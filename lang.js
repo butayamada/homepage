@@ -125,7 +125,19 @@ var LANG_TRANSLATIONS = {
     po_caption4:       "古民家ならではの立派な梁と吹き抜けの高い天井。",
 
     // akarinouta2026.html
-    ak_pamphlet_body:  "店頭にてDMをご用意しています。<br>ぜひお手に取ってご覧ください。"
+    ak_pamphlet_body:  "店頭にてDMをご用意しています。<br>ぜひお手に取ってご覧ください。",
+
+    // products.html
+    tab_products:      "商品別",
+    tab_artists:       "作家別",
+
+    // product detail pages
+    price_tax:         "（税込）",
+    spec_size:         "サイズ",
+    spec_material:     "素材",
+    spec_care:         "取り扱い",
+    spec_notes:        "注意事項",
+    btn_buy:           "購入はこちら"
   },
 
   en: {
@@ -238,7 +250,19 @@ var LANG_TRANSLATIONS = {
     po_caption3:       "The spacious interior. Renovation work is in progress.",
     po_caption4:       "Impressive beams and a soaring ceiling — characteristic of traditional Japanese architecture.",
 
-    ak_pamphlet_body:  "Exhibition leaflets are available at the store.<br>Please feel free to pick one up."
+    ak_pamphlet_body:  "Exhibition leaflets are available at the store.<br>Please feel free to pick one up.",
+
+    // products.html
+    tab_products:      "By Product",
+    tab_artists:       "By Artist",
+
+    // product detail pages
+    price_tax:         "(incl. tax)",
+    spec_size:         "Size",
+    spec_material:     "Material",
+    spec_care:         "Care",
+    spec_notes:        "Notes",
+    btn_buy:           "Purchase"
   },
 
   zh: {
@@ -351,7 +375,19 @@ var LANG_TRANSLATIONS = {
     po_caption3:       "宽敞的店内空间。内部装修正在进行中。",
     po_caption4:       "古民居特有的粗壮梁柱与挑高天花板。",
 
-    ak_pamphlet_body:  "店内备有展览DM，欢迎自取。"
+    ak_pamphlet_body:  "店内备有展览DM，欢迎自取。",
+
+    // products.html
+    tab_products:      "商品一览",
+    tab_artists:       "按作家",
+
+    // product detail pages
+    price_tax:         "（含税）",
+    spec_size:         "尺寸",
+    spec_material:     "材质",
+    spec_care:         "使用说明",
+    spec_notes:        "注意事项",
+    btn_buy:           "立即购买"
   }
 };
 

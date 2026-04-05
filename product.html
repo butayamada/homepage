@@ -129,7 +129,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
         <p class="product-specs-title">Details</p>
         <table class="spec-table" id="spec-table"></table>
       </div>
-      <a href="#" target="_blank" rel="noopener" class="btn-purchase" id="p-buy-btn">購入はこちら</a>
+      <a href="#" target="_blank" rel="noopener" class="btn-purchase" id="p-buy-btn"><span data-i18n="btn_buy">購入はこちら</span></a>
     </div>
   </div>
 </main>
@@ -194,13 +194,13 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     document.getElementById('p-category').textContent = p.category || '';
     document.getElementById('p-artist').textContent = p.artist;
     document.getElementById('p-name').textContent = p.name;
-    document.getElementById('p-price').innerHTML = p.price + '<span>（税込）</span>';
+    document.getElementById('p-price').innerHTML = p.price + '<span data-i18n="price_tax">（税込）</span>';
     document.getElementById('p-desc').textContent = p.description || '';
 
     var rows = '';
-    if (p.size) rows += '<tr><td>サイズ</td><td>' + p.size + '</td></tr>';
-    if (p.material) rows += '<tr><td>素材</td><td>' + p.material + '</td></tr>';
-    if (p.care) rows += '<tr><td>取り扱い</td><td>' + p.care + '</td></tr>';
+    if (p.size) rows += '<tr><td data-i18n="spec_size">サイズ</td><td>' + p.size + '</td></tr>';
+    if (p.material) rows += '<tr><td data-i18n="spec_material">素材</td><td>' + p.material + '</td></tr>';
+    if (p.care) rows += '<tr><td data-i18n="spec_care">取り扱い</td><td>' + p.care + '</td></tr>';
     if (!p.size && !p.material && !p.care) rows = '<tr><td colspan="2" style="color:var(--light-gray)">詳細はオンラインショップをご確認ください。</td></tr>';
     document.getElementById('spec-table').innerHTML = rows;
 

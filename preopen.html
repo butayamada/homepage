@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新店舗オープン — ARC FUKAMEKI minoh</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="新店舗オープン — ARC FUKAMEKI minoh">
+<meta property="og:description" content="大阪府箕面市の古民家を改装したセレクト雑貨店。">
+<meta property="og:url" content="https://fukameki.jp/preopen.html">
+<meta property="og:image" content="https://fukameki.jp/ogp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { opacity: 0; animation: bodyFadeIn 0.4s 0.2s ease forwards; }
+@keyframes bodyFadeIn { to { opacity: 1; } }
+:root {
+  --black: #1c1a18; --dark-gray: #3a3632; --mid-gray: #7a7570;
+  --light-gray: #b0aaa4; --off-white: #f5f3ef; --white: #faf9f6;
+  --border: rgba(0,0,0,0.1); --warm: #a07840;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Serif JP', serif; font-weight: 200; background: var(--white); color: var(--black); letter-spacing: 0.04em; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 3.5rem; background: rgba(250,249,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.logo { font-family: 'EB Garamond', serif; font-size: 1.1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+.nav-back { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid-gray); text-decoration: none; transition: color 0.2s; }
+.nav-back::before { content: ''; display: block; width: 30px; height: 1px; background: var(--mid-gray); transition: width 0.3s; }
+.nav-back:hover { color: var(--black); }
+.nav-back:hover::before { width: 50px; background: var(--black); }
+.hero { min-height: 100vh; background: var(--black); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 3.5rem 6rem; position: relative; overflow: hidden; }
+.hero-bg-text { position: absolute; top: 50%; left: 3.5rem; transform: translateY(-50%); font-family: 'EB Garamond', serif; font-size: clamp(6rem,15vw,14rem); font-weight: 400; letter-spacing: 0.05em; color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; white-space: nowrap; }
+.hero-tag { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--warm); margin-bottom: 1.5rem; }
+.hero-title { font-family: 'EB Garamond', serif; font-size: clamp(2.5rem,6vw,5rem); font-weight: 400; letter-spacing: 0.1em; color: var(--white); line-height: 1.15; margin-bottom: 1.5rem; }
+.hero-date { font-size: 0.75rem; letter-spacing: 0.3em; color: var(--light-gray); }
+.section { padding: 8rem 3.5rem; }
+.section.bg-off { background: var(--off-white); }
+.section-label { font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--light-gray); margin-bottom: 1rem; }
+.section-title { font-family: 'EB Garamond', serif; font-size: 2.2rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); line-height: 1.25; margin-bottom: 3rem; }
+.message-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.message-body { font-size: 0.82rem; line-height: 2.4; color: var(--mid-gray); letter-spacing: 0.06em; }
+.message-body p { margin-bottom: 1.8rem; }
+.message-body p:last-child { margin-bottom: 0; }
+.info-row { display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--border); font-size: 0.78rem; }
+.info-row:first-child { border-top: 1px solid var(--border); }
+.info-label { color: var(--light-gray); min-width: 90px; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.info-value { color: var(--dark-gray); line-height: 1.8; }
+.video-wrap { aspect-ratio: 16/9; background: var(--off-white); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; position: relative; overflow: hidden; }
+.play-icon { width: 56px; height: 56px; border: 1px solid var(--light-gray); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-icon::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 9px 0 9px 16px; border-color: transparent transparent transparent var(--light-gray); margin-left: 4px; }
+.video-placeholder-text { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--light-gray); }
+.photo-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-top: 3rem; }
+.photo-placeholder { aspect-ratio: 3/4; background: var(--off-white); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8rem; }
+.photo-placeholder span { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light-gray); }
+.photo-caption { font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.08em; padding: 0.8rem 0 0; line-height: 1.6; }
+.map-section { padding: 8rem 3.5rem; }
+.map-container { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+.map-desc { font-size: 0.8rem; line-height: 2.2; color: var(--mid-gray); letter-spacing: 0.06em; margin-bottom: 2rem; }
+.map-steps { list-style: none; }
+.map-steps li { display: flex; gap: 1.2rem; align-items: flex-start; padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; line-height: 1.7; color: var(--dark-gray); }
+.map-steps li:first-child { border-top: 1px solid var(--border); }
+.step-num { font-family: 'EB Garamond', serif; font-size: 0.9rem; color: var(--warm); min-width: 20px; }
+.map-svg-wrap { background: var(--off-white); border: 1px solid var(--border); padding: 2rem; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.hero-tag { animation: fadeIn 1s 0.3s ease forwards; opacity: 0; }
+.hero-title { animation: fadeIn 1s 0.5s ease forwards; opacity: 0; }
+.hero-date { animation: fadeIn 1s 0.7s ease forwards; opacity: 0; }
+footer { background: var(--black); padding: 3rem 3.5rem; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: #3a3632; text-decoration: none; }
+footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: #3a3632; }
+@media (max-width: 960px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .section { padding: 5rem 1.5rem; }
+  .map-section { padding: 5rem 1.5rem; }
+  .message-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .map-container { grid-template-columns: 1fr; gap: 3rem; }
+  .photo-grid { grid-template-columns: repeat(2,1fr); }
+  footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.8rem; }
+}
+@media (max-width: 600px) {
+  .hero-title { font-size: 2.2rem; }
+  .section-title { font-size: 1.8rem; }
+  .photo-grid { grid-template-columns: 1fr; }
+}
+.lang-switcher { position: relative; }
+.lang-select { appearance: none; -webkit-appearance: none; background: transparent; border: 1px solid var(--border); font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 0.15em; color: var(--mid-gray); cursor: pointer; padding: 0.35rem 2rem 0.35rem 0.8rem; outline: none; transition: color 0.2s, border-color 0.2s; background-image: url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b8b8b8'/%3E%3C/svg%3E); background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 7px; }
+.lang-select:hover { color: var(--black); border-color: var(--dark-gray); }</style>
+</head>
+<body>
+
+
+<nav>
+  <a href="index.html" class="logo">ARC FUKAMEKI minoh minoh</a>
+  <div style="display:flex;align-items:center;gap:2rem;">
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <a href="index.html" class="nav-back" data-i18n="nav_back">トップへ戻る</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-text">ARC</div>
+  <p class="hero-tag">New Opening — 2026.05.02</p>
+  <h1 class="hero-title" data-i18n="rn_hero_title">ARC FUKAMEKI minoh<br>リニューアルオープン（予定）のお知らせ</h1>
+  <p class="hero-date" data-i18n="rn_hero_date">2026年5月2日（土）より、新店舗にてリニューアルオープンいたします</p>
+</section>
+
+<section class="section reveal">
+  <div class="message-grid">
+    <div>
+      <p class="section-label">Message</p>
+      <h2 class="section-title" data-i18n="rn_msg_title">ごあいさつ</h2>
+      <div class="message-body">
+        <p data-i18n="rn_msg_p1">平素よりフカメキ雑貨店をご愛顧いただきありがとうございます。</p>
+        <p data-i18n="rn_msg_p2">このたび、2026年5月2日（土）より、フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、リニューアルオープンをすることになりました。</p>
+        <p data-i18n="rn_msg_p3">旧店舗からは徒歩1分とすぐ近くにはなりますが、おなじみの皆様には大変わかりづらく、ご迷惑をおかけいたします。<br>新しい空間でも変わらず、ていねいに選んだものたちをお届けしてまいります。どうぞよろしくお願いいたします。</p>
+        <p data-i18n="rn_msg_p4">リニューアルの監修（デザイン・設計）はKNOOOT株式会社の北村泰之さんにお願いしました。同氏の手がけた店舗デザインも弊店の作品のひとつとしてお楽しみください。</p>
+        <p style="margin-top:1rem;display:flex;gap:1.5rem;flex-wrap:wrap;">
+          <a href="https://knooot.com/" target="_blank" rel="noopener" style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:0.2em;color:var(--mid-gray);">knooot.com →</a>
+          <a href="https://www.instagram.com/yasuyuki_kitamura/" target="_blank" rel="noopener" style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:0.2em;color:var(--mid-gray);">@yasuyuki_kitamura →</a>
+        </p>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">Shop Info</p>
+      <h2 class="section-title" style="font-size:1.5rem;margin-bottom:2rem;" data-i18n="rn_shop_title">新店舗情報</h2>
+      <div class="info-row"><span class="info-label" data-i18n="rn_label_name">店名</span><span class="info-value">ARC FUKAMEKI minoh（アルクフカメキ箕面）</span></div>
+      <div class="info-row"><span class="info-label" data-i18n="rn_label_addr">住所</span><span class="info-value">大阪府箕面市箕面2丁目3-10</span></div>
+      <div class="info-row"><span class="info-label" data-i18n="rn_label_open">オープン</span><span class="info-value" data-i18n="rn_val_open">2026年5月2日（土）</span></div>
+      <div class="info-row"><span class="info-label" data-i18n="rn_label_hours">営業時間</span><span class="info-value">13:00 – 18:00</span></div>
+      <div class="info-row"><span class="info-label" data-i18n="rn_label_closed">定休日</span><span class="info-value" data-i18n="rn_val_closed">不定休</span></div>
+
+      <div class="info-row"><span class="info-label">Instagram</span><span class="info-value"><a href="https://www.instagram.com/fukamekizakkaten" style="color:inherit;">@fukamekizakkaten</a></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <p class="section-label">Pre-Opening</p>
+  <h2 class="section-title" data-i18n="rn_preopen_title">プレオープンのお知らせ</h2>
+  <div class="message-body">
+    <p data-i18n="rn_preopen_body">4月1日更新：4月11日～18日開催の企画展にてプレオープンいたします。<br>4月11日～18日開催のvickey'72個展「灯の詩」において、新店舗のプレオープンが決定しました。<br>本期間中の個展作品は新店舗で展示いたします。<br>ぜひお越しいただき、新店舗での作品展示をお楽しみください。<br>※新店舗の場所は本ページにてご確認ください。<br>※旧店舗にはスタッフを配置し、新店舗へのご案内をいたします。<br>※新店舗は改装工事中につき、設備が整っていなかったり、工事の音や匂いがする場合があります。悪しからずご了承くださいませ。</p>
+  </div>
+</section>
+
+<section class="section bg-off reveal">
+  <p class="section-label">Interior</p>
+  <h2 class="section-title" data-i18n="rn_interior_title">新店舗近影</h2>
+  <p class="message-body" style="margin-bottom:3rem;" data-i18n="rn_photo_intro">新店舗は古民家を改装中です。古い梁や高い天井など、古民家ならではの趣を活かしながら、プレオープンの4月11日に向けて工事が着々と進んでいます。</p>
+  <div class="photo-grid">
+    <div>
+      <img src="photo/0329/IMG_1512.jpeg" alt="新店舗外観" style="width:100%;max-width:800px;height:auto;display:block;">
+      <p class="photo-caption" data-i18n="po_caption1">外観。瓦屋根の古民家を改装しています。</p>
+    </div>
+    <div>
+      <img src="photo/0329/IMG_1516.jpeg" alt="店内・窓側" style="width:100%;max-width:800px;height:auto;display:block;">
+      <p class="photo-caption" data-i18n="po_caption2">店内の窓側。大きな窓から明るい光が差し込みます。</p>
+    </div>
+    <div>
+      <img src="photo/0329/IMG_1518.jpeg" alt="店内・広角" style="width:100%;max-width:800px;height:auto;display:block;">
+      <p class="photo-caption" data-i18n="po_caption3">広々とした店内。内装工事が進んでいます。</p>
+    </div>
+    <div>
+      <img src="photo/0329/IMG_1519.jpeg" alt="天井" style="width:100%;max-width:800px;height:auto;display:block;">
+      <p class="photo-caption" data-i18n="po_caption4">古民家ならではの立派な梁と吹き抜けの高い天井。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <p class="section-label">Access Movie</p>
+  <h2 class="section-title" data-i18n="rn_access_movie">アクセス動画</h2>
+  <p style="font-size:0.78rem;color:var(--light-gray);letter-spacing:0.1em;margin-bottom:2rem;">案内動画は準備中です。追って掲載いたします。</p>
+  <div class="video-wrap">
+    <div class="play-icon"></div>
+    <p class="video-placeholder-text">Video coming soon</p>
+  </div>
+</section>
+
+<section class="map-section reveal">
+  <p class="section-label">Access</p>
+  <h2 class="section-title" data-i18n="rn_access_title">旧店舗からのご案内</h2>
+  <div class="map-container">
+    <div>
+      <p class="map-desc" data-i18n="rn_map_desc">旧店舗（フカメキ雑貨店）から新店舗（ARC FUKAMEKI minoh minoh minoh）まで、徒歩約1分です。同じ通りを北へ進むとすぐにお越しいただけます。</p>
+      <ul class="map-steps">
+        <li><span class="step-num">1</span><span data-i18n="rn_step1">旧店舗（箕面2丁目3-4）を出て、通りを北へ進みます</span></li>
+        <li><span class="step-num">2</span><span data-i18n="rn_step2">同じ通りをそのままお進みください（徒歩約1分）</span></li>
+        <li><span class="step-num">3</span><span data-i18n="rn_step3">新店舗「ARC FUKAMEKI minoh minoh minoh」（箕面2丁目3-10）に到着です</span></li>
+      </ul>
+      <div style="margin-top:2.5rem;">
+        <p class="section-label" style="margin-bottom:0.6rem;">Google Map</p>
+        <iframe src="https://maps.google.com/maps?q=大阪府箕面市箕面2丁目3-10&output=embed&hl=ja&z=17" width="100%" height="480" style="border:1px solid var(--border);display:block;" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="map-svg-wrap" style="padding:0;overflow:hidden;">
+  <img src="photo/index/preopen_img01.jpg" alt="ARC FUKAMEKI minoh minoh minohご案内図" style="width:100%;display:block;" />
+</div>
+  </div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-logo">ARC FUKAMEKI minoh minoh</a>
+  <p>© 2026 Fukameki Zakkaten. All rights reserved.</p>
+</footer>
+
+<script>
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+</script>
+<script src="lang.js"></script>
+</body>
+</html>

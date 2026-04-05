@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商品紹介 — ARC FUKAMEKI minoh</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="商品紹介 — ARC FUKAMEKI minoh">
+<meta property="og:description" content="大阪府箕面市の古民家を改装したセレクト雑貨店。">
+<meta property="og:url" content="https://fukameki.jp/products.html">
+<meta property="og:image" content="https://fukameki.jp/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Serif+JP:wght@200;300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #1c1a18; --off-black: #1a1a1a; --dark-gray: #2e2e2e; --mid-gray: #7a7570;
+  --light-gray: #b0aaa4; --off-white: #f5f3ef; --white: #faf9f6; --border: rgba(0,0,0,0.1);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Serif JP', serif; font-weight: 200; background: var(--white); color: var(--black); }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.8rem 3.5rem;
+  background: rgba(250,249,246,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'EB Garamond', serif; font-size: 1.1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+.nav-back { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid-gray); text-decoration: none; transition: color 0.2s; }
+.nav-back::before { content: ''; display: block; width: 30px; height: 1px; background: var(--mid-gray); transition: width 0.3s; }
+.nav-back:hover { color: var(--black); }
+.nav-back:hover::before { width: 50px; background: var(--black); }
+.lang-switcher { position: relative; }
+.lang-select {
+  appearance: none; -webkit-appearance: none;
+  background: transparent; border: 1px solid var(--border);
+  font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 0.15em;
+  color: var(--mid-gray); cursor: pointer; padding: 0.35rem 2rem 0.35rem 0.8rem; outline: none;
+  transition: color 0.2s, border-color 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b0aaa4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 7px;
+}
+.lang-select:hover { color: var(--black); border-color: var(--dark-gray); }
+
+main { padding-top: 7rem; }
+
+#products { padding: 5rem 3.5rem 8rem; }
+
+.section-header { margin-bottom: 1.5rem; }
+.section-label { font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--light-gray); margin-bottom: 0.8rem; }
+.section-title { font-family: 'EB Garamond', serif; font-size: 2.2rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); line-height: 1.2; }
+.shop-link { margin-top: 0.8rem; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--mid-gray); margin-bottom: 3rem; }
+.shop-link a { color: inherit; text-decoration: underline; text-underline-offset: 0.3em; }
+.shop-link a:hover { color: var(--black); }
+
+.products-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.product-card { background: var(--white); overflow: hidden; cursor: pointer; }
+.product-image { position: relative; padding-top: 133.33%; overflow: hidden; background: var(--off-white); }
+.product-image img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; transform: scale(1.05); transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1); filter: brightness(0.96); }
+.product-card:hover .product-image img { transform: scale(1.06); }
+.product-info { padding: 1.2rem 1.4rem 1.8rem; border-top: 1px solid var(--border); }
+.product-cat { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--light-gray); margin-bottom: 0.5rem; }
+.product-name { font-family: 'EB Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--black); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+.product-price { font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.1em; }
+.soldout-label { color: #c0392b; font-size: 0.65rem; letter-spacing: 0.08em; margin-left: 0.4em; font-family: 'EB Garamond', serif; }
+
+footer {
+  background: var(--black); padding: 3rem 3.5rem;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+}
+.footer-logo { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; }
+footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); text-align: center; }
+.footer-links { display: flex; gap: 2rem; justify-content: flex-end; }
+.footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--light-gray); }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.view-tabs { display: flex; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+.view-tab {
+  font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 0.8rem 2rem 0.7rem; cursor: pointer; color: var(--light-gray);
+  background: none; border: none; border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s; margin-bottom: -1px;
+}
+.view-tab.active { color: var(--black); border-bottom-color: var(--black); }
+.view-tab:hover { color: var(--mid-gray); }
+
+.artist-filter { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 2.5rem; }
+.artist-filter.visible { display: flex; }
+.artist-btn {
+  font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.15em;
+  padding: 0.35rem 1.1rem; background: none; border: 1px solid var(--border);
+  color: var(--mid-gray); cursor: pointer; transition: all 0.2s;
+}
+.artist-btn:hover { color: var(--black); border-color: var(--dark-gray); }
+.artist-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+/* Artist spotlight */
+#artist-spotlight { display: none; margin-bottom: 4rem; padding-bottom: 3.5rem; border-bottom: 1px solid var(--border); }
+.spotlight-name {
+  font-family: 'EB Garamond', serif; font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 400; letter-spacing: 0.06em; color: var(--black);
+  line-height: 1.15; margin-bottom: 2rem;
+}
+.spotlight-bio {
+  font-size: 0.8rem; line-height: 2.4; color: var(--mid-gray);
+  letter-spacing: 0.06em; white-space: pre-line;
+  max-width: 600px; margin-bottom: 3rem;
+}
+.spotlight-img {
+  position: relative; padding-top: 133.33%;
+  width: 100%; max-width: 440px; overflow: hidden;
+  background: var(--off-white); margin-bottom: 3.5rem;
+}
+.spotlight-img img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.6s ease;
+}
+.spotlight-img:hover img { transform: scale(1.03); }
+.works-label {
+  font-family: 'EB Garamond', serif; font-size: 0.6rem;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--light-gray); margin-bottom: 1.5rem;
+}
+@media (max-width: 600px) {
+  .spotlight-img { max-width: 100%; padding-top: 75%; }
+}
+
+@media (max-width: 960px) {
+  nav { padding: 1.2rem 1.5rem; }
+  #products { padding: 4rem 1.5rem 6rem; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  nav { padding: 1rem 1.2rem; }
+  #products { padding: 3rem 1.2rem 5rem; }
+  .products-grid { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">ARC FUKAMEKI <span style="text-transform:none;">minoh</span></a>
+  <div class="lang-switcher">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+  <a href="index.html#products" class="nav-back" data-i18n="nav_back">戻る</a>
+</nav>
+
+<main>
+  <section id="products">
+    <div class="section-header reveal">
+      <p class="section-label">Online Shop</p>
+      <h2 class="section-title" data-i18n="products_title">商品紹介</h2>
+    </div>
+    <div class="reveal">
+      <p style="font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--light-gray);margin-bottom:0.5rem;">Shop Link</p>
+      <a href="https://fukameki.thebase.in/" target="_blank" rel="noopener" style="display:inline-block;"><img src="fukameki_logo_data/base_logo_vertical_black.png" alt="BASE オンラインショップ" style="height:48px;width:auto;display:block;"></a>
+    </div>
+
+    <div class="view-tabs">
+      <button class="view-tab active" id="tab-products" onclick="switchView('products')">商品別</button>
+      <button class="view-tab" id="tab-artists" onclick="switchView('artists')">作家別</button>
+    </div>
+    <div class="artist-filter" id="artist-filter"></div>
+
+    <div id="artist-spotlight">
+      <h2 class="spotlight-name" id="spotlight-name"></h2>
+      <p class="spotlight-bio" id="spotlight-bio"></p>
+      <div class="spotlight-img">
+        <img id="spotlight-img" src="" alt="">
+      </div>
+      <p class="works-label">Works</p>
+    </div>
+
+    <div class="products-grid" id="products-grid">
+      <a href="product_katayama_futamono.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/katayama_futamono_01.jpg" alt="片山裕二 ふたもの">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">片山裕二</p>
+          <p class="product-name">ふたもの</p>
+          <p class="product-price">¥4,950（税込）</p>
+        </div>
+      </a>
+      <a href="product_imai_hashi_oki.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/imai_hashi_oki_01.jpg" alt="今井律湖 動物箸置き">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">今井律湖</p>
+          <p class="product-name">動物箸置き</p>
+          <p class="product-price">¥2,090（税込）</p>
+        </div>
+      </a>
+      <a href="product_imai_daen_kozara.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/imai_daen_kozara_01.jpg" alt="今井律湖 楕円小皿 飴">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">今井律湖</p>
+          <p class="product-name">楕円小皿 飴</p>
+          <p class="product-price">¥2,750（税込）</p>
+        </div>
+      </a>
+      <a href="product_imai_soup_sara.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/imai_soup_sara_01.jpg" alt="今井律湖 スープ皿">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">今井律湖</p>
+          <p class="product-name">スープ皿</p>
+          <p class="product-price">¥4,400（税込）</p>
+        </div>
+      </a>
+      <a href="product_imai_candle_dish.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/imai_candle_dish_01.jpg" alt="今井律湖 キャンドルディッシュ">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">今井律湖</p>
+          <p class="product-name">キャンドルディッシュ</p>
+          <p class="product-price">¥5,500（税込）</p>
+        </div>
+      </a>
+      <a href="product_imai_oval_flat.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/imai_oval_flat_01.jpg" alt="今井律湖 オーバルフラット">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">今井律湖</p>
+          <p class="product-name">オーバルフラット</p>
+          <p class="product-price">¥6,600（税込）</p>
+        </div>
+      </a>
+      <a href="product_imai_oval_egg.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/imai_oval_egg_01.jpg" alt="今井律湖 オーバルエッグ">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">今井律湖</p>
+          <p class="product-name">オーバルエッグ</p>
+          <p class="product-price">¥6,600（税込）</p>
+        </div>
+      </a>
+      <a href="product_imai_hakkaku_bon.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image">
+          <img src="photo/index/imai_hakkaku_bon_01.jpg" alt="今井律湖 八角盆プレート 白">
+        </div>
+        <div class="product-info">
+          <p class="product-cat">今井律湖</p>
+          <p class="product-name">八角盆プレート 白</p>
+          <p class="product-price">¥8,800（税込）</p>
+        </div>
+      </a>
+      <a href="product_139504696.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139504696_01.jpg" alt="今井律湖 ティーポット 黒"></div>
+        <div class="product-info"><p class="product-cat">今井律湖</p><p class="product-name">ティーポット 黒</p><p class="product-price">¥12,100（税込）</p></div>
+      </a>
+      <a href="product_98892230.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p98892230_01.jpg" alt="totoko オワン小皿 SS"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">オワン小皿 SS</p><p class="product-price">¥5,280（税込）</p></div>
+      </a>
+      <a href="product_95190098.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p95190098_01.jpg" alt="totoko maru小皿 M"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">maru小皿 M サクラ材</p><p class="product-price">¥5,720（税込）</p></div>
+      </a>
+      <a href="product_88815090.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p88815090_01.jpg" alt="totoko 菓子皿03 Mロング"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">菓子皿03 Mロングサイズ</p><p class="product-price">¥5,720（税込）</p></div>
+      </a>
+      <a href="product_139495741.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139495741_01.jpg" alt="totoko 菓子皿 M"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">菓子皿 Mサイズ</p><p class="product-price">¥5,940（税込）</p></div>
+      </a>
+      <a href="product_139495480.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139495480_01.jpg" alt="totoko 菓子皿 Mロング"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">菓子皿 Mロングサイズ<span class="soldout-label">（soldout）</span></p><p class="product-price">¥5,940（税込）</p></div>
+      </a>
+      <a href="product_95189885.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p95189885_01.jpg" alt="totoko kune皿"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">kune皿 サクラ材</p><p class="product-price">¥6,820（税込）</p></div>
+      </a>
+      <a href="product_95189456.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p95189456_01.jpg" alt="totoko furiru皿 M"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">furiru皿 M サクラ材</p><p class="product-price">¥8,580（税込）</p></div>
+      </a>
+      <a href="product_95189624.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p95189624_01.jpg" alt="totoko furiru皿 L"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">furiru皿 L サクラ材</p><p class="product-price">¥9,680（税込）</p></div>
+      </a>
+      <a href="product_139496523.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139496523_01.jpg" alt="totoko 菓子皿 深L"></div>
+        <div class="product-info"><p class="product-cat">totoko</p><p class="product-name">菓子皿 深Lサイズ<span class="soldout-label">（soldout）</span></p><p class="product-price">¥9,900（税込）</p></div>
+      </a>
+      <a href="product_110820832.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110820832_01.jpg" alt="松本克也 菓子皿 9.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">菓子皿 9.5cm</p><p class="product-price">¥2,200（税込）</p></div>
+      </a>
+      <a href="product_110820530.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110820530_01.jpg" alt="松本克也 オクトゴナル皿 11.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">オクトゴナル皿 11.5cm</p><p class="product-price">¥2,860（税込）</p></div>
+      </a>
+      <a href="product_139487392.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139487392_01.jpg" alt="松本克也 オクトゴナル皿 16.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">オクトゴナル皿 16.5cm</p><p class="product-price">¥4,180（税込）</p></div>
+      </a>
+      <a href="product_139487457.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139487457_01.jpg" alt="松本克也 オクトゴナル皿 19.0cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">オクトゴナル皿 19.0cm</p><p class="product-price">¥4,950（税込）</p></div>
+      </a>
+      <a href="product_110820417.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110820417_01.jpg" alt="松本克也 りんか皿 11.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">りんか皿 11.5cm</p><p class="product-price">¥2,860（税込）</p></div>
+      </a>
+      <a href="product_139486861.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139486861_01.jpg" alt="松本克也 りんか皿 14.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">りんか皿 14.5cm</p><p class="product-price">¥3,960（税込）</p></div>
+      </a>
+      <a href="product_139487002.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139487002_01.jpg" alt="松本克也 りんか皿 16.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">りんか皿 16.5cm</p><p class="product-price">¥4,180（税込）</p></div>
+      </a>
+      <a href="product_110809143.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110809143_01.jpg" alt="松本克也 パン皿 杢 14.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">パン皿 杢 14.5cm</p><p class="product-price">¥3,960（税込）</p></div>
+      </a>
+      <a href="product_139488635.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139488635_01.jpg" alt="松本克也 リムプレート 25.0cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">リムプレート 25.0cm</p><p class="product-price">¥8,800（税込）</p></div>
+      </a>
+      <a href="product_72229485.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p72229485_01.jpg" alt="松本克也 隅切りトレー"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">隅切りトレー</p><p class="product-price">¥4,620（税込）</p></div>
+      </a>
+      <a href="product_29992076.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p29992076_01.jpg" alt="eMayu.. 花のブローチ"></div>
+        <div class="product-info"><p class="product-cat">eMayu..</p><p class="product-name">花のブローチ</p><p class="product-price">¥2,750（税込）</p></div>
+      </a>
+      <a href="product_36646372.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p36646372_01.jpg" alt="CROWN ダンスシューズ"></div>
+        <div class="product-info"><p class="product-cat">CROWN</p><p class="product-name">ダンスシューズ 天然皮革 ブラック</p><p class="product-price">¥12,100（税込）</p></div>
+      </a>
+      <a href="product_51106366.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p51106366_01.jpg" alt="Vermeer. earrings tsubu"></div>
+        <div class="product-info"><p class="product-cat">Vermeer.</p><p class="product-name">earrings tsubu</p><p class="product-price">¥1,400（税込）</p></div>
+      </a>
+      <a href="product_53567162.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p53567162_01.jpg" alt="La Cadena ワンストラップシューズ"></div>
+        <div class="product-info"><p class="product-cat">La Cadena</p><p class="product-name">JAPONESA ワンストラップシューズ</p><p class="product-price">¥6,820（税込）</p></div>
+      </a>
+      <a href="product_53569545.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p53569545_01.jpg" alt="nuccim† 二重靴下"></div>
+        <div class="product-info"><p class="product-cat">nuccim†</p><p class="product-name">二重靴下 ヌクシムクロス</p><p class="product-price">¥1,980（税込）</p></div>
+      </a>
+      <a href="product_56866733.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p56866733_01.jpg" alt="遠藤薫 ブランカレリーフ オーバル皿"></div>
+        <div class="product-info"><p class="product-cat">遠藤薫</p><p class="product-name">ブランカレリーフ オーバル皿</p><p class="product-price">¥4,620（税込）</p></div>
+      </a>
+      <a href="product_59665637.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p59665637_01.jpg" alt="髙野友美 グレー皿 フチなし 中"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">グレー皿 フチなし 中</p><p class="product-price">¥5,500（税込）</p></div>
+      </a>
+      <a href="product_59666641.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p59666641_01.jpg" alt="髙野友美 しぼ白化粧 小湯呑"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">しぼ白化粧 小湯呑</p><p class="product-price">¥3,850（税込）</p></div>
+      </a>
+      <a href="product_67725582.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p67725582_01.jpg" alt="前田彰子 ガラス花器 3"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">ガラス花器 3</p><p class="product-price">¥5,500（税込）</p></div>
+      </a>
+      <a href="product_67725695.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p67725695_01.jpg" alt="前田彰子 ガラス花器 2"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">ガラス花器 2</p><p class="product-price">¥4,180（税込）</p></div>
+      </a>
+      <a href="product_67725762.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p67725762_01.jpg" alt="前田彰子 ガラス花器 1"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">ガラス花器 1</p><p class="product-price">¥3,960（税込）</p></div>
+      </a>
+      <a href="product_67728595.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p67728595_01.jpg" alt="前田彰子 ガラスの小鉢 カラー"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">ガラスの小鉢 カラー</p><p class="product-price">¥3,850（税込）</p></div>
+      </a>
+      <a href="product_67990320.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p67990320_01.jpg" alt="La Cadena ベロア ワンストラップシューズ"></div>
+        <div class="product-info"><p class="product-cat">La Cadena</p><p class="product-name">JAPONESA ベロア ワンストラップシューズ</p><p class="product-price">¥9,020（税込）</p></div>
+      </a>
+      <a href="product_68113493.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p68113493_01.jpg" alt="伊藤満 カフェオレボウル size1"></div>
+        <div class="product-info"><p class="product-cat">伊藤満</p><p class="product-name">カフェオレボウル size1</p><p class="product-price">¥2,970（税込）</p></div>
+      </a>
+      <a href="product_69272148.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p69272148_01.jpg" alt="ワダコーヘー ball &amp; foot glass"></div>
+        <div class="product-info"><p class="product-cat">ワダコーヘー</p><p class="product-name">ball &amp; foot glass</p><p class="product-price">¥5,060（税込）</p></div>
+      </a>
+      <a href="product_69960464.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p69960464_01.jpg" alt="vickey'72 cracker"></div>
+        <div class="product-info"><p class="product-cat">vickey'72</p><p class="product-name">cracker</p><p class="product-price">¥13,200（税込）</p></div>
+      </a>
+      <a href="product_70208577.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p70208577_01.jpg" alt="サコユリコ コンポート鉢"></div>
+        <div class="product-info"><p class="product-cat">サコユリコ</p><p class="product-name">コンポート鉢</p><p class="product-price">¥4,840（税込）</p></div>
+      </a>
+      <a href="product_70208645.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p70208645_01.jpg" alt="サコユリコ コンポート皿 黒"></div>
+        <div class="product-info"><p class="product-cat">サコユリコ</p><p class="product-name">コンポート皿 黒</p><p class="product-price">¥4,840（税込）</p></div>
+      </a>
+      <a href="product_70954900.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p70954900_01.jpg" alt="atelier naige ribbon tie blouse"></div>
+        <div class="product-info"><p class="product-cat">atelier naige</p><p class="product-name">ribbon tie blouse リネン黒</p><p class="product-price">¥19,800（税込）</p></div>
+      </a>
+      <a href="product_71052047.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p71052047_01.jpg" alt="松本克也 トレー"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">トレー</p><p class="product-price">¥8,800（税込）</p></div>
+      </a>
+      <a href="product_71052065.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p71052065_01.jpg" alt="松本克也 オーバル皿 28.5cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">オーバル皿 28.5cm</p><p class="product-price">¥7,480（税込）</p></div>
+      </a>
+      <a href="product_71137619.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p71137619_01.jpg" alt="髙野友美 グレーポッチカップ"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">グレーポッチカップ</p><p class="product-price">¥4,180（税込）</p></div>
+      </a>
+      <a href="product_71137663.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p71137663_01.jpg" alt="髙野友美 グレー皿 フチあり 小"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">グレー皿 フチあり 小</p><p class="product-price">¥4,950（税込）</p></div>
+      </a>
+      <a href="product_71137711.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p71137711_01.jpg" alt="髙野友美 グレー皿 フチあり 中"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">グレー皿 フチあり 中</p><p class="product-price">¥6,050（税込）</p></div>
+      </a>
+      <a href="product_71137891.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p71137891_01.jpg" alt="髙野友美 白化粧花入 2"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">白化粧花入 2</p><p class="product-price">¥22,000（税込）</p></div>
+      </a>
+      <a href="product_71137987.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p71137987_01.jpg" alt="髙野友美 白化粧花入 1"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">白化粧花入 1</p><p class="product-price">¥19,800（税込）</p></div>
+      </a>
+      <a href="product_72229323.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p72229323_01.jpg" alt="松本克也 カッティングボード 22.0cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">カッティングボード 22.0cm</p><p class="product-price">¥7,150（税込）</p></div>
+      </a>
+      <a href="product_73388466.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p73388466_01.jpg" alt="田中文哉 リム皿 ホワイト"></div>
+        <div class="product-info"><p class="product-cat">田中文哉</p><p class="product-name">リム皿 ホワイト</p><p class="product-price">¥4,125（税込）</p></div>
+      </a>
+      <a href="product_73388949.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p73388949_01.jpg" alt="田中文哉 輪花鉢 12輪"></div>
+        <div class="product-info"><p class="product-cat">田中文哉</p><p class="product-name">輪花鉢 12輪</p><p class="product-price">¥4,290（税込）</p></div>
+      </a>
+      <a href="product_73389056.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p73389056_01.jpg" alt="田中文哉 輪花皿 16輪 14cm"></div>
+        <div class="product-info"><p class="product-cat">田中文哉</p><p class="product-name">輪花皿 16輪 14cm</p><p class="product-price">¥3,080（税込）</p></div>
+      </a>
+      <a href="product_73389146.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p73389146_01.jpg" alt="田中文哉 輪花小皿 16輪 11cm"></div>
+        <div class="product-info"><p class="product-cat">田中文哉</p><p class="product-name">輪花小皿 16輪 11cm</p><p class="product-price">¥2,200（税込）</p></div>
+      </a>
+      <a href="product_73389252.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p73389252_01.jpg" alt="田中文哉 六角豆皿"></div>
+        <div class="product-info"><p class="product-cat">田中文哉</p><p class="product-name">六角豆皿</p><p class="product-price">¥1,650（税込）</p></div>
+      </a>
+      <a href="product_74057726.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p74057726_01.jpg" alt="前田彰子 花入れギザギザ クリア"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">花入れギザギザ クリア</p><p class="product-price">¥5,500（税込）</p></div>
+      </a>
+      <a href="product_76769582.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p76769582_01.jpg" alt="アズマファブリック ポジャギストール 幅60"></div>
+        <div class="product-info"><p class="product-cat">アズマファブリック</p><p class="product-name">ポジャギストール 幅60</p><p class="product-price">¥19,800（税込）</p></div>
+      </a>
+      <a href="product_76769906.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p76769906_01.jpg" alt="アズマファブリック ポジャギストール 幅45"></div>
+        <div class="product-info"><p class="product-cat">アズマファブリック</p><p class="product-name">ポジャギストール 幅45</p><p class="product-price">¥17,600（税込）</p></div>
+      </a>
+      <a href="product_77352229.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p77352229_01.jpg" alt="Vermeer. earrings ミナ"></div>
+        <div class="product-info"><p class="product-cat">Vermeer.</p><p class="product-name">earrings ミナ</p><p class="product-price">¥2,200（税込）</p></div>
+      </a>
+      <a href="product_81884449.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p81884449_01.jpg" alt="ワダコーヘー ボトル"></div>
+        <div class="product-info"><p class="product-cat">ワダコーヘー</p><p class="product-name">ボトル</p><p class="product-price">¥11,000（税込）</p></div>
+      </a>
+      <a href="product_82614394.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p82614394_01.jpg" alt="髙野友美 ゴブレット 白ハケ 丸"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">ゴブレット 白ハケ 丸</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_83357756.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p83357756_01.jpg" alt="松本克也 リム鉢 大"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">リム鉢 大<span class="soldout-label">（soldout）</span></p><p class="product-price">¥7,810（税込）</p></div>
+      </a>
+      <a href="product_84294099.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p84294099_01.jpg" alt="MARTAU. WIDE BAG"></div>
+        <div class="product-info"><p class="product-cat">MARTAU.</p><p class="product-name">WIDE BAG</p><p class="product-price">¥29,700（税込）</p></div>
+      </a>
+      <a href="product_84312921.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p84312921_01.jpg" alt="MSNOM 2way rattan モチーフ NO.4"></div>
+        <div class="product-info"><p class="product-cat">MSNOM</p><p class="product-name">2way rattan モチーフ NO.4</p><p class="product-price">¥6,270（税込）</p></div>
+      </a>
+      <a href="product_85065960.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p85065960_01.jpg" alt="竹俣勇壱 ryo サーバー3種"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">ryo サーバー3種</p><p class="product-price">¥5,500（税込）</p></div>
+      </a>
+      <a href="product_85066000.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p85066000_01.jpg" alt="竹俣勇壱 ryo レードル"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">ryo レードル</p><p class="product-price">¥4,950（税込）</p></div>
+      </a>
+      <a href="product_85066852.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p85066852_01.jpg" alt="竹俣勇壱 ryo フィッシュ3種"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">ryo フィッシュ3種</p><p class="product-price">¥4,180（税込）</p></div>
+      </a>
+      <a href="product_85067300.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p85067300_01.jpg" alt="竹俣勇壱 ryo テーブルスプーン/フォーク"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">ryo テーブルスプーン/フォーク</p><p class="product-price">¥3,850（税込）</p></div>
+      </a>
+      <a href="product_85067386.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p85067386_01.jpg" alt="竹俣勇壱 ryo バターナイフ"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">ryo バターナイフ・バタースプレッダー</p><p class="product-price">¥3,080（税込）</p></div>
+      </a>
+      <a href="product_85067498.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p85067498_01.jpg" alt="竹俣勇壱 ryo サラダスプーン/フォーク"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">ryo サラダスプーン/フォーク</p><p class="product-price">¥3,080（税込）</p></div>
+      </a>
+      <a href="product_87073778.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p87073778_01.jpg" alt="中嶋寿子 ブローチ 磁器 2"></div>
+        <div class="product-info"><p class="product-cat">中嶋寿子</p><p class="product-name">ブローチ 磁器 2</p><p class="product-price">¥4,950（税込）</p></div>
+      </a>
+      <a href="product_88820288.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p88820288_01.jpg" alt="NEST ボトル型一輪挿し"></div>
+        <div class="product-info"><p class="product-cat">NEST</p><p class="product-name">ボトル型一輪挿し 鉄媒染</p><p class="product-price">¥9,900（税込）</p></div>
+      </a>
+      <a href="product_88820338.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p88820338_01.jpg" alt="NEST 八角胴 一輪挿し"></div>
+        <div class="product-info"><p class="product-cat">NEST</p><p class="product-name">八角胴 一輪挿し</p><p class="product-price">¥8,400（税込）</p></div>
+      </a>
+      <a href="product_88843222.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p88843222_01.jpg" alt="久銘 鏡"></div>
+        <div class="product-info"><p class="product-cat">久銘</p><p class="product-name">鏡</p><p class="product-price">¥12,000（税込）</p></div>
+      </a>
+      <a href="product_88904845.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p88904845_01.jpg" alt="大家具子 スクリューぐいのみ"></div>
+        <div class="product-info"><p class="product-cat">大家具子</p><p class="product-name">スクリューぐいのみ ふたくち</p><p class="product-price">¥5,060（税込）</p></div>
+      </a>
+      <a href="product_89640192.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p89640192_01.jpg" alt="yoshida pottery プリンセスコンポート"></div>
+        <div class="product-info"><p class="product-cat">yoshida pottery</p><p class="product-name">プリンセスコンポート アンティークホワイト</p><p class="product-price">¥8,250（税込）</p></div>
+      </a>
+      <a href="product_91832463.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91832463_01.jpg" alt="柏井羊 八角小皿"></div>
+        <div class="product-info"><p class="product-cat">柏井羊</p><p class="product-name">八角小皿</p><p class="product-price">¥1,980（税込）</p></div>
+      </a>
+      <a href="product_91833664.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91833664_01.jpg" alt="柏井羊 マグカップ"></div>
+        <div class="product-info"><p class="product-cat">柏井羊</p><p class="product-name">マグカップ</p><p class="product-price">¥3,520（税込）</p></div>
+      </a>
+      <a href="product_91833740.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91833740_01.jpg" alt="柏井羊 八角皿"></div>
+        <div class="product-info"><p class="product-cat">柏井羊</p><p class="product-name">八角皿</p><p class="product-price">¥3,960（税込）</p></div>
+      </a>
+      <a href="product_91833890.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91833890_01.jpg" alt="柏井羊 オーバルS"></div>
+        <div class="product-info"><p class="product-cat">柏井羊</p><p class="product-name">オーバルS</p><p class="product-price">¥3,180（税込）</p></div>
+      </a>
+      <a href="product_91834369.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91834369_01.jpg" alt="柏井羊 片口小鉢"></div>
+        <div class="product-info"><p class="product-cat">柏井羊</p><p class="product-name">片口小鉢</p><p class="product-price">¥2,860（税込）</p></div>
+      </a>
+      <a href="product_91922813.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91922813_01.jpg" alt="武曽健一 象嵌豆皿"></div>
+        <div class="product-info"><p class="product-cat">武曽健一</p><p class="product-name">象嵌豆皿</p><p class="product-price">¥1,980（税込）</p></div>
+      </a>
+      <a href="product_91923086.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91923086_01.jpg" alt="武曽健一 絞手7寸鉢 呉須"></div>
+        <div class="product-info"><p class="product-cat">武曽健一</p><p class="product-name">絞手7寸鉢 呉須</p><p class="product-price">¥7,700（税込）</p></div>
+      </a>
+      <a href="product_91923608.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p91923608_01.jpg" alt="武曽健一 フチドリ線刻4寸皿 錆/象嵌"></div>
+        <div class="product-info"><p class="product-cat">武曽健一</p><p class="product-name">フチドリ線刻4寸皿 錆/象嵌</p><p class="product-price">¥3,300（税込）</p></div>
+      </a>
+      <a href="product_95025278.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p95025278_01.jpg" alt="ワダコーヘー goblet 909"></div>
+        <div class="product-info"><p class="product-cat">ワダコーヘー</p><p class="product-name">goblet 909</p><p class="product-price">¥8,800（税込）</p></div>
+      </a>
+      <a href="product_95025488.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p95025488_01.jpg" alt="ワダコーヘー fin cup"></div>
+        <div class="product-info"><p class="product-cat">ワダコーヘー</p><p class="product-name">fin cup<span class="soldout-label">（soldout）</span></p><p class="product-price">¥6,050（税込）</p></div>
+      </a>
+      <a href="product_97605977.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p97605977_01.jpg" alt="千田徹 八角フリーカップ"></div>
+        <div class="product-info"><p class="product-cat">千田徹</p><p class="product-name">八角フリーカップ</p><p class="product-price">¥3,080（税込）</p></div>
+      </a>
+      <a href="product_97606597.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p97606597_01.jpg" alt="千田徹 丸平皿 中"></div>
+        <div class="product-info"><p class="product-cat">千田徹</p><p class="product-name">丸平皿 中</p><p class="product-price">¥2,970（税込）</p></div>
+      </a>
+      <a href="product_97615995.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p97615995_01.jpg" alt="イェンユウ mini cup"></div>
+        <div class="product-info"><p class="product-cat">イェンユウ</p><p class="product-name">mini cup</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_97639680.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p97639680_01.jpg" alt="冨部咲喜子 楕円鉢（ラグビー型）L 鉄釉"></div>
+        <div class="product-info"><p class="product-cat">冨部咲喜子</p><p class="product-name">楕円鉢（ラグビー型）L 鉄釉<span class="soldout-label">（soldout）</span></p><p class="product-price">¥6,600（税込）</p></div>
+      </a>
+      <a href="product_97690557.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p97690557_01.jpg" alt="イェンユウ 浅鉢 S-1"></div>
+        <div class="product-info"><p class="product-cat">イェンユウ</p><p class="product-name">浅鉢 S-1</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_101842342.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p101842342_01.jpg" alt="saji アンティークリネンコースター シンプル"></div>
+        <div class="product-info"><p class="product-cat">saji</p><p class="product-name">アンティークリネンコースター シンプル</p><p class="product-price">¥2,090（税込）</p></div>
+      </a>
+      <a href="product_104648746.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p104648746_01.jpg" alt="vickey'72 candlestick 置き型照明 1"></div>
+        <div class="product-info"><p class="product-cat">vickey'72</p><p class="product-name">candlestick 置き型照明 1</p><p class="product-price">¥28,600（税込）</p></div>
+      </a>
+      <a href="product_110858412.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110858412_01.jpg" alt="MSNOM 2wayラタンモチーフ"></div>
+        <div class="product-info"><p class="product-cat">MSNOM</p><p class="product-name">2wayラタンモチーフ</p><p class="product-price">¥6,270（税込）</p></div>
+      </a>
+      <a href="product_110862212.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110862212_01.jpg" alt="竹俣勇壱 マドラー ステンレス"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">マドラー ステンレス</p><p class="product-price">¥6,050（税込）</p></div>
+      </a>
+      <a href="product_110888027.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110888027_01.jpg" alt="竹俣勇壱 スプーンSL ステンレス"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">スプーンSL ステンレス</p><p class="product-price">¥3,300（税込）</p></div>
+      </a>
+      <a href="product_110888450.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p110888450_01.jpg" alt="竹俣勇壱 スプーンS ステンレス"></div>
+        <div class="product-info"><p class="product-cat">竹俣勇壱</p><p class="product-name">スプーンS ステンレス</p><p class="product-price">¥2,750（税込）</p></div>
+      </a>
+      <a href="product_113487185.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113487185_01.jpg" alt="額賀香織 マグ ecru"></div>
+        <div class="product-info"><p class="product-cat">額賀香織</p><p class="product-name">マグ ecru</p><p class="product-price">¥4,180（税込）</p></div>
+      </a>
+      <a href="product_113571039.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113571039_01.jpg" alt="前田彰子 花入れギザギザ カラー"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">花入れギザギザ カラー</p><p class="product-price">¥4,730（税込）</p></div>
+      </a>
+      <a href="product_113571780.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113571780_01.jpg" alt="前田彰子 ポチッとコップ クリア"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">ポチッとコップ クリア</p><p class="product-price">¥3,520（税込）</p></div>
+      </a>
+      <a href="product_113572085.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113572085_01.jpg" alt="前田彰子 ポチッとコップ カラー 1"></div>
+        <div class="product-info"><p class="product-cat">前田彰子</p><p class="product-name">ポチッとコップ カラー 1</p><p class="product-price">¥3,850（税込）</p></div>
+      </a>
+      <a href="product_113633629.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113633629_01.jpg" alt="中本純也 フタモノ 大 磁器"></div>
+        <div class="product-info"><p class="product-cat">中本純也</p><p class="product-name">フタモノ 大 磁器</p><p class="product-price">¥33,000（税込）</p></div>
+      </a>
+      <a href="product_113662198.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113662198_01.jpg" alt="中本純也 フタモノ 中 磁器"></div>
+        <div class="product-info"><p class="product-cat">中本純也</p><p class="product-name">フタモノ 中 磁器</p><p class="product-price">¥11,000（税込）</p></div>
+      </a>
+      <a href="product_113662957.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113662957_01.jpg" alt="中本純也 マグ 白磁"></div>
+        <div class="product-info"><p class="product-cat">中本純也</p><p class="product-name">マグ 白磁</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_113663212.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113663212_01.jpg" alt="中本純也 オーレボウル 白磁"></div>
+        <div class="product-info"><p class="product-cat">中本純也</p><p class="product-name">オーレボウル 白磁</p><p class="product-price">¥6,600（税込）</p></div>
+      </a>
+      <a href="product_113664270.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113664270_01.jpg" alt="中本純也 ピッチャー中 白磁"></div>
+        <div class="product-info"><p class="product-cat">中本純也</p><p class="product-name">ピッチャー中 白磁</p><p class="product-price">¥19,800（税込）</p></div>
+      </a>
+      <a href="product_113664649.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p113664649_01.jpg" alt="中本純也 ピッチャー小 白磁"></div>
+        <div class="product-info"><p class="product-cat">中本純也</p><p class="product-name">ピッチャー小 白磁</p><p class="product-price">¥11,000（税込）</p></div>
+      </a>
+      <a href="product_122620025.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p122620025_01.jpg" alt="八窪章吾 眠る子供（土）"></div>
+        <div class="product-info"><p class="product-cat">八窪章吾</p><p class="product-name">眠る子供（土）</p><p class="product-price">¥22,000（税込）</p></div>
+      </a>
+      <a href="product_122623071.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p122623071_01.jpg" alt="八窪章吾 眠る子供（白）"></div>
+        <div class="product-info"><p class="product-cat">八窪章吾</p><p class="product-name">眠る子供（白）</p><p class="product-price">¥20,800（税込）</p></div>
+      </a>
+      <a href="product_122623716.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p122623716_01.jpg" alt="八窪章吾 この夢"></div>
+        <div class="product-info"><p class="product-cat">八窪章吾</p><p class="product-name">この夢</p><p class="product-price">¥34,100（税込）</p></div>
+      </a>
+      <a href="product_122624816.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p122624816_01.jpg" alt="八窪章吾 遥か"></div>
+        <div class="product-info"><p class="product-cat">八窪章吾</p><p class="product-name">遥か</p><p class="product-price">¥34,100（税込）</p></div>
+      </a>
+      <a href="product_122629228.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p122629228_01.jpg" alt="raw___._ Ishi no akari 蝋燭"></div>
+        <div class="product-info"><p class="product-cat">raw___._</p><p class="product-name">Ishi no akari 蝋燭</p><p class="product-price">¥2,000（税込）</p></div>
+      </a>
+      <a href="product_122795338.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p122795338_01.jpg" alt="猪原朱乃 オーバル深皿 黒"></div>
+        <div class="product-info"><p class="product-cat">猪原朱乃</p><p class="product-name">オーバル深皿 黒</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_126457533.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p126457533_01.jpg" alt="hase hase stamp 1"></div>
+        <div class="product-info"><p class="product-cat">hase</p><p class="product-name">hase stamp 1</p><p class="product-price">¥1,760（税込）</p></div>
+      </a>
+      <a href="product_128407692.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p128407692_01.jpg" alt="サコユリコ 山コーヒーカップ&ソーサー 灰"></div>
+        <div class="product-info"><p class="product-cat">サコユリコ</p><p class="product-name">山コーヒーカップ&ソーサー 灰</p><p class="product-price">¥5,500（税込）</p></div>
+      </a>
+      <a href="product_133184156.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133184156_01.jpg" alt="糸so. シルクコースター 大"></div>
+        <div class="product-info"><p class="product-cat">糸so.</p><p class="product-name">シルクコースター 大</p><p class="product-price">¥2,200（税込）</p></div>
+      </a>
+      <a href="product_133240425.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133240425_01.jpg" alt="髙野友美 持ち手つき小鉢 白ハケ"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">持ち手つき小鉢 白ハケ</p><p class="product-price">¥3,850（税込）</p></div>
+      </a>
+      <a href="product_133241095.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133241095_01.jpg" alt="髙野友美 白ハケカップ"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">白ハケカップ</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_133241341.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133241341_01.jpg" alt="髙野友美 白ハケ銘々皿"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">白ハケ銘々皿</p><p class="product-price">¥3,850（税込）</p></div>
+      </a>
+      <a href="product_133241547.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133241547_01.jpg" alt="髙野友美 白ハケオーバル皿 小"></div>
+        <div class="product-info"><p class="product-cat">髙野友美</p><p class="product-name">白ハケオーバル皿 小</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_133243164.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133243164_01.jpg" alt="藤原志鈴香 ８角オーバル M 白"></div>
+        <div class="product-info"><p class="product-cat">藤原志鈴香</p><p class="product-name">８角オーバル M 白</p><p class="product-price">¥3,850（税込）</p></div>
+      </a>
+      <a href="product_133243483.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133243483_01.jpg" alt="藤原志鈴香 オド鉢 M 白"></div>
+        <div class="product-info"><p class="product-cat">藤原志鈴香</p><p class="product-name">オド鉢 M 白</p><p class="product-price">¥4,400（税込）</p></div>
+      </a>
+      <a href="product_133243595.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133243595_01.jpg" alt="藤原志鈴香 オド鉢 S 黒"></div>
+        <div class="product-info"><p class="product-cat">藤原志鈴香</p><p class="product-name">オド鉢 S 黒<span class="soldout-label">（soldout）</span></p><p class="product-price">¥1,650（税込）</p></div>
+      </a>
+      <a href="product_133243930.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133243930_01.jpg" alt="藤原志鈴香 角プレート M 黒"></div>
+        <div class="product-info"><p class="product-cat">藤原志鈴香</p><p class="product-name">角プレート M 黒</p><p class="product-price">¥2,420（税込）</p></div>
+      </a>
+      <a href="product_133804955.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133804955_01.jpg" alt="tatetoyoco 裂き織りティッシュケース ループ付き 1"></div>
+        <div class="product-info"><p class="product-cat">tatetoyoco</p><p class="product-name">裂き織りティッシュケース ループ付き 1</p><p class="product-price">¥3,500（税込）</p></div>
+      </a>
+      <a href="product_133805441.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p133805441_01.jpg" alt="tatetoyoco 裂き織りティッシュケース ループ付き 2"></div>
+        <div class="product-info"><p class="product-cat">tatetoyoco</p><p class="product-name">裂き織りティッシュケース ループ付き 2</p><p class="product-price">¥3,500（税込）</p></div>
+      </a>
+      <a href="product_139488326.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139488326_01.jpg" alt="松本克也 カッティングボード 25.0cm"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">カッティングボード 25.0cm</p><p class="product-price">¥9,790（税込）</p></div>
+      </a>
+      <a href="product_139488461.html" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-image"><img src="photo/index/p139488461_01.jpg" alt="松本克也 オーバルトレー"></div>
+        <div class="product-info"><p class="product-cat">松本克也</p><p class="product-name">オーバルトレー</p><p class="product-price">¥7,700（税込）</p></div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a href="index.html" class="footer-logo">ARC FUKAMEKI minoh</a>
+  <p>© 2026 Fukameki Zakkaten. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/fukamekizakkaten">Instagram</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+<script src="artists_data.js"></script>
+<script src="lang.js"></script>
+<script>
+// Reveal animation
+document.addEventListener('DOMContentLoaded', function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+  // Build artist filter buttons from card data
+  var artistSet = [];
+  document.querySelectorAll('.product-card .product-cat').forEach(function(el) {
+    var name = el.textContent.trim();
+    if (name && artistSet.indexOf(name) === -1) artistSet.push(name);
+  });
+
+  var filter = document.getElementById('artist-filter');
+
+  var allBtn = document.createElement('button');
+  allBtn.className = 'artist-btn active';
+  allBtn.textContent = 'すべて';
+  allBtn.onclick = function() { setActiveBtn(this); filterByArtist(null); };
+  filter.appendChild(allBtn);
+
+  artistSet.forEach(function(artist) {
+    var btn = document.createElement('button');
+    btn.className = 'artist-btn';
+    btn.textContent = artist;
+    btn.onclick = function() { setActiveBtn(this); filterByArtist(artist); };
+    filter.appendChild(btn);
+  });
+});
+
+function switchView(mode) {
+  var tabProducts = document.getElementById('tab-products');
+  var tabArtists = document.getElementById('tab-artists');
+  var filter = document.getElementById('artist-filter');
+  if (mode === 'artists') {
+    tabProducts.classList.remove('active');
+    tabArtists.classList.add('active');
+    filter.classList.add('visible');
+  } else {
+    tabArtists.classList.remove('active');
+    tabProducts.classList.add('active');
+    filter.classList.remove('visible');
+    filterByArtist(null);
+    // Reset artist button selection
+    document.querySelectorAll('.artist-btn').forEach(function(b) { b.classList.remove('active'); });
+    var first = document.querySelector('.artist-btn');
+    if (first) first.classList.add('active');
+  }
+}
+
+function filterByArtist(artist) {
+  var cards = document.querySelectorAll('#products-grid .product-card');
+  var spotlight = document.getElementById('artist-spotlight');
+
+  // Filter cards
+  var firstCard = null;
+  cards.forEach(function(card) {
+    if (!artist) {
+      card.style.display = '';
+    } else {
+      var cat = card.querySelector('.product-cat');
+      var match = cat && cat.textContent.trim() === artist;
+      card.style.display = match ? '' : 'none';
+      if (match && !firstCard) firstCard = card;
+    }
+  });
+
+  // Spotlight
+  if (!artist) {
+    spotlight.style.display = 'none';
+    return;
+  }
+
+  var data = window.ARTISTS_DATA && window.ARTISTS_DATA[artist];
+  document.getElementById('spotlight-name').textContent = artist;
+  var bioEl = document.getElementById('spotlight-bio');
+  var bio = (data && data.bio) ? data.bio : '';
+  bioEl.textContent = bio;
+  bioEl.style.display = bio ? '' : 'none';
+
+  // Use dedicated photo if specified, otherwise first product image
+  var imgEl = document.getElementById('spotlight-img');
+  if (data && data.photo) {
+    imgEl.src = data.photo;
+  } else if (firstCard) {
+    var cardImg = firstCard.querySelector('.product-image img');
+    if (cardImg) imgEl.src = cardImg.src;
+  }
+  imgEl.alt = artist;
+
+  spotlight.style.display = 'block';
+}
+
+function setActiveBtn(btn) {
+  document.querySelectorAll('.artist-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

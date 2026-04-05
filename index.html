@@ -1,0 +1,955 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARC FUKAMEKI minoh | フカメキ雑貨店</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="ARC FUKAMEKI minoh | フカメキ雑貨店">
+<meta property="og:description" content="大阪府箕面市の古民家を改装したセレクト雑貨店。">
+<meta property="og:url" content="https://fukameki.jp/">
+<meta property="og:image" content="https://fukameki.jp/ogp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0d0d0d;
+  --off-black: #1a1a1a;
+  --dark-gray: #2e2e2e;
+  --mid-gray: #6a6a6a;
+  --light-gray: #b8b8b8;
+  --off-white: #f4f3f1;
+  --white: #fafaf9;
+  --border: rgba(0,0,0,0.1);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Serif JP', serif; font-weight: 200; background: var(--white); color: var(--black); }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.8rem 3.5rem;
+  background: rgba(250,250,249,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'EB Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.25em; color: var(--black); text-decoration: none; text-transform: uppercase; }
+nav ul { list-style: none; display: flex; gap: 2.5rem; }
+nav a { font-family: 'Noto Serif JP', serif; font-weight: 200; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--mid-gray); text-decoration: none; transition: color 0.3s; }
+nav a:hover { color: var(--black); }
+.lang-switcher { position: relative; }
+.lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  font-family: 'EB Garamond', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--mid-gray);
+  cursor: pointer;
+  padding: 0.35rem 2rem 0.35rem 0.8rem;
+  outline: none;
+  transition: color 0.2s, border-color 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b8b8b8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 7px;
+}
+.lang-select:hover { color: var(--black); border-color: var(--dark-gray); }
+
+.hero { height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 0; }
+.hero-left { position: relative; overflow: hidden; }
+.hero-left img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; transform: scale(1.08); filter: brightness(0.93); transition: transform 6s ease; }
+.hero-left:hover img { transform: scale(1.04); }
+.hero-right { background: var(--white); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5rem 4.5rem; }
+.hero-logo-img { width: 80%; max-width: 420px; height: auto; display: block; animation: fadeIn 1s 0.4s ease forwards; opacity: 0; }
+.hero-index { font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.4em; color: var(--light-gray); text-transform: uppercase; margin-bottom: 3rem; }
+.hero-title { font-family: 'EB Garamond', serif; font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 400; line-height: 1.3; letter-spacing: 0.06em; color: var(--black); margin-bottom: 2.5rem; }
+.hero-title em { font-style: italic; color: var(--mid-gray); display: block; }
+.hero-desc { font-size: 0.78rem; line-height: 2.1; color: var(--mid-gray); letter-spacing: 0.08em; margin-bottom: 3.5rem; max-width: 320px; }
+.btn-text { display: inline-flex; align-items: center; gap: 1rem; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: gap 0.3s; }
+.btn-text::after { content: ''; display: block; width: 40px; height: 1px; background: var(--black); transition: width 0.3s; }
+.btn-text:hover { gap: 1.5rem; }
+.btn-text:hover::after { width: 60px; }
+
+.marquee-wrap { background: var(--black); overflow: hidden; padding: 1rem 0; }
+.marquee { display: flex; animation: marquee 22s linear infinite; white-space: nowrap; }
+.marquee span { font-family: 'EB Garamond', serif; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mid-gray); padding: 0 2rem; }
+.marquee span.dot { color: var(--dark-gray); padding: 0; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+#products { padding: 8rem 3.5rem; }
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+.section-label { font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--light-gray); margin-bottom: 0.8rem; }
+.section-title { font-family: 'EB Garamond', serif; font-size: 2.2rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); line-height: 1.2; }
+
+.products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.product-card { background: var(--white); overflow: hidden; cursor: pointer; }
+.product-image { aspect-ratio: 3/4; overflow: hidden; background: var(--off-white); }
+.product-image img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transform: scale(1.05); transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1); filter: brightness(0.96); }
+.product-card:hover .product-image img { transform: scale(1.06); }
+.product-info { padding: 1.2rem 1.4rem 1.8rem; border-top: 1px solid var(--border); }
+.product-cat { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--light-gray); margin-bottom: 0.5rem; }
+.product-name { font-family: 'EB Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--black); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+.product-price { font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.1em; }
+
+#concept { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+.concept-image { position: relative; overflow: hidden; }
+.concept-image img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transform: scale(1.05); filter: brightness(0.85) contrast(1.05); }
+.concept-text { background: var(--black); color: var(--white); display: flex; flex-direction: column; justify-content: center; padding: 6rem 5rem; }
+.concept-text .section-label { color: var(--dark-gray); }
+.concept-text .section-title { color: var(--white); margin-bottom: 2rem; }
+.concept-body { font-size: 0.8rem; line-height: 2.2; color: var(--mid-gray); letter-spacing: 0.08em; max-width: 400px; margin-bottom: 3rem; }
+.btn-white { display: inline-flex; align-items: center; gap: 1rem; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--white); text-decoration: none; transition: gap 0.3s; }
+.btn-white::after { content: ''; display: block; width: 40px; height: 1px; background: var(--white); transition: width 0.3s; }
+.btn-white:hover { gap: 1.5rem; }
+.btn-white:hover::after { width: 60px; }
+
+#news { padding: 8rem 3.5rem; background: var(--off-white); }
+.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
+.news-item { background: var(--off-white); padding: 2rem 2.5rem; text-decoration: none; color: inherit; transition: background 0.2s; display: flex; flex-direction: column; gap: 0.8rem; }
+.news-item:hover { background: var(--white); }
+.news-date { font-size: 0.62rem; letter-spacing: 0.2em; color: var(--light-gray); }
+.news-title { font-size: 0.85rem; line-height: 1.7; color: var(--black); letter-spacing: 0.05em; }
+.news-arrow { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--light-gray); margin-top: auto; transition: color 0.2s, transform 0.2s; display: inline-block; }
+.news-item:hover .news-arrow { color: var(--black); transform: translateX(4px); }
+
+#info { display: grid; grid-template-columns: 1fr 1fr; padding: 8rem 3.5rem; gap: 6rem; }
+.info-table { width: 100%; margin-top: 2.5rem; }
+.info-table tr td { padding: 1.1rem 0; border-bottom: 1px solid var(--border); font-size: 0.78rem; vertical-align: top; line-height: 1.8; letter-spacing: 0.05em; }
+.info-table td:first-child { color: var(--light-gray); width: 100px; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.map-block { height: 480px; background: var(--off-white); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-top: 2.5rem; }
+.map-block p { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light-gray); }
+
+footer { background: var(--black); padding: 3rem 3.5rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.footer-logo { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; }
+footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); text-align: center; }
+.footer-links { display: flex; gap: 2rem; justify-content: flex-end; }
+.footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--light-gray); }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.hero-right > * { animation: fadeIn 1s ease forwards; opacity: 0; }
+.hero-right > *:nth-child(1) { animation-delay: 0.3s; }
+.hero-right > *:nth-child(2) { animation-delay: 0.55s; }
+.hero-right > *:nth-child(3) { animation-delay: 0.75s; }
+.hero-right > *:nth-child(4) { animation-delay: 0.95s; }
+
+@media (max-width: 960px) {
+  nav { padding: 1.2rem 1.5rem; }
+  nav ul { gap: 1.2rem; }
+  .hero { grid-template-columns: 1fr; height: auto; }
+  .hero-left { height: 60vw; min-height: 260px; }
+  .hero-right { padding: 3rem 1.8rem 4rem; }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  #concept { grid-template-columns: 1fr; }
+  .concept-image { min-height: 50vw; }
+  .concept-text { padding: 4rem 1.8rem; }
+  #news { padding: 5rem 1.5rem; }
+  .news-grid { grid-template-columns: 1fr; }
+  #info { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
+  footer { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+  .footer-links { justify-content: center; }
+  .exhibition-grid { grid-template-columns: 1fr; gap: 2rem; }
+  #exhibition { padding: 4rem 1.5rem; }
+  .ex-past-list { margin-top: 1rem; }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 1rem 1.2rem; }
+  nav ul { gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end; max-width: 60vw; }
+  nav a { font-size: 0.62rem; }
+  .logo { font-size: 0.9rem; }
+  .hero-right { padding: 2rem 1.2rem 3rem; }
+  .hero-title { font-size: 2rem; }
+  .hero-desc { font-size: 0.78rem; }
+  .products-grid { grid-template-columns: 1fr; }
+  section { padding: 3.5rem 1.2rem; }
+  #products { padding: 3.5rem 1.2rem; }
+  #news { padding: 3.5rem 1.2rem; }
+  #info { padding: 3.5rem 1.2rem; }
+  .section-title { font-size: 1.8rem; }
+  .news-item { padding: 1.2rem 1.2rem; }
+  .marquee span { font-size: 0.65rem; padding: 0 1rem; }
+  .concept-text { padding: 3rem 1.2rem; }
+  .concept-title { font-size: 1.8rem; }
+  .info-table tr td { font-size: 0.74rem; }
+  footer { padding: 1.5rem 1.2rem; }
+  .lang-select { font-size: 0.62rem; }
+  .ex-name { font-size: 1.4rem; }
+  #exhibition { padding: 3.5rem 1.2rem; }
+}
+
+#exhibition { padding: 8rem 3.5rem; background: var(--off-white); }
+
+.exhibition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.ex-main { display: flex; flex-direction: column; gap: 2rem; }
+
+.ex-image {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--light-gray);
+  position: relative;
+}
+
+.ex-image-inner {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #c8c4bc 0%, #a09a90 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.ex-image-inner::after {
+  content: 'メイン画像';
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.5);
+}
+
+.ex-period {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--light-gray);
+  margin-bottom: 0.6rem;
+}
+
+.ex-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--black);
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
+}
+
+.ex-artist {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--mid-gray);
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+}
+
+.ex-artist-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--light-gray);
+  line-height: 1.5;
+}
+
+.ex-desc {
+  font-size: 0.8rem;
+  line-height: 2.1;
+  color: var(--mid-gray);
+  letter-spacing: 0.06em;
+  margin-bottom: 2rem;
+}
+
+.ex-past { padding-top: 0.5rem; }
+
+.ex-past-list { margin-top: 1.5rem; }
+
+.ex-past-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.ex-past-item:first-child { border-top: 1px solid var(--border); }
+.ex-past-item:hover { opacity: 0.6; }
+.ex-past-item:hover .news-arrow { transform: translateX(4px); color: var(--black); }
+
+@media (max-width: 960px) {
+  #exhibition { padding: 5rem 1.5rem; }
+  .exhibition-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+#renewal { padding: 8rem 3.5rem; background: var(--black); }
+#renewal .section-label { color: #555; }
+#renewal .section-title { color: var(--white); }
+#renewal .section-header { margin-bottom: 4rem; }
+.renewal-body { max-width: 680px; }
+.renewal-date {
+  font-size: 0.68rem; letter-spacing: 0.25em;
+  color: var(--warm); margin-bottom: 1.2rem;
+}
+.renewal-name {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400;
+  letter-spacing: 0.15em; color: var(--white);
+  margin-bottom: 2rem; line-height: 1.2;
+}
+.renewal-desc {
+  font-size: 0.82rem; line-height: 2.3;
+  color: #888; letter-spacing: 0.08em;
+  max-width: 520px; margin-bottom: 3rem;
+}
+#renewal .btn-text { color: var(--white); }
+#renewal .btn-text::after { background: var(--white); }
+
+@media (max-width: 480px) {
+  #renewal { padding: 4rem 1.2rem; }
+  .renewal-name { font-size: 2rem; }
+}
+
+#about {
+  padding: 8rem 3.5rem;
+  background: var(--white);
+}
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+.about-image {
+  overflow: hidden;
+}
+.about-image img {
+  width: 100%; height: auto;
+  display: block;
+  filter: brightness(0.95);
+  transition: transform 0.6s ease;
+}
+.about-image:hover img { transform: scale(1.03); }
+.about-text .section-label { margin-bottom: 0.8rem; }
+.about-text .section-title { margin-bottom: 2rem; }
+.about-body > p {
+  font-size: 0.82rem; line-height: 2.3;
+  color: var(--mid-gray); letter-spacing: 0.08em;
+  margin-bottom: 2.5rem;
+}
+.about-list { display: flex; flex-direction: column; gap: 0; }
+.about-list-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.78rem; line-height: 1.8; letter-spacing: 0.05em;
+}
+.about-list-item:first-child { border-top: 1px solid var(--border); }
+.about-list-label {
+  color: var(--light-gray);
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding-top: 0.1rem;
+}
+.about-list-value { color: var(--black); }
+
+@media (max-width: 960px) {
+  #about { padding: 5rem 1.5rem; }
+  .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 480px) {
+  #about { padding: 3.5rem 1.2rem; }
+  .about-list-item { grid-template-columns: 80px 1fr; }
+}
+
+
+#contact { padding: 8rem 3.5rem; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 0; }
+.contact-desc { font-size: 0.82rem; line-height: 2.3; color: var(--mid-gray); letter-spacing: 0.06em; margin-bottom: 2.5rem; }
+.contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light-gray); }
+.form-input, .form-textarea {
+  font-family: 'Noto Serif JP', serif; font-weight: 200;
+  font-size: 0.82rem; letter-spacing: 0.05em;
+  background: var(--white); border: none; border-bottom: 1px solid var(--border);
+  padding: 0.7rem 0; color: var(--black); outline: none; width: 100%;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-bottom-color: var(--black); }
+.form-textarea { resize: vertical; min-height: 120px; padding: 0.7rem 0; }
+.form-submit {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+  background: var(--black); color: var(--white); border: none;
+  padding: 1rem 2.5rem; cursor: pointer; transition: background 0.2s;
+  align-self: flex-start; margin-top: 0.5rem;
+}
+.form-submit:hover { background: var(--dark-gray); }
+.form-note { font-size: 0.68rem; color: var(--light-gray); letter-spacing: 0.08em; line-height: 1.8; }
+.form-success { display: none; font-size: 0.82rem; color: var(--mid-gray); letter-spacing: 0.08em; line-height: 2; padding: 2rem 0; }
+@media (max-width: 960px) {
+  #contact { padding: 5rem 1.5rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 480px) {
+  #contact { padding: 3.5rem 1.2rem; }
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+  z-index: 200;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--black);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--white);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--black);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--mid-gray); }
+.mobile-menu .mobile-lang {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1.5rem;
+}
+.mobile-menu .mobile-lang button {
+  background: none; border: none;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem; letter-spacing: 0.2em;
+  color: var(--light-gray); cursor: pointer;
+  transition: color 0.2s;
+}
+.mobile-menu .mobile-lang button.active { color: var(--black); }
+
+@media (max-width: 768px) {
+  nav ul { display: none; }
+  .lang-switcher { display: none; }
+  .hamburger { display: flex; }
+}
+
+.mobile-close {
+  position: absolute;
+  top: 1.8rem;
+  right: 1.8rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--mid-gray);
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  padding: 0.3rem;
+}
+.mobile-close:hover { color: var(--black); }
+</style>
+
+</head>
+<body>
+
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&family=Noto+Serif+JP:wght@200;300&display=swap" rel="stylesheet">
+
+<style>
+#splash-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 99998;
+  background: #f4f3f1;
+  align-items: center; justify-content: center;
+  opacity: 1;
+}
+#splash-overlay.splash-out {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+#splash-overlay img {
+  width: min(40vw, 280px);
+  height: auto;
+  animation: splashPulse 0.5s ease forwards;
+}
+@keyframes splashPulse {
+  0%   { opacity: 1; }
+  100% { opacity: 1; }
+}
+</style>
+<div id="splash-overlay">
+  <img src="arc.png" alt="ARC FUKAMEKI">
+</div>
+
+<script>
+(function(){
+  var splash = document.getElementById('splash-overlay');
+  splash.style.display = 'flex';
+  setTimeout(function() { splash.classList.add('splash-out'); }, 1000);
+  setTimeout(function() { splash.style.display = 'none'; }, 2000);
+})();
+</script>
+
+
+<nav>
+  <a href="#" class="logo">ARC FUKAMEKI <span style="text-transform: none;">minoh</span></a>
+  <ul>
+    <li><a href="#renewal">New Opening</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#exhibition">Exhibition</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#info">Access</a></li>
+    <li><a href="#products">Online Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" onclick="closeMenu()" aria-label="閉じる">&#10005;</button>
+  <a href="#renewal" onclick="closeMenu()">New Opening</a>
+  <a href="#news" onclick="closeMenu()">News</a>
+  <a href="#exhibition" onclick="closeMenu()">Exhibition</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#info" onclick="closeMenu()">Access</a>
+  <a href="#products" onclick="closeMenu()">Online Shop</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <div class="mobile-lang">
+    <button onclick="setLang('ja');closeMenu()">JA</button>
+    <button onclick="setLang('en');closeMenu()">EN</button>
+    <button onclick="setLang('zh');closeMenu()">中文</button>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-left">
+    <img src="photo/index/preopening.png" alt="木製トレーと食器" />
+  </div>
+  <div class="hero-right">
+    <img src="photo/index/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh" class="hero-logo-img">
+  </div>
+</section>
+
+</div>
+
+
+<section id="renewal">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-label">New Opening</p>
+      <h2 class="section-title" data-i18n="renewal_title">新店舗オープン予定（4/11～18企画展にてプレオープン決定）</h2>
+    </div>
+  </div>
+  <div class="renewal-body reveal">
+    <div class="renewal-text">
+      <p class="renewal-date" data-i18n="renewal_date">2026年5月2日（土）オープン</p>
+      <h3 class="renewal-name">ARC FUKAMEKI minoh</h3>
+      <p class="renewal-desc" data-i18n="renewal_desc">フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、2026年5月2日（土）にリニューアルオープンいたします。旧店舗から徒歩1分の場所で、新たな空間でお客様をお迎えします。<br><br>4月1日更新：4月11日～18日開催の企画展にてプレオープンいたします。<br>4月11日～18日開催のvickey'72個展「灯の詩」において、新店舗のプレオープンが決定しました。<br>本期間中の個展作品は新店舗で展示いたします。<br>ぜひお越しいただき、新店舗での作品展示をお楽しみください。<br>※新店舗の場所は本ページにてご確認ください。<br>※旧店舗にはスタッフを配置し、新店舗へのご案内をいたします。<br>※新店舗は改装工事中につき、設備が整っていなかったり、工事の音や匂いがする場合があります。悪しからずご了承くださいませ。</p>
+      <a href="preopen.html" class="btn-text" data-i18n="renewal_btn">詳細はこちら</a>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="section-header reveal">
+    <div><p class="section-label">News</p><h2 class="section-title" data-i18n="news_title">お知らせ</h2></div>
+    <a href="news.html" class="btn-text" data-i18n="see_all">すべて見る</a>
+  </div>
+  <div class="news-grid reveal" id="index-news-grid">
+    <a href="news.html#article-0" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">2026年5月2日新店舗「ARC FUKAMEKI minoh」オープンのお知らせ</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-1" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">4月企画展「灯の詩」開催のお知らせ</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-2" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">4月のスケジュールにつきまして</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-3" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">フカメキ雑貨店ホームページリニューアルのお知らせ</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-3" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">フカメキ雑貨店ホームページリニューアルのお知らせ</span><span class="news-arrow">→</span></a>
+  </div>
+</section>
+
+
+
+<section id="exhibition">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-label" data-i18n="ex_label">Exhibition</p>
+      <h2 class="section-title" data-i18n="ex_title">企画展</h2>
+    </div>
+  </div>
+
+  <div class="exhibition-grid reveal">
+    <div class="ex-main">
+      <div class="ex-image">
+        <img src="photo/index/img02.png" alt="企画展メイン画像" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+      <div class="ex-info">
+        <p class="ex-period" data-i18n="ex_period">2026.04.11 – 04.18</p>
+        <h3 class="ex-name" data-i18n="ex_name">灯の詩</h3>
+        <p class="ex-artist">出展者：vickey'72（個展）</p>
+        <p class="ex-desc" data-i18n="ex_desc">vickey&#39;72さんの個展。<br>ランプを中心とした、<br>繊細で美しい作品が集まります。</p>
+        <a href="akarinouta2026.html" target="_blank" class="btn-text" data-i18n="ex_btn">詳しく見る</a>
+      </div>
+    </div>
+
+    <div class="ex-past">
+      <p class="section-label">Next Exhibitions</p>
+      <div class="ex-past-list">
+        <a href="color2026.html" class="ex-past-item">
+          <span class="news-date">2026.05.02 – 05.10</span>
+          <span class="news-title">color</span>
+          <span class="ex-artist-sub">あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子（五十音順）</span>
+          <span class="news-arrow">→</span>
+        </a>
+        <a href="ampiana2026.html" class="ex-past-item">
+          <span class="news-date">2026.05.24 – 06.07</span>
+          <span class="news-title">AMPIANA POPUP</span>
+          <span class="ex-artist-sub">AMPIANA</span>
+          <span class="news-arrow">→</span>
+        </a>
+        <a href="kamiue2026.html" class="ex-past-item">
+          <span class="news-date">2026.06.06 – 06.13</span>
+          <span class="news-title">紙上征江 個展</span>
+          <span class="ex-artist-sub">紙上征江（個展）</span>
+          <span class="news-arrow">→</span>
+        </a>
+        <a href="natsumeku2026.html" class="ex-past-item">
+          <span class="news-date">2026.07.18 – 07.25</span>
+          <span class="news-title">ナツメク</span>
+          <span class="ex-artist-sub">deco＋、Noragrassworks、fika（五十音順）</span>
+          <span class="news-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-inner reveal">
+    <div class="about-image">
+      <img src="photo/index/about.jpg" alt="フカメキ雑貨店">
+    </div>
+    <div class="about-text">
+      <p class="section-label">About</p>
+      <h2 class="section-title">ARC FUKAMEKI minoh</h2>
+      <div class="about-body">
+        <p data-i18n="about_desc">2019年6月オープン。<br>手仕事品を中心に暮らしを充たすアイテムを全国各地よりセレクト。<br>常設販売のほか、季節やテーマに合わせた企画展示、個展を定期的に開催。<br>2026年5月移転、ARC FUKAMEKI minoh（アルクフカメキ箕面）に名称変更。<br>ARCは架け橋の意。<br>作り手と使い手がつながり心豊かな時間がうまれる場所でありたいと考えています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <div class="reveal">
+    <p class="section-label">Access</p>
+    <h2 class="section-title" data-i18n="access_title">アクセス</h2>
+    <div class="map-block" style="padding:0;overflow:hidden;"><iframe src="https://maps.google.com/maps?q=フカメキ雑貨店+大阪府箕面市箕面2丁目3-4&output=embed&hl=ja&z=16" width="100%" height="480" style="border:0;display:block;" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+  <div class="reveal">
+    <h2 class="section-title" data-i18n="info_title">店舗情報</h2>
+    <table class="info-table">
+      <tr><td data-i18n="addr_label">住所</td><td>〒562-0001<br>大阪府箕面市箕面2丁目3-4</td></tr>
+      <tr><td data-i18n="hours_label">営業時間</td><td data-i18n="hours_val">13:00 – 18:00</td></tr>
+      <tr><td data-i18n="closed_label">定休日</td><td data-i18n="closed_val">不定休</td></tr>
+      <tr><td data-i18n="payment_label">決済方法</td><td data-i18n="payment_val">現金、クレジットカード、PayPay</td></tr>
+      <tr><td>Instagram</td><td><a href="https://www.instagram.com/fukamekizakkaten" style="color:inherit;">@fukamekizakkaten</a></td></tr>
+    </table>
+  </div>
+</section>
+
+
+<section id="products">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-label">Online Shop</p>
+      <h2 class="section-title" data-i18n="products_title">商品紹介</h2>
+      <p style="margin-top:0.8rem;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--light-gray);">Shop Link</p>
+      <a href="https://fukameki.thebase.in/" target="_blank" rel="noopener" style="display:inline-block;margin-top:0.5rem;"><img src="fukameki_logo_data/base_logo_vertical_black.png" alt="BASE オンラインショップ" style="height:48px;width:auto;display:block;"></a>
+    </div>
+    <a href="products.html" class="btn-text" data-i18n="see_all">すべて見る</a>
+  </div>
+  <div class="products-grid reveal">
+    <a href="product_katayama_futamono.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/katayama_futamono_01.jpg" alt="片山裕二 ふたもの">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">片山裕二</p>
+        <p class="product-name">ふたもの</p>
+        <p class="product-price">¥4,950（税込）</p>
+      </div>
+    </a>
+    <a href="product_imai_hashi_oki.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/imai_hashi_oki_01.jpg" alt="今井律湖 動物箸置き">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">今井律湖</p>
+        <p class="product-name">動物箸置き</p>
+        <p class="product-price">¥2,090（税込）</p>
+      </div>
+    </a>
+    <a href="product_imai_daen_kozara.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/imai_daen_kozara_01.jpg" alt="今井律湖 楕円小皿 飴">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">今井律湖</p>
+        <p class="product-name">楕円小皿 飴</p>
+        <p class="product-price">¥2,750（税込）</p>
+      </div>
+    </a>
+    <a href="product_imai_soup_sara.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/imai_soup_sara_01.jpg" alt="今井律湖 スープ皿">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">今井律湖</p>
+        <p class="product-name">スープ皿</p>
+        <p class="product-price">¥4,400（税込）</p>
+      </div>
+    </a>
+    <a href="product_imai_candle_dish.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/imai_candle_dish_01.jpg" alt="今井律湖 キャンドルディッシュ">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">今井律湖</p>
+        <p class="product-name">キャンドルディッシュ</p>
+        <p class="product-price">¥5,500（税込）</p>
+      </div>
+    </a>
+    <a href="product_imai_oval_flat.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/imai_oval_flat_01.jpg" alt="今井律湖 オーバルフラット">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">今井律湖</p>
+        <p class="product-name">オーバルフラット</p>
+        <p class="product-price">¥6,600（税込）</p>
+      </div>
+    </a>
+    <a href="product_imai_oval_egg.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/imai_oval_egg_01.jpg" alt="今井律湖 オーバルエッグ">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">今井律湖</p>
+        <p class="product-name">オーバルエッグ</p>
+        <p class="product-price">¥6,600（税込）</p>
+      </div>
+    </a>
+    <a href="product_imai_hakkaku_bon.html" class="product-card" style="text-decoration:none;color:inherit;">
+      <div class="product-image">
+        <img src="photo/index/imai_hakkaku_bon_01.jpg" alt="今井律湖 八角盆プレート 白">
+      </div>
+      <div class="product-info">
+        <p class="product-cat">今井律湖</p>
+        <p class="product-name">八角盆プレート 白</p>
+        <p class="product-price">¥8,800（税込）</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+<section id="contact">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-label">Contact</p>
+      <h2 class="section-title" data-i18n="contact_title">お問合せ</h2>
+    </div>
+  </div>
+  <div class="contact-grid reveal">
+    <div>
+      <p class="contact-desc" data-i18n="contact_desc">
+        商品・企画展・その他のご質問は、下記フォームよりお問合せください。<br>通常、ご返信までに２〜３営業日を要しますことをご容赦くださいませ。
+      </p>
+    </div>
+    <div>
+      <!-- Step 1: 入力フォーム -->
+      <form class="contact-form" id="contact-form" onsubmit="showConfirm(event)">
+        <div class="form-group">
+          <label class="form-label" for="cf-name" data-i18n="contact_label_name">お名前 <span style="color:#c0392b;font-size:0.65rem;">※必須</span></label>
+          <input class="form-input" type="text" id="cf-name" name="name" required placeholder="山田 太郎" data-i18n-placeholder="contact_ph_name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-email" data-i18n="contact_label_email">メールアドレス <span style="color:#c0392b;font-size:0.65rem;">※必須</span></label>
+          <input class="form-input" type="email" id="cf-email" name="email" required placeholder="example@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-subject" data-i18n="contact_label_subject">件名</label>
+          <input class="form-input" type="text" id="cf-subject" name="subject" placeholder="商品について" data-i18n-placeholder="contact_ph_subject">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-message" data-i18n="contact_label_message">メッセージ <span style="color:#c0392b;font-size:0.65rem;">※必須</span></label>
+          <textarea class="form-textarea" id="cf-message" name="message" required placeholder="ご質問・ご要望をご記入ください" data-i18n-placeholder="contact_ph_message"></textarea>
+        </div>
+        <button class="form-submit" type="submit" data-i18n="contact_btn_confirm">内容を確認する</button>
+      </form>
+
+      <!-- Step 2: 確認画面 -->
+      <div id="contact-confirm" style="display:none;">
+        <p style="font-size:0.78rem;color:var(--mid-gray);letter-spacing:0.08em;line-height:2;margin-bottom:2rem;" data-i18n="contact_confirm_msg">以下の内容で送信します。よろしければ「送信する」を押してください。</p>
+        <table style="width:100%;font-size:0.78rem;letter-spacing:0.05em;line-height:1.8;">
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="color:var(--light-gray);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;width:100px;padding:1rem 0;vertical-align:top;" data-i18n="contact_conf_name">お名前</td>
+            <td id="conf-name" style="padding:1rem 0;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="color:var(--light-gray);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;padding:1rem 0;vertical-align:top;" data-i18n="contact_conf_email">メール</td>
+            <td id="conf-email" style="padding:1rem 0;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="color:var(--light-gray);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;padding:1rem 0;vertical-align:top;" data-i18n="contact_conf_subject">件名</td>
+            <td id="conf-subject" style="padding:1rem 0;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="color:var(--light-gray);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;padding:1rem 0;vertical-align:top;" data-i18n="contact_conf_message">メッセージ</td>
+            <td id="conf-message" style="padding:1rem 0;white-space:pre-wrap;"></td>
+          </tr>
+        </table>
+        <div style="display:flex;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap;">
+          <button class="form-submit" onclick="backToForm()" style="background:transparent;color:var(--black);border:1px solid var(--border);" data-i18n="contact_btn_back">戻る</button>
+          <button class="form-submit" id="btn-send" onclick="sendForm()" data-i18n="contact_btn_send">送信する</button>
+        </div>
+      </div>
+
+      <!-- Step 3: 送信完了 -->
+      <div class="form-success" id="form-success">
+        <p data-i18n="contact_success">お問い合わせありがとうございます。<br>内容を確認のうえ、折り返しご連絡いたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">ARC FUKAMEKI minoh</a>
+  <p>© 2026 Fukameki Zakkaten. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/fukamekizakkaten">Instagram</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ★ FormspreeのURLをここに入れてください
+var FORMSPREE_URL = 'https://formspree.io/f/mlgodarw';
+
+function showConfirm(e) {
+  e.preventDefault();
+  var name    = document.getElementById('cf-name').value.trim();
+  var email   = document.getElementById('cf-email').value.trim();
+  var subject = document.getElementById('cf-subject').value.trim() || '（未入力）';
+  var message = document.getElementById('cf-message').value.trim();
+  document.getElementById('conf-name').textContent    = name;
+  document.getElementById('conf-email').textContent   = email;
+  document.getElementById('conf-subject').textContent = subject;
+  document.getElementById('conf-message').textContent = message;
+  document.getElementById('contact-form').style.display    = 'none';
+  document.getElementById('contact-confirm').style.display = 'block';
+}
+
+function backToForm() {
+  document.getElementById('contact-confirm').style.display = 'none';
+  document.getElementById('contact-form').style.display    = 'block';
+}
+
+function sendForm() {
+  var btn = document.getElementById('btn-send');
+  btn.textContent = '送信中...';
+  btn.disabled = true;
+
+  var data = {
+    name:    document.getElementById('cf-name').value.trim(),
+    email:   document.getElementById('cf-email').value.trim(),
+    subject: document.getElementById('cf-subject').value.trim() || 'お問い合わせ',
+    message: document.getElementById('cf-message').value.trim()
+  };
+
+  fetch(FORMSPREE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('contact-confirm').style.display = 'none';
+      document.getElementById('form-success').style.display    = 'block';
+    } else {
+      btn.textContent = '送信する';
+      btn.disabled = false;
+      alert('送信に失敗しました。しばらく経ってからもう一度お試しください。');
+    }
+  })
+  .catch(function() {
+    btn.textContent = '送信する';
+    btn.disabled = false;
+    alert('送信に失敗しました。ネットワークをご確認ください。');
+  });
+}
+</script>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
+
+<script src="lang.js"></script>
+
+
+<script>
+function toggleMenu() {
+  var menu = document.getElementById('mobile-menu');
+  var btn  = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  var menu = document.getElementById('mobile-menu');
+  var btn  = document.getElementById('hamburger');
+  menu.classList.remove('open');
+  btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>

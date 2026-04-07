@@ -97,15 +97,15 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 .view-tab.active { color: var(--black); border-bottom-color: var(--black); }
 .view-tab:hover { color: var(--mid-gray); }
 
-.artist-filter { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 2.5rem; }
-.artist-filter.visible { display: flex; }
-.artist-btn {
+.artist-filter, .genre-filter { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 2.5rem; }
+.artist-filter.visible, .genre-filter.visible { display: flex; }
+.artist-btn, .genre-btn {
   font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.15em;
   padding: 0.35rem 1.1rem; background: none; border: 1px solid var(--border);
   color: var(--mid-gray); cursor: pointer; transition: all 0.2s;
 }
-.artist-btn:hover { color: var(--black); border-color: var(--dark-gray); }
-.artist-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+.artist-btn:hover, .genre-btn:hover { color: var(--black); border-color: var(--dark-gray); }
+.artist-btn.active, .genre-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
 
 /* Artist spotlight */
 #artist-spotlight { display: none; margin-bottom: 4rem; padding-bottom: 3.5rem; border-bottom: 1px solid var(--border); }
@@ -181,8 +181,10 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     <div class="view-tabs">
       <button class="view-tab active" id="tab-products" onclick="switchView('products')" data-i18n="tab_products">商品別</button>
       <button class="view-tab" id="tab-artists" onclick="switchView('artists')" data-i18n="tab_artists">作家別</button>
+      <button class="view-tab" id="tab-genres" onclick="switchView('genres')">ジャンル別</button>
     </div>
     <div class="artist-filter" id="artist-filter"></div>
+    <div class="genre-filter" id="genre-filter"></div>
 
     <div id="artist-spotlight">
       <h2 class="spotlight-name" id="spotlight-name"></h2>
@@ -790,6 +792,144 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 <script src="artists_data.js"></script>
 <script src="lang.js"></script>
 <script>
+var GENRE_LIST = ['食器（陶器）', '食器（木工）', '食器（ガラス）', 'カトラリー', 'ランプ', '衣類', 'アクセサリー', '靴', '花器', '造形', 'キャンドル', 'スタンプ', 'その他'];
+
+var GENRE_MAP = {
+  'product_katayama_futamono.html': '食器（陶器）',
+  'product_imai_hashi_oki.html': '食器（陶器）',
+  'product_imai_daen_kozara.html': '食器（陶器）',
+  'product_imai_soup_sara.html': '食器（陶器）',
+  'product_imai_candle_dish.html': 'キャンドル',
+  'product_imai_oval_flat.html': '食器（陶器）',
+  'product_imai_oval_egg.html': '食器（陶器）',
+  'product_imai_hakkaku_bon.html': '食器（陶器）',
+  'product_139504696.html': '食器（陶器）',
+  'product_98892230.html': '食器（木工）',
+  'product_95190098.html': '食器（木工）',
+  'product_88815090.html': '食器（木工）',
+  'product_139495741.html': '食器（木工）',
+  'product_139495480.html': '食器（木工）',
+  'product_95189885.html': '食器（木工）',
+  'product_95189456.html': '食器（木工）',
+  'product_95189624.html': '食器（木工）',
+  'product_139496523.html': '食器（木工）',
+  'product_110820832.html': '食器（木工）',
+  'product_110820530.html': '食器（木工）',
+  'product_139487392.html': '食器（木工）',
+  'product_139487457.html': '食器（木工）',
+  'product_110820417.html': '食器（木工）',
+  'product_139486861.html': '食器（木工）',
+  'product_139487002.html': '食器（木工）',
+  'product_110809143.html': '食器（木工）',
+  'product_139488635.html': '食器（木工）',
+  'product_72229485.html': '食器（木工）',
+  'product_29992076.html': 'アクセサリー',
+  'product_36646372.html': '靴',
+  'product_51106366.html': 'アクセサリー',
+  'product_53567162.html': '靴',
+  'product_53569545.html': '衣類',
+  'product_56866733.html': '食器（陶器）',
+  'product_59665637.html': '食器（陶器）',
+  'product_59666641.html': '食器（陶器）',
+  'product_67725582.html': '花器',
+  'product_67725695.html': '花器',
+  'product_67725762.html': '花器',
+  'product_67728595.html': '食器（ガラス）',
+  'product_67990320.html': '靴',
+  'product_68113493.html': '食器（陶器）',
+  'product_69272148.html': '食器（ガラス）',
+  'product_69960464.html': 'ランプ',
+  'product_70208577.html': '食器（陶器）',
+  'product_70208645.html': '食器（陶器）',
+  'product_70954900.html': '衣類',
+  'product_71052047.html': '食器（木工）',
+  'product_71052065.html': '食器（木工）',
+  'product_71137619.html': '食器（陶器）',
+  'product_71137663.html': '食器（陶器）',
+  'product_71137711.html': '食器（陶器）',
+  'product_71137891.html': '花器',
+  'product_71137987.html': '花器',
+  'product_72229323.html': '食器（木工）',
+  'product_73388466.html': '食器（陶器）',
+  'product_73388949.html': '食器（陶器）',
+  'product_73389056.html': '食器（陶器）',
+  'product_73389146.html': '食器（陶器）',
+  'product_73389252.html': '食器（陶器）',
+  'product_74057726.html': '花器',
+  'product_76769582.html': '衣類',
+  'product_76769906.html': '衣類',
+  'product_77352229.html': 'アクセサリー',
+  'product_81884449.html': '花器',
+  'product_82614394.html': '食器（陶器）',
+  'product_83357756.html': '食器（木工）',
+  'product_84294099.html': 'アクセサリー',
+  'product_84312921.html': 'アクセサリー',
+  'product_85065960.html': 'カトラリー',
+  'product_85066000.html': 'カトラリー',
+  'product_85066852.html': 'カトラリー',
+  'product_85067300.html': 'カトラリー',
+  'product_85067386.html': 'カトラリー',
+  'product_85067498.html': 'カトラリー',
+  'product_87073778.html': 'アクセサリー',
+  'product_88820288.html': '花器',
+  'product_88820338.html': '花器',
+  'product_88843222.html': 'その他',
+  'product_88904845.html': '食器（陶器）',
+  'product_89640192.html': '食器（陶器）',
+  'product_91832463.html': '食器（陶器）',
+  'product_91833664.html': '食器（陶器）',
+  'product_91833740.html': '食器（陶器）',
+  'product_91833890.html': '食器（陶器）',
+  'product_91834369.html': '食器（陶器）',
+  'product_91922813.html': '食器（陶器）',
+  'product_91923086.html': '食器（陶器）',
+  'product_91923608.html': '食器（陶器）',
+  'product_95025278.html': '食器（ガラス）',
+  'product_95025488.html': '食器（ガラス）',
+  'product_97605977.html': '食器（陶器）',
+  'product_97606597.html': '食器（陶器）',
+  'product_97615995.html': '食器（陶器）',
+  'product_97639680.html': '食器（陶器）',
+  'product_97690557.html': '食器（陶器）',
+  'product_101842342.html': 'その他',
+  'product_104648746.html': 'ランプ',
+  'product_110858412.html': 'アクセサリー',
+  'product_110862212.html': 'カトラリー',
+  'product_110888027.html': 'カトラリー',
+  'product_110888450.html': 'カトラリー',
+  'product_113487185.html': '食器（陶器）',
+  'product_113571039.html': '花器',
+  'product_113571780.html': '食器（ガラス）',
+  'product_113572085.html': '食器（ガラス）',
+  'product_113633629.html': '食器（陶器）',
+  'product_113662198.html': '食器（陶器）',
+  'product_113662957.html': '食器（陶器）',
+  'product_113663212.html': '食器（陶器）',
+  'product_113664270.html': '食器（陶器）',
+  'product_113664649.html': '食器（陶器）',
+  'product_122620025.html': '造形',
+  'product_122623071.html': '造形',
+  'product_122623716.html': '造形',
+  'product_122624816.html': '造形',
+  'product_122629228.html': 'キャンドル',
+  'product_122795338.html': '食器（陶器）',
+  'product_126457533.html': 'スタンプ',
+  'product_128407692.html': '食器（陶器）',
+  'product_133184156.html': 'その他',
+  'product_133240425.html': '食器（陶器）',
+  'product_133241095.html': '食器（陶器）',
+  'product_133241341.html': '食器（陶器）',
+  'product_133241547.html': '食器（陶器）',
+  'product_133243164.html': '食器（陶器）',
+  'product_133243483.html': '食器（陶器）',
+  'product_133243595.html': '食器（陶器）',
+  'product_133243930.html': '食器（陶器）',
+  'product_133804955.html': 'その他',
+  'product_133805441.html': 'その他',
+  'product_139488326.html': '食器（木工）',
+  'product_139488461.html': '食器（木工）'
+};
+
 // Reveal animation
 document.addEventListener('DOMContentLoaded', function() {
   var observer = new IntersectionObserver(function(entries) {
@@ -819,22 +959,56 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.onclick = function() { setActiveBtn(this); filterByArtist(artist); };
     filter.appendChild(btn);
   });
+
+  // Build genre filter buttons
+  var genreFilter = document.getElementById('genre-filter');
+
+  var allGenreBtn = document.createElement('button');
+  allGenreBtn.className = 'genre-btn active';
+  allGenreBtn.textContent = 'すべて';
+  allGenreBtn.onclick = function() { setActiveGenreBtn(this); filterByGenre(null); };
+  genreFilter.appendChild(allGenreBtn);
+
+  GENRE_LIST.forEach(function(genre) {
+    var btn = document.createElement('button');
+    btn.className = 'genre-btn';
+    btn.textContent = genre;
+    btn.onclick = function() { setActiveGenreBtn(this); filterByGenre(genre); };
+    genreFilter.appendChild(btn);
+  });
 });
 
 function switchView(mode) {
   var tabProducts = document.getElementById('tab-products');
   var tabArtists = document.getElementById('tab-artists');
-  var filter = document.getElementById('artist-filter');
+  var tabGenres = document.getElementById('tab-genres');
+  var artistFilter = document.getElementById('artist-filter');
+  var genreFilter = document.getElementById('genre-filter');
+  var spotlight = document.getElementById('artist-spotlight');
+
+  tabProducts.classList.remove('active');
+  tabArtists.classList.remove('active');
+  tabGenres.classList.remove('active');
+  artistFilter.classList.remove('visible');
+  genreFilter.classList.remove('visible');
+
   if (mode === 'artists') {
-    tabProducts.classList.remove('active');
     tabArtists.classList.add('active');
-    filter.classList.add('visible');
-  } else {
-    tabArtists.classList.remove('active');
-    tabProducts.classList.add('active');
-    filter.classList.remove('visible');
+    artistFilter.classList.add('visible');
+    filterByGenre(null);
+  } else if (mode === 'genres') {
+    tabGenres.classList.add('active');
+    genreFilter.classList.add('visible');
     filterByArtist(null);
-    // Reset artist button selection
+    spotlight.style.display = 'none';
+    document.querySelectorAll('.genre-btn').forEach(function(b) { b.classList.remove('active'); });
+    var firstGenre = document.querySelector('.genre-btn');
+    if (firstGenre) firstGenre.classList.add('active');
+  } else {
+    tabProducts.classList.add('active');
+    filterByArtist(null);
+    filterByGenre(null);
+    spotlight.style.display = 'none';
     document.querySelectorAll('.artist-btn').forEach(function(b) { b.classList.remove('active'); });
     var first = document.querySelector('.artist-btn');
     if (first) first.classList.add('active');
@@ -845,7 +1019,6 @@ function filterByArtist(artist) {
   var cards = document.querySelectorAll('#products-grid .product-card');
   var spotlight = document.getElementById('artist-spotlight');
 
-  // Filter cards
   var firstCard = null;
   cards.forEach(function(card) {
     if (!artist) {
@@ -858,7 +1031,6 @@ function filterByArtist(artist) {
     }
   });
 
-  // Spotlight
   if (!artist) {
     spotlight.style.display = 'none';
     return;
@@ -871,7 +1043,6 @@ function filterByArtist(artist) {
   bioEl.textContent = bio;
   bioEl.style.display = bio ? '' : 'none';
 
-  // Use dedicated photo if specified, otherwise first product image
   var imgEl = document.getElementById('spotlight-img');
   if (data && data.photo) {
     imgEl.src = data.photo;
@@ -884,8 +1055,27 @@ function filterByArtist(artist) {
   spotlight.style.display = 'block';
 }
 
+function filterByGenre(genre) {
+  var cards = document.querySelectorAll('#products-grid .product-card');
+  cards.forEach(function(card) {
+    if (!genre) {
+      card.style.display = '';
+    } else {
+      var href = card.getAttribute('href') || '';
+      var fileName = href.split('/').pop();
+      var cardGenre = GENRE_MAP[fileName] || 'その他';
+      card.style.display = (cardGenre === genre) ? '' : 'none';
+    }
+  });
+}
+
 function setActiveBtn(btn) {
   document.querySelectorAll('.artist-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function setActiveGenreBtn(btn) {
+  document.querySelectorAll('.genre-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
 }
 </script>

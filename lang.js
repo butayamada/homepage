@@ -510,6 +510,82 @@ function setLang(lang) {
     window.NEWS_DATA = NEWS_ARTICLES[lang];
     buildNewsList();
   }
+
+  // 商品詳細ページの翻訳を適用
+  applyProductTranslations(lang);
+
+  // ページ固有のコールバック（product.html 等で使用）
+  if (typeof window.onLangChange === 'function') {
+    window.onLangChange(lang);
+  }
+}
+
+/* =====================================================
+   applyProductTranslations: 商品詳細ページ固有のテキストを翻訳
+   PRODUCT_TRANSLATIONS が読み込まれている場合のみ動作
+   ===================================================== */
+var _productOrigCache = null;
+
+function _storeProductOriginals() {
+  var orig = { specs: {} };
+  var titleEl = document.querySelector('.product-title');
+  if (titleEl) orig.name = titleEl.textContent;
+  var descEl = document.querySelector('.product-desc p');
+  if (descEl) orig.desc = descEl.textContent;
+  var artistEl = document.querySelector('.artist-profile-text');
+  if (artistEl) orig.artist_profile = artistEl.innerHTML;
+  var matEl = document.querySelector('[data-i18n="spec_material"]');
+  if (matEl && matEl.nextElementSibling) orig.specs.material = matEl.nextElementSibling.textContent;
+  var careEl = document.querySelector('[data-i18n="spec_care"]');
+  if (careEl && careEl.nextElementSibling) orig.specs.care = careEl.nextElementSibling.textContent;
+  var notesEl = document.querySelector('[data-i18n="spec_notes"]');
+  if (notesEl && notesEl.nextElementSibling) orig.specs.notes = notesEl.nextElementSibling.textContent;
+  _productOrigCache = orig;
+}
+
+function applyProductTranslations(lang) {
+  if (!window.PRODUCT_TRANSLATIONS) return;
+
+  // ファイル名でエントリを検索
+  var filename = window.location.pathname.split('/').pop() || 'index.html';
+  if (!filename) return;
+
+  var pt = PRODUCT_TRANSLATIONS[filename];
+  if (!pt) return;
+
+  // 日本語テキストを初回呼び出し時に保存
+  if (!_productOrigCache) _storeProductOriginals();
+
+  var tr = (lang === 'ja') ? null : (pt[lang] || null);
+  var orig = _productOrigCache || {};
+
+  function applyOrRestore(el, translatedVal, origVal, useInner) {
+    if (!el) return;
+    if (tr && translatedVal) {
+      if (useInner) el.innerHTML = translatedVal;
+      else el.textContent = translatedVal;
+    } else if (lang === 'ja' && origVal !== undefined) {
+      if (useInner) el.innerHTML = origVal;
+      else el.textContent = origVal;
+    }
+  }
+
+  applyOrRestore(document.querySelector('.product-title'), tr && tr.name, orig.name, false);
+  applyOrRestore(document.querySelector('.product-desc p'), tr && tr.desc, orig.desc, false);
+  applyOrRestore(document.querySelector('.artist-profile-text'), tr && tr.artist_profile, orig.artist_profile, true);
+
+  function applySpec(i18nKey, specKey) {
+    var label = document.querySelector('[data-i18n="' + i18nKey + '"]');
+    if (!label || !label.nextElementSibling) return;
+    var val = tr && tr.specs && tr.specs[specKey];
+    var origVal = orig.specs && orig.specs[specKey];
+    if (val) label.nextElementSibling.textContent = val;
+    else if (lang === 'ja' && origVal !== undefined) label.nextElementSibling.textContent = origVal;
+  }
+
+  applySpec('spec_material', 'material');
+  applySpec('spec_care', 'care');
+  applySpec('spec_notes', 'notes');
 }
 
 /* =====================================================

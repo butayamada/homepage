@@ -144,6 +144,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 </footer>
 
 <script src="products_data.js"></script>
+<script src="product_translations.js"></script>
 <script src="lang.js"></script>
 <script>
 (function() {
@@ -210,10 +211,48 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     document.getElementById('product-detail').style.display = '';
   }
 
+  function applyDynamicProductLang(lang, p, id) {
+    // Re-apply data-i18n labels (render() adds them after setLang has already run)
+    if (window.LANG_TRANSLATIONS && LANG_TRANSLATIONS[lang]) {
+      var t = LANG_TRANSLATIONS[lang];
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+    }
+    // Apply product-specific translations for non-Japanese
+    if (lang !== 'ja' && window.PRODUCT_TRANSLATIONS) {
+      var key = 'product_' + id + '.html';
+      var pt = PRODUCT_TRANSLATIONS[key];
+      if (pt && pt[lang]) {
+        var tr = pt[lang];
+        if (tr.name) document.getElementById('p-name').textContent = tr.name;
+        if (tr.desc) document.getElementById('p-desc').textContent = tr.desc;
+        if (tr.specs) {
+          function applySpec(i18nKey, val) {
+            var label = document.querySelector('[data-i18n="' + i18nKey + '"]');
+            if (label && label.nextElementSibling && val) label.nextElementSibling.textContent = val;
+          }
+          applySpec('spec_material', tr.specs.material);
+          applySpec('spec_care', tr.specs.care);
+          applySpec('spec_notes', tr.specs.notes);
+        }
+      }
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     var id = getParam('id');
     if (id && window.PRODUCTS_DATA && window.PRODUCTS_DATA[id]) {
-      render(window.PRODUCTS_DATA[id], id);
+      var p = window.PRODUCTS_DATA[id];
+      render(p, id);
+      // Apply language after render (setLang already ran before render)
+      var lang = localStorage.getItem('arc_lang') || 'ja';
+      applyDynamicProductLang(lang, p, id);
+      // Register hook for subsequent language changes
+      window.onLangChange = function(newLang) {
+        applyDynamicProductLang(newLang, p, id);
+      };
     } else {
       document.getElementById('not-found').style.display = '';
     }

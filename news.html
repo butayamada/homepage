@@ -11,10 +11,10 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>お知らせ — ARC FUKAMEKI <span style="text-transform:none;">minoh</span></title>
+<title>お知らせ — ARC FUKAMEKI minoh</title>
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="ARC FUKAMEKI <span style="text-transform:none;">minoh</span>">
-<meta property="og:title" content="お知らせ — ARC FUKAMEKI <span style="text-transform:none;">minoh</span>">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="お知らせ — ARC FUKAMEKI minoh">
 <meta property="og:description" content="大阪府箕面市の古民家を改装したセレクト雑貨店。">
 <meta property="og:url" content="https://fukameki.jp/news.html">
 <meta property="og:image" content="https://fukameki.jp/ogp.jpg">
@@ -217,6 +217,12 @@ var NEWS_DATA = [];
    以下は編集不要です
    ===================================================== */
 
+// scroll reveal（buildNewsListより先に定義）
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+
 // news.htmlの記事一覧を生成
 function buildNewsList() {
   var container = document.getElementById('news-list');
@@ -235,22 +241,14 @@ function buildNewsList() {
       '</div>' +
       '<div class="news-article-body">' + item.body + '</div>';
     container.appendChild(article);
+    observer.observe(article);
   });
-  // reveal animation
-  setTimeout(function(){
-    document.querySelectorAll('.news-article').forEach(function(el, i){
-      setTimeout(function(){ el.classList.add('visible'); }, i * 80);
-    });
-  }, 100);
 }
 
 function toggleArticle(el) {
   el.classList.toggle('open');
 }
 
-// index.htmlのお知らせセクションを上位4件で更新する関数
-// (index.htmlと同じフォルダで使う場合、index.htmlのnewsセクションを
-//  LocalStorageを通じて自動更新します)
 function syncToIndex() {
   var top4 = NEWS_DATA.slice(0, 4);
   localStorage.setItem('arc_news', JSON.stringify(top4));
@@ -265,12 +263,6 @@ function syncToIndex() {
   buildNewsList();
   syncToIndex();
 })();
-
-// scroll reveal
-var observer = new IntersectionObserver(function(entries){
-  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.05 });
-document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
 
 // ハッシュで指定された記事を自動的に開いてスクロール
 setTimeout(function() {

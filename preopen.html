@@ -69,7 +69,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .photo-placeholder span { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light-gray); }
 .photo-caption { font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.08em; padding: 0.8rem 0 0; line-height: 1.6; }
 .map-section { padding: 8rem 3.5rem; }
-.map-container { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+.map-container { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; overflow: hidden; }
+.map-container > div { min-width: 0; }
 .map-desc { font-size: 0.8rem; line-height: 2.2; color: var(--mid-gray); letter-spacing: 0.06em; margin-bottom: 2rem; }
 .map-steps { list-style: none; }
 .map-steps li { display: flex; gap: 1.2rem; align-items: flex-start; padding: 0.9rem 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; line-height: 1.7; color: var(--dark-gray); }
@@ -226,7 +227,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: #3a3632; }
       </div>
     </div>
     <div class="map-svg-wrap" style="padding:0;">
-  <img src="photo/index/preopen_img01.jpg" alt="ARC FUKAMEKI <span style="text-transform:none;">minoh</span>ご案内図" style="width:100%;display:block;" />
+  <img src="photo/index/preopen_img01.jpg" alt="ARC FUKAMEKI minohご案内図" style="width:100%;max-width:100%;display:block;" />
 </div>
   </div>
 </section>

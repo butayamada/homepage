@@ -240,6 +240,15 @@ var obs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+if (location.hash) {
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var el = document.querySelector(location.hash);
+      if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }, 50);
+  });
+}
 </script>
 <script src="lang.js"></script>
 </body>

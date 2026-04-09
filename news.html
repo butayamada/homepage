@@ -157,6 +157,8 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: #3a3632; }
 /* ANIMATIONS */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes newsArticleFadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.news-article { animation: newsArticleFadeIn 0.5s ease forwards; }
 
 @media (max-width: 960px) {
   nav { padding: 1.2rem 1.5rem; }
@@ -229,8 +231,9 @@ function buildNewsList() {
   container.innerHTML = '';
   NEWS_DATA.forEach(function(item, i) {
     var article = document.createElement('div');
-    article.className = 'news-article reveal';
+    article.className = 'news-article';
     article.id = 'article-' + i;
+    article.style.animationDelay = (i * 80) + 'ms';
     article.innerHTML =
       '<div class="news-article-header" onclick="toggleArticle(this.parentElement)">' +
         '<div class="news-article-left">' +
@@ -241,7 +244,6 @@ function buildNewsList() {
       '</div>' +
       '<div class="news-article-body">' + item.body + '</div>';
     container.appendChild(article);
-    observer.observe(article);
   });
 }
 

@@ -51,6 +51,8 @@ nav {
 nav ul { list-style: none; display: flex; gap: 2.5rem; }
 nav a { font-family: 'Noto Serif JP', serif; font-weight: 200; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--mid-gray); text-decoration: none; transition: color 0.3s; }
 nav a:hover { color: var(--black); }
+.nav-instagram { display:flex; align-items:center; opacity:0.45; transition:opacity 0.3s; }
+.nav-instagram:hover { opacity:0.85; }
 .lang-switcher { position: relative; }
 .lang-select {
   appearance: none;
@@ -539,12 +541,17 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     <li><a href="#products">Online Shop</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="lang-switcher">
-    <select class="lang-select" onchange="setLang(this.value)">
-      <option value="ja">JA</option>
-      <option value="en">EN</option>
-      <option value="zh">中文</option>
-    </select>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <a href="https://www.instagram.com/fukamekizakkaten" target="_blank" rel="noopener" aria-label="Instagram" class="nav-instagram">
+      <img src="fukameki_logo_data/instagram-logo-white-7.png" alt="Instagram" style="width:20px;height:auto;display:block;">
+    </a>
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
     <span></span><span></span><span></span>

@@ -123,6 +123,8 @@ var LANG_TRANSLATIONS = {
     po_caption2:       "店内の窓側。大きな窓から明るい光が差し込みます。",
     po_caption3:       "広々とした店内。内装工事が進んでいます。",
     po_caption4:       "古民家ならではの立派な梁と吹き抜けの高い天井。",
+    po_caption5:       "新店舗の什器を手作りで作成中。大工さんの工具をお借りしています。",
+    po_caption6:       "店内の塗装（漆喰）をお手伝い中。高いところの塗作業はむずかしい！",
 
     // akarinouta2026.html
     ak_pamphlet_body:  "店頭にてDMをご用意しています。<br>ぜひお手に取ってご覧ください。",
@@ -249,6 +251,8 @@ var LANG_TRANSLATIONS = {
     po_caption2:       "Window side of the interior. Bright light streams through the large windows.",
     po_caption3:       "The spacious interior. Renovation work is in progress.",
     po_caption4:       "Impressive beams and a soaring ceiling — characteristic of traditional Japanese architecture.",
+    po_caption5:       "Handcrafting the shop fixtures ourselves — borrowing tools from the carpenter.",
+    po_caption6:       "Helping with the plastering inside. Painting the high spots is quite a challenge!",
 
     ak_pamphlet_body:  "Exhibition leaflets are available at the store.<br>Please feel free to pick one up.",
 
@@ -374,6 +378,8 @@ var LANG_TRANSLATIONS = {
     po_caption2:       "店内窗侧。明亮的光线透过大窗照射进来。",
     po_caption3:       "宽敞的店内空间。内部装修正在进行中。",
     po_caption4:       "古民居特有的粗壮梁柱与挑高天花板。",
+    po_caption5:       "正在亲手制作店内陈列架。借用了木工师傅的工具。",
+    po_caption6:       "协助进行店内灰泥涂装。高处的涂装作业真的很难！",
 
     ak_pamphlet_body:  "店内备有展览DM，欢迎自取。",
 

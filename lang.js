@@ -11,7 +11,7 @@ var LANG_TRANSLATIONS = {
     // index.html
     renewal_title:  "新店舗オープン予定（4/11～18企画展にてプレオープン決定）",
     renewal_date:   "2026年5月2日（土）オープン",
-    renewal_desc:   "フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、2026年5月2日（土）にリニューアルオープンいたします。旧店舗から徒歩1分の場所で、新たな空間でお客様をお迎えします。<br><br>4月1日更新：4月11日～18日開催の企画展にてプレオープンいたします。<br>4月11日～18日開催のvickey'72個展「灯の詩」において、新店舗のプレオープンが決定しました。<br>本期間中の個展作品は新店舗で展示いたします。<br>ぜひお越しいただき、新店舗での作品展示をお楽しみください。<br>※新店舗の場所は旧店舗から徒歩30秒の場所です。詳しい場所は<a href="preopen.html#access" style="color:inherit;">本ホームページ</a>内に記載しております。<br>※旧店舗にはスタッフを配置し、新店舗へのご案内をいたします。<br>※新店舗は改装工事中につき、設備が整っていなかったり、工事の音や匂いがする場合があります。悪しからずご了承くださいませ。",
+    renewal_desc:   "フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、2026年5月2日（土）にリニューアルオープンいたします。旧店舗から徒歩1分の場所で、新たな空間でお客様をお迎えします。<br><br>4月1日更新：4月11日～18日開催の企画展にてプレオープンいたします。<br>4月11日～18日開催のvickey'72個展「灯の詩」において、新店舗のプレオープンが決定しました。<br>本期間中の個展作品は新店舗で展示いたします。<br>ぜひお越しいただき、新店舗での作品展示をお楽しみください。<br>※新店舗の場所は旧店舗から徒歩30秒の場所です。詳しい場所は<a href='preopen.html#access' style='color:inherit;'>本ホームページ</a>内に記載しております。<br>※旧店舗にはスタッフを配置し、新店舗へのご案内をいたします。<br>※新店舗は改装工事中につき、設備が整っていなかったり、工事の音や匂いがする場合があります。悪しからずご了承くださいませ。",
     renewal_btn:    "詳細はこちら",
     news_title:     "お知らせ",
     ex_label:       "Exhibition",
@@ -146,7 +146,7 @@ var LANG_TRANSLATIONS = {
 
     renewal_title:  "New Store Opening (Pre-opening confirmed at the April 11–18 Exhibition!)",
     renewal_date:   "Opening Saturday, May 2, 2026",
-    renewal_desc:   "Fukameki Zakka-ten will relocate and reopen as \"ARC FUKAMEKI minoh\" on Saturday, May 2, 2026. Located just one minute's walk from the previous store, we look forward to welcoming you in our new space.<br><br>Updated April 1: We will hold a pre-opening during the exhibition from April 11–18!<br>The new store will pre-open during the vickey'72 solo exhibition \"Poem of Light\" (April 11–18)!<br>Exhibition works during this period will be displayed at the new store.<br>We hope you will come enjoy the artworks in our new space!<br>※ The new store is located 30 seconds' walk from the old store. The exact location can be found on <a href="preopen.html#access" style="color:inherit;">this page</a>.<br>※ Staff will be at the old store to guide you to the new location.<br>※ Please note the new store is still under renovation — facilities may be incomplete and there may be construction noise or odors. We appreciate your understanding.",
+    renewal_desc:   "Fukameki Zakka-ten will relocate and reopen as \"ARC FUKAMEKI minoh\" on Saturday, May 2, 2026. Located just one minute's walk from the previous store, we look forward to welcoming you in our new space.<br><br>Updated April 1: We will hold a pre-opening during the exhibition from April 11–18!<br>The new store will pre-open during the vickey'72 solo exhibition \"Poem of Light\" (April 11–18)!<br>Exhibition works during this period will be displayed at the new store.<br>We hope you will come enjoy the artworks in our new space!<br>※ The new store is located 30 seconds' walk from the old store. The exact location can be found on <a href='preopen.html#access' style='color:inherit;'>this page</a>.<br>※ Staff will be at the old store to guide you to the new location.<br>※ Please note the new store is still under renovation — facilities may be incomplete and there may be construction noise or odors. We appreciate your understanding.",
     renewal_btn:    "Learn More",
     news_title:     "News",
     ex_label:       "Exhibition",
@@ -271,7 +271,7 @@ var LANG_TRANSLATIONS = {
 
     renewal_title:  "新店开业（4/11～18企划展预开业确定！）",
     renewal_date:   "2026年5月2日（周六）开业",
-    renewal_desc:   "深目杂货店将于2026年5月2日（周六）以「ARC FUKAMEKI minoh」之名迁至新店重新开业。新店位于原店步行1分钟处，期待在全新的空间里迎接各位顾客。<br><br>4月1日更新：将在4月11日～18日举办的企划展期间进行预开业！<br>新店将在vickey'72个展「灯之诗」（4月11日～18日）期间进行预开业！<br>本期间的个展作品将在新店展示。<br>欢迎莅临，尽情欣赏新店的展览作品！<br>※新店位于原店步行30秒处。详细位置请参阅<a href="preopen.html#access" style="color:inherit;">本网站</a>内相关内容。<br>※旧店将配置工作人员，为您引导前往新店。<br>※新店目前仍在装修中，可能存在设施不完善、施工噪音或气味等情况，敬请谅解。",
+    renewal_desc:   "深目杂货店将于2026年5月2日（周六）以「ARC FUKAMEKI minoh」之名迁至新店重新开业。新店位于原店步行1分钟处，期待在全新的空间里迎接各位顾客。<br><br>4月1日更新：将在4月11日～18日举办的企划展期间进行预开业！<br>新店将在vickey'72个展「灯之诗」（4月11日～18日）期间进行预开业！<br>本期间的个展作品将在新店展示。<br>欢迎莅临，尽情欣赏新店的展览作品！<br>※新店位于原店步行30秒处。详细位置请参阅<a href='preopen.html#access' style='color:inherit;'>本网站</a>内相关内容。<br>※旧店将配置工作人员，为您引导前往新店。<br>※新店目前仍在装修中，可能存在设施不完善、施工噪音或气味等情况，敬请谅解。",
     renewal_btn:    "查看详情",
     news_title:     "最新消息",
     ex_label:       "展览",

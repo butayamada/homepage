@@ -148,7 +148,30 @@
       "Bash(mv fetch_results.json fetch_results2.json _dev/)",
       "Bash(mv CLAUDE.md _dev/)",
       "Bash(mv \"1774602319530_image.png\" _dev/)",
-      "Bash(mv share:*)"
+      "Bash(mv share:*)",
+      "Bash(node --check \"C:/Users/butay/claude code/homepage/lang.js\")",
+      "Bash(sed -n '85,100p' \"/c/Users/butay/claude code/homepage/products.html\")",
+      "Bash(sed -n '794,802p' \"/c/Users/butay/claude code/homepage/products.html\")",
+      "Bash(xargs -I{} sh -c 'echo \"=== {} ===\"; grep -c \"footer-links\" \"{}\" 2>/dev/null')",
+      "Bash(sed -n '93,98p' \"/c/Users/butay/claude code/homepage/ampiana2026.html\")",
+      "Bash(sed -n '104,112p' \"/c/Users/butay/claude code/homepage/ampiana2026.html\")",
+      "Bash(sed -n '136,143p' \"/c/Users/butay/claude code/homepage/ampiana2026.html\")",
+      "Bash(sed -n '83,100p' \"/c/Users/butay/claude code/homepage/preopen.html\")",
+      "Bash(sed -n '95,100p' \"/c/Users/butay/claude code/homepage/preopen.html\")",
+      "Bash(sed -n '233,240p' \"/c/Users/butay/claude code/homepage/preopen.html\")",
+      "Bash(sed -n '146,170p' \"/c/Users/butay/claude code/homepage/news.html\")",
+      "Bash(sed -n '205,210p' \"/c/Users/butay/claude code/homepage/news.html\")",
+      "Bash(sed -n '239,260p' \"/c/Users/butay/claude code/homepage/akarinouta2026.html\")",
+      "Bash(sed -n '275,285p' \"/c/Users/butay/claude code/homepage/akarinouta2026.html\")",
+      "Bash(sed -n '300,310p' \"/c/Users/butay/claude code/homepage/akarinouta2026.html\")",
+      "Bash(sed -n '443,449p' \"/c/Users/butay/claude code/homepage/akarinouta2026.html\")",
+      "Bash(sed -n '278,285p' \"/c/Users/butay/claude code/homepage/akarinouta2026.html\")",
+      "Bash(sed -n '304,308p' \"/c/Users/butay/claude code/homepage/akarinouta2026.html\")",
+      "Bash(sed -n '444,452p' \"/c/Users/butay/claude code/homepage/akarinouta2026.html\")",
+      "Bash(sed -n '239,244p' \"/c/Users/butay/claude code/homepage/preopen.html\")",
+      "Bash(sed -n '210,215p' \"/c/Users/butay/claude code/homepage/news.html\")",
+      "Bash(sed -n '142,148p' \"/c/Users/butay/claude code/homepage/ampiana2026.html\")",
+      "Bash(sed -n '131,137p' \"/c/Users/butay/claude code/homepage/onlineshop.html\")"
     ]
   }
 }

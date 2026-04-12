@@ -401,6 +401,11 @@ var LANG_TRANSLATIONS = {
 var NEWS_ARTICLES = {
   ja: [
     {
+      date: "2026.04.12",
+      title: "新店舗「ARC FUKAMEKI minoh」プレオープンしました",
+      body: "お知らせをしておりましたように、4月11日～18日企画展「灯の詩」開催に合わせ、4月11日より新店舗のプレオープンをいたしました。<br>前日の荒れた天気からうって変わって、気持ちの良い晴天の中、多くのお客様に足をお運びいただき、誠にありがとうございました。<br>残りの日程につきましても、新店舗でのお迎えをさせていただきます。引き続きよろしくお願いいたします。<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
+    },
+    {
       date: "2026.04.01",
       title: "2026年5月2日新店舗「ARC FUKAMEKI minoh」オープンのお知らせ",
       body: "平素よりフカメキ雑貨店をご愛顧いただきありがとうございます。このたび、2026年5月2日（土）より、フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、リニューアルオープンをすることになりました。旧店舗からは徒歩1分とすぐ近くにはなりますが、おなじみの皆様には大変わかりづらく、ご迷惑をおかけいたします。<br><br>リニューアルオープンの詳細につきましては、トップページの「ARC FUKAMEKI minoh　オープン」のページよりご確認ください。<br><br>また、4月の企画展「灯の詩」では、プレオープンとして新店舗での開催を予定しております。ご興味のある方は、ぜひそちらにも足をお運びくださいませ。"
@@ -423,6 +428,11 @@ var NEWS_ARTICLES = {
   ],
   en: [
     {
+      date: "2026.04.12",
+      title: "New Store 'ARC FUKAMEKI minoh' Pre-Opening",
+      body: "As announced, the new store pre-opened on April 11, coinciding with the solo exhibition \"Poem of Light\" (April 11–18). The weather turned beautifully sunny after the previous day's storm, and we were delighted to welcome many guests. Thank you so much for coming. We look forward to welcoming you at the new store for the remaining days of the exhibition.<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
+    },
+    {
       date: "2026.04.01",
       title: "Notice: ARC FUKAMEKI minoh New Store Opening on May 2, 2026",
       body: "Thank you for your continued support of Fukameki Zakka-ten. We are pleased to announce that from Saturday, May 2, 2026, Fukameki Zakka-ten will relocate and reopen as \"ARC FUKAMEKI minoh\". The new store is just a 1-minute walk from the previous location — we apologize for any inconvenience to our regular customers.<br><br>For details about the reopening, please see the \"ARC FUKAMEKI minoh Opening\" page linked from the top page.<br><br>We also plan to use the new store for our April exhibition \"Poem of Light\" as a pre-opening event. We hope to see you there!"
@@ -444,6 +454,11 @@ var NEWS_ARTICLES = {
     }
   ],
   zh: [
+    {
+      date: "2026.04.12",
+      title: "新店「ARC FUKAMEKI minoh」正式预开业",
+      body: "正如之前公告所述，配合4月11日至18日「灯之诗」个展，新店已于4月11日起正式预开业。在前一天恶劣天气过后，当天阳光明媚，许多顾客前来光临，衷心感谢大家的到来。展览剩余日程同样将在新店举行，敬请继续支持。<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
+    },
     {
       date: "2026.04.01",
       title: "通知：ARC FUKAMEKI minoh将于2026年5月2日新店开业",

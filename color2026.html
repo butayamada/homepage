@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -11,11 +11,11 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>color — ARC FUKAMEKI <span style="text-transform:none;">minoh</span></title>
+<title>color — ARC FUKAMEKI minoh</title>
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="ARC FUKAMEKI <span style="text-transform:none;">minoh</span>">
-<meta property="og:title" content="color — ARC FUKAMEKI <span style="text-transform:none;">minoh</span>">
-<meta property="og:description" content="大阪府箕面市の古民家を改装したセレクト雑貨店。">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="color — ARC FUKAMEKI minoh">
+<meta property="og:description" content="企画展「color」2026.05.02–05.10 — ARC FUKAMEKI minoh">
 <meta property="og:url" content="https://fukameki.jp/color2026.html">
 <meta property="og:image" content="https://fukameki.jp/ogp.jpg">
 <meta property="og:image:width" content="1200">
@@ -25,96 +25,222 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Serif+JP:wght@200;300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { opacity: 0; animation: bodyFadeIn 0.4s 0.2s ease forwards; }
+@keyframes bodyFadeIn { to { opacity: 1; } }
 :root {
-  --black: #1c1a18; --mid-gray: #7a7570; --light-gray: #b0aaa4;
-  --off-white: #f5f3ef; --white: #faf9f6; --border: rgba(0,0,0,0.1);
+  --black: #1c1a18;
+  --dark-gray: #3a3632;
+  --mid-gray: #7a7570;
+  --light-gray: #b0aaa4;
+  --off-white: #f5f3ef;
+  --white: #faf9f6;
+  --border: rgba(0,0,0,0.1);
 }
-html, body { height: 100%; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: 'Noto Serif JP', serif; font-weight: 200;
-  background: var(--white); color: var(--black);
-  display: flex; flex-direction: column;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1;
 }
+
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 1.8rem 3.5rem;
+  padding: 1.6rem 3.5rem;
   background: rgba(250,249,246,0.92); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
-.logo { font-family: 'EB Garamond', serif; font-size: 1.1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); text-decoration: none; }
-.nav-back { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid-gray); text-decoration: none; transition: color 0.2s; }
-.nav-back::before { content: ''; display: block; width: 30px; height: 1px; background: var(--mid-gray); transition: width 0.3s; }
+.nav-logo {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--mid-gray); text-decoration: none; transition: color 0.2s;
+}
+.nav-logo:hover { color: var(--black); }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mid-gray); text-decoration: none; transition: color 0.2s;
+}
+.nav-back::before {
+  content: ''; display: block; width: 30px; height: 1px;
+  background: var(--mid-gray); transition: width 0.3s, background 0.2s;
+}
 .nav-back:hover { color: var(--black); }
 .nav-back:hover::before { width: 50px; background: var(--black); }
-main {
-  flex: 1;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 2rem;
+
+/* HERO */
+.hero {
+  height: 100vh; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end;
 }
-.ex-label {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.65rem; letter-spacing: 0.5em; text-transform: uppercase;
-  color: var(--light-gray); margin-bottom: 1rem;
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('photo/0413/S__9216017_0.jpg') center center / cover no-repeat;
 }
-.ex-period {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.8rem; letter-spacing: 0.3em;
-  color: var(--light-gray); margin-bottom: 2rem;
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,26,24,0.72) 0%, rgba(28,26,24,0.15) 55%, transparent 100%);
 }
-.ex-title {
+.hero-content {
+  position: relative; z-index: 1;
+  padding: 5rem 4rem;
+  color: #faf9f6;
+}
+.hero-tag {
   font-family: 'EB Garamond', serif;
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  font-weight: 400; letter-spacing: 0.1em;
-  color: var(--black); line-height: 1.1;
+  font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: rgba(250,249,246,0.6); margin-bottom: 1.2rem;
+}
+.hero-period {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem; letter-spacing: 0.25em;
+  color: rgba(250,249,246,0.7); margin-bottom: 1.4rem;
+}
+.hero-title {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 400; letter-spacing: 0.08em;
+  color: #faf9f6; line-height: 1;
+  margin-bottom: 1.2rem;
+}
+.hero-artists {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.75rem; letter-spacing: 0.2em;
+  color: rgba(250,249,246,0.65);
+  line-height: 1.8;
+}
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* SECTION LABEL */
+.section-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.6rem; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--light-gray); margin-bottom: 1.8rem; display: block;
+}
+
+/* INTRO */
+.intro {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; padding: 7rem 4rem; align-items: start;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+}
+.intro-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 200; letter-spacing: 0.06em;
+  line-height: 1.85; color: var(--black);
   margin-bottom: 2rem;
 }
-.coming-title {
+.intro-desc {
+  font-size: 0.82rem; letter-spacing: 0.08em;
+  color: var(--mid-gray); line-height: 2.2;
+  margin-bottom: 3rem;
+}
+.intro-meta { border-top: 1px solid var(--border); }
+.meta-row {
+  display: flex; gap: 2rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+.meta-label {
   font-family: 'EB Garamond', serif;
-  font-size: clamp(1.8rem, 5vw, 3.5rem);
-  font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--black); line-height: 1;
-  margin-bottom: 2rem;
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--light-gray); flex-shrink: 0; width: 5rem;
 }
-.coming-sub {
-  font-size: 0.78rem; letter-spacing: 0.15em;
-  color: var(--light-gray); line-height: 2;
+.meta-value {
+  font-size: 0.78rem; letter-spacing: 0.06em;
+  color: var(--dark-gray); line-height: 1.9;
 }
-.coming-line {
-  width: 40px; height: 1px;
-  background: var(--light-gray);
-  margin: 2rem auto;
+.intro-image {
+  position: sticky; top: 8rem;
 }
+.intro-image img {
+  width: 100%; height: auto; display: block;
+}
+
+/* GALLERY */
+.gallery { padding: 5rem 2.5rem 7rem; background: var(--off-white); }
+.gallery-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.6rem; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--light-gray); text-align: center; display: block;
+  margin-bottom: 3rem;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  max-width: 1400px; margin: 0 auto;
+}
+.gallery-item { overflow: hidden; background: var(--border); }
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.6s ease;
+}
+.gallery-item:hover img { transform: scale(1.03); }
+.gallery-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
+.gallery-item.tall { aspect-ratio: 2/3; }
+.gallery-item.sq   { aspect-ratio: 1; }
+
+/* FOOTER */
 footer {
   background: var(--black); padding: 2rem 3.5rem;
   display: flex; justify-content: space-between; align-items: center;
 }
-.footer-logo { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: #3a3632; text-decoration: none; }
-footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: #3a3632; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-.ex-label   { animation: fadeIn 0.8s 0.2s ease forwards; opacity: 0; }
-.ex-period  { animation: fadeIn 0.8s 0.35s ease forwards; opacity: 0; }
-.ex-title   { animation: fadeIn 0.8s 0.5s ease forwards; opacity: 0; }
-.coming-line { animation: fadeIn 0.8s 0.65s ease forwards; opacity: 0; }
-.coming-title { animation: fadeIn 0.8s 0.8s ease forwards; opacity: 0; }
-.coming-sub  { animation: fadeIn 0.8s 0.95s ease forwards; opacity: 0; }
-@media (max-width: 480px) {
-  nav { padding: 1.2rem 1.5rem; }
-  footer { padding: 1.5rem; flex-direction: column; gap: 0.8rem; }
+.footer-logo {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: #3a3632; text-decoration: none;
 }
+footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: #3a3632; }
+
+/* LANG SWITCHER */
 .lang-switcher { position: relative; }
-.lang-select { appearance: none; -webkit-appearance: none; background: transparent; border: 1px solid var(--border); font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 0.15em; color: var(--mid-gray); cursor: pointer; padding: 0.35rem 2rem 0.35rem 0.8rem; outline: none; transition: color 0.2s, border-color 0.2s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b8b8b8'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 7px; }
-.lang-select:hover { color: var(--black); border-color: #3a3632; }
+.lang-select {
+  appearance: none; -webkit-appearance: none;
+  background: transparent; border: 1px solid rgba(0,0,0,0.15);
+  font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 0.15em;
+  color: var(--mid-gray); cursor: pointer; padding: 0.35rem 2rem 0.35rem 0.8rem;
+  outline: none; transition: color 0.2s, border-color 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 7px;
+}
+.lang-select:hover { color: var(--black); border-color: rgba(0,0,0,0.3); }
+.lang-select option { background: #1c1a18; color: #fff; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 1.4rem 2rem; }
+  .hero-content { padding: 4rem 2rem; }
+  .intro { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
+  .intro-image { position: static; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item.wide { grid-column: span 2; }
+}
+@media (max-width: 600px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .hero-content { padding: 3rem 1.5rem; }
+  .intro { padding: 4rem 1.5rem; }
+  .gallery { padding: 3rem 1rem 5rem; }
+  .gallery-grid { grid-template-columns: 1fr; gap: 2px; }
+  .gallery-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+}
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="index.html" class="logo">ARC FUKAMEKI <span style="text-transform:none;">minoh</span></a>
+  <a href="index.html" class="nav-logo">ARC FUKAMEKI <span style="text-transform:none;">minoh</span></a>
   <div style="display:flex;align-items:center;gap:2rem;">
     <a href="https://www.instagram.com/fukamekizakkaten" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;align-items:center;opacity:0.45;transition:opacity 0.3s;"><img src="fukameki_logo_data/instagram-logo-white-7.png" alt="Instagram" style="width:20px;height:auto;display:block;"></a>
     <div class="lang-switcher">
@@ -127,18 +253,114 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: #3a3632; }
     <a href="index.html" class="nav-back" data-i18n="nav_back">トップへ戻る</a>
   </div>
 </nav>
-<main>
-  <p class="ex-label">Exhibition</p>
-  <p class="ex-period">2026.05.02 – 05.10</p>
-  <h1 class="ex-title">color</h1>
-  <div class="coming-line"></div>
-  <h2 class="coming-title">Coming Soon</h2>
-  <p class="coming-sub" data-i18n="coming_sub">詳細は準備中です。<br>今しばらくお待ちください。</p>
-</main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Exhibition — ARC FUKAMEKI <span style="text-transform:none;">minoh</span></p>
+    <p class="hero-period">2026.05.02 — 05.10</p>
+    <h1 class="hero-title">color</h1>
+    <p class="hero-artists" data-i18n="color_artists_v">あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子（五十音順）</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro reveal">
+  <div class="intro-text">
+    <span class="section-label">About the Exhibition</span>
+    <h2 class="intro-title" data-i18n="color_intro_title">5名の作家が紡ぐ、<br>色のある暮らし。</h2>
+    <p class="intro-desc" data-i18n="color_desc">「color」と題した本展では、あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子の5名が集います。陶磁器、ガラス、木工、ファブリックなど、それぞれの素材と技法で表現された色彩豊かな作品をお楽しみください。</p>
+    <div class="intro-meta">
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="ak_meta_period_l">会期</span>
+        <span class="meta-value" data-i18n="color_period_v">2026年5月2日（土）— 5月10日（日）</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="ak_meta_hours_l">時間</span>
+        <span class="meta-value" data-i18n="color_hours_v">13:00 — 18:00</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="color_artists_l">出展者</span>
+        <span class="meta-value" data-i18n="color_artists_v">あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子（五十音順）</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="ak_meta_venue_l">会場</span>
+        <span class="meta-value">ARC FUKAMEKI <span style="text-transform:none;">minoh</span><br>大阪府箕面市箕面2丁目3-10</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="ak_meta_access_l">アクセス</span>
+        <span class="meta-value" data-i18n="color_access_v">阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし</span>
+      </div>
+    </div>
+  </div>
+  <div class="intro-image">
+    <img src="photo/0413/S__9216014_0.jpg" alt="展示作品" />
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <span class="gallery-label reveal">Works</span>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item wide">
+      <img src="photo/0413/S__9216006_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item tall">
+      <img src="photo/0413/S__9216008_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item tall">
+      <img src="photo/0413/S__9216009_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item sq">
+      <img src="photo/0413/S__9216010_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item sq">
+      <img src="photo/0413/S__9216011_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item tall">
+      <img src="photo/0413/S__9216013_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item wide">
+      <img src="photo/0413/S__9216015_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item sq">
+      <img src="photo/0413/S__9216016_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item wide">
+      <img src="photo/0413/S__9216017_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item tall">
+      <img src="photo/0413/S__9216019_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item sq">
+      <img src="photo/0413/S__9216020.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item tall">
+      <img src="photo/0413/S__9216021_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item sq">
+      <img src="photo/0413/S__9216023_0.jpg" alt="展示作品" />
+    </div>
+    <div class="gallery-item sq">
+      <img src="photo/0413/S__9216012_0.jpg" alt="展示作品" />
+    </div>
+  </div>
+</section>
+
 <footer>
   <a href="index.html" class="footer-logo">ARC FUKAMEKI <span style="text-transform:none;">minoh</span></a>
   <p>© 2026 Fukameki Zakkaten. All rights reserved.</p>
 </footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+</script>
 <script src="lang.js"></script>
 </body>
 </html>

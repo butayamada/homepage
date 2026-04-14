@@ -85,11 +85,11 @@ var LANG_TRANSLATIONS = {
 
     // color2026.html
     color_intro_title:  "5名の作家が紡ぐ、<br>色のある暮らし。",
-    color_desc:         "「color」と題した本展では、あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子の5名が集います。陶磁器、ガラス、木工、ファブリックなど、それぞれの素材と技法で表現された色彩豊かな作品をお楽しみください。",
+    color_desc:         "「color」と題した本展では、あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子の5名が集います。陶磁器、ガラス、木工、ファブリックなど、それぞれの素材と技法で表現された色彩豊かな作品をお楽しみください。<br>また、当期間中はお菓子の出店もございます。",
     color_period_v:     "2026年5月2日（土）— 5月10日（日）",
     color_hours_v:      "13:00 — 18:00",
     color_artists_l:    "出展者",
-    color_artists_v:    "あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子（五十音順）",
+    color_artists_v:    "あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子（五十音順）<br>菓子　さじ洋菓子店、Fluff.",
     color_access_v:     "阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし",
 
     // coming soon pages
@@ -228,11 +228,11 @@ var LANG_TRANSLATIONS = {
 
     // color2026.html
     color_intro_title:  "Five artists weave<br>a life of colour.",
-    color_desc:         "In this exhibition titled \"color\", five artists — ashu, Iwao Tonarite, Kazuya Niimi, naigemii, and Akiko Maeda — come together. Enjoy their colourful works expressed through ceramics, glass, woodwork, fabric, and more.",
+    color_desc:         "In this exhibition titled \"color\", five artists — ashu, Iwao Tonarite, Kazuya Niimi, naigemii, and Akiko Maeda — come together. Enjoy their colourful works expressed through ceramics, glass, woodwork, fabric, and more.<br>Sweet treat vendors will also be on site throughout the exhibition.",
     color_period_v:     "May 2 (Sat) — May 10 (Sun), 2026",
     color_hours_v:      "13:00 — 18:00",
     color_artists_l:    "Artists",
-    color_artists_v:    "ashu, Iwao Tonarite, Kazuya Niimi, naigemii, Akiko Maeda",
+    color_artists_v:    "ashu, Iwao Tonarite, Kazuya Niimi, naigemii, Akiko Maeda<br>Sweets: Saji Yogashiten, Fluff.",
     color_access_v:     "5-min walk from Minoh Station (Hankyu Minoh Line)<br>No parking available",
 
     coming_sub:        "Details coming soon.<br>Please check back later.",
@@ -364,11 +364,11 @@ var LANG_TRANSLATIONS = {
 
     // color2026.html
     color_intro_title:  "五位作家编织的，<br>有色彩的生活。",
-    color_desc:         "本次展览以「color」为题，汇聚了あしゅ、イワオトナリテ、新见和也、naigemii、前田彰子五位作家。请欣赏他们以陶瓷、玻璃、木工、织物等不同素材与技法呈现的丰富色彩作品。",
+    color_desc:         "本次展览以「color」为题，汇聚了あしゅ、イワオトナリテ、新见和也、naigemii、前田彰子五位作家。请欣赏他们以陶瓷、玻璃、木工、织物等不同素材与技法呈现的丰富色彩作品。<br>展览期间还将设有甜点摊位。",
     color_period_v:     "2026年5月2日（周六）— 5月10日（周日）",
     color_hours_v:      "13:00 — 18:00",
     color_artists_l:    "参展作家",
-    color_artists_v:    "あしゅ、イワオトナリテ、新见和也、naigemii、前田彰子（五十音顺）",
+    color_artists_v:    "あしゅ、イワオトナリテ、新见和也、naigemii、前田彰子（五十音顺）<br>甜点　さじ洋菓子店、Fluff.",
     color_access_v:     "从阪急电铁箕面线箕面站步行5分钟<br>无停车场",
 
     coming_sub:        "详情准备中，<br>请稍后查看。",

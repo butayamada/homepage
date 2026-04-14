@@ -83,6 +83,15 @@ var LANG_TRANSLATIONS = {
     ak_meta_access_v:  "阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし",
     ak_pamphlet:       "vickey'72<br>EXHIBITION<br>灯の詩",
 
+    // color2026.html
+    color_intro_title:  "5名の作家が紡ぐ、<br>色のある暮らし。",
+    color_desc:         "「color」と題した本展では、あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子の5名が集います。陶磁器、ガラス、木工、ファブリックなど、それぞれの素材と技法で表現された色彩豊かな作品をお楽しみください。",
+    color_period_v:     "2026年5月2日（土）— 5月10日（日）",
+    color_hours_v:      "13:00 — 18:00",
+    color_artists_l:    "出展者",
+    color_artists_v:    "あしゅ、イワオトナリテ、新見和也、naigemii、前田彰子（五十音順）",
+    color_access_v:     "阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし",
+
     // coming soon pages
     coming_sub:        "詳細は準備中です。<br>今しばらくお待ちください。",
     natsumeku_title:   "ナツメク",
@@ -123,6 +132,8 @@ var LANG_TRANSLATIONS = {
     po_caption2:       "店内の窓側。大きな窓から明るい光が差し込みます。",
     po_caption3:       "広々とした店内。内装工事が進んでいます。",
     po_caption4:       "古民家ならではの立派な梁と吹き抜けの高い天井。",
+    po_caption5:       "新店舗の什器を手作りで作成中。大工さんの工具をお借りしています。",
+    po_caption6:       "店内の塗装（漆喰）をお手伝い中。高いところの塗作業はむずかしい！",
 
     // akarinouta2026.html
     ak_pamphlet_body:  "店頭にてDMをご用意しています。<br>ぜひお手に取ってご覧ください。",
@@ -215,6 +226,15 @@ var LANG_TRANSLATIONS = {
     ak_meta_access_v:  "5-min walk from Minoh Station (Hankyu Minoh Line)<br>No parking available",
     ak_pamphlet:       "vickey'72<br>EXHIBITION<br>Poem of Light",
 
+    // color2026.html
+    color_intro_title:  "Five artists weave<br>a life of colour.",
+    color_desc:         "In this exhibition titled \"color\", five artists — ashu, Iwao Tonarite, Kazuya Niimi, naigemii, and Akiko Maeda — come together. Enjoy their colourful works expressed through ceramics, glass, woodwork, fabric, and more.",
+    color_period_v:     "May 2 (Sat) — May 10 (Sun), 2026",
+    color_hours_v:      "13:00 — 18:00",
+    color_artists_l:    "Artists",
+    color_artists_v:    "ashu, Iwao Tonarite, Kazuya Niimi, naigemii, Akiko Maeda",
+    color_access_v:     "5-min walk from Minoh Station (Hankyu Minoh Line)<br>No parking available",
+
     coming_sub:        "Details coming soon.<br>Please check back later.",
     natsumeku_title:   "Natsumeku",
     kamiue_title:      "Yukue Kamiue Solo Exhibition",
@@ -249,6 +269,8 @@ var LANG_TRANSLATIONS = {
     po_caption2:       "Window side of the interior. Bright light streams through the large windows.",
     po_caption3:       "The spacious interior. Renovation work is in progress.",
     po_caption4:       "Impressive beams and a soaring ceiling — characteristic of traditional Japanese architecture.",
+    po_caption5:       "Handcrafting the shop fixtures ourselves — borrowing tools from the carpenter.",
+    po_caption6:       "Helping with the plastering inside. Painting the high spots is quite a challenge!",
 
     ak_pamphlet_body:  "Exhibition leaflets are available at the store.<br>Please feel free to pick one up.",
 
@@ -340,6 +362,15 @@ var LANG_TRANSLATIONS = {
     ak_meta_access_v:  "从阪急电铁箕面线箕面站步行5分钟<br>无停车场",
     ak_pamphlet:       "vickey'72<br>EXHIBITION<br>灯之诗",
 
+    // color2026.html
+    color_intro_title:  "五位作家编织的，<br>有色彩的生活。",
+    color_desc:         "本次展览以「color」为题，汇聚了あしゅ、イワオトナリテ、新见和也、naigemii、前田彰子五位作家。请欣赏他们以陶瓷、玻璃、木工、织物等不同素材与技法呈现的丰富色彩作品。",
+    color_period_v:     "2026年5月2日（周六）— 5月10日（周日）",
+    color_hours_v:      "13:00 — 18:00",
+    color_artists_l:    "参展作家",
+    color_artists_v:    "あしゅ、イワオトナリテ、新见和也、naigemii、前田彰子（五十音顺）",
+    color_access_v:     "从阪急电铁箕面线箕面站步行5分钟<br>无停车场",
+
     coming_sub:        "详情准备中，<br>请稍后查看。",
     natsumeku_title:   "夏目",
     kamiue_title:      "纸上征江 个展",
@@ -374,6 +405,8 @@ var LANG_TRANSLATIONS = {
     po_caption2:       "店内窗侧。明亮的光线透过大窗照射进来。",
     po_caption3:       "宽敞的店内空间。内部装修正在进行中。",
     po_caption4:       "古民居特有的粗壮梁柱与挑高天花板。",
+    po_caption5:       "正在亲手制作店内陈列架。借用了木工师傅的工具。",
+    po_caption6:       "协助进行店内灰泥涂装。高处的涂装作业真的很难！",
 
     ak_pamphlet_body:  "店内备有展览DM，欢迎自取。",
 
@@ -394,6 +427,11 @@ var LANG_TRANSLATIONS = {
 /* ニュース記事（多言語） */
 var NEWS_ARTICLES = {
   ja: [
+    {
+      date: "2026.04.12",
+      title: "新店舗「ARC FUKAMEKI minoh」プレオープンしました",
+      body: "お知らせをしておりましたように、4月11日～18日企画展「灯の詩」開催に合わせ、4月11日より新店舗のプレオープンをいたしました。<br>前日の荒れた天気からうって変わって、気持ちの良い晴天の中、多くのお客様に足をお運びいただき、誠にありがとうございました。<br>残りの日程につきましても、新店舗でのお迎えをさせていただきます。引き続きよろしくお願いいたします。<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
+    },
     {
       date: "2026.04.01",
       title: "2026年5月2日新店舗「ARC FUKAMEKI minoh」オープンのお知らせ",
@@ -417,6 +455,11 @@ var NEWS_ARTICLES = {
   ],
   en: [
     {
+      date: "2026.04.12",
+      title: "New Store 'ARC FUKAMEKI minoh' Pre-Opening",
+      body: "As announced, the new store pre-opened on April 11, coinciding with the solo exhibition \"Poem of Light\" (April 11–18). The weather turned beautifully sunny after the previous day's storm, and we were delighted to welcome many guests. Thank you so much for coming. We look forward to welcoming you at the new store for the remaining days of the exhibition.<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
+    },
+    {
       date: "2026.04.01",
       title: "Notice: ARC FUKAMEKI minoh New Store Opening on May 2, 2026",
       body: "Thank you for your continued support of Fukameki Zakka-ten. We are pleased to announce that from Saturday, May 2, 2026, Fukameki Zakka-ten will relocate and reopen as \"ARC FUKAMEKI minoh\". The new store is just a 1-minute walk from the previous location — we apologize for any inconvenience to our regular customers.<br><br>For details about the reopening, please see the \"ARC FUKAMEKI minoh Opening\" page linked from the top page.<br><br>We also plan to use the new store for our April exhibition \"Poem of Light\" as a pre-opening event. We hope to see you there!"
@@ -438,6 +481,11 @@ var NEWS_ARTICLES = {
     }
   ],
   zh: [
+    {
+      date: "2026.04.12",
+      title: "新店「ARC FUKAMEKI minoh」正式预开业",
+      body: "正如之前公告所述，配合4月11日至18日「灯之诗」个展，新店已于4月11日起正式预开业。在前一天恶劣天气过后，当天阳光明媚，许多顾客前来光临，衷心感谢大家的到来。展览剩余日程同样将在新店举行，敬请继续支持。<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
+    },
     {
       date: "2026.04.01",
       title: "通知：ARC FUKAMEKI minoh将于2026年5月2日新店开业",

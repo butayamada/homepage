@@ -428,6 +428,11 @@ var LANG_TRANSLATIONS = {
 var NEWS_ARTICLES = {
   ja: [
     {
+      date: "2026.04.14",
+      title: "企画展紹介ページ「color」を更新しました",
+      body: "企画展紹介ページ「color」を更新しました。詳細は<a href='color2026.html' style='color:inherit;'>こちら</a>をご覧ください。"
+    },
+    {
       date: "2026.04.12",
       title: "新店舗「ARC FUKAMEKI minoh」プレオープンしました",
       body: "お知らせをしておりましたように、4月11日～18日企画展「灯の詩」開催に合わせ、4月11日より新店舗のプレオープンをいたしました。<br>前日の荒れた天気からうって変わって、気持ちの良い晴天の中、多くのお客様に足をお運びいただき、誠にありがとうございました。<br>残りの日程につきましても、新店舗でのお迎えをさせていただきます。引き続きよろしくお願いいたします。<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
@@ -455,6 +460,11 @@ var NEWS_ARTICLES = {
   ],
   en: [
     {
+      date: "2026.04.14",
+      title: "Exhibition page \"color\" updated",
+      body: "The exhibition introduction page \"color\" has been updated. Please see <a href='color2026.html' style='color:inherit;'>here</a> for details."
+    },
+    {
       date: "2026.04.12",
       title: "New Store 'ARC FUKAMEKI minoh' Pre-Opening",
       body: "As announced, the new store pre-opened on April 11, coinciding with the solo exhibition \"Poem of Light\" (April 11–18). The weather turned beautifully sunny after the previous day's storm, and we were delighted to welcome many guests. Thank you so much for coming. We look forward to welcoming you at the new store for the remaining days of the exhibition.<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DW-7_pQD-Ng/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
@@ -481,6 +491,11 @@ var NEWS_ARTICLES = {
     }
   ],
   zh: [
+    {
+      date: "2026.04.14",
+      title: "企划展介绍页面「color」已更新",
+      body: "企划展介绍页面「color」已更新。详情请参阅<a href='color2026.html' style='color:inherit;'>此处</a>。"
+    },
     {
       date: "2026.04.12",
       title: "新店「ARC FUKAMEKI minoh」正式预开业",

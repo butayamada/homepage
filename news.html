@@ -25,8 +25,10 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
-<script src="lang.js"></script>
+<script src="lang.js" defer></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { opacity: 0; animation: bodyFadeIn 0.4s 0.2s ease forwards; }
@@ -160,8 +162,6 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 /* ANIMATIONS */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-@keyframes newsArticleFadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-.news-article { animation: newsArticleFadeIn 0.5s ease forwards; }
 
 @media (max-width: 960px) {
   nav { padding: 1.2rem 1.5rem; }
@@ -204,7 +204,66 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 </div>
 
 <div class="news-container" id="news-list">
-  <!-- 記事はJavaScriptで生成されます -->
+  <div class="news-article visible" id="article-0">
+    <div class="news-article-header" onclick="toggleArticle(this.parentElement)">
+      <div class="news-article-left">
+        <p class="news-article-date">2026.04.14</p>
+        <h2 class="news-article-title">企画展紹介ページ「color」を更新しました</h2>
+      </div>
+      <span class="news-toggle">+</span>
+    </div>
+    <div class="news-article-body">企画展紹介ページ「color」を更新しました。詳細は<a href="color2026.html" style="color:inherit;">こちら</a>をご覧ください。</div>
+  </div>
+  <div class="news-article visible" id="article-1">
+    <div class="news-article-header" onclick="toggleArticle(this.parentElement)">
+      <div class="news-article-left">
+        <p class="news-article-date">2026.04.12</p>
+        <h2 class="news-article-title">新店舗「ARC FUKAMEKI minoh」プレオープンしました</h2>
+      </div>
+      <span class="news-toggle">+</span>
+    </div>
+    <div class="news-article-body">お知らせをしておりましたように、4月11日～18日企画展「灯の詩」開催に合わせ、4月11日より新店舗のプレオープンをいたしました。<br>前日の荒れた天気からうって変わって、気持ちの良い晴天の中、多くのお客様に足をお運びいただき、誠にありがとうございました。<br>残りの日程につきましても、新店舗でのお迎えをさせていただきます。引き続きよろしくお願いいたします。<br><br><div style="display:flex;justify-content:center;margin-top:1.5rem;"><blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DW-7_pQD-Ng/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;"></blockquote></div></div>
+  </div>
+  <div class="news-article visible" id="article-2">
+    <div class="news-article-header" onclick="toggleArticle(this.parentElement)">
+      <div class="news-article-left">
+        <p class="news-article-date">2026.04.01</p>
+        <h2 class="news-article-title">2026年5月2日新店舗「ARC FUKAMEKI minoh」オープンのお知らせ</h2>
+      </div>
+      <span class="news-toggle">+</span>
+    </div>
+    <div class="news-article-body">平素よりフカメキ雑貨店をご愛顧いただきありがとうございます。このたび、2026年5月2日（土）より、フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、リニューアルオープンをすることになりました。旧店舗からは徒歩1分とすぐ近くにはなりますが、おなじみの皆様には大変わかりづらく、ご迷惑をおかけいたします。<br><br>リニューアルオープンの詳細につきましては、トップページの「ARC FUKAMEKI minoh　オープン」のページよりご確認ください。<br><br>また、4月の企画展「灯の詩」では、プレオープンとして新店舗での開催を予定しております。ご興味のある方は、ぜひそちらにも足をお運びくださいませ。</div>
+  </div>
+  <div class="news-article visible" id="article-3">
+    <div class="news-article-header" onclick="toggleArticle(this.parentElement)">
+      <div class="news-article-left">
+        <p class="news-article-date">2026.04.01</p>
+        <h2 class="news-article-title">4月企画展「灯の詩」開催のお知らせ</h2>
+      </div>
+      <span class="news-toggle">+</span>
+    </div>
+    <div class="news-article-body">4月11日（土）～18日（土）におきまして、vickey'72さん個展「灯の詩」を開催いたします。詳細につきましては、トップページより企画展特設ページをご確認くださいませ。皆様のご来店を心よりお待ちしております！</div>
+  </div>
+  <div class="news-article visible" id="article-4">
+    <div class="news-article-header" onclick="toggleArticle(this.parentElement)">
+      <div class="news-article-left">
+        <p class="news-article-date">2026.04.01</p>
+        <h2 class="news-article-title">4月のスケジュールにつきまして</h2>
+      </div>
+      <span class="news-toggle">+</span>
+    </div>
+    <div class="news-article-body">フカメキ雑貨店の4月の開店スケジュールは以下の通りです。<br><br>4月11日（土）～18日（土）　企画展「灯の詩」<br><br>※4月の平常営業はございません</div>
+  </div>
+  <div class="news-article visible" id="article-5">
+    <div class="news-article-header" onclick="toggleArticle(this.parentElement)">
+      <div class="news-article-left">
+        <p class="news-article-date">2026.04.01</p>
+        <h2 class="news-article-title">フカメキ雑貨店ホームページリニューアルのお知らせ</h2>
+      </div>
+      <span class="news-toggle">+</span>
+    </div>
+    <div class="news-article-body">2026年4月よりフカメキ雑貨店のホームページをリニューアルしました。今後、当店の最新情報をホームページからも発信していきますので、気になる方はチェックをお願いします。<br><br>なお、引き続きインスタグラム（<a href="https://www.instagram.com/fukamekizakkaten" style="color:inherit;">@fukamekizakkaten</a>）からも最新情報を発信していきますので、そちらのご確認も引き続きよろしくお願いいたします。</div>
+  </div>
 </div>
 
 <footer>
@@ -235,13 +294,14 @@ document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el);
 
 // news.htmlの記事一覧を生成
 function buildNewsList() {
+  if (!NEWS_DATA.length) return;
   var container = document.getElementById('news-list');
+  if (!container) return;
   container.innerHTML = '';
   NEWS_DATA.forEach(function(item, i) {
     var article = document.createElement('div');
-    article.className = 'news-article';
+    article.className = 'news-article reveal';
     article.id = 'article-' + i;
-    article.style.animationDelay = (i * 80) + 'ms';
     article.innerHTML =
       '<div class="news-article-header" onclick="toggleArticle(this.parentElement)">' +
         '<div class="news-article-left">' +
@@ -252,21 +312,30 @@ function buildNewsList() {
       '</div>' +
       '<div class="news-article-body">' + item.body + '</div>';
     container.appendChild(article);
+    (function(a, delay) {
+      setTimeout(function() { a.classList.add('visible'); }, delay);
+    })(article, i * 80 + 50);
   });
 }
 
 function toggleArticle(el) {
   el.classList.toggle('open');
+  if (el.classList.contains('open') && typeof instgrm !== 'undefined') {
+    instgrm.Embeds.process();
+  }
 }
 
 function syncToIndex() {
-  var top4 = NEWS_DATA.slice(0, 4);
-  localStorage.setItem('arc_news', JSON.stringify(top4));
+  try {
+    var top4 = NEWS_DATA.slice(0, 4);
+    localStorage.setItem('arc_news', JSON.stringify(top4));
+  } catch(e) {}
 }
 
 // 初期化（lang.jsが読み込まれていれば保存済み言語を使用）
 (function() {
-  var lang = (typeof localStorage !== 'undefined' && localStorage.getItem('arc_lang')) || 'ja';
+  var lang = 'ja';
+  try { lang = localStorage.getItem('arc_lang') || 'ja'; } catch(e) {}
   if (typeof NEWS_ARTICLES !== 'undefined' && NEWS_ARTICLES[lang]) {
     NEWS_DATA = NEWS_ARTICLES[lang];
   }
@@ -291,5 +360,6 @@ setTimeout(function() {
 }, 400);
 </script>
 
+<script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>

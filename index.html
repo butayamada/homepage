@@ -25,6 +25,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -609,12 +611,30 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     <a href="news.html" class="btn-text" data-i18n="see_all">すべて見る</a>
   </div>
   <div class="news-grid reveal" id="index-news-grid">
-    <a href="news.html#article-0" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">2026年5月2日新店舗「ARC FUKAMEKI minoh」オープンのお知らせ</span><span class="news-arrow">→</span></a>
-    <a href="news.html#article-1" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">4月企画展「灯の詩」開催のお知らせ</span><span class="news-arrow">→</span></a>
-    <a href="news.html#article-2" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">4月のスケジュールにつきまして</span><span class="news-arrow">→</span></a>
-    <a href="news.html#article-3" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">フカメキ雑貨店ホームページリニューアルのお知らせ</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-0" class="news-item"><span class="news-date">2026.04.12</span><span class="news-title">新店舗「ARC FUKAMEKI minoh」プレオープンしました</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-1" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">2026年5月2日新店舗「ARC FUKAMEKI minoh」オープンのお知らせ</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-2" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">4月企画展「灯の詩」開催のお知らせ</span><span class="news-arrow">→</span></a>
+    <a href="news.html#article-3" class="news-item"><span class="news-date">2026.04.01</span><span class="news-title">4月のスケジュールにつきまして</span><span class="news-arrow">→</span></a>
   </div>
 </section>
+<script>
+// lang.jsが正常に読み込まれた場合、NEWS_ARTICLESから最新4件でグリッドを再構築
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof NEWS_ARTICLES === 'undefined') return;
+  var lang = 'ja';
+  try { lang = localStorage.getItem('arc_lang') || 'ja'; } catch(e) {}
+  var articles = (NEWS_ARTICLES[lang] || NEWS_ARTICLES['ja'] || []).slice(0, 4);
+  var grid = document.getElementById('index-news-grid');
+  if (!grid || !articles.length) return;
+  grid.innerHTML = articles.map(function(a, i) {
+    return '<a href="news.html#article-' + i + '" class="news-item">' +
+      '<span class="news-date">' + a.date + '</span>' +
+      '<span class="news-title">' + a.title + '</span>' +
+      '<span class="news-arrow">→</span>' +
+      '</a>';
+  }).join('');
+});
+</script>
 
 
 
@@ -624,6 +644,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
       <p class="section-label" data-i18n="ex_label">Exhibition</p>
       <h2 class="section-title" data-i18n="ex_title">企画展</h2>
     </div>
+    <a href="exhibitions.html" class="btn-text" data-i18n="see_all">すべて見る</a>
   </div>
 
   <div class="exhibition-grid reveal">
@@ -949,7 +970,7 @@ const observer = new IntersectionObserver(entries => {
 reveals.forEach(el => observer.observe(el));
 </script>
 
-<script src="lang.js"></script>
+<script src="lang.js" defer></script>
 
 
 <script>

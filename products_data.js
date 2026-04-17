@@ -458,19 +458,6 @@ window.PRODUCTS_DATA = {
     baseUrl: "https://fukameki.thebase.in/items/69272148"
   },
 
-  "69960464": {
-    artist: "vickey'72",
-    name: "cracker",
-    price: "¥13,200",
-    category: "Lighting",
-    size: "φ約6cm、高さ約18.5cm、コード長129cm",
-    material: "紙管（ヴィンテージ）、真鍮パイプ",
-    description: "ヴィンテージの紙管を使ったペンダントランプ。紙のマットな質感が落ち着いた雰囲気を演出します。e12 G30ミニボール型LED電球（最大5W）付属。",
-    img: "photo/index/p69960464_01.jpg",
-    images: ["b6484cd364ad128da51aff408db24186","788779a5034aab6673320b0401402172","9fe3cf1d65ba6472e2b8bdd3d6d1541b","38bd78b6e0226302b482b5f06005b283","ec33e37e4e02d1898e5a0df97e7dbf46","f79c5d82ba548473e5a6101b81dc6cb2","74f254e6da8af34d15d46102268bffd2","b24740ed034976cde7b4f39142d64ed1","c595bde07caf465e9c5f5ac2229f6009"],
-    baseUrl: "https://fukameki.thebase.in/items/69960464"
-  },
-
   "70208577": {
     artist: "サコユリコ",
     name: "コンポート鉢",

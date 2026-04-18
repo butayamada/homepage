@@ -119,6 +119,15 @@ main {
 .ex-item:first-child { border-top: 1px solid var(--border); }
 .ex-item:hover { opacity: 0.6; }
 .ex-item:hover .ex-arrow { transform: translateX(4px); color: var(--black); }
+.ex-item-plain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--border);
+  color: inherit;
+}
+.ex-item-plain:first-child { border-top: 1px solid var(--border); }
 
 .ex-date {
   font-size: 0.62rem; letter-spacing: 0.2em;
@@ -196,6 +205,11 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); }
   </div>
 
   <div class="ex-list reveal">
+    <div class="ex-item-plain">
+      <span class="ex-date">2026.08.22 – 08.30</span>
+      <span class="ex-name">（企画展名未定）</span>
+      <span class="ex-artists">caboche、水麗、谷口美波、松本美弥子（guest）（五十音順）</span>
+    </div>
     <a href="natsumeku2026.html" class="ex-item">
       <span class="ex-date">2026.07.18 – 07.25</span>
       <span class="ex-name">ナツメク</span>

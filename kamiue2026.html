@@ -116,6 +116,50 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 .lang-switcher { position: relative; }
 .lang-select { appearance: none; -webkit-appearance: none; background: transparent; border: 1px solid var(--border); font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 0.15em; color: var(--mid-gray); cursor: pointer; padding: 0.35rem 2rem 0.35rem 0.8rem; outline: none; transition: color 0.2s, border-color 0.2s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b8b8b8'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 7px; }
 .lang-select:hover { color: var(--black); border-color: #3a3632; }
+
+/* ARTISTS SECTION */
+.artists-section {
+  padding: 5rem 3.5rem 6rem;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+.artists-section-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--light-gray); margin-bottom: 3rem;
+  opacity: 0; animation: fadeIn 0.8s 1.1s ease forwards;
+}
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 3rem;
+}
+.artist-card {
+  border-top: 1px solid var(--border);
+  padding-top: 1.4rem;
+  opacity: 0; animation: fadeIn 0.8s 1.2s ease forwards;
+}
+.artist-card-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--black);
+  margin-bottom: 0.5rem; line-height: 1.3;
+}
+.artist-card-genre {
+  font-size: 0.65rem; letter-spacing: 0.12em;
+  color: var(--light-gray); margin-bottom: 1rem; line-height: 1.6;
+}
+.artist-card-ig {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.65rem; letter-spacing: 0.1em;
+  color: var(--mid-gray); text-decoration: none; transition: color 0.2s;
+}
+.artist-card-ig:hover { color: var(--black); }
+@media (max-width: 600px) {
+  .artists-section { padding: 4rem 1.5rem; }
+  .artists-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+}
 </style>
 </head>
 <body>
@@ -141,6 +185,19 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
   <h2 class="coming-title">Coming Soon</h2>
   <p class="coming-sub" data-i18n="coming_sub">詳細は準備中です。<br>今しばらくお待ちください。</p>
 </main>
+<section class="artists-section">
+  <p class="artists-section-label">Artists</p>
+  <div class="artists-grid">
+    <div class="artist-card">
+      <p class="artist-card-name">紙上征江</p>
+      <p class="artist-card-genre">陶器</p>
+      <a href="https://www.instagram.com/meishinkoubou/" target="_blank" rel="noopener" class="artist-card-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @meishinkoubou
+      </a>
+    </div>
+  </div>
+</section>
 <footer>
   <a href="index.html" class="footer-logo">ARC FUKAMEKI <span style="text-transform:none;">minoh</span></a>
   <p>© 2026 Fukameki Zakkaten. All rights reserved.</p>

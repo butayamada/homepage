@@ -428,6 +428,11 @@ var LANG_TRANSLATIONS = {
 var NEWS_ARTICLES = {
   ja: [
     {
+      date: "2026.04.19",
+      title: "「灯の詩」展商品のオンライン販売をいたします（19日20時より）",
+      body: "vickey'72さんの店頭での展示を終えさせて頂きました。<br>会期中はたくさんのご来店をいただきまして誠にありがとうございました。<br>ご用意可能な作品を通販対応させて頂きます。<br>当オンラインショップ（<a href='https://fukameki.thebase.in/' target='_blank' rel='noopener' style='color:inherit;'>fukameki.thebase.in</a>）へ掲載いたします。<br>掲載期間　2026年4月19日20時〜4月22日終日まで"
+    },
+    {
       date: "2026.04.14",
       title: "企画展紹介ページ「color」を更新しました",
       body: "企画展紹介ページ「color」を更新しました。詳細は<a href='color2026.html' style='color:inherit;'>こちら</a>をご覧ください。"
@@ -460,6 +465,11 @@ var NEWS_ARTICLES = {
   ],
   en: [
     {
+      date: "2026.04.19",
+      title: "Online sales of works from the \"Poem of Light\" exhibition (from 8 PM on the 19th)",
+      body: "The in-store exhibition by vickey'72 has now concluded.<br>Thank you so much to everyone who visited during the exhibition period.<br>Works that are available will be offered through our online shop.<br>They will be listed at our online shop (<a href='https://fukameki.thebase.in/' target='_blank' rel='noopener' style='color:inherit;'>fukameki.thebase.in</a>).<br>Listing period: April 19, 2026 from 8:00 PM — through April 22 (all day)"
+    },
+    {
       date: "2026.04.14",
       title: "Exhibition page \"color\" updated",
       body: "The exhibition introduction page \"color\" has been updated. Please see <a href='color2026.html' style='color:inherit;'>here</a> for details."
@@ -491,6 +501,11 @@ var NEWS_ARTICLES = {
     }
   ],
   zh: [
+    {
+      date: "2026.04.19",
+      title: "「灯之诗」展览作品线上销售开始（4月19日20时起）",
+      body: "vickey'72的店内展示已结束。<br>感谢展览期间前来光临的各位顾客。<br>部分可供销售的作品将支持网购。<br>将在我们的网上商店（<a href='https://fukameki.thebase.in/' target='_blank' rel='noopener' style='color:inherit;'>fukameki.thebase.in</a>）上架。<br>上架时间：2026年4月19日20时起至4月22日全天"
+    },
     {
       date: "2026.04.14",
       title: "企划展介绍页面「color」已更新",

@@ -193,6 +193,67 @@ nav {
 .gallery-item.tall { aspect-ratio: 2/3; }
 .gallery-item.sq   { aspect-ratio: 1; }
 
+/* ARTISTS SECTION */
+.artists-section {
+  padding: 6rem 3.5rem 7rem;
+  background: var(--white);
+}
+.artists-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--light-gray); margin-bottom: 3rem;
+}
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 3rem;
+}
+.artist-card {
+  border-top: 1px solid var(--border);
+  padding-top: 1.4rem;
+}
+.artist-card-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--black);
+  margin-bottom: 0.5rem; line-height: 1.3;
+}
+.artist-card-genre {
+  font-size: 0.65rem; letter-spacing: 0.12em;
+  color: var(--light-gray); margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.artist-card-ig {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.65rem; letter-spacing: 0.1em;
+  color: var(--mid-gray); text-decoration: none;
+  transition: color 0.2s;
+}
+.artist-card-ig:hover { color: var(--black); }
+.artist-card-ig svg { flex-shrink: 0; }
+.artists-divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 4rem 0 3rem;
+}
+.sweets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem 3rem;
+  max-width: 60%;
+}
+
+@media (max-width: 960px) {
+  .artists-section { padding: 5rem 2rem; }
+  .artists-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .sweets-grid { max-width: 100%; }
+}
+@media (max-width: 600px) {
+  .artists-section { padding: 4rem 1.5rem; }
+  .artists-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  .sweets-grid { grid-template-columns: 1fr; }
+}
+
 /* FOOTER */
 footer {
   background: var(--black); padding: 2rem 3.5rem;
@@ -348,6 +409,75 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: #3a3632; }
     <div class="gallery-item sq">
       <img src="photo/0413/S__9216012_0.jpg" alt="展示作品" />
     </div>
+  </div>
+</section>
+
+<section class="artists-section">
+  <p class="artists-label reveal">Artists</p>
+  <div class="artists-grid reveal">
+
+    <div class="artist-card">
+      <p class="artist-card-name">あしゅ</p>
+      <p class="artist-card-genre">ストール、パンツ</p>
+      <a href="https://www.instagram.com/asyuasyusyu/" target="_blank" rel="noopener" class="artist-card-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @asyuasyusyu
+      </a>
+    </div>
+
+    <div class="artist-card">
+      <p class="artist-card-name">イワオトナリテ</p>
+      <p class="artist-card-genre">陶器</p>
+      <a href="https://www.instagram.com/iwaotonarite/" target="_blank" rel="noopener" class="artist-card-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @iwaotonarite
+      </a>
+    </div>
+
+    <div class="artist-card">
+      <p class="artist-card-name">新見和也</p>
+      <p class="artist-card-genre">木工</p>
+      <a href="https://www.instagram.com/niimikazuya/" target="_blank" rel="noopener" class="artist-card-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @niimikazuya
+      </a>
+    </div>
+
+    <div class="artist-card">
+      <p class="artist-card-name">naigemii</p>
+      <p class="artist-card-genre">衣服</p>
+      <a href="https://www.instagram.com/naige__mii/" target="_blank" rel="noopener" class="artist-card-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @naige__mii
+      </a>
+    </div>
+
+    <div class="artist-card">
+      <p class="artist-card-name">前田彰子</p>
+      <p class="artist-card-genre">ガラス</p>
+    </div>
+
+  </div>
+
+  <hr class="artists-divider reveal">
+
+  <p class="artists-label reveal" style="margin-bottom:2rem;">Sweets</p>
+  <div class="sweets-grid reveal">
+
+    <div class="artist-card">
+      <p class="artist-card-name">さじ洋菓子店</p>
+      <p class="artist-card-genre">お菓子</p>
+      <a href="https://www.instagram.com/sazie_yougashiten/" target="_blank" rel="noopener" class="artist-card-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @sazie_yougashiten
+      </a>
+    </div>
+
+    <div class="artist-card">
+      <p class="artist-card-name">Fluff.</p>
+      <p class="artist-card-genre">お菓子</p>
+    </div>
+
   </div>
 </section>
 

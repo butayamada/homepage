@@ -84,6 +84,18 @@ main { padding-top: 7rem; }
 .product-price { font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.1em; }
 .soldout-label { color: #c0392b; font-size: 0.65rem; letter-spacing: 0.08em; margin-left: 0.4em; font-family: 'EB Garamond', serif; }
 
+.soldout-toggle-wrap {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'EB Garamond', serif; font-size: 0.65rem;
+  letter-spacing: 0.15em; color: var(--mid-gray); cursor: pointer;
+  user-select: none; margin-bottom: -1px; white-space: nowrap;
+}
+.soldout-toggle-wrap input[type="checkbox"] {
+  width: 13px; height: 13px; cursor: pointer; accent-color: var(--black);
+  flex-shrink: 0;
+}
+body.hide-soldout .product-card:has(.soldout-label) { display: none; }
+
 footer {
   background: var(--black); padding: 3rem 3.5rem;
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
@@ -97,7 +109,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-.view-tabs { display: flex; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+.view-tabs { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
 .view-tab {
   font-family: 'EB Garamond', serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
   padding: 0.8rem 2rem 0.7rem; cursor: pointer; color: var(--light-gray);
@@ -191,9 +203,15 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     </div>
 
     <div class="view-tabs">
-      <button class="view-tab active" id="tab-products" onclick="switchView('products')" data-i18n="tab_products">商品別</button>
-      <button class="view-tab" id="tab-artists" onclick="switchView('artists')" data-i18n="tab_artists">作家別</button>
-      <button class="view-tab" id="tab-genres" onclick="switchView('genres')">ジャンル別</button>
+      <div style="display:flex;">
+        <button class="view-tab active" id="tab-products" onclick="switchView('products')" data-i18n="tab_products">商品別</button>
+        <button class="view-tab" id="tab-artists" onclick="switchView('artists')" data-i18n="tab_artists">作家別</button>
+        <button class="view-tab" id="tab-genres" onclick="switchView('genres')">ジャンル別</button>
+      </div>
+      <label class="soldout-toggle-wrap">
+        <input type="checkbox" id="soldout-toggle" onchange="toggleSoldout(this)">
+        soldoutを非表示
+      </label>
     </div>
     <div class="artist-filter" id="artist-filter"></div>
     <div class="genre-filter" id="genre-filter"></div>
@@ -800,6 +818,26 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 <script src="artists_data.js"></script>
 <script src="lang.js"></script>
 <script>
+// soldout toggle
+function toggleSoldout(cb) {
+  if (cb.checked) {
+    document.body.classList.add('hide-soldout');
+    try { localStorage.setItem('fukameki_hide_soldout', '1'); } catch(e) {}
+  } else {
+    document.body.classList.remove('hide-soldout');
+    try { localStorage.removeItem('fukameki_hide_soldout'); } catch(e) {}
+  }
+}
+(function() {
+  try {
+    if (localStorage.getItem('fukameki_hide_soldout') === '1') {
+      document.body.classList.add('hide-soldout');
+      var cb = document.getElementById('soldout-toggle');
+      if (cb) cb.checked = true;
+    }
+  } catch(e) {}
+})();
+
 var GENRE_LIST = ['食器（陶器）', '食器（木工）', '食器（ガラス）', 'カトラリー', 'ランプ', '衣類', 'アクセサリー', '靴', '花器', '造形', 'キャンドル', 'スタンプ', 'その他'];
 
 var GENRE_MAP = {

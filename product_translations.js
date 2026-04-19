@@ -2451,4 +2451,199 @@ window.PRODUCT_TRANSLATIONS = {
     }
   }
 
-}; // END PRODUCT_TRANSLATIONS
+};
+
+window.PRODUCT_TRANSLATIONS['product_56898631.html'] = {
+  en: {
+    name: "tin cup",
+    desc: "An old tin cup transformed directly into a lamp. The deep rust tones are the patina of age, not defects. Features a mini ball bulb and rotary switch. Plug-in type.",
+    specs: { size: "Φ approx. 7.5cm × h approx. 8cm, cord length approx. 140cm (excl. plug)", material: "Antique tin cup, other materials" }
+  },
+  zh: {
+    name: "tin cup",
+    desc: "将古旧马口铁杯直接改造成照明作品。深沉的锈色是岁月积淀的风味，并非瑕疵。采用迷你球形灯泡和旋转开关。插座式。",
+    specs: { size: "Φ约7.5cm × h约8cm，电线长约140cm（不含插头）", material: "复古马口铁杯，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_104649530.html'] = {
+  en: {
+    name: "candlestick — French antique",
+    desc: "A French antique wooden spool combined with a ceramic rosette, crafted into a lamp. The delicate silhouette, maker's marks, and kintsugi repairs give it a singular character. Beautiful even when unlit.",
+    specs: { size: "Φ approx. 6.5cm, h approx. 21cm (approx. 25cm with bulb), cord 1420mm (excl. plug)", material: "Wooden parts, ceramic, other materials" }
+  },
+  zh: {
+    name: "candlestick 法国古董",
+    desc: "将法国古董木线轴与陶瓷玫瑰花饰组合而成的照明作品。纤细的轮廓、刻印的制造商标记以及金继修复痕迹，共同造就其独特个性。即使不点亮，氛围也极为出色。",
+    specs: { size: "Φ约6.5cm，h约21cm（含灯泡约25cm），电线1420mm（不含插头）", material: "木质配件，陶瓷，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_69925183.html'] = {
+  en: {
+    name: "sizuku",
+    desc: "A brass pole lamp with a cone-shaped shade — originally a French cornet pastry mold — suspended at the top. When lit, soft light spills from the cone's tip, casting delicate shadows. The shade is removable.",
+    specs: { size: "Base Φ approx. 6.5cm, h approx. 34.5cm, cord approx. 140cm (excl. plug)", material: "Cone-shaped mold (French), brass, iron disc, other" }
+  },
+  zh: {
+    name: "sizuku",
+    desc: "真鍮竿灯，顶端悬挂的圆锥形罩原为法国可颂饼模具。点亮后，柔和的光从圆锥尖端溢出，投下细腻的影子。罩可从底座上取下。",
+    specs: { size: "底座Φ约6.5cm，h约34.5cm，电线约140cm（不含插头）", material: "圆锥形模具（法国制），黄铜，铁盘，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_69926400.html'] = {
+  en: {
+    name: "CS-01 enamel",
+    desc: "An antique enamel lantern repurposed as a lamp. White enamel with blue trim; rust and peeling reveal its age. Its quiet, deep expression adds temporal weight to any space.",
+    specs: { size: "A φ approx. 13cm / B φ approx. 10cm, h approx. 12cm, cord approx. 140cm (excl. plug)", material: "Antique enamel lantern, other materials" }
+  },
+  zh: {
+    name: "CS-01 搪瓷",
+    desc: "将古旧搪瓷灯笼直接改造成照明作品。白色搪瓷配蓝色镶边，锈迹与剥落传递着年代的韵味。现代产品无法复制的静谧深邃，为空间增添时间的厚重感。",
+    specs: { size: "A φ约13cm / B φ约10cm，h约12cm，电线约140cm（不含插头）", material: "古旧搪瓷灯笼，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_56898468.html'] = {
+  en: {
+    name: "CS-01 brass",
+    desc: "An antique brass lamp base transformed into a lamp. A rounded column atop an angular pedestal, with aged brass patina that modern products cannot replicate. Commanding presence even when unlit.",
+    specs: { size: "A 5.5×5.5cm h16cm / B 6.5×6.5cm h15cm, cord approx. 140cm (excl. plug)", material: "Antique brass lamp base, other materials" }
+  },
+  zh: {
+    name: "CS-01 黄铜",
+    desc: "将古旧黄铜灯座改造成照明作品。方形底座上承托圆润柱体，经年沉淀的黄铜色调是现代产品无法复制的个性。即使不点亮也能收紧空间。",
+    specs: { size: "A 5.5×5.5cm h16cm / B 6.5×6.5cm h15cm，电线约140cm（不含插头）", material: "古旧黄铜灯座，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_69925697.html'] = {
+  en: {
+    name: "burnerd",
+    desc: "A handcrafted lamp: brass pipe arcs upward from a black round base, topped with an aluminum cup shade. When lit, light filters through the cup to softly illuminate surroundings. Each piece is one-of-a-kind with unique patina.",
+    specs: { size: "Diameter approx. 6cm, h approx. 23.5cm, cord approx. 140cm (excl. plug)", material: "Aluminum cup, brass pipe, wood, iron plate, other" }
+  },
+  zh: {
+    name: "burnerd",
+    desc: "黑色圆底座上，黄铜管优美地弧起，顶端置一铝制杯形罩的手工灯具。点亮后，光从杯中透出，柔和地照亮周围。以旧零件组合而成的孤品，每件的铜锈风韵各不相同。",
+    specs: { size: "径约6cm，h约23.5cm，电线约140cm（不含插头）", material: "铝杯，黄铜管，木材，铁板，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_104648266.html'] = {
+  en: {
+    name: "faro white",
+    desc: "Faro means 'lighthouse' in Italian. When lit, soft light escapes from the small lantern section, evoking a lighthouse at sea. White-painted wooden spool and brass — a quiet presence even when unlit.",
+    specs: { size: "Φ approx. 5cm, h approx. 16cm, cord approx. 140cm (excl. plug)", material: "Wooden spool (birch), brass" }
+  },
+  zh: {
+    name: "faro 白色",
+    desc: "意大利语「faro」意为灯塔。点亮后，光从小灯楼部分溢出，宛如夜海中的灯塔。白色涂装的木制线轴与黄铜构成，不点亮时也能融入空间，存在感静谧。",
+    specs: { size: "Φ约5cm，h约16cm，电线约140cm（不含插头）", material: "木制线轴（桦木），黄铜" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_62423097.html'] = {
+  en: {
+    name: "faro natural",
+    desc: "Faro means 'lighthouse' in Italian — this is the unfinished wood version. When lit, soft light escapes from the small lantern section. The natural birch wood and brass create a warm, understated charm.",
+    specs: { size: "Φ approx. 5cm, h approx. 16cm, cord approx. 140cm (excl. plug)", material: "Wooden spool (birch), brass" }
+  },
+  zh: {
+    name: "faro 原木色",
+    desc: "意大利语「faro」意为灯塔，这是无涂装版本。点亮后，光从小灯楼溢出，如夜海中的灯塔。未经涂装的木纹与黄铜搭配，呈现质朴温润的气质。",
+    specs: { size: "Φ约5cm，h约16cm，电线约140cm（不含插头）", material: "木制线轴（桦木），黄铜" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_69926669.html'] = {
+  en: {
+    name: "faro tall white",
+    desc: "The tall variant of the faro series. The elongated silhouette emphasizes the lighthouse form even more. White-painted lathe-turned legs support a small glowing lantern top — a striking tabletop lamp.",
+    specs: { size: "Φ approx. 7.5cm, h approx. 34cm, cord approx. 140cm (excl. plug)", material: "Lathe-turned legs, brass, other" }
+  },
+  zh: {
+    name: "faro tall 白色",
+    desc: "faro系列的高版本。修长的轮廓更加凸显灯塔的意象。白色涂装的旋盘车脚上，小巧的灯楼部分发光，是存在感十足的桌上照明。",
+    specs: { size: "Φ约7.5cm，h约34cm，电线约140cm（不含插头）", material: "旋盘车削脚部，黄铜，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_62422641.html'] = {
+  en: {
+    name: "shell mold",
+    desc: "A lamp using confectionery molds as shades. Brass pipe extends upward from a gray shell mold. When lit, soft light fills from within, casting shell-like shadows. Poetic charm even when unlit.",
+    specs: { size: "w approx. 16cm × d approx. 12cm × h approx. 29cm, cord approx. 140cm (excl. plug)", material: "Confectionery mold, wooden base, brass, other" }
+  },
+  zh: {
+    name: "shell mold",
+    desc: "以贝壳形糕点模具为罩的灯具。黄铜管从灰色模具中向上延伸，优美别致。点亮后，柔和的光从内部充盈，投下贝壳般的光影。不点亮时，其形态亦为空间增添诗意。",
+    specs: { size: "w约16cm × d约12cm × h约29cm，电线约140cm（不含插头）", material: "糕点模具，木制底座，黄铜，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_142036648.html'] = {
+  en: {
+    name: "open/close board",
+    desc: "A slender rod rising from an iron base, topped with a wooden board displaying 'open' on one side and 'closed' on the other. Perfect for shop counters or studio entrances. Board is removable; metal develops natural patina.",
+    specs: { size: "Board approx. 17.5cm × 3cm, base approx. 8cm × 6.5cm, total height approx. 31.5cm", material: "Iron (base and rod), wooden board, other" }
+  },
+  zh: {
+    name: "open/close board",
+    desc: "细杆从铁质底座伸出，顶端悬挂着正面「open」、背面「closed」字样的木板摆设。适合店铺柜台、工作室入口或个人工作空间。木板可拆卸，金属配件经年自然生锈。",
+    specs: { size: "木板约17.5cm × 3cm，底座约8cm × 6.5cm，全高约31.5cm", material: "铁（底座·杆），木板，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_81299780.html'] = {
+  en: {
+    name: "pavlova",
+    desc: "An antique hat stand repurposed as a lamp. The combination of brass components and Mizume cherry wood creates an elegant presence. Beautiful even when unlit, it brings a rich atmosphere to any space.",
+    specs: { size: "Base Φ approx. 9.5cm, h approx. 35cm, cord 1435mm (excl. plug)", material: "Hat stand (Mizume cherry wood), brass" }
+  },
+  zh: {
+    name: "pavlova",
+    desc: "将古旧帽架改造成的台灯。黄铜配件与水目樱木的搭配，营造出高雅的气质。即使不点亮，其存在感也能为空间带来丰富的氛围。",
+    specs: { size: "底座Φ约9.5cm，h约35cm，电线1435mm（不含插头）", material: "帽架（水目樱木），黄铜" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_69926185.html'] = {
+  en: {
+    name: '"open" box 02',
+    desc: 'A wall-mounted lamp: when the door is ajar, the word "open" glows softly; when closed, it reads "closed". LED with minimal heat. Perfect for shop entrances, studios, or personal spaces.',
+    specs: { size: 'Closed: W19.5cm × H14.5cm × D8.5cm, open depth approx. 20cm, cord approx. 140cm (excl. plug)', material: "Wooden box, acrylic panel, brass, other" }
+  },
+  zh: {
+    name: '"open" box 02',
+    desc: '壁挂式照明，打开门时"open"字样柔和发光，关闭时显示"closed"。LED发热少，安心使用。适合店铺入口、工作室或个人房间。',
+    specs: { size: '关闭：W19.5cm × H14.5cm × D8.5cm，开启时深度约20cm，电线约140cm（不含插头）', material: "木箱，亚克力板，黄铜，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_69960464.html'] = {
+  en: {
+    name: '"open" stand 01 (1)',
+    desc: 'A stand lamp with a round base and brass pipe extending upward, topped with a small vintage-style box. Open it and "open" glows softly. LED. Perfect for counters, windowsills, or beside a desk.',
+    specs: { size: 'Base Φ approx. 14cm, h 28cm, box width (closed) approx. 15.5cm, open depth approx. 20cm, cord approx. 140cm (excl. plug)', material: "Wooden box, wooden base, brass, acrylic panel, other" }
+  },
+  zh: {
+    name: '"open" stand 01（１）',
+    desc: '圆形底座上黄铜管伸出，顶端承载小巧复古风格箱子的台灯。打开箱子，"open"字样柔和发光。LED。适合柜台、窗边或书桌旁。',
+    specs: { size: '底座Φ约14cm，高28cm，箱宽（关闭时）约15.5cm，开启时深度约20cm，电线约140cm（不含插头）', material: "木箱，木制底座，黄铜，亚克力板，其他材料" }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_104645367.html'] = {
+  en: {
+    name: '"open" stand 01 (2)',
+    desc: 'A stand lamp made from an antique wooden box once used as a pillow. Brass pipe extends from a round base; "open" glows softly through acrylic panels. A lovable upward gaze. LED.',
+    specs: { size: 'w21.5cm × d10cm × h27cm, cord approx. 140cm (excl. plug)', material: "Wooden box, wooden base, brass, acrylic panels" }
+  },
+  zh: {
+    name: '"open" stand 01（２）',
+    desc: '以曾用作枕头的古旧木箱改制而成的台灯。圆形底座上延伸出黄铜管，"open"字样通过亚克力板柔和发光。略微仰视的角度中蕴含着可爱气息。LED。',
+    specs: { size: 'w21.5cm × d10cm × h27cm，电线约140cm（不含插头）', material: "木箱，木制底座，黄铜，亚克力板" }
+  }
+};

@@ -739,88 +739,34 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <a href="products.html" class="btn-text" data-i18n="see_all">すべて見る</a>
   </div>
-  <div class="products-grid reveal">
-    <a href="product_katayama_futamono.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/katayama_futamono_01.jpg" alt="片山裕二 ふたもの">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">片山裕二</p>
-        <p class="product-name">ふたもの</p>
-        <p class="product-price">¥4,950（税込）</p>
-      </div>
-    </a>
-    <a href="product_imai_hashi_oki.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/imai_hashi_oki_01.jpg" alt="今井律湖 動物箸置き">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">今井律湖</p>
-        <p class="product-name">動物箸置き</p>
-        <p class="product-price">¥2,090（税込）</p>
-      </div>
-    </a>
-    <a href="product_imai_daen_kozara.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/imai_daen_kozara_01.jpg" alt="今井律湖 楕円小皿 飴">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">今井律湖</p>
-        <p class="product-name">楕円小皿 飴</p>
-        <p class="product-price">¥2,750（税込）</p>
-      </div>
-    </a>
-    <a href="product_imai_soup_sara.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/imai_soup_sara_01.jpg" alt="今井律湖 スープ皿">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">今井律湖</p>
-        <p class="product-name">スープ皿</p>
-        <p class="product-price">¥4,400（税込）</p>
-      </div>
-    </a>
-    <a href="product_imai_candle_dish.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/imai_candle_dish_01.jpg" alt="今井律湖 キャンドルディッシュ">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">今井律湖</p>
-        <p class="product-name">キャンドルディッシュ</p>
-        <p class="product-price">¥5,500（税込）</p>
-      </div>
-    </a>
-    <a href="product_imai_oval_flat.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/imai_oval_flat_01.jpg" alt="今井律湖 オーバルフラット">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">今井律湖</p>
-        <p class="product-name">オーバルフラット</p>
-        <p class="product-price">¥6,600（税込）</p>
-      </div>
-    </a>
-    <a href="product_imai_oval_egg.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/imai_oval_egg_01.jpg" alt="今井律湖 オーバルエッグ">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">今井律湖</p>
-        <p class="product-name">オーバルエッグ</p>
-        <p class="product-price">¥6,600（税込）</p>
-      </div>
-    </a>
-    <a href="product_imai_hakkaku_bon.html" class="product-card" style="text-decoration:none;color:inherit;">
-      <div class="product-image">
-        <img src="photo/index/imai_hakkaku_bon_01.jpg" alt="今井律湖 八角盆プレート 白">
-      </div>
-      <div class="product-info">
-        <p class="product-cat">今井律湖</p>
-        <p class="product-name">八角盆プレート 白</p>
-        <p class="product-price">¥8,800（税込）</p>
-      </div>
-    </a>
-  </div>
+  <div class="products-grid reveal" id="index-products-grid"></div>
+  <script>
+  (function() {
+    var grid = document.getElementById('index-products-grid');
+    if (!grid || !window.PRODUCTS_DATA || !window.PRODUCTS_ORDER) return;
+    var count = 0;
+    for (var i = 0; i < PRODUCTS_ORDER.length && count < 8; i++) {
+      var fname = PRODUCTS_ORDER[i];
+      var key = fname.replace(/^product_/, '').replace(/\.html$/, '');
+      var p = PRODUCTS_DATA[key];
+      if (!p || p.soldout) continue;
+      var price = p.price.indexOf('（税込）') === -1 ? p.price + '（税込）' : p.price;
+      var a = document.createElement('a');
+      a.href = fname;
+      a.className = 'product-card';
+      a.style.cssText = 'text-decoration:none;color:inherit;';
+      a.innerHTML =
+        '<div class="product-image"><img src="' + p.img + '" alt="' + p.artist + ' ' + p.name + '" loading="lazy"></div>' +
+        '<div class="product-info">' +
+          '<p class="product-cat">' + p.artist + '</p>' +
+          '<p class="product-name">' + p.name + '</p>' +
+          '<p class="product-price">' + price + '</p>' +
+        '</div>';
+      grid.appendChild(a);
+      count++;
+    }
+  })();
+  </script>
 </section>
 
 
@@ -969,6 +915,7 @@ const observer = new IntersectionObserver(entries => {
 reveals.forEach(el => observer.observe(el));
 </script>
 
+<script src="products_data.js"></script>
 <script src="lang.js" defer></script>
 
 

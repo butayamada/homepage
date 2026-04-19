@@ -132,8 +132,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p139496523_01.jpg",
     images: ["06ddd0978c5ad7715022ad6c9688e712","30df2d7bea9f234115786bd7eb0f31ee","6186e5ffdd44fd97206c699614165df6","e3978e4bd1070297b5949fc80e2b7b3b","76b9634a1fda1276c347f0b49bb9c113","bbe0eb6dd7f98a05b2178f097f29ce2f","76804186d3be77f95b2c7578efc4f170"],
     baseUrl: "https://fukameki.thebase.in/items/139496523"
-  }
-
+  },
 
   "110820832": {
     artist: "松本克也",
@@ -264,7 +263,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p72229485_01.jpg",
     images: ["316d2edced2b3f4b04e2fa041410722b","181c555413887d2e11531573d697338f","fa1815622ae33c9592375e1db7c7fa51","e19afc4deeec27a27177d7ad134f7519"],
     baseUrl: "https://fukameki.thebase.in/items/72229485"
-  }
+  },
 
 
   "29992076": {
@@ -393,7 +392,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p67725695_01.jpg",
     images: ["55f59cbec3ba3983f2fdb53e8452a8e3","713e70b36d150750cc64d44b27bfcfc1","a2288dccd958d4658ead366cd09cef04","d4ec264b8a2a3bd0acc5959a35bf090a","cafab9c3f100d08faa2d9cd1ecd008ac","9d7a70d125b1dc755e71ac37c0f6e7ec"],
     baseUrl: "https://fukameki.thebase.in/items/67725695"
-  }
+  },
 
 
   "67725762": {
@@ -508,7 +507,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p71052047_01.jpg",
     images: ["6ba674a25cc01543d9d6ec78adfc6147","00947bb1c22c58849a5e8f1f9909cb81","95236a46e8bd4ff65d3490a6582531b8","8427c30a75893d19785d9170d85ce918","9adc9e6b10d78465db04c8ad905f3ee8","63ad2eb683676b58bae3b12db98eaa0e"],
     baseUrl: "https://fukameki.thebase.in/items/71052047"
-  }
+  },
 
 
   "71052065": {
@@ -642,7 +641,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p73389056_01.jpg",
     images: ["b98c8308aba8bbaf21cf1368a216cc0a","20b8ec8a257bcba549a9918b088553d3","1b491c50185978f4d149ade5decb65f9","118d9be5f64db522ca4877e9b8f65d91","2bab6f2233f0c1848a18c6413dc87739","9e770fe837b1e7cf69e1805c21c9debe","1f6e107489e227c17bd4902a36d55e87"],
     baseUrl: "https://fukameki.thebase.in/items/73389056"
-  }
+  },
 
 
   "73389146": {
@@ -774,7 +773,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p84294099_01.jpg",
     images: ["b8debd12f55ae38b14d7c5d20cfac835","5f2e808f73e23979002b3b70baa17aad","92279b69ac18dd97de49aa1a199678e2","e88f93b4f1d2497deeb2db3160d12497","2c8091502e2bbc92cbf2cf507fc39685","da94d56588fabe2e4de728463fde0e5f","2aa12c8a8dcd6385246f2444742a1ef6","4ef30cfbb8b117b2ef939fb57c9fb3dd","0e0c51bcb6b2fc77e1673c11b4317a43","da840d847c2da3887b2b59b2682deea1","1f85045cf892ad4dc411620cbd46ac22","935af1b402810015fdee382ea51c97e8"],
     baseUrl: "https://fukameki.thebase.in/items/84294099"
-  }
+  },
 
 
   "84312921": {
@@ -911,7 +910,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p88820338_01.jpg",
     images: ["27a8c5f71910ec9bb669f309efa8b2de","ec325b162cafe93d56f88d332006f602","894be9b5eef0f5fa6fb3ddc128699c77","b15f5cfc588fd4c7b90addb980623813","762f5d3c385541cd6b4f460e5f235fdc","00e6eba09bab5fd624624fe3c6d1b9c9"],
     baseUrl: "https://fukameki.thebase.in/items/88820338"
-  }
+  },
 
 
   "88843222": {
@@ -1042,7 +1041,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91923086_01.jpg",
     images: ["8081623c4a6eef25b327efa70a97901b","1228ea42e84ed661e7eb608875526000","771639920960e3b7a4df674bdfdad4a8","4ab7109aa22b7bd7948d60976ac09382","e46a36fbd8bd0da75312aa918126a11c","37eac974f732ababc8616cf2d761c096"],
     baseUrl: "https://fukameki.thebase.in/items/91923086"
-  }
+  },
 
 
   "91923608": {
@@ -1708,6 +1707,201 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p139505242_01.jpg",
     images: ["daac3696ad79e2cfbad436ccf71e93e5","89b606fa17e39da0f9491eff61652c06","9c89faa8eeb1f527f87e856408f9734c","4531937df8e813e924ea43c6fd0617f7","0897a5ef330eef5dce2da3a00c148037","ed2e3b5474eefea17f684f35ed7f32bc"],
     baseUrl: "https://fukameki.thebase.in/items/139505242"
+  },
+
+  "56898631": {
+    artist: "vickey'72",
+    name: "tin cup",
+    price: "¥24,200",
+    category: "Lighting",
+    size: "Φ約7.5cm × h約8cm、コード長約140cm（プラグ除く）",
+    material: "アンティークブリキカップ、他",
+    description: "古いブリキのカップをそのまま照明に仕立てた作品です。深みのある錆の色合いは経年による味わいであり、傷や欠陥ではありません。ミニボール球と回転式スイッチを使用。",
+    img: "photo/index/p56898631_01.jpg",
+    images: ["9d152acac65e7a7143c452b2a06ec6a2","4338ce82207f66ef0d1ed200a7d5b190","ed3ca617083fefbeb465e1873afbb644","32a93a9171165554046cfb7b7e36fa1d","5643462d4b8af23553fb85a4044c0e17","3c0bad50bc7fef4e4faed1f736854f17","d637027b88432fd20c02a38c1dffeb27","0ba3328fdf5706d63babcfc0232f8776","0160ea5b31a06387c691a9728af1f5d2","b3220fd72aa9113e08b0169de3601e7d"],
+    baseUrl: "https://fukameki.thebase.in/items/56898631"
+  },
+
+  "104649530": {
+    artist: "vickey'72",
+    name: "candlestick フランスアンティーク",
+    price: "¥28,600",
+    category: "Lighting",
+    size: "Φ約6.5cm、h約21cm（電球含む約25cm）、コード長1420mm（プラグ除く）",
+    material: "木製パーツ、陶磁器、他",
+    description: "フランスのアンティーク木製スプールと陶器のロゼットを組み合わせた照明作品。繊細なシルエット、刻まれたメーカーズマーク、金継ぎの跡が独自の個性を生み出しています。灯さずとも、その佇まいはとても良い雰囲気です。",
+    img: "photo/index/p104649530_01.jpg",
+    images: ["9f3b9fd59849c726d191bee131245f59","c8a10d99d77293564453b564d721d023","5e9a7ccb6682c87b56af408a18bde6fc","6198e2ff3ba395cc174762fbeaa5195f","49158fa66941ee848f15a15028199a3d","cd497bafde2854529e17f0d28af20c4f","3de76cf3b69a7b040e33c59afa98be08","ad005e8680188da90dd3f570a82680f4","043f55bf70da93f50aa63eecd46c3382","7279603b827f993899586453d4126c74","99b62cbe3d0ad4de1ed424012e400794","a1b4e4103606cfbe169cf822f8705417"],
+    baseUrl: "https://fukameki.thebase.in/items/104649530"
+  },
+
+  "69925183": {
+    artist: "vickey'72",
+    name: "sizuku",
+    price: "¥29,700",
+    category: "Lighting",
+    size: "ベース径約6.5cm、h約34.5cm、コード長約140cm（プラグ除く）",
+    material: "コーン型菓子型（フランス製）、真鍮、鉄皿、他",
+    description: "真鍮のポールランプ。先端に吊るされた円錐形シェードは、もともとフランスのコルネット菓子型。灯すと円錐の先端から柔らかな光が漏れ、周囲に繊細な影を落とします。シェードはスタンドから取り外し可能です。",
+    img: "photo/index/p69925183_01.jpg",
+    images: ["5c4559a63618a5b4df5ef0479a832fd5","5ebc87851e63139bcf12737c38fe735c","b3e46d4ca4a4e71b73ede40e4c8984ff","34a6fa8c623cdd74a31c25a7a00fd122","af403ba23f8a905444b20f3eed8302fb","52aa93ee8827b31901179134ed99674c","2c524ffaf478302ca27fcd78b5a30acd"],
+    baseUrl: "https://fukameki.thebase.in/items/69925183"
+  },
+
+  "69926400": {
+    artist: "vickey'72",
+    name: "CS-01 ホーロー",
+    price: "¥30,800",
+    category: "Lighting",
+    size: "A φ約13cm / B φ約10cm、h約12cm、コード長約140cm（プラグ除く）",
+    material: "アンティークホーローランプ、他",
+    description: "アンティークのホーローランプをそのまま照明に仕立てた作品。白いホーローに青いラインが入り、錆や剥がれが年代の味わいを伝えます。現代のプロダクトでは出せない静かで深みのある表情が空間に時間の重みを添えます。",
+    img: "photo/index/p69926400_01.jpg",
+    images: ["2a5e4e754c23f68574b075826087bc3b","c1b4bbd0b8ec917c68e19e1b7316165f","76b5fe576493d389af8dab61b33c86c1","167cae8a3db4f7d6fd9c1d93cca383b4","81728440dd36068fa0c7f1105913c30d","a2658db8b258c454e94431e643952b24","db2e82256cbd1d5da04379f0d26942f3","a489f6e66ec8a8958b77bb8d9ef21e31","dda4cd630c952642d84e602a2df22c00","8ed35cca4c6611c3988e95d421c67e29","32a57235d54527c66a991e2ed92e79c9","3aef4f9dd33428da25ffae7b80cbdf88","bc8f59424b2014e2583d047198c91214","bef265220dca2771339fdb2a7aa160cc","b2bf0dcc6157dbe268de22fae36962c6","57fdb1ca3206250ed3c20427ff56c84b"],
+    baseUrl: "https://fukameki.thebase.in/items/69926400"
+  },
+
+  "56898468": {
+    artist: "vickey'72",
+    name: "CS-01 真鍮",
+    price: "¥30,800",
+    category: "Lighting",
+    size: "A 5.5cm × 5.5cm h16cm / B 6.5cm × 6.5cm h15cm、コード長約140cm（プラグ除く）",
+    material: "アンティーク真鍮ランプベース、他",
+    description: "アンティークの真鍮ランプベースを照明に仕立てた作品。角台座に丸みを帯びた柱が乗る端正な佇まい、経年で深まった真鍮の色合いは現代のプロダクトでは出せない個性を持ちます。灯さずとも空間を引き締めます。",
+    img: "photo/index/p56898468_01.jpg",
+    images: ["93cd49c5557fc91abb83994d28cbac83","e6b5a088813acbe90de551666e13af07","c4df4f6fd72a692f9994466d40a67634","86d62e1395691da7799640b5452df8ad","a9de62c7c5e272e1e230f97c9eaa44c1","87391b6718fe7ca3adf8d5725b655998"],
+    baseUrl: "https://fukameki.thebase.in/items/56898468"
+  },
+
+  "69925697": {
+    artist: "vickey'72",
+    name: "burnerd",
+    price: "¥30,800",
+    category: "Lighting",
+    size: "径約6cm、h約23.5cm、コード長約140cm（プラグ除く）",
+    material: "アルミカップ、真鍮パイプ、木材、鉄板、他",
+    description: "黒い丸ベースから真鍮パイプが弧を描いて立ち上がり、アルミカップのシェードをのせた手工芸的なランプ。灯すとカップから光が漏れ周囲を柔らかく照らします。古いパーツを組み合わせた一品もので、個体ごとにパティナの風合いが異なります。",
+    img: "photo/index/p69925697_01.jpg",
+    images: ["a96226dd2c971508b6bad47843b605ed","b655f6f422eb3fd7858f95976ad62f6e","ee90a2e640c0cbc74a75f296ad07ceed","9abab408f9c76587607d63bdb06c2db4","8c7be3b7da7dafdea9edbf14a17d1dd9","7ea26e33af9ba2f88b3d60a32024a289"],
+    baseUrl: "https://fukameki.thebase.in/items/69925697"
+  },
+
+  "104648266": {
+    artist: "vickey'72",
+    name: "faro 白",
+    price: "¥33,000",
+    category: "Lighting",
+    size: "Φ約5cm、h約16cm、コード長約140cm（プラグ除く）",
+    material: "木製スプール（バーチ）、真鍮",
+    description: "イタリア語で「灯台」を意味する faro。灯すと小さな燈楼部分から光が漏れ、夜の海に立つ灯台のような佇まいを見せます。白塗装の木製スプールと真鍮で構成されており、灯さずとも空間に溶け込む存在感があります。",
+    img: "photo/index/p104648266_01.jpg",
+    images: ["426efc1c180001de0c95d2a9cbab0b9a","d5ff4e97568deb98a7a2c2e8a3f3fd5b","50dfad025efb212df395dba2342bdad2","ef491235974ff3472902c1361dd56939","b6cb1f57134d5a225967b1200ffa59e3","21e859bbe2d140dac0a08aba76e6b96a","5db9e5b54efda1db72926b7d8e79a680","ecbf247dc5eff18c2570fb9743081106"],
+    baseUrl: "https://fukameki.thebase.in/items/104648266"
+  },
+
+  "62423097": {
+    artist: "vickey'72",
+    name: "faro 無塗装",
+    price: "¥33,000",
+    category: "Lighting",
+    size: "Φ約5cm、h約16cm、コード長約140cm（プラグ除く）",
+    material: "木製スプール（バーチ）、真鍮",
+    description: "イタリア語で「灯台」を意味する faro の無塗装版。灯すと小さな燈楼部分から光が漏れ、夜の海に立つ灯台のような佇まいを見せます。無塗装の木地と真鍮の組み合わせが素朴で温かみのある表情を持ちます。",
+    img: "photo/index/p62423097_01.jpg",
+    images: ["e1ff62069952fe9de65612d93251909c","4bd7a7d2b758de6213d18d92087e204a","df937b0b17b404c54a81f84ce47d80b8","0d99247724ea47f400949e067074694d","a19860757b9b6cf460bea836e72546a7","12eda9e406fec3da6b038e9f98a37971","e81f40e723bcf2df6b4d74524182d44d","02b466019007717c399c52af28f6c2a6","07d71b3b7e5626aa48e4e19c4b92806c","a0f61b373d798e552d0270132a18e73b"],
+    baseUrl: "https://fukameki.thebase.in/items/62423097"
+  },
+
+  "69926669": {
+    artist: "vickey'72",
+    name: "faro tall 白",
+    price: "¥40,700",
+    category: "Lighting",
+    size: "Φ約7.5cm、h約34cm、コード長約140cm（プラグ除く）",
+    material: "旋盤挽き脚部、真鍮、他",
+    description: "faro シリーズのトールバリエーション。縦に伸びたシルエットが灯台らしさをより強調します。白塗装の旋盤挽き脚の上に小さな燈楼部分が光る、存在感のある卓上照明です。",
+    img: "photo/index/p69926669_01.jpg",
+    images: ["441db35b269e7c69656591ede52189bd","ac9fdec226b11c9232dcc884d2ee8bc2","953c8b0e399efcf05c6b63114c66c59e","a6bdfdd3cd9bdf79e0d7706e384a0b90","f6b98068af42e9bb9024da420de0005e","0cb9417d6e0d06487f452f07c19fb9a1","85504b89b0930f3fbd9c6d26a126c0ad","5a5230cdd1a4866ce037c2f95275b0f8","4e08333c27522eef00790aacac31582b"],
+    baseUrl: "https://fukameki.thebase.in/items/69926669"
+  },
+
+  "62422641": {
+    artist: "vickey'72",
+    name: "shell mold",
+    price: "¥33,000",
+    category: "Lighting",
+    size: "w約16cm × d約12cm × h約29cm、コード長約140cm（プラグ除く）",
+    material: "菓子型、木製ベース、真鍮、他",
+    description: "貝形の菓子型をシェードにしたランプ。グレーの菓子型から真鍮パイプが上へと伸びる優美なフォルム。灯すと内側から柔らかな光が満ち、貝のような影を落とします。灯さずとも、その形は詩的な魅力を空間に添えます。",
+    img: "photo/index/p62422641_01.jpg",
+    images: ["62e3ad8db8c1d54f08bc094af30d0d1a","1b38f4f4a3e10cd0317f58c7980fde9f","e4462ac39bb5b07081bdb1a349c3f4ba","480c7ad9fdaa8fa680b6be6cd9f77edf","6d2050ee03e4f4c9422b1101023fbabe","b912ed0735e03cee9a05ed290d22c10b","a72098b3e43b3b20d61e79de507627a3","f48db3f9c3da440f9c7109520fff47df","01eb8b11ad2d8e7480b814eb6acadec7","ba4e3e45f4a6e0447b29d53c986e58d3","17e0fe72bd3202062cfa80a513bf6d7e","0e94d9f35a277871ecc6c526b0196f4a","aaceb5e854bfb6fc2a455299f76ab18a","f21ba4aa45703b71a6e972b863e9fe05","afed1b124e2bcf653c38dfdf9bdf8518"],
+    baseUrl: "https://fukameki.thebase.in/items/62422641"
+  },
+
+  "142036648": {
+    artist: "vickey'72",
+    name: "open/close board",
+    price: "¥33,000",
+    category: "Other",
+    size: "ボード約17.5cm × 3cm、ベース約8cm × 6.5cm、全高約31.5cm",
+    material: "アイアン（ベース・ロッド）、木製ボード、他",
+    description: "細いロッドがアイアンベースから伸び、先端に「open」「closed」の文字が入った木製ボードを掲げたオブジェ。店舗カウンターや工房の入口、個人の作業空間に。日々の区切りを示す小道具として。ボードは取り外し可能で、金属パーツは経年で自然なさびが生まれます。",
+    img: "photo/index/p142036648_01.jpg",
+    images: ["b63d6d942f423041e5a7415f858efee3","15456a97d03ff1cb1e6b7a1912ebc9ea","f3e09214bb71818a2e4333bc45a737c9","33112f0eae5cff8f2e07663a7a6e5251","629ce5541153df2c98db3f6766ed48a0","4d7404fa5bf164851a4766b83de97968","b3c0541505e01c8ba22dda6f1e399def","fa665c9cf2af6ba09a62e6ad1d8e652b","b3d660f1e37c541f0eabe427bf445bbb"],
+    baseUrl: "https://fukameki.thebase.in/items/142036648"
+  },
+
+  "81299780": {
+    artist: "vickey'72",
+    name: "pavlova",
+    price: "¥41,800",
+    category: "Lighting",
+    size: "ベース径約9.5cm、h約35cm、コード長1435mm（プラグ除く）",
+    material: "帽子掛けスタンド（ミズメ桜）、真鍮",
+    description: "アンティークの帽子掛けスタンドをランプに仕立てた作品。真鍮パーツとミズメ桜の組み合わせが気品ある佇まいを生み出します。灯さずとも、その存在感は空間に豊かな雰囲気をもたらします。",
+    img: "photo/index/p81299780_01.jpg",
+    images: ["e21b575fe4183192d21a655565f72f92","fea91894b1475f6616588136915c7709","58cfab1fff47e9062039383d647524c7","46b4d9bec2334acae97f83cdafa6bb51","d0a3f9dca6bb666ac0fe097e739eeb35","fc3b6396b21ce6010b914a22643fb68d","5cb22d2766d233550aa7b6f5c03eec4a","e39b52e6e2562e3a0f60f5567f49de72","a479859bb2522af3e3b9b0d3369c816d"],
+    baseUrl: "https://fukameki.thebase.in/items/81299780"
+  },
+
+  "69926185": {
+    artist: "vickey'72",
+    name: "\"open\" box 02",
+    price: "¥61,600",
+    category: "Lighting",
+    size: "閉：W19.5cm × H14.5cm × D8.5cm、開時奥行約20cm、コード長約140cm（プラグ除く）",
+    material: "木製ボックス、アクリル板、真鍮、他",
+    description: "ドアが開くと「open」の文字が浮かび上がり、閉じると「closed」になる壁掛け照明。内側から柔らかな光が漏れ出します。LEDで発熱が少なく安心して使えます。店舗の入口や工房、個人の部屋に。",
+    img: "photo/index/p69926185_01.jpg",
+    images: ["a370eedc27aad97586e55813ea46962d","dfdb7b882ee4bb30cf92c2bbaf2ca8b8","b38a9b9da48023135be17be76808683b","019ca5fc0129a57f3814abefa6930381","05011aa6451e7379b9c87f62ac295b43","da1f42c32b3d6e8d7782774b1c8cd14b","d9e9d5ae7476d118b7250f99b008b53a","83acfeb2bd9f039ebbaefec9a6ec25d0","a8cab938a872fe153b3416a7a2483b86","0859bee1b4e132ea1a4de1e397738cb6","7104b4392f1a8b6ffad4b3e8b392e7b3"],
+    baseUrl: "https://fukameki.thebase.in/items/69926185"
+  },
+
+  "69960464": {
+    artist: "vickey'72",
+    name: "\"open\" stand 01（１）",
+    price: "¥67,100",
+    category: "Lighting",
+    size: "ベース径約14cm、高さ28cm、ボックス幅（閉時）約15.5cm、開時奥行約20cm、コード長約140cm（プラグ除く）",
+    material: "木製ボックス、木製ベース、真鍮、アクリル板、他",
+    description: "丸いベースから真鍮パイプが伸び、先端に小さなヴィンテージ風ボックスを掲げたスタンドランプ。ボックスを開くと「open」の文字が柔らかく光ります。LEDで発熱が少なく安心。カウンターや窓辺、デスク脇に。",
+    img: "photo/index/p69960464_01.jpg",
+    images: ["a7feceaaa0bd2a1c4083f0424ca038ba","06bfb8015a0d04958a27aa09aef2e34e","650222acb768c90486baef9bfee301a5","29ff23274a89f396171c82c89b67fd36","998b57e163a5a630a0c8778f5decb972","1714bbe83a6c6fb755c6b002d7387498","b7d66c5c131a0094b45e97d981d1d323","d302ac4ac976b5a92025c40a9940ea19","e22e2ff8cf197626d5fd2eb16abd40ec","cc221e21501f91d26d7ec1b2d535f11c","6be67f3588f9f518a4173a92e1c7971a","f46e814d8f07291fd5436ead6dfd5089"],
+    baseUrl: "https://fukameki.thebase.in/items/69960464"
+  },
+
+  "104645367": {
+    artist: "vickey'72",
+    name: "\"open\" stand 01（２）",
+    price: "¥67,100",
+    category: "Lighting",
+    size: "w21.5cm × d10cm × h27cm、コード長約140cm（プラグ除く）",
+    material: "木製ボックス、木製ベース、真鍮、アクリル板",
+    description: "枕として使われていたアンティーク木箱を再利用したスタンドランプ。丸ベースから真鍮パイプが伸び、アクリル板越しに「open」の文字が柔らかく光ります。少し上を向いた視線に愛らしさが宿ります。LEDで発熱が少なく安心して使えます。",
+    img: "photo/index/p104645367_01.jpg",
+    images: ["5292850f8a586ceed8dd8d64e798eb38","17539f6af5320d33831fbb1a2659d60a","fafd7c8db3eb6e14596e617ca05b6b79","604734f025df888f650c25e34e167a99","7745297483e733a9b15f7ceff20a20be","f0cbd44e4973f6421b7595754decc83a","83ba241c2540ebebfd41d2d53ad24ea5","7f59bf19433fed3bafb6c8ecae65d7ef","bdba6bcc5cda0030f6aaa47404a28515","7fc31c113d4bedbc8e891851eddd7fb8","a58d6f99d49f8787269eddb7bd9f2f31","4245e4a29efa8b4b820e740cebb7ae2a"],
+    baseUrl: "https://fukameki.thebase.in/items/104645367"
   }
 
 }; // END PRODUCTS_DATA

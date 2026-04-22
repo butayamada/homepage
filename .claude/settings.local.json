@@ -171,7 +171,21 @@
       "Bash(sed -n '239,244p' \"/c/Users/butay/claude code/homepage/preopen.html\")",
       "Bash(sed -n '210,215p' \"/c/Users/butay/claude code/homepage/news.html\")",
       "Bash(sed -n '142,148p' \"/c/Users/butay/claude code/homepage/ampiana2026.html\")",
-      "Bash(sed -n '131,137p' \"/c/Users/butay/claude code/homepage/onlineshop.html\")"
+      "Bash(sed -n '131,137p' \"/c/Users/butay/claude code/homepage/onlineshop.html\")",
+      "Bash(gh pr:*)",
+      "Bash(ffmpeg -version)",
+      "WebFetch(domain:docs.google.com)",
+      "WebFetch(domain:doc-0o-24-sheets.googleusercontent.com)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\ampiana2026.html\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\ampiana2026.html\")",
+      "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\kamiue2026.html\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\kamiue2026.html\")",
+      "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\natsumeku2026.html\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\natsumeku2026.html\")",
+      "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\aug2026.html\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\aug2026.html\")",
+      "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\exhibitions.html\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\exhibitions.html\")",
+      "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\index.html\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\index.html\")",
+      "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\lang.js\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\lang.js\")",
+      "Bash(node --check \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\product_translations.js\")",
+      "Bash(node --check \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\products_data.js\")"
     ]
   }
 }

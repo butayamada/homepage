@@ -460,7 +460,7 @@ var NEWS_ARTICLES = {
     {
       date: "2026.04.01",
       title: "フカメキ雑貨店ホームページリニューアルのお知らせ",
-      body: "2026年4月よりフカメキ雑貨店のホームページをリニューアルしました。今後、当店の最新情報をホームページからも発信していきますので、気になる方はチェックをお願いします。<br><br>なお、引き続きインスタグラム（<a href=\"https://www.instagram.com/fukamekizakkaten\" style=\"color:inherit;\">@fukamekizakkaten</a>）からも最新情報を発信していきますので、そちらのご確認も引き続きよろしくお願いいたします。"
+      body: "2026年4月よりフカメキ雑貨店のホームページをリニューアルしました。今後、当店の最新情報をホームページからも発信していきますので、気になる方はチェックをお願いします。<br><br>なお、引き続きインスタグラム（<a href=\"https://www.instagram.com/arcfukameki_minoh\" style=\"color:inherit;\">@arcfukameki_minoh</a>）からも最新情報を発信していきますので、そちらのご確認も引き続きよろしくお願いいたします。"
     }
   ],
   en: [
@@ -497,7 +497,7 @@ var NEWS_ARTICLES = {
     {
       date: "2026.04.01",
       title: "Website Renewal",
-      body: "From April 2026, Fukameki Zakka-ten has launched a new website. We will be sharing the latest news here, so please check back often.<br><br>We will also continue to share updates on Instagram (<a href=\"https://www.instagram.com/fukamekizakkaten\" style=\"color:inherit;\">@fukamekizakkaten</a>)."
+      body: "From April 2026, Fukameki Zakka-ten has launched a new website. We will be sharing the latest news here, so please check back often.<br><br>We will also continue to share updates on Instagram (<a href=\"https://www.instagram.com/arcfukameki_minoh\" style=\"color:inherit;\">@arcfukameki_minoh</a>)."
     }
   ],
   zh: [
@@ -534,7 +534,7 @@ var NEWS_ARTICLES = {
     {
       date: "2026.04.01",
       title: "深目杂货店官网更新通知",
-      body: "自2026年4月起，深目杂货店官网焕新上线。今后将通过官网发布最新信息，欢迎关注。<br><br>Instagram（<a href=\"https://www.instagram.com/fukamekizakkaten\" style=\"color:inherit;\">@fukamekizakkaten</a>）也将持续更新，敬请继续关注。"
+      body: "自2026年4月起，深目杂货店官网焕新上线。今后将通过官网发布最新信息，欢迎关注。<br><br>Instagram（<a href=\"https://www.instagram.com/arcfukameki_minoh\" style=\"color:inherit;\">@arcfukameki_minoh</a>）也将持续更新，敬请继续关注。"
     }
   ]
 };

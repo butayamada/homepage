@@ -1926,7 +1926,7 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p104645367_01.jpg",
     images: ["5292850f8a586ceed8dd8d64e798eb38","17539f6af5320d33831fbb1a2659d60a","fafd7c8db3eb6e14596e617ca05b6b79","604734f025df888f650c25e34e167a99","7745297483e733a9b15f7ceff20a20be","f0cbd44e4973f6421b7595754decc83a","83ba241c2540ebebfd41d2d53ad24ea5","7f59bf19433fed3bafb6c8ecae65d7ef","bdba6bcc5cda0030f6aaa47404a28515","7fc31c113d4bedbc8e891851eddd7fb8","a58d6f99d49f8787269eddb7bd9f2f31","4245e4a29efa8b4b820e740cebb7ae2a"],
     baseUrl: "https://fukameki.thebase.in/items/104645367"
-  }
+  },
 
 
   "katayama_futamono": {

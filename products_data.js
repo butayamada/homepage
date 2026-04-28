@@ -1722,6 +1722,7 @@ window.PRODUCTS_DATA = {
   },
 
   "56898631": {
+    soldout: true,
     artist: "vickey'72",
     name: "tin cup",
     price: "¥24,200",
@@ -1735,6 +1736,7 @@ window.PRODUCTS_DATA = {
   },
 
   "104649530": {
+    soldout: true,
     artist: "vickey'72",
     name: "candlestick フランスアンティーク",
     price: "¥28,600",
@@ -1762,6 +1764,7 @@ window.PRODUCTS_DATA = {
   },
 
   "69926400": {
+    soldout: true,
     artist: "vickey'72",
     name: "CS-01 ホーロー",
     price: "¥30,800",
@@ -1775,6 +1778,7 @@ window.PRODUCTS_DATA = {
   },
 
   "56898468": {
+    soldout: true,
     artist: "vickey'72",
     name: "CS-01 真鍮",
     price: "¥30,800",
@@ -1815,6 +1819,7 @@ window.PRODUCTS_DATA = {
   },
 
   "62423097": {
+    soldout: true,
     artist: "vickey'72",
     name: "faro 無塗装",
     price: "¥33,000",

@@ -1928,6 +1928,86 @@ window.PRODUCTS_DATA = {
     baseUrl: "https://fukameki.thebase.in/items/104645367"
   }
 
+
+  "katayama_futamono": {
+    artist: "片山裕二（陶房月見清楽）",
+    name: "ふたもの",
+    price: "¥4,950",
+    category: "Ceramics",
+    img: "photo/index/katayama_futamono_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
+
+  "imai_hashi_oki": {
+    artist: "今井律湖（益子）",
+    name: "動物箸置き",
+    price: "¥2,090",
+    category: "Ceramics",
+    img: "photo/index/imai_hashi_oki_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
+
+  "imai_daen_kozara": {
+    artist: "今井律湖（益子）",
+    name: "楕円小皿 飴",
+    price: "¥2,750",
+    category: "Ceramics",
+    img: "photo/index/imai_daen_kozara_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
+
+  "imai_soup_sara": {
+    artist: "今井律湖（益子）",
+    name: "スープ皿",
+    price: "¥4,400",
+    category: "Ceramics",
+    img: "photo/index/imai_soup_sara_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
+
+  "imai_candle_dish": {
+    artist: "今井律湖（益子）",
+    name: "キャンドルディッシュ",
+    price: "¥5,500",
+    category: "Ceramics",
+    img: "photo/index/imai_candle_dish_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
+
+  "imai_oval_flat": {
+    artist: "今井律湖（益子）",
+    name: "オーバルフラット",
+    price: "¥6,600",
+    category: "Ceramics",
+    img: "photo/index/imai_oval_flat_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
+
+  "imai_oval_egg": {
+    artist: "今井律湖（益子）",
+    name: "オーバルエッグ",
+    price: "¥6,600",
+    category: "Ceramics",
+    img: "photo/index/imai_oval_egg_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
+
+  "imai_hakkaku_bon": {
+    artist: "今井律湖（益子）",
+    name: "八角盆プレート 白",
+    price: "¥8,800",
+    category: "Ceramics",
+    img: "photo/index/imai_hakkaku_bon_01.jpg",
+    images: [],
+    baseUrl: "https://fukameki.thebase.in/"
+  },
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [

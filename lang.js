@@ -31,7 +31,7 @@ var LANG_TRANSLATIONS = {
     see_all:        "すべて見る",
 
     // renewal.html
-    rn_hero_title:     "ARC FUKAMEKI minoh<br>リニューアルオープン（予定）のお知らせ",
+    rn_hero_title:     "ARC FUKAMEKI minoh<br>リニューアルオープンのお知らせ",
     rn_hero_date:      "2026年5月2日（土）より、新店舗にてリニューアルオープンいたします",
     rn_msg_title:      "ごあいさつ",
     rn_msg_p1:         "平素よりフカメキ雑貨店をご愛顧いただきありがとうございます。",

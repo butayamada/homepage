@@ -9,7 +9,7 @@ var LANG_TRANSLATIONS = {
     nav_back_short: "← 戻る",
 
     // index.html
-    renewal_title:  "新店舗オープン予定",
+    renewal_title:  "リニューアルオープン",
     renewal_date:   "2026年5月2日（土）オープン",
     renewal_desc:   "フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、2026年5月2日（土）にリニューアルオープンいたします。旧店舗から徒歩1分の場所で、新たな空間でお客様をお迎えします。",
     renewal_btn:    "詳細はこちら",

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -11,11 +11,11 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMPIANA POPUP — ARC FUKAMEKI <span style="text-transform:none;">minoh</span></title>
+<title>AMPIANA POPUP — ARC FUKAMEKI minoh</title>
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="ARC FUKAMEKI <span style="text-transform:none;">minoh</span>">
-<meta property="og:title" content="AMPIANA POPUP — ARC FUKAMEKI <span style="text-transform:none;">minoh</span>">
-<meta property="og:description" content="大阪府箕面市の古民家を改装したセレクト雑貨店。">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="AMPIANA POPUP — ARC FUKAMEKI minoh">
+<meta property="og:description" content="マダガスカルの職人が手仕事でつくるかごバッグブランド・AMPIANAのポップアップ。">
 <meta property="og:url" content="https://fukameki.jp/ampiana2026.html">
 <meta property="og:image" content="https://fukameki.jp/ogp.jpg">
 <meta property="og:image:width" content="1200">
@@ -27,142 +27,278 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Serif+JP:wght@200;300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { opacity: 0; animation: bodyFadeIn 0.4s 0.2s ease forwards; }
+@keyframes bodyFadeIn { to { opacity: 1; } }
 :root {
-  --black: #1c1a18; --mid-gray: #7a7570; --light-gray: #b0aaa4;
-  --off-white: #f5f3ef; --white: #faf9f6; --border: rgba(0,0,0,0.1);
+  --black: #1c1a18;
+  --dark-gray: #3a3632;
+  --mid-gray: #7a7570;
+  --light-gray: #b0aaa4;
+  --off-white: #f5f3ef;
+  --white: #faf9f6;
+  --border: rgba(0,0,0,0.1);
+  --accent: #8a7a5a;
 }
-html, body { height: 100%; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: 'Noto Serif JP', serif; font-weight: 200;
-  background: var(--white); color: var(--black);
-  display: flex; flex-direction: column;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1;
 }
+
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 1.8rem 3.5rem;
+  padding: 1.6rem 3.5rem;
   background: rgba(250,249,246,0.92); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
-.logo { font-family: 'EB Garamond', serif; font-size: 1.1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); text-decoration: none; }
-.nav-back { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid-gray); text-decoration: none; transition: color 0.2s; }
-.nav-back::before { content: ''; display: block; width: 30px; height: 1px; background: var(--mid-gray); transition: width 0.3s; }
+.logo {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--black); text-decoration: none;
+}
+.nav-back {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mid-gray); text-decoration: none; transition: color 0.2s;
+}
+.nav-back::before {
+  content: ''; display: block; width: 30px; height: 1px;
+  background: var(--mid-gray); transition: width 0.3s, background 0.2s;
+}
 .nav-back:hover { color: var(--black); }
 .nav-back:hover::before { width: 50px; background: var(--black); }
-main {
-  flex: 1;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 2rem;
+
+/* HERO */
+.hero {
+  height: 100vh; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end;
 }
-.ex-label {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.65rem; letter-spacing: 0.5em; text-transform: uppercase;
-  color: var(--light-gray); margin-bottom: 1rem;
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  filter: brightness(0.75);
 }
-.ex-period {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.8rem; letter-spacing: 0.3em;
-  color: var(--light-gray); margin-bottom: 2rem;
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,26,24,0.88) 0%, rgba(28,26,24,0.2) 55%, transparent 100%);
 }
-.ex-title {
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 3.5rem 5rem;
+  width: 100%;
+}
+.hero-tag {
   font-family: 'EB Garamond', serif;
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  font-weight: 400; letter-spacing: 0.1em;
-  color: var(--black); line-height: 1.1;
+  font-size: 0.65rem; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.5rem;
+}
+.hero-brand {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 400; letter-spacing: 0.3em;
+  color: var(--light-gray); margin-bottom: 0.8rem;
+}
+.hero-title {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 400; letter-spacing: 0.12em;
+  color: var(--white); line-height: 1;
   margin-bottom: 2rem;
 }
-.coming-title {
+.hero-period {
+  font-size: 0.72rem; letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.6);
+}
+
+/* INTRO */
+.intro {
+  padding: 7rem 3.5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+  align-items: start;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+.section-label {
   font-family: 'EB Garamond', serif;
-  font-size: clamp(1.8rem, 5vw, 3.5rem);
-  font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--black); line-height: 1;
-  margin-bottom: 2rem;
+  font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 2rem;
 }
-.coming-sub {
-  font-size: 0.78rem; letter-spacing: 0.15em;
-  color: var(--light-gray); line-height: 2;
+.intro-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 2rem; font-weight: 400; letter-spacing: 0.1em;
+  color: var(--black); margin-bottom: 2.5rem; line-height: 1.4;
 }
-.coming-line {
-  width: 40px; height: 1px;
-  background: var(--light-gray);
-  margin: 2rem auto;
+.intro-body {
+  font-size: 0.82rem; line-height: 2.4; color: var(--mid-gray);
+  letter-spacing: 0.08em;
 }
+.intro-body p { margin-bottom: 1.8rem; }
+.intro-body p:last-child { margin-bottom: 0; }
+.intro-meta {
+  margin-top: 3rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.meta-row {
+  display: flex; gap: 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.76rem; letter-spacing: 0.06em;
+}
+.meta-label {
+  color: var(--light-gray); min-width: 80px;
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+}
+.meta-value { color: var(--dark-gray); line-height: 1.7; }
+.intro-image { position: relative; }
+.intro-image img {
+  width: 100%; display: block; object-fit: cover;
+  object-position: center center;
+}
+
+/* GALLERY */
+.gallery { padding: 0 3.5rem 8rem; }
+.gallery-label {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 3rem;
+  padding-top: 5rem; border-top: 1px solid var(--border);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.gallery-grid .wide { grid-column: span 2; }
+.gallery-item {
+  overflow: hidden; position: relative;
+  background: var(--off-white);
+}
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center; display: block;
+  transform: scale(1.06);
+  transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1), filter 0.4s;
+  filter: brightness(1.0);
+}
+.gallery-item:hover img { transform: scale(1.05); filter: brightness(1.06); }
+.gallery-item.tall { aspect-ratio: 3/4; }
+.gallery-item.sq { aspect-ratio: 1/1; }
+.gallery-item.wide { aspect-ratio: 16/7; }
+
+/* BRAND SECTION */
+.brand-section {
+  padding: 6rem 3.5rem 8rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: center;
+  background: var(--off-white);
+  border-top: 1px solid var(--border);
+}
+.brand-text .section-label { margin-bottom: 1.5rem; }
+.brand-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.6rem; font-weight: 400; letter-spacing: 0.08em;
+  color: var(--black); margin-bottom: 2rem; line-height: 1.4;
+}
+.brand-body {
+  font-size: 0.8rem; line-height: 2.3; color: var(--mid-gray);
+  letter-spacing: 0.06em; margin-bottom: 2rem;
+}
+.brand-link {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.75rem; letter-spacing: 0.15em;
+  color: var(--mid-gray); text-decoration: none; transition: color 0.2s;
+}
+.brand-link:hover { color: var(--black); }
+.brand-image img {
+  width: 100%; display: block;
+}
+
+/* FOOTER */
 footer {
-  background: var(--black); padding: 3rem 3.5rem;
+  background: var(--black);
+  padding: 3rem 3.5rem;
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
 }
-.footer-logo { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; }
+.footer-logo {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--dark-gray); text-decoration: none;
+}
 footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); text-align: center; }
 .footer-links { display: flex; gap: 2rem; justify-content: flex-end; }
 .footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--light-gray); }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-.ex-label   { animation: fadeIn 0.8s 0.2s ease forwards; opacity: 0; }
-.ex-period  { animation: fadeIn 0.8s 0.35s ease forwards; opacity: 0; }
-.ex-title   { animation: fadeIn 0.8s 0.5s ease forwards; opacity: 0; }
-.coming-line { animation: fadeIn 0.8s 0.65s ease forwards; opacity: 0; }
-.coming-title { animation: fadeIn 0.8s 0.8s ease forwards; opacity: 0; }
-.coming-sub  { animation: fadeIn 0.8s 0.95s ease forwards; opacity: 0; }
-@media (max-width: 480px) {
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-content > * {
+  animation: fadeUp 1s ease forwards; opacity: 0;
+}
+.hero-content > *:nth-child(1) { animation-delay: 0.2s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.4s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.6s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* LANG SWITCHER */
+.lang-switcher { position: relative; }
+.lang-select {
+  appearance: none; -webkit-appearance: none; background: transparent;
+  border: 1px solid rgba(0,0,0,0.15); font-family: 'EB Garamond', serif;
+  font-size: 0.68rem; letter-spacing: 0.15em; color: var(--mid-gray);
+  cursor: pointer; padding: 0.35rem 2rem 0.35rem 0.8rem; outline: none;
+  transition: color 0.2s, border-color 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 7px;
+}
+.lang-select:hover { color: var(--black); border-color: rgba(0,0,0,0.3); }
+.lang-select option { background: #1c1a18; color: #fff; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
   nav { padding: 1.2rem 1.5rem; }
+  .hero-content { padding: 0 1.5rem 3.5rem; }
+  .intro { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  .gallery { padding: 0 1.5rem 5rem; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid .wide { grid-column: span 2; }
+  .brand-section { grid-template-columns: 1fr; padding: 4rem 1.5rem 5rem; }
   footer { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
   .footer-links { justify-content: center; }
 }
-.lang-switcher { position: relative; }
-.lang-select { appearance: none; -webkit-appearance: none; background: transparent; border: 1px solid var(--border); font-family: 'EB Garamond', serif; font-size: 0.68rem; letter-spacing: 0.15em; color: var(--mid-gray); cursor: pointer; padding: 0.35rem 2rem 0.35rem 0.8rem; outline: none; transition: color 0.2s, border-color 0.2s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b8b8b8'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.6rem center; background-size: 7px; }
-.lang-select:hover { color: var(--black); border-color: #3a3632; }
-
-/* ARTISTS SECTION */
-.artists-section {
-  padding: 5rem 3.5rem 6rem;
-  background: var(--white);
-  border-top: 1px solid var(--border);
-}
-.artists-section-label {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase;
-  color: var(--light-gray); margin-bottom: 3rem;
-  opacity: 0; animation: fadeIn 0.8s 1.1s ease forwards;
-}
-.artists-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem 3rem;
-}
-.artist-card {
-  border-top: 1px solid var(--border);
-  padding-top: 1.4rem;
-  opacity: 0; animation: fadeIn 0.8s 1.2s ease forwards;
-}
-.artist-card-name {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.2rem; font-weight: 400;
-  letter-spacing: 0.06em; color: var(--black);
-  margin-bottom: 0.5rem; line-height: 1.3;
-}
-.artist-card-genre {
-  font-size: 0.65rem; letter-spacing: 0.12em;
-  color: var(--light-gray); margin-bottom: 1rem; line-height: 1.6;
-}
-.artist-card-ig {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-family: 'EB Garamond', serif;
-  font-size: 0.65rem; letter-spacing: 0.1em;
-  color: var(--mid-gray); text-decoration: none; transition: color 0.2s;
-}
-.artist-card-ig:hover { color: var(--black); }
-@media (max-width: 600px) {
-  .artists-section { padding: 4rem 1.5rem; }
-  .artists-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+@media (max-width: 480px) {
+  nav { padding: 0.9rem 1.2rem; }
+  .hero { height: 92vh; }
+  .hero-content { padding: 0 1.2rem 3rem; }
+  .hero-title { font-size: 3rem; letter-spacing: 0.08em; }
+  .intro { padding: 3rem 1.2rem; gap: 2rem; }
+  .intro-title { font-size: 1.4rem; }
+  .gallery { padding: 0 1.2rem 4rem; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid .wide { grid-column: span 1; aspect-ratio: 4/3; }
+  .gallery-item.tall { aspect-ratio: 4/3; }
+  .brand-section { padding: 3rem 1.2rem 4rem; }
+  footer { padding: 2rem 1.2rem; }
 }
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="logo">ARC FUKAMEKI <span style="text-transform:none;">minoh</span></a>
   <div style="display:flex;align-items:center;gap:2rem;">
@@ -177,27 +313,81 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     <a href="index.html" class="nav-back" data-i18n="nav_back">トップへ戻る</a>
   </div>
 </nav>
-<main>
-  <p class="ex-label">Exhibition</p>
-  <p class="ex-period">2026.05.24 – 06.07</p>
-  <h1 class="ex-title">AMPIANA POPUP</h1>
-  <div class="coming-line"></div>
-  <h2 class="coming-title">Coming Soon</h2>
-  <p class="coming-sub" data-i18n="coming_sub">詳細は準備中です。<br>今しばらくお待ちください。</p>
-</main>
-<section class="artists-section">
-  <p class="artists-section-label">Artists</p>
-  <div class="artists-grid">
-    <div class="artist-card">
-      <p class="artist-card-name">AMPIANA</p>
-      <p class="artist-card-genre">かご</p>
-      <a href="https://www.instagram.com/ampiana_official/" target="_blank" rel="noopener" class="artist-card-ig">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        @ampiana_official
-      </a>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="photo/index/ampiana_img02.jpg" alt="AMPIANA かごバッグ">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Pop Up — ARC FUKAMEKI <span style="text-transform:none;">minoh</span></p>
+    <p class="hero-brand">AMPIANA</p>
+    <h1 class="hero-title">AMPIANA<br>POPUP</h1>
+    <p class="hero-period">2026.05.24 — 06.07</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro reveal">
+  <div class="intro-text">
+    <p class="section-label">About the Pop Up</p>
+    <h2 class="intro-title" data-i18n="am_intro_title">マダガスカルから届く、<br>手仕事のかごバッグ。</h2>
+    <div class="intro-body">
+      <p data-i18n="am_bio_p1">AMPIANAは、マダガスカルの熟練した職人たちが手仕事でつくるかごバッグのブランドです。数日をかけて一点ずつ丁寧に仕上げられたバッグは、堅牢な構造と修繕への対応によって、長く共に歩む道具となることを目指しています。</p>
+      <p data-i18n="am_bio_p2">素早く消費するためではなく、ゆっくりと時間をかけて手元に届き、長く愛用されることを前提につくられているのがAMPIANAの哲学。マダガスカルの市場から直接セレクトされた希少なアイテムも並びます。</p>
+      <p data-i18n="am_bio_p3">素材が持つ温もりと、職人の技が詰まった一点ものの魅力を、ぜひ手に取ってご覧ください。</p>
+    </div>
+    <div class="intro-meta">
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="am_meta_period_l">会期</span>
+        <span class="meta-value" data-i18n="am_meta_period_v">2026年5月24日（土）— 6月7日（日）</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="am_meta_venue_l">会場</span>
+        <span class="meta-value">ARC FUKAMEKI <span style="text-transform:none;">minoh</span><br>大阪府箕面市箕面2丁目3-10</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label" data-i18n="am_meta_access_l">アクセス</span>
+        <span class="meta-value" data-i18n="am_meta_access_v">阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし</span>
+      </div>
+    </div>
+  </div>
+  <div class="intro-image reveal">
+    <img src="photo/index/ampiana_img03.jpg" alt="AMPIANAかごバッグ クローズアップ">
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <p class="gallery-label reveal">Gallery</p>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item tall">
+      <img src="photo/index/ampiana_img01.jpg" alt="AMPIANAかごバッグ 2点">
+    </div>
+    <div class="gallery-item tall">
+      <img src="photo/index/ampiana_img03.jpg" alt="AMPIANAバケットバッグ">
+    </div>
+    <div class="gallery-item wide" style="grid-column: span 2; aspect-ratio: 16/7;">
+      <img src="photo/index/ampiana_img02.jpg" alt="AMPIANAバッグ コレクション">
     </div>
   </div>
 </section>
+
+<!-- BRAND SECTION -->
+<section class="brand-section reveal">
+  <div class="brand-text">
+    <p class="section-label">Brand</p>
+    <h3 class="brand-title" data-i18n="am_brand_title">AMPIANA</h3>
+    <p class="brand-body" data-i18n="am_brand_body">AMPIANAのバッグは、購入後の修繕にも対応し、長きにわたって共に歩むことができます。素材の個性を活かした一点ものの表情をぜひご覧ください。</p>
+    <a href="https://www.instagram.com/ampiana_official/" target="_blank" rel="noopener" class="brand-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @ampiana_official
+    </a>
+  </div>
+  <div class="brand-image">
+    <img src="photo/index/ampiana_img01.jpg" alt="AMPIANAかごバッグ">
+  </div>
+</section>
+
 <footer>
   <a href="index.html" class="footer-logo">ARC FUKAMEKI <span style="text-transform:none;">minoh</span></a>
   <p>© 2026 Fukameki Zakkaten. All rights reserved.</p>
@@ -206,6 +396,14 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     <a href="index.html#contact">Contact</a>
   </div>
 </footer>
-<script src="lang.js"></script>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+</script>
+<script src="lang.js" defer></script>
 </body>
 </html>

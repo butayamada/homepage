@@ -473,6 +473,11 @@ var LANG_TRANSLATIONS = {
 var NEWS_ARTICLES = {
   ja: [
     {
+      date: "2026.05.09",
+      title: "企画展紹介ページ「AMPIANA POP UP」を更新しました",
+      body: "企画展紹介ページ「AMPIANA POP UP」を更新しました。詳細は<a href='ampiana2026.html' style='color:inherit;'>こちら</a>をご覧ください。"
+    },
+    {
       date: "2026.04.19",
       title: "「灯の詩」展商品のオンライン販売をいたします（19日20時より）",
       body: "vickey'72さんの店頭での展示を終えさせて頂きました。<br>会期中はたくさんのご来店をいただきまして誠にありがとうございました。<br>ご用意可能な作品を通販対応させて頂きます。<br>当オンラインショップ（<a href='https://fukameki.thebase.in/' target='_blank' rel='noopener' style='color:inherit;'>fukameki.thebase.in</a>）へ掲載いたします。<br>掲載期間　2026年4月19日20時〜4月22日終日まで<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DXR0WGmjymv/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
@@ -510,6 +515,11 @@ var NEWS_ARTICLES = {
   ],
   en: [
     {
+      date: "2026.05.09",
+      title: "Exhibition page \"AMPIANA POP UP\" has been updated",
+      body: "The exhibition introduction page \"AMPIANA POP UP\" has been updated. Please see <a href='ampiana2026.html' style='color:inherit;'>here</a> for details."
+    },
+    {
       date: "2026.04.19",
       title: "Online sales of works from the \"Poem of Light\" exhibition (from 8 PM on the 19th)",
       body: "The in-store exhibition by vickey'72 has now concluded.<br>Thank you so much to everyone who visited during the exhibition period.<br>Works that are available will be offered through our online shop.<br>They will be listed at our online shop (<a href='https://fukameki.thebase.in/' target='_blank' rel='noopener' style='color:inherit;'>fukameki.thebase.in</a>).<br>Listing period: April 19, 2026 from 8:00 PM — through April 22 (all day)<br><br><div style='display:flex;justify-content:center;margin-top:1.5rem;'><blockquote class='instagram-media' data-instgrm-captioned data-instgrm-permalink='https://www.instagram.com/p/DXR0WGmjymv/' data-instgrm-version='14' style='background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;'></blockquote></div>"
@@ -546,6 +556,11 @@ var NEWS_ARTICLES = {
     }
   ],
   zh: [
+    {
+      date: "2026.05.09",
+      title: "企划展介绍页面「AMPIANA POP UP」已更新",
+      body: "企划展介绍页面「AMPIANA POP UP」已更新。详情请见<a href='ampiana2026.html' style='color:inherit;'>此处</a>。"
+    },
     {
       date: "2026.04.19",
       title: "「灯之诗」展览作品线上销售开始（4月19日20时起）",

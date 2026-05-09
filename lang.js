@@ -138,6 +138,19 @@ var LANG_TRANSLATIONS = {
     // akarinouta2026.html
     ak_pamphlet_body:  "店頭にてDMをご用意しています。<br>ぜひお手に取ってご覧ください。",
 
+    // ampiana2026.html
+    am_intro_title:    "マダガスカルから届く、<br>手仕事のかごバッグ。",
+    am_bio_p1:         "AMPIANAは、マダガスカルの熟練した職人たちが手仕事でつくるかごバッグのブランドです。数日をかけて一点ずつ丁寧に仕上げられたバッグは、堅牢な構造と修繕への対応によって、長く共に歩む道具となることを目指しています。",
+    am_bio_p2:         "素早く消費するためではなく、ゆっくりと時間をかけて手元に届き、長く愛用されることを前提につくられているのがAMPIANAの哲学。マダガスカルの市場から直接セレクトされた希少なアイテムも並びます。",
+    am_bio_p3:         "素材が持つ温もりと、職人の技が詰まった一点ものの魅力を、ぜひ手に取ってご覧ください。",
+    am_meta_period_l:  "会期",
+    am_meta_period_v:  "2026年5月24日（土）— 6月7日（日）",
+    am_meta_venue_l:   "会場",
+    am_meta_access_l:  "アクセス",
+    am_meta_access_v:  "阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし",
+    am_brand_title:    "AMPIANA",
+    am_brand_body:     "AMPIANAのバッグは、購入後の修繕にも対応し、長きにわたって共に歩むことができます。素材の個性を活かした一点ものの表情をぜひご覧ください。",
+
     // products.html
     tab_products:      "商品別",
     tab_artists:       "作家別",
@@ -274,6 +287,19 @@ var LANG_TRANSLATIONS = {
 
     ak_pamphlet_body:  "Exhibition leaflets are available at the store.<br>Please feel free to pick one up.",
 
+    // ampiana2026.html
+    am_intro_title:    "Handcrafted Basket Bags<br>from Madagascar.",
+    am_bio_p1:         "AMPIANA is a brand of handcrafted basket bags made by skilled artisans in Madagascar. Each bag is carefully crafted over several days, designed to be a lasting companion through its robust construction and repair support.",
+    am_bio_p2:         "Rather than fast consumption, AMPIANA is built on the philosophy of slow production — bags that take time to reach you and are meant to be loved for years. Items sourced directly from Madagascan markets are also available.",
+    am_bio_p3:         "Please come and feel the warmth of the materials and the skill of the artisans in each one-of-a-kind piece.",
+    am_meta_period_l:  "Dates",
+    am_meta_period_v:  "May 24 (Sat) — June 7 (Sun), 2026",
+    am_meta_venue_l:   "Venue",
+    am_meta_access_l:  "Access",
+    am_meta_access_v:  "5-min walk from Hankyu Minoh Station<br>No parking available",
+    am_brand_title:    "AMPIANA",
+    am_brand_body:     "AMPIANA bags come with repair support, allowing them to accompany you for years to come. Please enjoy the unique character of each piece.",
+
     // products.html
     tab_products:      "By Product",
     tab_artists:       "By Artist",
@@ -409,6 +435,19 @@ var LANG_TRANSLATIONS = {
     po_caption6:       "协助进行店内灰泥涂装。高处的涂装作业真的很难！",
 
     ak_pamphlet_body:  "店内备有展览DM，欢迎自取。",
+
+    // ampiana2026.html
+    am_intro_title:    "来自马达加斯加的<br>手工编织包。",
+    am_bio_p1:         "AMPIANA是一个由马达加斯加熟练工匠手工制作编织包的品牌。每一个包都需要数日精心制作，坚固的结构与提供修缮服务，使其成为可以长久陪伴的工具。",
+    am_bio_p2:         "AMPIANA的理念不是快速消费，而是慢慢地将包送到您手中，让您长久珍藏使用。还有直接从马达加斯加市场精选的稀有商品。",
+    am_bio_p3:         "请亲手感受素材的温暖与工匠技艺凝聚于每一件独特作品之中。",
+    am_meta_period_l:  "展期",
+    am_meta_period_v:  "2026年5月24日（六）— 6月7日（日）",
+    am_meta_venue_l:   "会场",
+    am_meta_access_l:  "交通",
+    am_meta_access_v:  "阪急电铁箕面线箕面站步行5分钟<br>无停车场",
+    am_brand_title:    "AMPIANA",
+    am_brand_body:     "AMPIANA的包支持修缮服务，可以长久陪伴您。请欣赏每一件作品独特的素材魅力。",
 
     // products.html
     tab_products:      "商品一览",

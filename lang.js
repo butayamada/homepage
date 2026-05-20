@@ -153,6 +153,17 @@ var LANG_TRANSLATIONS = {
     am_brand_title:    "AMPIANA",
     am_brand_body:     "AMPIANAのバッグは、購入後の修繕にも対応し、長きにわたって共に歩むことができます。素材の個性を活かした一点ものの表情をぜひご覧ください。",
 
+    // kamiue2026.html
+    km_intro_title:    "陶の世界に宿る、<br>大胆な色彩と静けさ。",
+    km_bio_p1:         "山口県下関市生まれ。陶芸家アシスタントを経て単身メキシコへ。Taller de Hilda Sanvientにて作陶。帰国後大阪にて自宅兼工房を構え、2012年より本格的に活動を始める。",
+    km_bio_p2:         "一年半ぶりとなる個展。MAHOROBAの茶器や大胆な絵付けなど、新たな姿と魅力をご覧いただけます。",
+    km_meta_period_v:  "2026年6月6日（土）— 6月13日（土）",
+    km_meta_hours_v:   "13:00 — 18:00",
+    km_meta_artist_v:  "初日（6月6日）作家在店",
+    km_meta_access_v:  "阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし",
+    km_artist_title:   "紙上征江",
+    km_artist_body:    "山口県下関市生まれの陶芸家。メキシコでの作陶経験を経て大阪を拠点に活動。土の素材感を活かしながら大胆な絵付けや繊細な造形で独自の世界を表現し続けている。",
+
     // products.html
     tab_products:      "商品別",
     tab_artists:       "作家別",
@@ -304,6 +315,17 @@ var LANG_TRANSLATIONS = {
     am_brand_title:    "AMPIANA",
     am_brand_body:     "AMPIANA bags come with repair support, allowing them to accompany you for years to come. Please enjoy the unique character of each piece.",
 
+    // kamiue2026.html
+    km_intro_title:    "Bold colors and stillness,<br>dwelling in clay.",
+    km_bio_p1:         "Born in Shimonoseki, Yamaguchi. After working as a ceramicist's assistant, she traveled solo to Mexico and studied at Taller de Hilda Sanvient. Upon returning to Japan, she established her studio in Osaka and began her full-scale career in 2012.",
+    km_bio_p2:         "Her first solo exhibition in a year and a half. Featuring new tea vessels from MAHOROBA and boldly painted works — a chance to see her art in a new form.",
+    km_meta_period_v:  "June 6 (Sat) — June 13 (Sat), 2026",
+    km_meta_hours_v:   "13:00 — 18:00",
+    km_meta_artist_v:  "Artist in attendance on opening day (June 6)",
+    km_meta_access_v:  "5-min walk from Hankyu Minoh Station<br>No parking available",
+    km_artist_title:   "Meie Kamiue",
+    km_artist_body:    "Ceramicist based in Osaka. After gaining experience in Mexico, she creates works that express a unique world through bold painting and delicate forms, making the most of the raw qualities of clay.",
+
     // products.html
     tab_products:      "By Product",
     tab_artists:       "By Artist",
@@ -454,6 +476,17 @@ var LANG_TRANSLATIONS = {
     am_meta_access_v:  "阪急电铁箕面线箕面站步行5分钟<br>无停车场",
     am_brand_title:    "AMPIANA",
     am_brand_body:     "AMPIANA的包支持修缮服务，可以长久陪伴您。请欣赏每一件作品独特的素材魅力。",
+
+    // kamiue2026.html
+    km_intro_title:    "陶土中栖居的，<br>大胆色彩与静谧。",
+    km_bio_p1:         "生于山口县下关市。曾任陶艺家助手，后只身前往墨西哥，于Taller de Hilda Sanvient学习制陶。回国后在大阪设立自宅兼工作室，自2012年起正式展开创作活动。",
+    km_bio_p2:         "时隔一年半的个展。MAHOROBAの茶器与大胆绘饰等新作将一一呈现，敬请期待。",
+    km_meta_period_v:  "2026年6月6日（六）— 6月13日（六）",
+    km_meta_hours_v:   "13:00 — 18:00",
+    km_meta_artist_v:  "开幕日（6月6日）作家到场",
+    km_meta_access_v:  "阪急电铁箕面线箕面站步行5分钟<br>无停车场",
+    km_artist_title:   "纸上征江",
+    km_artist_body:    "大阪为据点的陶艺家。经墨西哥制陶经历后，以大胆绘饰与精细造型表现独特的艺术世界，充分发挥陶土素材本身的质感。",
 
     // products.html
     tab_products:      "商品一览",

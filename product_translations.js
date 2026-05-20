@@ -2647,3 +2647,107 @@ window.PRODUCT_TRANSLATIONS['product_104645367.html'] = {
     specs: { size: 'w21.5cm × d10cm × h27cm，电线约140cm（不含插头）', material: "木箱，木制底座，黄铜，亚克力板" }
   }
 };
+
+window.PRODUCT_TRANSLATIONS['product_144020454.html'] = {
+  en: {
+    name: 'Ring Rest "Shizuku"',
+    desc: 'A glass ring rest in a droplet shape that gently cradles rings, earrings, and small accessories. Its thickness and rounded form feel natural in the hand, and it also works as decorative home décor. Handmade; slight individual variation.',
+    specs: { material: 'Glass', care: 'Not microwave or dishwasher safe' }
+  },
+  zh: {
+    name: '戒指托「雫」',
+    desc: '以玻璃制成的「雫（水滴）」形戒指托，温柔托起戒指、耳环等小饰品。厚实圆润的造型握感舒适，也可作为室内摆设。手工制作，每件略有个体差异。',
+    specs: { material: '玻璃', care: '不可使用微波炉及洗碗机' }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_144020350.html'] = {
+  en: {
+    name: 'Wall Hanging Vase — Clear, Small',
+    desc: 'A wall-mounted glass single-stem vase. The compact size adds a touch of seasonal color to any room. Includes durable wire. Handmade; slight individual variation.',
+    specs: { size: 'Opening approx. 1–2 cm diameter', material: 'Glass (with wire)', care: 'Not microwave or dishwasher safe' }
+  },
+  zh: {
+    name: '壁挂花入れ 透明 小',
+    desc: '可挂于墙上的玻璃一輪插。小巧尺寸，为房间增添季节色彩。附耐用铁丝。手工制作，每件略有个体差异。',
+    specs: { size: '开口直径约1〜2cm', material: '玻璃（附铁丝）', care: '不可使用微波炉及洗碗机' }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_144020301.html'] = {
+  en: {
+    name: 'Wall Hanging Vase — Clear',
+    desc: 'A wall-mounted glass single-stem vase. The clear type blends beautifully into spaces as light passes through. Includes durable wire. Handmade; slight individual variation.',
+    specs: { size: 'Opening approx. 1–2 cm diameter', material: 'Glass (with wire)', care: 'Not microwave or dishwasher safe' }
+  },
+  zh: {
+    name: '壁挂花入れ 透明',
+    desc: '可挂于墙上的玻璃一輪插。透明款式通透感强，与任何空间完美融合。附耐用铁丝。手工制作，每件略有个体差异。',
+    specs: { size: '开口直径约1〜2cm', material: '玻璃（附铁丝）', care: '不可使用微波炉及洗碗机' }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_144116611.html'] = {
+  en: {
+    name: 'Wall Hanging Vase — Pastel',
+    desc: 'A wall-mounted glass vase in soft pastel tones — pale pink, pale gray, or pale white. Its gentle hues add a quiet touch of color to any space. Handmade; slight individual variation.',
+    specs: { size: 'Opening approx. 1.2 cm diameter', material: 'Glass (with wire)', care: 'Not microwave or dishwasher safe' }
+  },
+  zh: {
+    name: '壁挂花入れ 淡色',
+    desc: '柔和粉彩色调的玻璃壁挂花器。提供浅粉、浅灰、浅白三色。温柔的色调为空间静静添上彩意。手工制作，每件略有个体差异。',
+    specs: { size: '开口直径约1.2cm', material: '玻璃（附铁丝）', care: '不可使用微波炉及洗碗机' }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_144021497.html'] = {
+  en: {
+    name: 'Bowl — Clear',
+    desc: 'A glass bowl with a characteristic thick, rounded form. Its simple beauty makes it easy to reach for every day. Handmade; slight individual variation.',
+    specs: { material: 'Glass', care: 'Not microwave or dishwasher safe' }
+  },
+  zh: {
+    name: '碗 透明',
+    desc: '以厚实圆润为特征的玻璃碗。简洁之美让人每日都想随手取用。手工制作，每件略有个体差异。',
+    specs: { material: '玻璃', care: '不可使用微波炉及洗碗机' }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_144021364.html'] = {
+  en: {
+    name: 'POT — Color Green',
+    desc: 'A glass pot in a delicate light green tint. Can be used with water as a vase, or sealed as a storage container. Simple, understated, and naturally at home in daily life.',
+    specs: { material: 'Glass', care: 'Not microwave or dishwasher safe' }
+  },
+  zh: {
+    name: 'POT 彩色 绿',
+    desc: '薄涂浅绿色调的玻璃POT。可加水用作花器，也可加盖作为储存容器。不事雕琢，简约融入日常生活的一件。',
+    specs: { material: '玻璃', care: '不可使用微波炉及洗碗机' }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_143941692.html'] = {
+  en: {
+    name: 'Tea Cup & Saucer Set',
+    desc: 'A tea cup and saucer set with a "kakewake" (layered glaze) design that creates a gradient reminiscent of light. The tall form fits comfortably in hand, and pairing with the saucer creates a dignified, beautiful moment.',
+    specs: { size: 'Cup: approx. dia. 5cm × h. 7.5cm, 50cc / Saucer: approx. dia. 7cm × h. 1.5cm', material: 'Porcelain', care: 'Microwave safe; no dishwasher, oven, or direct flame' }
+  },
+  zh: {
+    name: '茶杯茶托套组',
+    desc: '以「挂分け」（多釉叠加）工艺呈现如光般渐变效果的茶杯茶托套组。竖长形茶杯握感舒适，配上茶托更显端庄雅致。',
+    specs: { size: '茶杯：口径约5cm・高约7.5cm・50cc / 茶托：口径约7cm・高约1.5cm', material: '瓷器', care: '可微波炉・不可洗碗机・不可烤箱・不可直火' }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
+  en: {
+    name: 'Gaiwan',
+    desc: 'A porcelain gaiwan featuring the "kakewake" layered glaze technique that creates a light-like gradient. A three-piece set: lid, bowl, and tea coaster. The translucency of the porcelain and the beauty of the glaze create a refined presence.',
+    specs: { size: 'Dia. approx. 9cm × h. approx. 5cm, 140cc capacity (total h. incl. lid & saucer approx. 7.5cm)', material: 'Porcelain', care: 'Microwave safe; no dishwasher, oven, or direct flame' }
+  },
+  zh: {
+    name: '盖碗',
+    desc: '以「挂分け」叠釉技法呈现如光般渐变的瓷质盖碗。盖・碗・茶托三件套。瓷器的通透感与釉色之美共同呈现出端雅的姿态。',
+    specs: { size: '口径约9cm・高约5cm・容量140cc（含盖茶托总高约7.5cm）', material: '瓷器', care: '可微波炉・不可洗碗机・不可烤箱・不可直火' }
+  }
+};

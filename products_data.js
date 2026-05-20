@@ -2008,6 +2008,116 @@ window.PRODUCTS_DATA = {
     images: [],
     baseUrl: "https://fukameki.thebase.in/"
   },
+
+  "144020454": {
+    artist: "前田彰子",
+    name: "リングレスト「しずく」",
+    price: "¥3,630",
+    category: "Glass",
+    size: "手のひらサイズ",
+    material: "ガラス",
+    care: "電子レンジ・食洗機不可",
+    description: "指輪やピアスなど小物を優しく受け止める「しずく」の形をしたガラスのリングレスト。厚みと丸みが手になじみ、インテリアとしても映える一点。手作りのため個体差があります。",
+    img: "photo/index/p144020454_01.jpg",
+    images: ["dc4344acf294ec100d5a12ac170ee92d","c5eb3db3845aadd7fd75526b5574c707","f3ae0a79889d291fa2b1927dbc2bc21a","2d9348ee924e63b8eaff1c70c684fe2a"],
+    baseUrl: "https://fukameki.thebase.in/items/144020454"
+  },
+
+  "144020350": {
+    artist: "前田彰子",
+    name: "つり花入れ クリア 小",
+    price: "¥3,740",
+    category: "Glass",
+    size: "口径約1〜2cm",
+    material: "ガラス（ワイヤー付き）",
+    care: "電子レンジ・食洗機不可",
+    description: "壁掛けできるガラスの一輪挿し。コンパクトなサイズで季節の一花を部屋に添える。丈夫なワイヤー付き。手作りのため個体差があります。",
+    img: "photo/index/p144020350_01.jpg",
+    images: ["4425d190f04d66272f2fe48846d827e6","55aed0c9993f228f6d6af37dd603a3ad"],
+    baseUrl: "https://fukameki.thebase.in/items/144020350"
+  },
+
+  "144020301": {
+    artist: "前田彰子",
+    name: "つり花入れ クリア",
+    price: "¥3,850",
+    category: "Glass",
+    size: "口径約1〜2cm",
+    material: "ガラス（ワイヤー付き）",
+    care: "電子レンジ・食洗機不可",
+    description: "壁掛けできるガラスの一輪挿し。クリアタイプは光を通す透明感が空間に馴染む。丈夫なワイヤー付き。手作りのため個体差があります。",
+    img: "photo/index/p144020301_01.jpg",
+    images: ["2903fc97ac2c779e580dfed01ebc3e48","8b2761ac859abb1d54ca9e9a47179af1","e2d42a38411d2b5e11d08e4645fb3484","398a505026b103515388269db998f54d"],
+    baseUrl: "https://fukameki.thebase.in/items/144020301"
+  },
+
+  "144116611": {
+    artist: "前田彰子",
+    name: "つり花入れ 淡色",
+    price: "¥4,400",
+    category: "Glass",
+    size: "口径約1.2cm",
+    material: "ガラス（ワイヤー付き）",
+    care: "電子レンジ・食洗機不可",
+    description: "淡いパステルカラーのガラス製壁掛け花入れ。ペールピンク・ペールグレー・ペールホワイトの3色展開。やわらかな色合いが空間にそっと彩りを添える。",
+    img: "photo/index/p144116611_01.jpg",
+    images: ["846641e5d18f2fc240a558b628f5bfc3","e9822da0f6047a8695f243e376d74e5b","523aa661690ea7a490bdedb9d3ca48c0","3be6a250195fed7e4024fcdb7719cec3"],
+    baseUrl: "https://fukameki.thebase.in/items/144116611"
+  },
+
+  "144021497": {
+    artist: "前田彰子",
+    name: "ボウル クリア",
+    price: "¥5,720",
+    category: "Glass",
+    material: "ガラス",
+    care: "電子レンジ・食洗機不可",
+    description: "厚みのある丸みが特徴のガラスのボウル。日常に気軽に使えるシンプルな美しさ。ひとつひとつ手作りのため個体差があります。",
+    img: "photo/index/p144021497_01.jpg",
+    images: ["dd2fad6603490f8e4c7950ba020d52b6","4996f2d2df7e2d248b8df43c91f7d446","7de6e808f8bfb96874d03f219707f51d","76f807000fe99bca02598e49453265fc","856611ab87500f5fd169061b30b35674","214669a097d0c2696d8fe742963921a7"],
+    baseUrl: "https://fukameki.thebase.in/items/144021497"
+  },
+
+  "144021364": {
+    artist: "前田彰子",
+    name: "POT カラー グリーン",
+    price: "¥14,300",
+    category: "Glass",
+    material: "ガラス",
+    care: "電子レンジ・食洗機不可",
+    description: "薄付きグリーンのガラスのPOT。水を入れて花器として、またはふたをして保存容器としても使える。飾らずシンプルに、日々の暮らしに馴染む一点。",
+    img: "photo/index/p144021364_01.jpg",
+    images: ["9d849e4679e220d1c897cb54ab1eaf9f","009485db7dbd814ae76de38eb6f0fc23","85e88ef55e58e8f1a5a6c735cbdc5e23","1260231dd7ba8915cd3cd5e095a64c77","68110a6511847937c39976d6d86c0433"],
+    baseUrl: "https://fukameki.thebase.in/items/144021364"
+  },
+
+  "143941692": {
+    artist: "イワオトナリテ",
+    name: "茶杯茶托セット",
+    price: "¥4,400",
+    category: "Ceramics",
+    size: "茶杯：口径約5cm・高さ約7.5cm・50cc / 茶托：口径約7cm・高さ約1.5cm",
+    material: "磁器",
+    care: "電子レンジ可・食洗機不可・オーブン不可・直火不可",
+    description: "複数の釉薬を重ねることで光のようなグラデーションを表現した「掛け分け」デザインの茶杯と茶托のセット。縦長の形が手に馴染み、茶托を添えることで凛とした美しい一時を生み出す。",
+    img: "photo/index/p143941692_01.jpg",
+    images: ["b868cd374a009ab1f8596c3f9072149a","04ea2bdf36a4502eeff643719a6f71e8","b287e739e5a12d7134ad0103147884d9","a26f57f1bf5150b74d9a0ff554463d34","e1b1e212e3774790356e88742174f20b","edd842e116b8e840075b6149497cae08","f453356aa0c5bcb95d1da701db9163b7"],
+    baseUrl: "https://fukameki.thebase.in/items/143941692"
+  },
+
+  "143983119": {
+    artist: "イワオトナリテ",
+    name: "蓋碗",
+    price: "¥6,600",
+    category: "Ceramics",
+    size: "口径約9cm・高さ約5cm・容量140cc（蓋・茶托含む高さ約7.5cm）",
+    material: "磁器",
+    care: "電子レンジ可・食洗機不可・オーブン不可・直火不可",
+    description: "光のようなグラデーションを表現した「掛け分け」釉薬が特徴のガイワン（蓋碗）。蓋・碗・茶托の3点セット。磁器の透明感と釉薬の美しさが凛とした佇まいを生む。",
+    img: "photo/index/p143983119_01.jpg",
+    images: ["f7f7c82103f70b0bc5a7796c15accd1c","c076c2d3f992907488f5bc072710469c","46412c082f59af71cecce0a4f2c67ed3","46cf3c782911da962114d1e602c5823b","6b2e3b50cbcdf328cbffe45ff8894de5","0e91ef25b9f84f3d60115cc9959bbf86","a6053db4eeb318ad5861f5286c94be1a"],
+    baseUrl: "https://fukameki.thebase.in/items/143983119"
+  },
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [
@@ -2158,4 +2268,12 @@ window.PRODUCTS_ORDER = [
   'product_133805441.html',
   'product_139488326.html',
   'product_139488461.html',
+  'product_143941692.html',
+  'product_143983119.html',
+  'product_144020454.html',
+  'product_144020350.html',
+  'product_144020301.html',
+  'product_144116611.html',
+  'product_144021497.html',
+  'product_144021364.html',
 ];

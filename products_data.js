@@ -2121,6 +2121,14 @@ window.PRODUCTS_DATA = {
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [
+  'product_143941692.html',
+  'product_143983119.html',
+  'product_144020454.html',
+  'product_144020350.html',
+  'product_144020301.html',
+  'product_144116611.html',
+  'product_144021497.html',
+  'product_144021364.html',
   'product_56898631.html',
   'product_104649530.html',
   'product_69925183.html',
@@ -2268,12 +2276,4 @@ window.PRODUCTS_ORDER = [
   'product_133805441.html',
   'product_139488326.html',
   'product_139488461.html',
-  'product_143941692.html',
-  'product_143983119.html',
-  'product_144020454.html',
-  'product_144020350.html',
-  'product_144020301.html',
-  'product_144116611.html',
-  'product_144021497.html',
-  'product_144021364.html',
 ];

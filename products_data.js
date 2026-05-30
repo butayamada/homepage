@@ -2122,7 +2122,7 @@ window.PRODUCTS_DATA = {
   '110861062': {
     artist: "casca",
     name: "ラタンブローチ 1",
-    price: 3080,
+    price: "¥3,080",
     category: "Other",
     material: "天然ラタン",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2135,7 +2135,7 @@ window.PRODUCTS_DATA = {
   '145365169': {
     artist: "casca",
     name: "ラタンブローチ 2",
-    price: 3190,
+    price: "¥3,190",
     category: "Other",
     material: "天然ラタン",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2148,7 +2148,7 @@ window.PRODUCTS_DATA = {
   '110860974': {
     artist: "casca",
     name: "ラタンバレッタ 1",
-    price: 4290,
+    price: "¥4,290",
     category: "Other",
     material: "天然ラタン",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2161,7 +2161,7 @@ window.PRODUCTS_DATA = {
   '110861037': {
     artist: "casca",
     name: "ラタンバレッタ 2",
-    price: 4400,
+    price: "¥4,400",
     category: "Other",
     material: "天然ラタン",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2174,7 +2174,7 @@ window.PRODUCTS_DATA = {
   '93501527': {
     artist: "casca",
     name: "ミニカゴブローチ 1",
-    price: 4290,
+    price: "¥4,290",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2187,7 +2187,7 @@ window.PRODUCTS_DATA = {
   '93501333': {
     artist: "casca",
     name: "ミニカゴブローチ 2",
-    price: 4400,
+    price: "¥4,400",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2200,7 +2200,7 @@ window.PRODUCTS_DATA = {
   '93501235': {
     artist: "casca",
     name: "ミニカゴブローチ 3",
-    price: 4510,
+    price: "¥4,510",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2213,7 +2213,7 @@ window.PRODUCTS_DATA = {
   '93501116': {
     artist: "casca",
     name: "ミニカゴブローチ 4",
-    price: 4620,
+    price: "¥4,620",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2226,7 +2226,7 @@ window.PRODUCTS_DATA = {
   '67894870': {
     artist: "casca",
     name: "ミニカゴブローチ 5",
-    price: 4840,
+    price: "¥4,840",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2239,7 +2239,7 @@ window.PRODUCTS_DATA = {
   '93500887': {
     artist: "casca",
     name: "ミニカゴブローチ 6",
-    price: 4950,
+    price: "¥4,950",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2252,7 +2252,7 @@ window.PRODUCTS_DATA = {
   '93500669': {
     artist: "casca",
     name: "ミニカゴブローチ 7",
-    price: 5610,
+    price: "¥5,610",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
@@ -2265,7 +2265,7 @@ window.PRODUCTS_DATA = {
   '93500500': {
     artist: "casca",
     name: "ミニカゴブローチ 8",
-    price: 5720,
+    price: "¥5,720",
     category: "Other",
     material: "天然ラタン・革・布",
     care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",

@@ -11,23 +11,25 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          server-dir: /www/
-          local-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.claude/**
-            **/node_modules/**
-            gen_*.py
-            CLAUDE.md
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy via FTP (lftp)
+        env:
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -u fukamekizakkaten,"$FTP_PASSWORD" fukamekizakkaten.sakura.ne.jp <<'EOF'
+          set ftp:passive-mode on
+          set net:timeout 30
+          set net:max-retries 3
+          set ssl:verify-certificate no
+          mirror -R \
+            --exclude-glob .git* \
+            --exclude-glob .claude/ \
+            --exclude-glob gen_*.py \
+            --exclude-glob CLAUDE.md \
+            --exclude-glob .github/ \
+            . /www/
+          quit
+          EOF

@@ -11,10 +11,18 @@ REMOTE_DIR = "/home/fukamekizakkaten/www/fukameki.jp"
 LOCAL_DIR  = os.path.dirname(os.path.abspath(__file__))
 
 EXCLUDE = {
-    '.git', '.github', '.claude', '__pycache__',
-    'node_modules', 'deploy.py', 'gen_casca.py',
-    'gen_products.py', 'CLAUDE.md', 'fukameki_deploy_key',
-    'fukameki_deploy_key.pub',
+    # Git / CI
+    '.git', '.github', '.claude', '__pycache__', 'node_modules',
+    # 開発用スクリプト・設定
+    'deploy.py', 'CLAUDE.md', 'fix_casca.py',
+    'gen_casca.py', 'gen_products.py',
+    'fukameki_deploy_key', 'fukameki_deploy_key.pub',
+    # 開発フォルダ
+    '_dev',
+    # 元画像フォルダ（圧縮済みはphoto/indexにある）
+    'AMPIANA', '0520',
+    # 元データ（HEIC）
+    '元データ',
 }
 
 def should_exclude(path):

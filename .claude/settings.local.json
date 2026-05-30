@@ -185,7 +185,10 @@
       "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\index.html\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\index.html\")",
       "Bash(cp \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\lang.js\" \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\lang.js\")",
       "Bash(node --check \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\product_translations.js\")",
-      "Bash(node --check \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\products_data.js\")"
+      "Bash(node --check \"C:\\\\Users\\\\butay\\\\claude code\\\\homepage\\\\.claude\\\\worktrees\\\\crazy-antonelli\\\\products_data.js\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }

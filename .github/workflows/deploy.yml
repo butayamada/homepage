@@ -28,8 +28,9 @@ jobs:
             --exclude-glob .git* \
             --exclude-glob .claude/ \
             --exclude-glob gen_*.py \
+            --exclude-glob deploy.py \
             --exclude-glob CLAUDE.md \
             --exclude-glob .github/ \
-            . /www/
+            . /home/fukamekizakkaten/www/fukameki.jp/
           quit
           EOF

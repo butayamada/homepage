@@ -171,7 +171,8 @@
       "Bash(sed -n '239,244p' \"/c/Users/butay/claude code/homepage/preopen.html\")",
       "Bash(sed -n '210,215p' \"/c/Users/butay/claude code/homepage/news.html\")",
       "Bash(sed -n '142,148p' \"/c/Users/butay/claude code/homepage/ampiana2026.html\")",
-      "Bash(sed -n '131,137p' \"/c/Users/butay/claude code/homepage/onlineshop.html\")"
+      "Bash(sed -n '131,137p' \"/c/Users/butay/claude code/homepage/onlineshop.html\")",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }

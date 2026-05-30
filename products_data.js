@@ -2118,9 +2118,177 @@ window.PRODUCTS_DATA = {
     images: ["f7f7c82103f70b0bc5a7796c15accd1c","c076c2d3f992907488f5bc072710469c","46412c082f59af71cecce0a4f2c67ed3","46cf3c782911da962114d1e602c5823b","6b2e3b50cbcdf328cbffe45ff8894de5","0e91ef25b9f84f3d60115cc9959bbf86","a6053db4eeb318ad5861f5286c94be1a"],
     baseUrl: "https://fukameki.thebase.in/items/143983119"
   },
+
+  '110861062': {
+    artist: "casca",
+    name: "ラタンブローチ 1",
+    price: 3080,
+    category: "Other",
+    material: "天然ラタン",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "花のようなまあるいブローチ。編み上げ、染色し、ニスでコーティングして仕上げています。回転式の安全ピンを使用しており、針が落ちにくい構造になっています。",
+    img: "photo/index/p110861062_01.jpg",
+    images: ["29ffee108c50e9f02da096b8d419cb50","af1e4901d1d67c1e63cdcc355889c586","0e708ba2258f3dc97aa0a723d6cb62ee","8a7f1359f395f943b758e936b2ba3408","cf8c63944b35e5c29fc971899e74fdbe","b3010171ec9276bc4792c598ab890ed9"],
+    baseUrl: "https://fukameki.thebase.in/items/110861062"
+  },
+
+  '145365169': {
+    artist: "casca",
+    name: "ラタンブローチ 2",
+    price: 3190,
+    category: "Other",
+    material: "天然ラタン",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "花のようなまあるいブローチ。編み上げ、染色し、ニスでコーティングして仕上げています。回転式の安全ピンを使用しており、針が落ちにくい構造になっています。",
+    img: "photo/index/p145365169_01.jpg",
+    images: ["3657b7e0286c5d762fccd753c3d64a43","b946bc6bfad73c61648c63bf98c09a6b","ad0c704fb262bf4443cbc8dd9075a727","71c71f84397a83f1a425d85c82718282","5ad6611faf5356c4101956f5045dcdd9","c47f75b1a94ab3ff00b6b575d6ce005a","ff05940da81b7ae071347ee27e2a2d38"],
+    baseUrl: "https://fukameki.thebase.in/items/145365169"
+  },
+
+  '110860974': {
+    artist: "casca",
+    name: "ラタンバレッタ 1",
+    price: 4290,
+    category: "Other",
+    material: "天然ラタン",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "ラタンのバレッタ。編み上げ、染色し、ニスでコーティングして仕上げています。",
+    img: "photo/index/p110860974_01.jpg",
+    images: ["ae64e0baefec6492cea7c8b3365476f6","60356f38c284532f7057592780a34a44","ce5add051bc530ef01b703b78528dbd6","f0b8a44497e9648665f0016636014654","8d7e7d30c851eb12c66ee67e2be336ed","15576475bf03c5bfc1d76642d5ec48c4"],
+    baseUrl: "https://fukameki.thebase.in/items/110860974"
+  },
+
+  '110861037': {
+    artist: "casca",
+    name: "ラタンバレッタ 2",
+    price: 4400,
+    category: "Other",
+    material: "天然ラタン",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "ラタンのバレッタ。編み上げ、染色し、ニスでコーティングして仕上げています。",
+    img: "photo/index/p110861037_01.jpg",
+    images: ["1f4e73238d37f7b42b81c824a88d5199","95a710b7f358d178c9f3e47c50096d19","b1b4953d12119c7fbc469bf816dce687","8f9bc56b729d695dd2261847b9bd4795","313a26b150a463e9e17f095567d00dd5"],
+    baseUrl: "https://fukameki.thebase.in/items/110861037"
+  },
+
+  '93501527': {
+    artist: "casca",
+    name: "ミニカゴブローチ 1",
+    price: 4290,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や持ち手に革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p93501527_01.jpg",
+    images: ["3d6c7acd69f64562d2c6c10d498f6c2f","fa95c08d698e713bd86060e33de5d6c7","1707ec9b107513b18791af3908a8f30e","343a660dfb962a6d3646641ba8ebc810","5a7907a726679e173696caa152d4a621","cf0b5fb348d1cfe0398c8dd9ef89a2d2"],
+    baseUrl: "https://fukameki.thebase.in/items/93501527"
+  },
+
+  '93501333': {
+    artist: "casca",
+    name: "ミニカゴブローチ 2",
+    price: 4400,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や持ち手に革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p93501333_01.jpg",
+    images: ["98641ed4a89daa5697f3f934a215ba70","a641d9bf97cef0eeee4265e23cb8602b","32e1544ac5e55ef70fbc88252f7284b3","6b85769447862971f33067e341b17491","310938d67b5b90ed678bd617301c28a7"],
+    baseUrl: "https://fukameki.thebase.in/items/93501333"
+  },
+
+  '93501235': {
+    artist: "casca",
+    name: "ミニカゴブローチ 3",
+    price: 4510,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p93501235_01.jpg",
+    images: ["7881bd81cf40099c796a3c823f670706","cdba85c5ae1a0550df19bacde42ab2d3","2a20ac8528da841b5709ac9b9fdf0ed8","905bb52a1792754e5622834bb308fe6f","158f52e23d0c6f51cf6b56ec82c7cd43","bf4b01770a5a28933fd810ee3785c1cf"],
+    baseUrl: "https://fukameki.thebase.in/items/93501235"
+  },
+
+  '93501116': {
+    artist: "casca",
+    name: "ミニカゴブローチ 4",
+    price: 4620,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や持ち手に革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p93501116_01.jpg",
+    images: ["0fc7a5d85be6b74cf4dd49bb123094c2","f3f8f7fbc545942d9478fdd6e7022674","0dde14b4263a841f2904f321aff8f6d1","655951e7e500ef532cc7be275ab3c13b"],
+    baseUrl: "https://fukameki.thebase.in/items/93501116"
+  },
+
+  '67894870': {
+    artist: "casca",
+    name: "ミニカゴブローチ 5",
+    price: 4840,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や持ち手に革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p67894870_01.jpg",
+    images: ["2565d8b1a69cd4cb073d17ea7f0260a8","effbb40cbb4562526072586624653da4","0d6191798ce20ad81f5296737baf1d05"],
+    baseUrl: "https://fukameki.thebase.in/items/67894870"
+  },
+
+  '93500887': {
+    artist: "casca",
+    name: "ミニカゴブローチ 6",
+    price: 4950,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p93500887_01.jpg",
+    images: ["d2b9b8d60afd413a6483eef902d07e77","055a122d871751d15242d89b3231b820","9105c9e0b6d79d17aedf8f96fb6c8e78","16c7272028b79094386a083880f4048c","3ae3bb23e3bc536928269032a370e2dd"],
+    baseUrl: "https://fukameki.thebase.in/items/93500887"
+  },
+
+  '93500669': {
+    artist: "casca",
+    name: "ミニカゴブローチ 7",
+    price: 5610,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p93500669_01.jpg",
+    images: ["bc10bf720a81e3039bb7356ac66d07cc","773b1fb19cd250eff647742472f062b4","7c2fe3ce4c62da03823f0bcf11e6b1a3","9c153b92e1f74b18811abb5ab5497bce"],
+    baseUrl: "https://fukameki.thebase.in/items/93500669"
+  },
+
+  '93500500': {
+    artist: "casca",
+    name: "ミニカゴブローチ 8",
+    price: 5720,
+    category: "Other",
+    material: "天然ラタン・革・布",
+    care: "水濡れ・摩擦・衝撃で変形・破損の恐れがあります。濡れてしまった場合は乾かしてからご使用ください。",
+    description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や持ち手に革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
+    img: "photo/index/p93500500_01.jpg",
+    images: ["43cee3ad87692da229c899edf9a4b866","b2f1fb56f61992c6d083b7acbf27b296","33d68a2725b66ea16d448ffbfad49931","ef77bfb6bd3397c89ced1563079dc61c"],
+    baseUrl: "https://fukameki.thebase.in/items/93500500"
+  },
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [
+  'product_110861062.html',
+  'product_145365169.html',
+  'product_110860974.html',
+  'product_110861037.html',
+  'product_93501527.html',
+  'product_93501333.html',
+  'product_93501235.html',
+  'product_93501116.html',
+  'product_67894870.html',
+  'product_93500887.html',
+  'product_93500669.html',
+  'product_93500500.html',
   'product_143941692.html',
   'product_143983119.html',
   'product_144020454.html',

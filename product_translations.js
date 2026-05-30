@@ -2750,4 +2750,221 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
     desc: '以「挂分け」叠釉技法呈现如光般渐变的瓷质盖碗。盖・碗・茶托三件套。瓷器的通透感与釉色之美共同呈现出端雅的姿态。',
     specs: { size: '口径约9cm・高约5cm・容量140cc（含盖茶托总高约7.5cm）', material: '瓷器', care: '可微波炉・不可洗碗机・不可烤箱・不可直火' }
   }
+
+  'product_110861062.html': {
+    en: {
+      name: "Rattan Brooch 1",
+      desc: "A round, flower-like brooch. Handwoven rattan, dyed and varnish-coated. Features a rotating pin closure for security.",
+      specs: {
+        material: "Natural rattan",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "拉坦藤胸针 1",
+      desc: "圆形花朵造型胸针，手工编织拉坦藤，染色后上清漆。采用旋转式安全别针，不易脱落。",
+      specs: {
+        material: "天然拉坦藤",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_145365169.html': {
+    en: {
+      name: "Rattan Brooch 2",
+      desc: "A round, flower-like brooch. Handwoven rattan, dyed and varnish-coated. Features a rotating pin closure for security.",
+      specs: {
+        material: "Natural rattan",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "拉坦藤胸针 2",
+      desc: "圆形花朵造型胸针，手工编织拉坦藤，染色后上清漆。采用旋转式安全别针，不易脱落。",
+      specs: {
+        material: "天然拉坦藤",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_110860974.html': {
+    en: {
+      name: "Rattan Barrette 1",
+      desc: "Handwoven rattan barrette, dyed and varnish-coated.",
+      specs: {
+        material: "Natural rattan",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "拉坦藤发夹 1",
+      desc: "手工编织拉坦藤发夹，染色后上清漆。",
+      specs: {
+        material: "天然拉坦藤",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_110861037.html': {
+    en: {
+      name: "Rattan Barrette 2",
+      desc: "Handwoven rattan barrette, dyed and varnish-coated.",
+      specs: {
+        material: "Natural rattan",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "拉坦藤发夹 2",
+      desc: "手工编织拉坦藤发夹，染色后上清漆。",
+      specs: {
+        material: "天然拉坦藤",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_93501527.html': {
+    en: {
+      name: "Mini Basket Brooch 1",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 1",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_93501333.html': {
+    en: {
+      name: "Mini Basket Brooch 2",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 2",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_93501235.html': {
+    en: {
+      name: "Mini Basket Brooch 3",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 3",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_93501116.html': {
+    en: {
+      name: "Mini Basket Brooch 4",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 4",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_67894870.html': {
+    en: {
+      name: "Mini Basket Brooch 5",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 5",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_93500887.html': {
+    en: {
+      name: "Mini Basket Brooch 6",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 6",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_93500669.html': {
+    en: {
+      name: "Mini Basket Brooch 7",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 7",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
+  'product_93500500.html': {
+    en: {
+      name: "Mini Basket Brooch 8",
+      desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
+      specs: {
+        material: "Natural rattan / leather / fabric",
+        care: "Avoid water, friction, and impact. Dry thoroughly if wet."
+      }
+    },
+    zh: {
+      name: "迷你篮子胸针 8",
+      desc: "手工编织拉坦藤迷你篮子造型胸针，染色后上清漆，内衬布料与皮革装饰。每件独一无二。",
+      specs: {
+        material: "天然拉坦藤 / 皮革 / 布料",
+        care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
+      }
+    }
+  },
 };

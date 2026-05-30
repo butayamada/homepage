@@ -760,8 +760,12 @@ document.addEventListener('DOMContentLoaded', function() {
       var fname = PRODUCTS_ORDER[i];
       var key = fname.replace(/^product_/, '').replace(/\.html$/, '');
       var p = PRODUCTS_DATA[key];
-      if (!p || p.soldout) continue;
-      var price = p.price.indexOf('（税込）') === -1 ? p.price + '（税込）' : p.price;
+      if (!p) continue;
+      // price は数値（3080）・文字列（"¥3,080"）どちらでも正規化
+      var priceStr = typeof p.price === 'number'
+        ? '¥' + p.price.toLocaleString('ja-JP')
+        : String(p.price);
+      var price = priceStr.indexOf('（税込）') === -1 ? priceStr + '（税込）' : priceStr;
       var a = document.createElement('a');
       a.href = fname;
       a.className = 'product-card';

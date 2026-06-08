@@ -97,6 +97,7 @@ var LANG_TRANSLATIONS = {
     natsumeku_title:   "ナツメク",
     kamiue_title:      "紙上征江 個展",
     yoshida_title:     "yoshida pottery 個展",
+    jhen_title:        "ヂェン先生の日常着展",
 
     // onlineshop.html
     shop_coming:       "オンラインショップは準備中です。<br>今しばらくお待ちください。",
@@ -266,6 +267,7 @@ var LANG_TRANSLATIONS = {
     natsumeku_title:   "Natsumeku",
     kamiue_title:      "Yukue Kamiue Solo Exhibition",
     yoshida_title:     "yoshida pottery Solo Exhibition",
+    jhen_title:        "Jhen Sensei's Everyday Clothes Exhibition",
 
     shop_coming:       "Online shop coming soon.<br>Please check back later.",
 
@@ -429,6 +431,7 @@ var LANG_TRANSLATIONS = {
     natsumeku_title:   "夏目",
     kamiue_title:      "纸上征江 个展",
     yoshida_title:     "yoshida pottery 个展",
+    jhen_title:        "郑惠中日常服展",
 
     shop_coming:       "网络商店准备中，<br>请稍后查看。",
 

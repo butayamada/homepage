@@ -109,7 +109,7 @@ var LANG_TRANSLATIONS = {
     shop_coming:       "オンラインショップは準備中です。<br>今しばらくお待ちください。",
 
     // index.html — about
-    about_desc:        "2019年6月オープン。<br>手仕事品を中心に暮らしを充たすアイテムを全国各地よりセレクト。<br>常設販売のほか、季節やテーマに合わせた企画展示、個展を定期的に開催。<br>2026年5月移転、ARC FUKAMEKI minoh（アルクフカメキ箕面）に名称変更。<br>ARCは架け橋の意。<br>作り手と使い手がつながり心豊かな時間がうまれる場所でありたいと考えています。",
+    about_desc:        "2019年6月オープン。<br>手仕事品を中心に暮らしを充たすアイテムを全国各地よりセレクト。<br>常設販売のほか、季節やテーマに合わせた企画展示、個展を定期的に開催。<br>2026年5月移転、<a href='preopen.html' style='color:inherit;text-decoration:underline;text-underline-offset:3px;'>ARC FUKAMEKI minoh</a>（アルクフカメキ箕面）に名称変更。<br>ARCは架け橋の意。<br>作り手と使い手がつながり心豊かな時間がうまれる場所でありたいと考えています。",
 
     // index.html — shop info
     payment_label:     "決済方法",
@@ -283,7 +283,7 @@ var LANG_TRANSLATIONS = {
 
     shop_coming:       "Online shop coming soon.<br>Please check back later.",
 
-    about_desc:        "Opened June 2019.<br>Carefully selected items for everyday living from craftspeople across Japan.<br>In addition to permanent stock, we regularly hold themed exhibitions and solo shows.<br>Relocated May 2026 and renamed ARC FUKAMEKI minoh.<br>\"ARC\" means bridge — a place where makers and users connect, and where a richer life takes shape.",
+    about_desc:        "Opened June 2019.<br>Carefully selected items for everyday living from craftspeople across Japan.<br>In addition to permanent stock, we regularly hold themed exhibitions and solo shows.<br>Relocated May 2026 and renamed <a href='preopen.html' style='color:inherit;text-decoration:underline;text-underline-offset:3px;'>ARC FUKAMEKI minoh</a>.<br>\"ARC\" means bridge — a place where makers and users connect, and where a richer life takes shape.",
 
     payment_label:     "Payment",
     payment_val:       "Cash, Credit Card, PayPay",
@@ -453,7 +453,7 @@ var LANG_TRANSLATIONS = {
 
     shop_coming:       "网络商店准备中，<br>请稍后查看。",
 
-    about_desc:        "2019年6月开业。<br>精心挑选来自全国各地工匠的手工制品及生活好物。<br>除常设销售外，还定期举办主题企划展及个展。<br>2026年5月迁址，更名为ARC FUKAMEKI minoh。<br>「ARC」意为桥梁——希望成为连接制作者与使用者、孕育丰富生活的场所。",
+    about_desc:        "2019年6月开业。<br>精心挑选来自全国各地工匠的手工制品及生活好物。<br>除常设销售外，还定期举办主题企划展及个展。<br>2026年5月迁址，更名为<a href='preopen.html' style='color:inherit;text-decoration:underline;text-underline-offset:3px;'>ARC FUKAMEKI minoh</a>。<br>「ARC」意为桥梁——希望成为连接制作者与使用者、孕育丰富生活的场所。",
 
     payment_label:     "支付方式",
     payment_val:       "现金、信用卡、PayPay",

@@ -95,6 +95,10 @@ var LANG_TRANSLATIONS = {
     // coming soon pages
     coming_sub:        "詳細は準備中です。<br>今しばらくお待ちください。",
     natsumeku_title:   "ナツメク",
+    natsumeku_desc:    "夏の終わりに、作家4組が集まるグループ展。ガラス、衣服、アクセサリーを中心に、日常を彩る手仕事の品々が並びます。",
+    natsumeku_period_v: "2026年7月18日（土）— 7月25日（土）",
+    natsumeku_hours_v:  "13:00 — 18:00",
+    natsumeku_access_v: "阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし",
     kamiue_title:      "紙上征江 個展",
     yoshida_title:     "yoshida pottery 個展",
     jhen_title:        "ヂェン先生の日常着展",
@@ -265,6 +269,10 @@ var LANG_TRANSLATIONS = {
 
     coming_sub:        "Details coming soon.<br>Please check back later.",
     natsumeku_title:   "Natsumeku",
+    natsumeku_desc:    "A group exhibition of four artists at the end of summer. Featuring glasswork, clothing, and accessories — handcrafted pieces for everyday life.",
+    natsumeku_period_v: "July 18 (Sat) — July 25 (Sat), 2026",
+    natsumeku_hours_v:  "13:00 — 18:00",
+    natsumeku_access_v: "5-min walk from Hankyu Minoh Station<br>No parking available",
     kamiue_title:      "Yukue Kamiue Solo Exhibition",
     yoshida_title:     "yoshida pottery Solo Exhibition",
     jhen_title:        "Jhen Sensei's Everyday Clothes Exhibition",
@@ -429,6 +437,10 @@ var LANG_TRANSLATIONS = {
 
     coming_sub:        "详情准备中，<br>请稍后查看。",
     natsumeku_title:   "夏目",
+    natsumeku_desc:    "夏末四位作家联合展览。以玻璃工艺、服饰、饰品为主，汇聚点缀日常生活的手工艺品。",
+    natsumeku_period_v: "2026年7月18日（六）— 7月25日（六）",
+    natsumeku_hours_v:  "13:00 — 18:00",
+    natsumeku_access_v: "阪急电铁箕面线箕面站步行5分钟<br>无停车场",
     kamiue_title:      "纸上征江 个展",
     yoshida_title:     "yoshida pottery 个展",
     jhen_title:        "郑惠中日常服展",

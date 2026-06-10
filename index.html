@@ -297,40 +297,6 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
   .exhibition-grid { grid-template-columns: 1fr; gap: 3rem; }
 }
 
-#renewal { padding: 8rem 3.5rem; background: var(--black); }
-#renewal .section-label { color: #555; }
-#renewal .section-title { color: var(--white); }
-#renewal .section-header { margin-bottom: 4rem; }
-.renewal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.renewal-image { overflow: hidden; }
-.renewal-image img { width: 100%; display: block; object-fit: cover; filter: brightness(0.9); transition: transform 0.7s ease; }
-.renewal-image:hover img { transform: scale(1.03); }
-.renewal-date {
-  font-size: 0.68rem; letter-spacing: 0.25em;
-  color: var(--warm); margin-bottom: 1.2rem;
-}
-.renewal-name {
-  font-family: 'EB Garamond', serif;
-  font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400;
-  letter-spacing: 0.15em; color: var(--white);
-  margin-bottom: 2rem; line-height: 1.2;
-}
-.renewal-desc {
-  font-size: 0.82rem; line-height: 2.3;
-  color: #888; letter-spacing: 0.08em;
-  max-width: 520px; margin-bottom: 3rem;
-}
-#renewal .btn-text { color: var(--white); }
-#renewal .btn-text::after { background: var(--white); }
-
-@media (max-width: 960px) {
-  .renewal-body { grid-template-columns: 1fr; gap: 3rem; }
-  .renewal-image { order: -1; }
-}
-@media (max-width: 480px) {
-  #renewal { padding: 4rem 1.2rem; }
-  .renewal-name { font-size: 2rem; }
-}
 
 #about {
   padding: 8rem 3.5rem;
@@ -543,7 +509,6 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 <nav>
   <a href="#" class="logo">ARC FUKAMEKI <span style="text-transform: none;">minoh</span></a>
   <ul>
-    <li><a href="#renewal">New Opening</a></li>
     <li><a href="#news">News</a></li>
     <li><a href="#exhibition">Exhibition</a></li>
     <li><a href="#about">About</a></li>
@@ -570,7 +535,6 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 
 <div class="mobile-menu" id="mobile-menu">
   <button class="mobile-close" onclick="closeMenu()" aria-label="閉じる">&#10005;</button>
-  <a href="#renewal" onclick="closeMenu()">New Opening</a>
   <a href="#news" onclick="closeMenu()">News</a>
   <a href="#exhibition" onclick="closeMenu()">Exhibition</a>
   <a href="#about" onclick="closeMenu()">About</a>
@@ -594,27 +558,6 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 </section>
 
 </div>
-
-
-<section id="renewal">
-  <div class="section-header reveal">
-    <div>
-      <p class="section-label">New Opening</p>
-      <h2 class="section-title" data-i18n="renewal_title">リニューアルオープン</h2>
-    </div>
-  </div>
-  <div class="renewal-body reveal">
-    <div class="renewal-text">
-      <p class="renewal-date" data-i18n="renewal_date">2026年5月2日（土）オープン</p>
-      <h3 class="renewal-name">ARC FUKAMEKI minoh</h3>
-      <p class="renewal-desc" data-i18n="renewal_desc">フカメキ雑貨店は「ARC FUKAMEKI minoh（アルクフカメキ箕面）」として新店舗に移転し、2026年5月2日（土）にリニューアルオープンいたします。旧店舗から徒歩1分の場所で、新たな空間でお客様をお迎えします。</p>
-      <a href="preopen.html" class="btn-text" data-i18n="renewal_btn">詳細はこちら</a>
-    </div>
-    <div class="renewal-image">
-      <img src="photo/index/store_exterior.jpg" alt="ARC FUKAMEKI minoh 店舗外観">
-    </div>
-  </div>
-</section>
 
 <section id="news">
   <div class="section-header reveal">

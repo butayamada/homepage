@@ -157,6 +157,85 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 .hero-right > *:nth-child(3) { animation-delay: 0.75s; }
 .hero-right > *:nth-child(4) { animation-delay: 0.95s; }
 
+/* ── CALENDAR ── */
+#calendar { padding: 7rem 3.5rem; background: var(--white); border-top: 1px solid var(--border); }
+.cal-wrap { max-width: 900px; }
+.cal-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 3rem;
+}
+.cal-month-num {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(4rem, 8vw, 6rem); font-weight: 400;
+  color: var(--black); line-height: 1;
+}
+.cal-slash {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.5rem; color: var(--light-gray);
+  margin: 0 0.6rem; align-self: flex-end; padding-bottom: 0.5rem;
+}
+.cal-month-sub { display: flex; flex-direction: column; align-self: flex-end; padding-bottom: 0.3rem; }
+.cal-year  { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.15em; color: var(--mid-gray); line-height: 1.2; }
+.cal-month-en { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.15em; color: var(--mid-gray); line-height: 1.2; }
+.cal-legend { text-align: right; }
+.cal-legend-item { display: flex; align-items: center; justify-content: flex-end; gap: 0.6rem; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--mid-gray); line-height: 2.2; }
+.cal-legend-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.cal-legend-dot.ex   { border: 1.5px solid #d84a72; }
+.cal-legend-dot.open { border: 1.5px solid var(--mid-gray); }
+.cal-legend-hours { font-family: 'EB Garamond', serif; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--mid-gray); margin-top: 0.4rem; }
+
+.cal-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.cal-table thead th {
+  font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.2em;
+  font-weight: 400; color: var(--light-gray); text-align: left;
+  padding: 0 0 1rem 0.6rem; border-bottom: 1px solid var(--border);
+}
+.cal-table tbody td {
+  vertical-align: top; padding: 0.9rem 0.6rem 1.2rem;
+  border-bottom: 1px solid var(--border); border-right: 1px solid var(--border);
+  height: 90px; position: relative;
+}
+.cal-table tbody td:last-child { border-right: none; }
+.cal-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0;
+}
+.cal-num.ex   { border: 1.5px solid #d84a72; color: #d84a72; }
+.cal-num.open { border: 1.5px solid var(--mid-gray); color: var(--mid-gray); }
+.cal-num.closed { color: var(--light-gray); }
+.cal-event {
+  font-size: 0.6rem; letter-spacing: 0.06em; line-height: 1.6;
+  color: var(--mid-gray); margin-top: 0.4rem;
+}
+.cal-event.ex { color: #d84a72; }
+.cal-event-sub { font-size: 0.58rem; color: #d84a72; display: block; }
+
+/* exhibition period bar: cells 6→13 */
+.cal-ex-bar td.bar { position: relative; }
+.cal-ex-bar td.bar::after {
+  content: ''; position: absolute;
+  left: 0; right: -1px; bottom: 14px;
+  height: 2px; background: #d84a72;
+}
+.cal-ex-bar td.bar-start::after { left: 16px; }
+.cal-ex-bar td.bar-end::after   { right: 50%; }
+
+@media (max-width: 960px) {
+  #calendar { padding: 5rem 1.5rem; }
+  .cal-table tbody td { height: 72px; padding: 0.7rem 0.4rem 0.9rem; }
+  .cal-num { width: 26px; height: 26px; font-size: 0.85rem; }
+  .cal-event { font-size: 0.55rem; }
+}
+@media (max-width: 480px) {
+  #calendar { padding: 4rem 1.2rem; }
+  .cal-month-num { font-size: 3.5rem; }
+  .cal-table tbody td { height: 60px; padding: 0.5rem 0.2rem 0.6rem; }
+  .cal-num { width: 22px; height: 22px; font-size: 0.75rem; }
+  .cal-event { display: none; }
+  .cal-legend-item { font-size: 0.65rem; }
+}
+
 @media (max-width: 960px) {
   nav { padding: 1.2rem 1.5rem; }
   nav ul { gap: 1.2rem; }
@@ -680,6 +759,91 @@ document.addEventListener('DOMContentLoaded', function() {
     </table>
     <h3 style="margin-top:2rem;margin-bottom:0.8rem;font-size:1rem;letter-spacing:0.15em;">新店舗案内図</h3>
     <img src="photo/index/shintenpo.png" alt="新店舗案内図" style="width:100%;max-width:800px;display:block;">
+  </div>
+</section>
+
+
+<section id="calendar">
+  <div class="cal-wrap reveal">
+    <div class="cal-header">
+      <div style="display:flex;align-items:flex-end;gap:0.2rem;">
+        <span class="cal-month-num">6</span>
+        <span class="cal-slash">/</span>
+        <div class="cal-month-sub">
+          <span class="cal-year">2026</span>
+          <span class="cal-month-en">June</span>
+        </div>
+      </div>
+      <div class="cal-legend">
+        <div class="cal-legend-item">
+          <span class="cal-legend-dot ex"></span>営業日（企画展示）
+        </div>
+        <div class="cal-legend-item">
+          <span class="cal-legend-dot open"></span>営業日（常設）
+        </div>
+        <div class="cal-legend-hours">13:00 – 18:00 open</div>
+      </div>
+    </div>
+
+    <table class="cal-table">
+      <thead>
+        <tr>
+          <th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="cal-num ex">1</span>
+            <p class="cal-event">AMPIANA<br>POP UP</p>
+          </td>
+          <td><span class="cal-num ex">2</span></td>
+          <td><span class="cal-num ex">3</span></td>
+          <td><span class="cal-num ex">4</span></td>
+          <td><span class="cal-num closed">5</span></td>
+          <td>
+            <span class="cal-num ex">6</span>
+            <p class="cal-event ex">紙上征江個展<br><span class="cal-event-sub">作家在店</span></p>
+          </td>
+          <td><span class="cal-num ex">7</span></td>
+        </tr>
+        <tr class="cal-ex-bar">
+          <td class="bar bar-start"><span class="cal-num ex">8</span></td>
+          <td class="bar"><span class="cal-num ex">9</span></td>
+          <td class="bar"><span class="cal-num ex">10</span></td>
+          <td class="bar"><span class="cal-num ex">11</span></td>
+          <td class="bar"><span class="cal-num ex">12</span></td>
+          <td class="bar bar-end"><span class="cal-num ex">13</span></td>
+          <td><span class="cal-num closed">14</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cal-num open">15</span>
+            <p class="cal-event">常設展示</p>
+          </td>
+          <td><span class="cal-num open">16</span></td>
+          <td><span class="cal-num open">17</span></td>
+          <td><span class="cal-num closed">18</span></td>
+          <td><span class="cal-num closed">19</span></td>
+          <td><span class="cal-num open">20</span></td>
+          <td><span class="cal-num open">21</span></td>
+        </tr>
+        <tr>
+          <td><span class="cal-num open">22</span></td>
+          <td><span class="cal-num open">23</span></td>
+          <td><span class="cal-num open">24</span></td>
+          <td><span class="cal-num closed">25</span></td>
+          <td><span class="cal-num closed">26</span></td>
+          <td><span class="cal-num open">27</span></td>
+          <td><span class="cal-num open">28</span></td>
+        </tr>
+        <tr>
+          <td><span class="cal-num open">29</span></td>
+          <td><span class="cal-num open">30</span></td>
+          <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>
 

@@ -530,6 +530,11 @@ var LANG_TRANSLATIONS = {
 var NEWS_ARTICLES = {
   ja: [
     {
+      date: "2026.06.13",
+      title: "営業カレンダーを更新しました",
+      body: "詳細は<a href='index.html#calendar' style='color:inherit;'>こちら</a>をご覧ください。"
+    },
+    {
       date: "2026.05.09",
       title: "企画展紹介ページ「AMPIANA POP UP」を更新しました",
       body: "企画展紹介ページ「AMPIANA POP UP」を更新しました。詳細は<a href='ampiana2026.html' style='color:inherit;'>こちら</a>をご覧ください。"
@@ -572,6 +577,11 @@ var NEWS_ARTICLES = {
   ],
   en: [
     {
+      date: "2026.06.13",
+      title: "Business calendar updated",
+      body: "Please see <a href='index.html#calendar' style='color:inherit;'>here</a> for details."
+    },
+    {
       date: "2026.05.09",
       title: "Exhibition page \"AMPIANA POP UP\" has been updated",
       body: "The exhibition introduction page \"AMPIANA POP UP\" has been updated. Please see <a href='ampiana2026.html' style='color:inherit;'>here</a> for details."
@@ -613,6 +623,11 @@ var NEWS_ARTICLES = {
     }
   ],
   zh: [
+    {
+      date: "2026.06.13",
+      title: "营业日历已更新",
+      body: "详情请点击<a href='index.html#calendar' style='color:inherit;'>这里</a>查看。"
+    },
     {
       date: "2026.05.09",
       title: "企划展介绍页面「AMPIANA POP UP」已更新",

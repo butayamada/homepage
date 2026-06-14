@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Serif+JP:wght@200;300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Serif+JP:wght@200;300&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -31,6 +31,7 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Noto Serif JP', serif; font-weight: 200; background: var(--white); color: var(--black); }
 
+/* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
@@ -55,72 +56,45 @@ nav {
 }
 .lang-select:hover { color: var(--black); border-color: var(--dark-gray); }
 
+/* ── MAIN ── */
 main { padding-top: 9rem; padding-bottom: 8rem; }
-.page-inner { max-width: 900px; margin: 0 auto; padding: 0 3.5rem; }
-.page-header { margin-bottom: 5rem; }
-.section-label { font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--light-gray); margin-bottom: 0.8rem; }
-.page-title { font-family: 'EB Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; letter-spacing: 0.08em; color: var(--black); }
+.page-inner { max-width: 760px; margin: 0 auto; padding: 0 3.5rem; }
+.page-header { margin-bottom: 4rem; }
+.section-label { font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--light-gray); margin-bottom: 0.6rem; }
+.page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 300; letter-spacing: 0.1em; color: #333; }
 
 /* ── CALENDAR ── */
-.cal-section { margin-bottom: 6rem; }
-.cal-section:last-child { margin-bottom: 0; }
-.cal-header {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 3rem;
-}
-.cal-month-num {
-  font-family: 'EB Garamond', serif;
-  font-size: clamp(4rem, 8vw, 6rem); font-weight: 400;
-  color: var(--black); line-height: 1;
-}
-.cal-slash {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.5rem; color: var(--light-gray);
-  margin: 0 0.6rem; align-self: flex-end; padding-bottom: 0.5rem;
-}
-.cal-month-sub { display: flex; flex-direction: column; align-self: flex-end; padding-bottom: 0.3rem; }
-.cal-year  { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.15em; color: var(--mid-gray); line-height: 1.2; }
-.cal-month-en { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.15em; color: var(--mid-gray); line-height: 1.2; }
-.cal-legend { text-align: right; }
-.cal-legend-item { display: flex; align-items: center; justify-content: flex-end; gap: 0.6rem; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--mid-gray); line-height: 2.2; }
-.cal-legend-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-.cal-legend-dot.ex   { border: 1.5px solid #d84a72; }
-.cal-legend-dot.open { border: 1.5px solid var(--mid-gray); }
-.cal-legend-hours { font-family: 'EB Garamond', serif; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--mid-gray); margin-top: 0.4rem; }
+.cal-section { margin-bottom: 5rem; }
+.cal-section + .cal-section { border-top: 1px solid #e8e8e8; padding-top: 5rem; }
 
-.cal-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.cal-table thead th {
-  font-family: 'EB Garamond', serif; font-size: 0.65rem; letter-spacing: 0.2em;
-  font-weight: 400; color: var(--light-gray); text-align: left;
-  padding: 0 0 1rem 0.6rem; border-bottom: 1px solid var(--border);
-}
-.cal-table tbody td {
-  vertical-align: top; padding: 0.9rem 0.6rem 1.2rem;
-  border-bottom: 1px solid var(--border); border-right: 1px solid var(--border);
-  height: 90px; position: relative;
-}
-.cal-table tbody td:last-child { border-right: none; }
-.cal-table tbody td.cal-empty { background: var(--off-white); border-color: transparent; }
-.cal-num {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 50%;
-  font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0;
-}
-.cal-num.ex   { border: 1.5px solid #d84a72; color: #d84a72; }
-.cal-num.open { border: 1.5px solid var(--mid-gray); color: var(--mid-gray); }
-.cal-num.closed { color: var(--light-gray); }
-.cal-event {
-  font-size: 0.6rem; letter-spacing: 0.06em; line-height: 1.6;
-  color: var(--mid-gray); margin-top: 0.4rem;
-}
-.cal-event.ex { color: #d84a72; }
-.cal-event-sub { font-size: 0.58rem; color: #d84a72; display: block; }
-.cal-bar {
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; background: #d84a72;
-}
-.cal-divider { border-top: 1px solid var(--border); margin-bottom: 6rem; }
+.cal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; }
+.cal-month-wrap { display: flex; align-items: flex-end; }
+.cal-month-num { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; line-height: 1; color: #333; letter-spacing: -2px; }
+.cal-slash { font-size: 28px; color: #bbb; font-weight: 300; padding: 0 8px; margin-bottom: 10px; font-family: 'Cormorant Garamond', serif; }
+.cal-year-month { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: #555; line-height: 1.7; letter-spacing: 1px; margin-bottom: 10px; }
 
+.cal-legend { text-align: right; font-family: 'Noto Serif JP', serif; font-size: 13px; color: #333; line-height: 2.2; font-weight: 300; }
+.legend-item { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.legend-circle { width: 18px; height: 18px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.legend-circle.kikaku { border: 2px solid #e8528a; }
+.legend-circle.josetsu { border: 2px solid #999; }
+.cal-hours { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #666; margin-top: 4px; text-align: right; letter-spacing: 0.5px; }
+
+.cal-grid { width: 100%; border-collapse: collapse; }
+.cal-grid th { font-family: 'Cormorant Garamond', serif; font-size: 11px; font-weight: 400; color: #aaa; letter-spacing: 3px; text-align: center; padding: 4px 0 12px; }
+.cal-grid td { width: 14.28%; text-align: left; vertical-align: top; border: 0.5px solid #ddd; height: 80px; padding: 6px 8px; position: relative; }
+.cal-grid td.empty { background: #fafafa; border: 0.5px solid #eee; }
+
+.day-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; }
+.day-num.circle-pink { border: 1.5px solid #e8528a; border-radius: 50%; color: #e8528a; }
+.day-num.circle-gray { border: 1.5px solid #aaa; border-radius: 50%; color: #333; }
+
+.day-label { font-family: 'Noto Serif JP', serif; font-size: 10px; margin-top: 3px; line-height: 1.5; font-weight: 300; color: #555; }
+.day-label.pink { color: #e8528a; }
+
+.kikaku-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #e8528a; }
+
+/* ── FOOTER ── */
 footer { background: var(--black); padding: 3rem 3.5rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
 .footer-logo { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; }
 footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); text-align: center; }
@@ -132,14 +106,16 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
   nav { padding: 1.2rem 1.5rem; }
   .page-inner { padding: 0 1.5rem; }
   main { padding-top: 7rem; }
-  .cal-table tbody td { height: 72px; padding: 0.7rem 0.4rem 0.9rem; }
-  .cal-num { width: 26px; height: 26px; font-size: 0.85rem; }
-  .cal-event { font-size: 0.55rem; }
+  .cal-grid td { height: 64px; padding: 5px 5px; }
+  .cal-month-num { font-size: 52px; }
 }
 @media (max-width: 480px) {
   nav { padding: 1rem 1.2rem; }
   footer { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
   .footer-links { justify-content: center; }
+  .cal-grid td { height: 54px; }
+  .day-num { width: 22px; height: 22px; font-size: 12px; }
+  .day-label { font-size: 9px; }
 }
 </style>
 </head>
@@ -170,231 +146,224 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 
     <!-- ── June 2026 ── -->
     <div class="cal-section">
-      <div class="cal-header">
-        <div style="display:flex;align-items:flex-end;gap:0.2rem;">
+      <div class="cal-head">
+        <div class="cal-month-wrap">
           <span class="cal-month-num">6</span>
           <span class="cal-slash">/</span>
-          <div class="cal-month-sub">
-            <span class="cal-year">2026</span>
-            <span class="cal-month-en">June</span>
-          </div>
+          <div class="cal-year-month">2026<br>June</div>
         </div>
-        <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
-          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        <div>
+          <div class="cal-legend">
+            <div class="legend-item"><span class="legend-circle kikaku"></span><span style="color:#e8528a;">営業日（企画展示）</span></div>
+            <div class="legend-item"><span class="legend-circle josetsu"></span><span>営業日（常設）</span></div>
+          </div>
+          <div class="cal-hours">13:00 - 18:00 open</div>
         </div>
       </div>
-      <table class="cal-table">
+      <table class="cal-grid">
         <thead>
           <tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr>
         </thead>
         <tbody>
           <tr>
             <td>
-              <div class="cal-bar"></div>
-              <span class="cal-num ex">1</span>
-              <p class="cal-event ex">AMPIANA<br>POP UP</p>
+              <div class="kikaku-bar"></div>
+              <span class="day-num circle-pink">1</span>
+              <div class="day-label pink">AMPIANA<br>POP UP</div>
             </td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">2</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">3</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">4</span></td>
-            <td><span class="cal-num closed">5</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">2</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">3</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">4</span></td>
+            <td><span class="day-num">5</span></td>
             <td>
-              <div class="cal-bar"></div>
-              <span class="cal-num ex">6</span>
-              <p class="cal-event ex">紙上征江個展<br><span class="cal-event-sub">作家在店</span></p>
+              <div class="kikaku-bar"></div>
+              <span class="day-num circle-pink">6</span>
+              <div class="day-label pink">紙上征江個展</div>
             </td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">7</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">7</span></td>
           </tr>
           <tr>
-            <td><div class="cal-bar"></div><span class="cal-num ex">8</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">9</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">10</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">11</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">12</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">13</span></td>
-            <td><span class="cal-num closed">14</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">8</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">9</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">10</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">11</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">12</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">13</span></td>
+            <td><span class="day-num">14</span></td>
           </tr>
           <tr>
             <td>
-              <span class="cal-num open">15</span>
-              <p class="cal-event">常設展示</p>
+              <span class="day-num circle-gray">15</span>
+              <div class="day-label">常設展示</div>
             </td>
-            <td><span class="cal-num open">16</span></td>
-            <td><span class="cal-num open">17</span></td>
-            <td><span class="cal-num closed">18</span></td>
-            <td><span class="cal-num closed">19</span></td>
-            <td><span class="cal-num open">20</span></td>
-            <td><span class="cal-num open">21</span></td>
+            <td><span class="day-num circle-gray">16</span></td>
+            <td><span class="day-num circle-gray">17</span></td>
+            <td><span class="day-num">18</span></td>
+            <td><span class="day-num">19</span></td>
+            <td><span class="day-num circle-gray">20</span></td>
+            <td><span class="day-num circle-gray">21</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">22</span></td>
-            <td><span class="cal-num open">23</span></td>
-            <td><span class="cal-num open">24</span></td>
-            <td><span class="cal-num closed">25</span></td>
-            <td><span class="cal-num closed">26</span></td>
-            <td><span class="cal-num open">27</span></td>
-            <td><span class="cal-num open">28</span></td>
+            <td><span class="day-num circle-gray">22</span></td>
+            <td><span class="day-num circle-gray">23</span></td>
+            <td><span class="day-num circle-gray">24</span></td>
+            <td><span class="day-num">25</span></td>
+            <td><span class="day-num">26</span></td>
+            <td><span class="day-num circle-gray">27</span></td>
+            <td><span class="day-num circle-gray">28</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">29</span></td>
-            <td><span class="cal-num open">30</span></td>
-            <td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td>
+            <td><span class="day-num circle-gray">29</span></td>
+            <td><span class="day-num circle-gray">30</span></td>
+            <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
           </tr>
         </tbody>
       </table>
     </div>
-
-    <div class="cal-divider"></div>
 
     <!-- ── July 2026 ── -->
     <div class="cal-section">
-      <div class="cal-header">
-        <div style="display:flex;align-items:flex-end;gap:0.2rem;">
+      <div class="cal-head">
+        <div class="cal-month-wrap">
           <span class="cal-month-num">7</span>
           <span class="cal-slash">/</span>
-          <div class="cal-month-sub">
-            <span class="cal-year">2026</span>
-            <span class="cal-month-en">July</span>
-          </div>
+          <div class="cal-year-month">2026<br>July</div>
         </div>
-        <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
-          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        <div>
+          <div class="cal-legend">
+            <div class="legend-item"><span class="legend-circle kikaku"></span><span style="color:#e8528a;">営業日（企画展示）</span></div>
+            <div class="legend-item"><span class="legend-circle josetsu"></span><span>営業日（常設）</span></div>
+          </div>
+          <div class="cal-hours">13:00 - 18:00 open</div>
         </div>
       </div>
-      <table class="cal-table">
+      <table class="cal-grid">
         <thead>
           <tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td class="cal-empty"></td>
-            <td class="cal-empty"></td>
-            <td><span class="cal-num open">1</span></td>
-            <td><span class="cal-num closed">2</span></td>
-            <td><span class="cal-num closed">3</span></td>
-            <td><span class="cal-num open">4</span></td>
-            <td><span class="cal-num open">5</span></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td><span class="day-num circle-gray">1</span></td>
+            <td><span class="day-num">2</span></td>
+            <td><span class="day-num">3</span></td>
+            <td><span class="day-num circle-gray">4</span></td>
+            <td><span class="day-num circle-gray">5</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">6</span></td>
-            <td><span class="cal-num open">7</span></td>
-            <td><span class="cal-num open">8</span></td>
-            <td><span class="cal-num closed">9</span></td>
-            <td><span class="cal-num closed">10</span></td>
-            <td><span class="cal-num open">11</span></td>
-            <td><span class="cal-num open">12</span></td>
+            <td><span class="day-num circle-gray">6</span></td>
+            <td><span class="day-num circle-gray">7</span></td>
+            <td><span class="day-num circle-gray">8</span></td>
+            <td><span class="day-num">9</span></td>
+            <td><span class="day-num">10</span></td>
+            <td><span class="day-num circle-gray">11</span></td>
+            <td><span class="day-num circle-gray">12</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">13</span></td>
-            <td><span class="cal-num open">14</span></td>
-            <td><span class="cal-num open">15</span></td>
-            <td><span class="cal-num closed">16</span></td>
-            <td><span class="cal-num closed">17</span></td>
+            <td><span class="day-num circle-gray">13</span></td>
+            <td><span class="day-num circle-gray">14</span></td>
+            <td><span class="day-num circle-gray">15</span></td>
+            <td><span class="day-num">16</span></td>
+            <td><span class="day-num">17</span></td>
             <td>
-              <div class="cal-bar"></div>
-              <span class="cal-num ex">18</span>
-              <p class="cal-event ex">ナツメク</p>
+              <div class="kikaku-bar"></div>
+              <span class="day-num circle-pink">18</span>
+              <div class="day-label pink">ナツメク</div>
             </td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">19</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">19</span></td>
           </tr>
           <tr>
-            <td><div class="cal-bar"></div><span class="cal-num ex">20</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">21</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">22</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">23</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">24</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">25</span></td>
-            <td><span class="cal-num closed">26</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">20</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">21</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">22</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">23</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">24</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">25</span></td>
+            <td><span class="day-num">26</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">27</span></td>
-            <td><span class="cal-num open">28</span></td>
-            <td><span class="cal-num open">29</span></td>
-            <td><span class="cal-num closed">30</span></td>
-            <td><span class="cal-num closed">31</span></td>
-            <td class="cal-empty"></td>
-            <td class="cal-empty"></td>
+            <td><span class="day-num circle-gray">27</span></td>
+            <td><span class="day-num circle-gray">28</span></td>
+            <td><span class="day-num circle-gray">29</span></td>
+            <td><span class="day-num">30</span></td>
+            <td><span class="day-num">31</span></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="cal-divider"></div>
-
     <!-- ── August 2026 ── -->
     <div class="cal-section">
-      <div class="cal-header">
-        <div style="display:flex;align-items:flex-end;gap:0.2rem;">
+      <div class="cal-head">
+        <div class="cal-month-wrap">
           <span class="cal-month-num">8</span>
           <span class="cal-slash">/</span>
-          <div class="cal-month-sub">
-            <span class="cal-year">2026</span>
-            <span class="cal-month-en">August</span>
-          </div>
+          <div class="cal-year-month">2026<br>August</div>
         </div>
-        <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
-          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        <div>
+          <div class="cal-legend">
+            <div class="legend-item"><span class="legend-circle kikaku"></span><span style="color:#e8528a;">営業日（企画展示）</span></div>
+            <div class="legend-item"><span class="legend-circle josetsu"></span><span>営業日（常設）</span></div>
+          </div>
+          <div class="cal-hours">13:00 - 18:00 open</div>
         </div>
       </div>
-      <table class="cal-table">
+      <table class="cal-grid">
         <thead>
           <tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td>
-            <td><span class="cal-num open">1</span></td>
-            <td><span class="cal-num open">2</span></td>
+            <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
+            <td><span class="day-num circle-gray">1</span></td>
+            <td><span class="day-num circle-gray">2</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">3</span></td>
-            <td><span class="cal-num open">4</span></td>
-            <td><span class="cal-num open">5</span></td>
-            <td><span class="cal-num closed">6</span></td>
-            <td><span class="cal-num closed">7</span></td>
-            <td><span class="cal-num open">8</span></td>
-            <td><span class="cal-num open">9</span></td>
+            <td><span class="day-num circle-gray">3</span></td>
+            <td><span class="day-num circle-gray">4</span></td>
+            <td><span class="day-num circle-gray">5</span></td>
+            <td><span class="day-num">6</span></td>
+            <td><span class="day-num">7</span></td>
+            <td><span class="day-num circle-gray">8</span></td>
+            <td><span class="day-num circle-gray">9</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">10</span></td>
-            <td><span class="cal-num open">11</span></td>
-            <td><span class="cal-num open">12</span></td>
-            <td><span class="cal-num closed">13</span></td>
-            <td><span class="cal-num closed">14</span></td>
-            <td><span class="cal-num open">15</span></td>
-            <td><span class="cal-num open">16</span></td>
+            <td><span class="day-num circle-gray">10</span></td>
+            <td><span class="day-num circle-gray">11</span></td>
+            <td><span class="day-num circle-gray">12</span></td>
+            <td><span class="day-num">13</span></td>
+            <td><span class="day-num">14</span></td>
+            <td><span class="day-num circle-gray">15</span></td>
+            <td><span class="day-num circle-gray">16</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">17</span></td>
-            <td><span class="cal-num open">18</span></td>
-            <td><span class="cal-num open">19</span></td>
-            <td><span class="cal-num closed">20</span></td>
-            <td><span class="cal-num closed">21</span></td>
+            <td><span class="day-num circle-gray">17</span></td>
+            <td><span class="day-num circle-gray">18</span></td>
+            <td><span class="day-num circle-gray">19</span></td>
+            <td><span class="day-num">20</span></td>
+            <td><span class="day-num">21</span></td>
             <td>
-              <div class="cal-bar"></div>
-              <span class="cal-num ex">22</span>
-              <p class="cal-event ex">処暑、線を辿る</p>
+              <div class="kikaku-bar"></div>
+              <span class="day-num circle-pink">22</span>
+              <div class="day-label pink">処暑、線を辿る</div>
             </td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">23</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">23</span></td>
           </tr>
           <tr>
-            <td><div class="cal-bar"></div><span class="cal-num ex">24</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">25</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">26</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">27</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">28</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">29</span></td>
-            <td><div class="cal-bar"></div><span class="cal-num ex">30</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">24</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">25</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">26</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">27</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">28</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">29</span></td>
+            <td><div class="kikaku-bar"></div><span class="day-num circle-pink">30</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num closed">31</span></td>
-            <td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td><td class="cal-empty"></td>
+            <td><span class="day-num">31</span></td>
+            <td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td>
           </tr>
         </tbody>
       </table>

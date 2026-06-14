@@ -211,6 +211,8 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 .cal-event.ex { color: #d84a72; }
 .cal-event-sub { font-size: 0.58rem; color: #d84a72; display: block; }
 
+.cal-bar { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #d84a72; }
+
 /* exhibition period bar: cells 6→13 */
 .cal-ex-bar td.bar { position: relative; }
 .cal-ex-bar td.bar::after {
@@ -769,90 +771,229 @@ document.addEventListener('DOMContentLoaded', function() {
       <p class="section-label">Calendar</p>
       <h2 class="section-title">営業カレンダー</h2>
     </div>
-    <div class="cal-header">
-      <div style="display:flex;align-items:flex-end;gap:0.2rem;">
-        <span class="cal-month-num">6</span>
-        <span class="cal-slash">/</span>
-        <div class="cal-month-sub">
-          <span class="cal-year">2026</span>
-          <span class="cal-month-en">June</span>
+    <!-- June 2026 -->
+    <div data-cal-month="2026-06">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:0.2rem;">
+          <span class="cal-month-num">6</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub">
+            <span class="cal-year">2026</span>
+            <span class="cal-month-en">June</span>
+          </div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
         </div>
       </div>
-      <div class="cal-legend">
-        <div class="cal-legend-item">
-          <span class="cal-legend-dot ex"></span>営業日（企画展示）
-        </div>
-        <div class="cal-legend-item">
-          <span class="cal-legend-dot open"></span>営業日（常設）
-        </div>
-        <div class="cal-legend-hours">13:00 – 18:00 open</div>
-      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="cal-num ex">1</span><p class="cal-event">AMPIANA<br>POP UP</p></td>
+            <td><span class="cal-num ex">2</span></td>
+            <td><span class="cal-num ex">3</span></td>
+            <td><span class="cal-num ex">4</span></td>
+            <td><span class="cal-num closed">5</span></td>
+            <td><span class="cal-num ex">6</span><p class="cal-event ex">紙上征江個展<br><span class="cal-event-sub">作家在店</span></p></td>
+            <td><span class="cal-num ex">7</span></td>
+          </tr>
+          <tr class="cal-ex-bar">
+            <td class="bar bar-start"><span class="cal-num ex">8</span></td>
+            <td class="bar"><span class="cal-num ex">9</span></td>
+            <td class="bar"><span class="cal-num ex">10</span></td>
+            <td class="bar"><span class="cal-num ex">11</span></td>
+            <td class="bar"><span class="cal-num ex">12</span></td>
+            <td class="bar bar-end"><span class="cal-num ex">13</span></td>
+            <td><span class="cal-num closed">14</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">15</span><p class="cal-event">常設展示</p></td>
+            <td><span class="cal-num open">16</span></td>
+            <td><span class="cal-num open">17</span></td>
+            <td><span class="cal-num closed">18</span></td>
+            <td><span class="cal-num closed">19</span></td>
+            <td><span class="cal-num open">20</span></td>
+            <td><span class="cal-num open">21</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">22</span></td>
+            <td><span class="cal-num open">23</span></td>
+            <td><span class="cal-num open">24</span></td>
+            <td><span class="cal-num closed">25</span></td>
+            <td><span class="cal-num closed">26</span></td>
+            <td><span class="cal-num open">27</span></td>
+            <td><span class="cal-num open">28</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">29</span></td>
+            <td><span class="cal-num open">30</span></td>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <table class="cal-table">
-      <thead>
-        <tr>
-          <th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <span class="cal-num ex">1</span>
-            <p class="cal-event">AMPIANA<br>POP UP</p>
-          </td>
-          <td><span class="cal-num ex">2</span></td>
-          <td><span class="cal-num ex">3</span></td>
-          <td><span class="cal-num ex">4</span></td>
-          <td><span class="cal-num closed">5</span></td>
-          <td>
-            <span class="cal-num ex">6</span>
-            <p class="cal-event ex">紙上征江個展<br><span class="cal-event-sub">作家在店</span></p>
-          </td>
-          <td><span class="cal-num ex">7</span></td>
-        </tr>
-        <tr class="cal-ex-bar">
-          <td class="bar bar-start"><span class="cal-num ex">8</span></td>
-          <td class="bar"><span class="cal-num ex">9</span></td>
-          <td class="bar"><span class="cal-num ex">10</span></td>
-          <td class="bar"><span class="cal-num ex">11</span></td>
-          <td class="bar"><span class="cal-num ex">12</span></td>
-          <td class="bar bar-end"><span class="cal-num ex">13</span></td>
-          <td><span class="cal-num closed">14</span></td>
-        </tr>
-        <tr>
-          <td>
-            <span class="cal-num open">15</span>
-            <p class="cal-event">常設展示</p>
-          </td>
-          <td><span class="cal-num open">16</span></td>
-          <td><span class="cal-num open">17</span></td>
-          <td><span class="cal-num closed">18</span></td>
-          <td><span class="cal-num closed">19</span></td>
-          <td><span class="cal-num open">20</span></td>
-          <td><span class="cal-num open">21</span></td>
-        </tr>
-        <tr>
-          <td><span class="cal-num open">22</span></td>
-          <td><span class="cal-num open">23</span></td>
-          <td><span class="cal-num open">24</span></td>
-          <td><span class="cal-num closed">25</span></td>
-          <td><span class="cal-num closed">26</span></td>
-          <td><span class="cal-num open">27</span></td>
-          <td><span class="cal-num open">28</span></td>
-        </tr>
-        <tr>
-          <td><span class="cal-num open">29</span></td>
-          <td><span class="cal-num open">30</span></td>
-          <td></td><td></td><td></td><td></td><td></td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- July 2026 -->
+    <div data-cal-month="2026-07" style="display:none;">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:0.2rem;">
+          <span class="cal-month-num">7</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub">
+            <span class="cal-year">2026</span>
+            <span class="cal-month-en">July</span>
+          </div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        </div>
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td></td><td></td>
+            <td><span class="cal-num open">1</span></td>
+            <td><span class="cal-num closed">2</span></td>
+            <td><span class="cal-num closed">3</span></td>
+            <td><span class="cal-num open">4</span></td>
+            <td><span class="cal-num open">5</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">6</span></td>
+            <td><span class="cal-num open">7</span></td>
+            <td><span class="cal-num open">8</span></td>
+            <td><span class="cal-num closed">9</span></td>
+            <td><span class="cal-num closed">10</span></td>
+            <td><span class="cal-num open">11</span></td>
+            <td><span class="cal-num open">12</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">13</span></td>
+            <td><span class="cal-num open">14</span></td>
+            <td><span class="cal-num open">15</span></td>
+            <td><span class="cal-num closed">16</span></td>
+            <td><span class="cal-num closed">17</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">18</span><p class="cal-event ex">ナツメク</p></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">19</span></td>
+          </tr>
+          <tr>
+            <td><div class="cal-bar"></div><span class="cal-num ex">20</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">21</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">22</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">23</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">24</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">25</span></td>
+            <td><span class="cal-num closed">26</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">27</span></td>
+            <td><span class="cal-num open">28</span></td>
+            <td><span class="cal-num open">29</span></td>
+            <td><span class="cal-num closed">30</span></td>
+            <td><span class="cal-num closed">31</span></td>
+            <td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- August 2026 -->
+    <div data-cal-month="2026-08" style="display:none;">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:0.2rem;">
+          <span class="cal-month-num">8</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub">
+            <span class="cal-year">2026</span>
+            <span class="cal-month-en">August</span>
+          </div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        </div>
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td><span class="cal-num open">1</span></td>
+            <td><span class="cal-num open">2</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">3</span></td>
+            <td><span class="cal-num open">4</span></td>
+            <td><span class="cal-num open">5</span></td>
+            <td><span class="cal-num closed">6</span></td>
+            <td><span class="cal-num closed">7</span></td>
+            <td><span class="cal-num open">8</span></td>
+            <td><span class="cal-num open">9</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">10</span></td>
+            <td><span class="cal-num open">11</span></td>
+            <td><span class="cal-num open">12</span></td>
+            <td><span class="cal-num closed">13</span></td>
+            <td><span class="cal-num closed">14</span></td>
+            <td><span class="cal-num open">15</span></td>
+            <td><span class="cal-num open">16</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">17</span></td>
+            <td><span class="cal-num open">18</span></td>
+            <td><span class="cal-num open">19</span></td>
+            <td><span class="cal-num closed">20</span></td>
+            <td><span class="cal-num closed">21</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">22</span><p class="cal-event ex">処暑、線を辿る</p></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">23</span></td>
+          </tr>
+          <tr>
+            <td><div class="cal-bar"></div><span class="cal-num ex">24</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">25</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">26</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">27</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">28</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">29</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">30</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num closed">31</span></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div style="margin-top:2rem;text-align:right;">
-      <a href="calendar.html" style="font-family:'EB Garamond',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--mid-gray);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;">翌月以降のカレンダーはこちら →</a>
+      <a href="calendar.html" style="font-family:'EB Garamond',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--mid-gray);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;">カレンダーページはこちら →</a>
     </div>
   </div>
 </section>
+<script>
+(function() {
+  var now = new Date();
+  var ym = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+  var sections = document.querySelectorAll('#calendar [data-cal-month]');
+  var shown = false;
+  sections.forEach(function(el) {
+    if (el.dataset.calMonth === ym) { el.style.display = ''; shown = true; }
+    else { el.style.display = 'none'; }
+  });
+  if (!shown) {
+    sections.forEach(function(el) {
+      if (!shown && el.dataset.calMonth > ym) { el.style.display = ''; shown = true; }
+    });
+  }
+})();
+</script>
 
 
 <section id="products">

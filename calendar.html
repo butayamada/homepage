@@ -148,7 +148,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     <p class="cal-notice">カレンダーに記載された予定は、予告なく変更する場合がございます。悪しからずご了承ください。</p>
 
     <!-- ── June 2026 ── -->
-    <div class="cal-section">
+    <div class="cal-section" data-cal-month="2026-06">
       <div class="cal-head">
         <div class="cal-month-wrap">
           <span class="cal-month-num">6</span>
@@ -226,7 +226,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     </div>
 
     <!-- ── July 2026 ── -->
-    <div class="cal-section">
+    <div class="cal-section" data-cal-month="2026-07">
       <div class="cal-head">
         <div class="cal-month-wrap">
           <span class="cal-month-num">7</span>
@@ -301,7 +301,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     </div>
 
     <!-- ── August 2026 ── -->
-    <div class="cal-section">
+    <div class="cal-section" data-cal-month="2026-08">
       <div class="cal-head">
         <div class="cal-month-wrap">
           <span class="cal-month-num">8</span>
@@ -388,5 +388,14 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 </footer>
 
 <script src="lang.js"></script>
+<script>
+(function() {
+  var now = new Date();
+  var ym = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+  document.querySelectorAll('[data-cal-month]').forEach(function(el) {
+    if (el.dataset.calMonth < ym) el.style.display = 'none';
+  });
+})();
+</script>
 </body>
 </html>

@@ -195,7 +195,7 @@ var LANG_TRANSLATIONS = {
     spec_care:         "取り扱い",
     spec_notes:        "注意事項",
     btn_buy:           "購入はこちら",
-    purchase_intl_note: "BASEでは海外へのお届けにも対応しています。世界中からのご注文をお待ちしております。"
+    purchase_intl_note: ""
   },
 
   en: {
@@ -742,6 +742,11 @@ function setLang(lang) {
         '</a>';
     }).join('');
   }
+
+  // 日本語以外でのみ表示する要素を切り替え
+  document.querySelectorAll('.lang-non-ja').forEach(function(el) {
+    el.style.display = (lang === 'ja') ? 'none' : '';
+  });
 
   // セレクトボックスの表示を更新
   document.querySelectorAll('.lang-select').forEach(function(sel) {

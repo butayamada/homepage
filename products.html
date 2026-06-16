@@ -206,11 +206,11 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
       <div style="display:flex;">
         <button class="view-tab active" id="tab-products" onclick="switchView('products')" data-i18n="tab_products">商品別</button>
         <button class="view-tab" id="tab-artists" onclick="switchView('artists')" data-i18n="tab_artists">作家別</button>
-        <button class="view-tab" id="tab-genres" onclick="switchView('genres')">ジャンル別</button>
+        <button class="view-tab" id="tab-genres" onclick="switchView('genres')" data-i18n="tab_genres">ジャンル別</button>
       </div>
       <label class="soldout-toggle-wrap">
         <input type="checkbox" id="soldout-toggle" onchange="toggleSoldout(this)">
-        soldoutを非表示
+        <span data-i18n="soldout_hide">soldoutを非表示</span>
       </label>
     </div>
     <div class="artist-filter" id="artist-filter"></div>
@@ -956,6 +956,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
 </footer>
 
 <script src="artists_data.js"></script>
+<script src="product_translations.js"></script>
 <script src="lang.js"></script>
 <script>
 // soldout toggle

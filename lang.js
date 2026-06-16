@@ -175,6 +175,8 @@ var LANG_TRANSLATIONS = {
     // products.html
     tab_products:      "商品別",
     tab_artists:       "作家別",
+    tab_genres:        "ジャンル別",
+    soldout_hide:      "soldoutを非表示",
 
     // product detail pages
     price_tax:         "（税込）",
@@ -345,6 +347,8 @@ var LANG_TRANSLATIONS = {
     // products.html
     tab_products:      "By Product",
     tab_artists:       "By Artist",
+    tab_genres:        "By Genre",
+    soldout_hide:      "Hide sold-out",
 
     // product detail pages
     price_tax:         "(incl. tax)",
@@ -515,6 +519,8 @@ var LANG_TRANSLATIONS = {
     // products.html
     tab_products:      "商品一览",
     tab_artists:       "按作家",
+    tab_genres:        "按品类",
+    soldout_hide:      "隐藏售罄",
 
     // product detail pages
     price_tax:         "（含税）",
@@ -724,6 +730,9 @@ function setLang(lang) {
   // 商品詳細ページの翻訳を適用
   applyProductTranslations(lang);
 
+  // 商品一覧ページのカード名を翻訳
+  applyProductCardNames(lang);
+
   // ページ固有のコールバック（product.html 等で使用）
   if (typeof window.onLangChange === 'function') {
     window.onLangChange(lang);
@@ -796,6 +805,32 @@ function applyProductTranslations(lang) {
   applySpec('spec_material', 'material');
   applySpec('spec_care', 'care');
   applySpec('spec_notes', 'notes');
+}
+
+// products.html のカード一覧の商品名を翻訳
+function applyProductCardNames(lang) {
+  if (!window.PRODUCT_TRANSLATIONS) return;
+  document.querySelectorAll('a.product-card[href]').forEach(function(card) {
+    var href = card.getAttribute('href');
+    var fname = href.split('/').pop().split('?')[0];
+    var pt = PRODUCT_TRANSLATIONS[fname];
+    if (!pt) return;
+    var nameEl = card.querySelector('.product-name');
+    if (!nameEl) return;
+    // テキストノードのみ更新（soldout-label spanは保持）
+    var textNode = null;
+    for (var i = 0; i < nameEl.childNodes.length; i++) {
+      if (nameEl.childNodes[i].nodeType === 3) { textNode = nameEl.childNodes[i]; break; }
+    }
+    if (!textNode) return;
+    if (!textNode._origText) textNode._origText = textNode.nodeValue;
+    if (lang === 'ja') {
+      textNode.nodeValue = textNode._origText;
+    } else {
+      var tr = pt[lang];
+      if (tr && tr.name) textNode.nodeValue = tr.name + ' ';
+    }
+  });
 }
 
 /* =====================================================

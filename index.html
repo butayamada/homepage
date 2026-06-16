@@ -769,7 +769,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="cal-wrap reveal">
     <div style="margin-bottom:2.5rem;">
       <p class="section-label">Calendar</p>
-      <h2 class="section-title">営業カレンダー</h2>
+      <h2 class="section-title" data-i18n="cal_title">営業カレンダー</h2>
     </div>
     <!-- June 2026 -->
     <div data-cal-month="2026-06">
@@ -783,8 +783,8 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
           <div class="cal-legend-hours">13:00 – 18:00 open</div>
         </div>
       </div>
@@ -797,7 +797,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <td><span class="cal-num ex">3</span></td>
             <td><span class="cal-num ex">4</span></td>
             <td><span class="cal-num closed">5</span></td>
-            <td><span class="cal-num ex">6</span><p class="cal-event ex">紙上征江個展<br><span class="cal-event-sub">作家在店</span></p></td>
+            <td><span class="cal-num ex">6</span><p class="cal-event ex">紙上征江個展<br><span class="cal-event-sub" data-i18n="cal_artist_in">作家在店</span></p></td>
             <td><span class="cal-num ex">7</span></td>
           </tr>
           <tr class="cal-ex-bar">
@@ -810,7 +810,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <td><span class="cal-num closed">14</span></td>
           </tr>
           <tr>
-            <td><span class="cal-num open">15</span><p class="cal-event">常設展示</p></td>
+            <td><span class="cal-num open">15</span><p class="cal-event" data-i18n="cal_josetsu">常設展示</p></td>
             <td><span class="cal-num open">16</span></td>
             <td><span class="cal-num open">17</span></td>
             <td><span class="cal-num closed">18</span></td>
@@ -848,8 +848,8 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
           <div class="cal-legend-hours">13:00 – 18:00 open</div>
         </div>
       </div>
@@ -915,8 +915,8 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
           <div class="cal-legend-hours">13:00 – 18:00 open</div>
         </div>
       </div>
@@ -984,8 +984,8 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
           <div class="cal-legend-hours">13:00 – 18:00 open</div>
         </div>
       </div>
@@ -1050,8 +1050,8 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
         <div class="cal-legend">
-          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span>営業日（企画展示）</div>
-          <div class="cal-legend-item"><span class="cal-legend-dot open"></span>営業日（常設）</div>
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
           <div class="cal-legend-hours">13:00 – 18:00 open</div>
         </div>
       </div>
@@ -1106,7 +1106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <div style="margin-top:2rem;text-align:right;">
-      <a href="calendar.html" style="font-family:'EB Garamond',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--mid-gray);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;">カレンダーページはこちら →</a>
+      <a href="calendar.html" style="font-family:'EB Garamond',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--mid-gray);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;" data-i18n="cal_page_link">カレンダーページはこちら →</a>
     </div>
   </div>
 </section>

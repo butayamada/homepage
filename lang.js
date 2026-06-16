@@ -172,6 +172,16 @@ var LANG_TRANSLATIONS = {
     km_artist_title:   "紙上征江",
     km_artist_body:    "山口県下関市生まれの陶芸家。メキシコでの作陶経験を経て大阪を拠点に活動。土の素材感を活かしながら大胆な絵付けや繊細な造形で独自の世界を表現し続けている。",
 
+    // calendar
+    cal_title:         "営業カレンダー",
+    cal_legend_ex:     "営業日（企画展示）",
+    cal_legend_open:   "営業日（常設）",
+    cal_josetsu:       "常設展示",
+    cal_artist_in:     "作家在店",
+    cal_notice:        "カレンダーに記載された予定は、予告なく変更する場合がございます。悪しからずご了承ください。",
+    cal_changes_none:  "変更点：なし",
+    cal_page_link:     "カレンダーページはこちら →",
+
     // products.html
     tab_products:      "商品別",
     tab_artists:       "作家別",
@@ -344,6 +354,16 @@ var LANG_TRANSLATIONS = {
     km_artist_title:   "Meie Kamiue",
     km_artist_body:    "Ceramicist based in Osaka. After gaining experience in Mexico, she creates works that express a unique world through bold painting and delicate forms, making the most of the raw qualities of clay.",
 
+    // calendar
+    cal_title:         "Business Calendar",
+    cal_legend_ex:     "Open: Exhibition",
+    cal_legend_open:   "Open: Regular",
+    cal_josetsu:       "Regular display",
+    cal_artist_in:     "Artist in store",
+    cal_notice:        "Please note that dates listed are subject to change without prior notice.",
+    cal_changes_none:  "Changes: none",
+    cal_page_link:     "View full calendar →",
+
     // products.html
     tab_products:      "By Product",
     tab_artists:       "By Artist",
@@ -515,6 +535,16 @@ var LANG_TRANSLATIONS = {
     km_meta_access_v:  "阪急电铁箕面线箕面站步行5分钟<br>无停车场",
     km_artist_title:   "纸上征江",
     km_artist_body:    "大阪为据点的陶艺家。经墨西哥制陶经历后，以大胆绘饰与精细造型表现独特的艺术世界，充分发挥陶土素材本身的质感。",
+
+    // calendar
+    cal_title:         "营业日历",
+    cal_legend_ex:     "营业日（企划展）",
+    cal_legend_open:   "营业日（常设）",
+    cal_josetsu:       "常设展示",
+    cal_artist_in:     "作家到店",
+    cal_notice:        "日历上记载的日程可能会在未提前通知的情况下变动，敬请谅解。",
+    cal_changes_none:  "变更：无",
+    cal_page_link:     "查看完整日历 →",
 
     // products.html
     tab_products:      "商品一览",

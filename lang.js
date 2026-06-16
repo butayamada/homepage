@@ -194,7 +194,8 @@ var LANG_TRANSLATIONS = {
     spec_material:     "素材",
     spec_care:         "取り扱い",
     spec_notes:        "注意事項",
-    btn_buy:           "購入はこちら"
+    btn_buy:           "購入はこちら",
+    purchase_intl_note: "BASEでは海外へのお届けにも対応しています。世界中からのご注文をお待ちしております。"
   },
 
   en: {
@@ -376,7 +377,8 @@ var LANG_TRANSLATIONS = {
     spec_material:     "Material",
     spec_care:         "Care",
     spec_notes:        "Notes",
-    btn_buy:           "Purchase"
+    btn_buy:           "Purchase",
+    purchase_intl_note: "International shipping is available via BASE. Orders from around the world are welcome."
   },
 
   zh: {
@@ -558,7 +560,8 @@ var LANG_TRANSLATIONS = {
     spec_material:     "材质",
     spec_care:         "使用说明",
     spec_notes:        "注意事项",
-    btn_buy:           "立即购买"
+    btn_buy:           "立即购买",
+    purchase_intl_note: "BASE平台支持国际配送，欢迎来自世界各地的订购。"
   }
 };
 

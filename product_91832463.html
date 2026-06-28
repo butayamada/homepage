@@ -83,6 +83,7 @@ main { padding-top: 7rem; }
 .spec-table td:first-child { color: var(--light-gray); width: 90px; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
 .btn-purchase { display: inline-flex; align-items: center; gap: 1.2rem; font-family: 'EB Garamond', serif; font-size: 0.82rem; letter-spacing: 0.25em; text-transform: uppercase; background: var(--black); color: var(--white); text-decoration: none; padding: 1.1rem 2.5rem; transition: background 0.2s; margin-top: 1rem; }
 .btn-purchase:hover { background: var(--dark-gray); }
+.purchase-note { font-size: 0.65rem; color: var(--mid-gray); letter-spacing: 0.04em; line-height: 1.8; margin-top: 1rem; }
 .btn-purchase::after { content: '→'; font-size: 1rem; }
 footer { background: var(--black); padding: 3rem 3.5rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
 .footer-logo { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dark-gray); text-decoration: none; }
@@ -191,6 +192,7 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
       </div>
 
       <a href="https://fukameki.thebase.in/items/91832463" target="_blank" rel="noopener" class="btn-purchase"><span data-i18n="btn_buy">購入はこちら</span></a>
+      <p class="purchase-note lang-non-ja" data-i18n="purchase_intl_note" style="display:none">BASEでは海外へのお届けにも対応しています。世界中からのご注文をお待ちしております。</p>
       <div class="artist-profile">
         <p class="artist-profile-title">Artist</p>
         <p class="artist-profile-text">柏井羊

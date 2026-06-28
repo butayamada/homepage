@@ -16,9 +16,9 @@ var LANG_TRANSLATIONS = {
     news_title:     "お知らせ",
     ex_label:       "Exhibition",
     ex_title:       "企画展",
-    ex_period:      "2026.05.24 – 06.07",
-    ex_name:        "AMPIANA POP UP",
-    ex_desc:        "マダガスカル産ラフィアを使用したバッグや小物を展開するブランド「AMPIANA」のポップアップを開催します。",
+    ex_period:      "2026.06.06 – 06.13",
+    ex_name:        "紙上征江 個展",
+    ex_desc:        "MAHOROBAの茶器や大胆な絵付けなど、陶芸家・紙上征江の一年半ぶりの個展。",
     ex_btn:         "詳しく見る",
     access_title:   "アクセス",
     info_title:     "店舗情報",
@@ -95,6 +95,12 @@ var LANG_TRANSLATIONS = {
     // coming soon pages
     coming_sub:        "詳細は準備中です。<br>今しばらくお待ちください。",
     natsumeku_title:   "ナツメク",
+    natsumeku_desc:    "夏の終わりに、作家4組が集まるグループ展。ガラス、衣服、アクセサリーを中心に、日常を彩る手仕事の品々が並びます。",
+    natsumeku_period_v: "2026年7月18日（土）— 7月25日（土）",
+    natsumeku_hours_v:  "13:00 — 18:00",
+    natsumeku_access_v: "阪急電鉄箕面線箕面駅より徒歩5分<br>駐車場なし",
+    aug_title:         "処暑、線を辿る",
+    aug_desc:          "作り手が向き合った時間が美しい線となって結晶する。<br>夏に秋が混ざりはじめる頃、洗練されたアイテムが暮らしに寄り添います。<br>即売品のほかオーダーも一部で受付させて頂きます。",
     kamiue_title:      "紙上征江 個展",
     yoshida_title:     "yoshida pottery 個展",
     jhen_title:        "ヂェン先生の日常着展",
@@ -103,7 +109,7 @@ var LANG_TRANSLATIONS = {
     shop_coming:       "オンラインショップは準備中です。<br>今しばらくお待ちください。",
 
     // index.html — about
-    about_desc:        "2019年6月オープン。<br>手仕事品を中心に暮らしを充たすアイテムを全国各地よりセレクト。<br>常設販売のほか、季節やテーマに合わせた企画展示、個展を定期的に開催。<br>2026年5月移転、ARC FUKAMEKI minoh（アルクフカメキ箕面）に名称変更。<br>ARCは架け橋の意。<br>作り手と使い手がつながり心豊かな時間がうまれる場所でありたいと考えています。",
+    about_desc:        "2019年6月オープン。<br>手仕事品を中心に暮らしを充たすアイテムを全国各地よりセレクト。<br>常設販売のほか、季節やテーマに合わせた企画展示、個展を定期的に開催。<br>2026年5月移転、<a href='preopen.html' style='color:inherit;text-decoration:underline;text-underline-offset:3px;'>ARC FUKAMEKI minoh</a>（アルクフカメキ箕面）に名称変更。<br>ARCは架け橋の意。<br>作り手と使い手がつながり心豊かな時間がうまれる場所でありたいと考えています。",
 
     // index.html — shop info
     payment_label:     "決済方法",
@@ -166,9 +172,21 @@ var LANG_TRANSLATIONS = {
     km_artist_title:   "紙上征江",
     km_artist_body:    "山口県下関市生まれの陶芸家。メキシコでの作陶経験を経て大阪を拠点に活動。土の素材感を活かしながら大胆な絵付けや繊細な造形で独自の世界を表現し続けている。",
 
+    // calendar
+    cal_title:         "営業カレンダー",
+    cal_legend_ex:     "営業日（企画展示）",
+    cal_legend_open:   "営業日（常設）",
+    cal_josetsu:       "常設展示",
+    cal_artist_in:     "作家在店",
+    cal_notice:        "カレンダーに記載された予定は、予告なく変更する場合がございます。悪しからずご了承ください。",
+    cal_changes_none:  "変更点：なし",
+    cal_page_link:     "カレンダーページはこちら →",
+
     // products.html
     tab_products:      "商品別",
     tab_artists:       "作家別",
+    tab_genres:        "ジャンル別",
+    soldout_hide:      "soldoutを非表示",
 
     // product detail pages
     price_tax:         "（税込）",
@@ -176,7 +194,9 @@ var LANG_TRANSLATIONS = {
     spec_material:     "素材",
     spec_care:         "取り扱い",
     spec_notes:        "注意事項",
-    btn_buy:           "購入はこちら"
+    btn_buy:           "購入はこちら",
+    btn_purchase:      "BASEで購入する",
+    purchase_intl_note: ""
   },
 
   en: {
@@ -190,9 +210,9 @@ var LANG_TRANSLATIONS = {
     news_title:     "News",
     ex_label:       "Exhibition",
     ex_title:       "Exhibition",
-    ex_period:      "2026.05.24 – 06.07",
-    ex_name:        "AMPIANA POP UP",
-    ex_desc:        "A pop-up by AMPIANA, a brand offering bags and accessories made from Malagasy raffia.",
+    ex_period:      "2026.06.06 – 06.13",
+    ex_name:        "Meie Kamiue Solo Exhibition",
+    ex_desc:        "Solo exhibition by ceramicist Meie Kamiue. Featuring new tea vessels and boldly painted works.",
     ex_btn:         "View Details",
     access_title:   "Access",
     info_title:     "Shop Info",
@@ -265,13 +285,19 @@ var LANG_TRANSLATIONS = {
 
     coming_sub:        "Details coming soon.<br>Please check back later.",
     natsumeku_title:   "Natsumeku",
+    natsumeku_desc:    "A group exhibition of four artists at the end of summer. Featuring glasswork, clothing, and accessories — handcrafted pieces for everyday life.",
+    natsumeku_period_v: "July 18 (Sat) — July 25 (Sat), 2026",
+    natsumeku_hours_v:  "13:00 — 18:00",
+    natsumeku_access_v: "5-min walk from Hankyu Minoh Station<br>No parking available",
+    aug_title:         "Shosho — Tracing the Line",
+    aug_desc:          "The time makers devoted crystallises into beautiful lines.<br>As summer begins to give way to autumn, refined pieces settle into daily life.<br>Ready-to-take items available, with some made-to-order.",
     kamiue_title:      "Yukue Kamiue Solo Exhibition",
     yoshida_title:     "yoshida pottery Solo Exhibition",
     jhen_title:        "Jhen Sensei's Everyday Clothes Exhibition",
 
     shop_coming:       "Online shop coming soon.<br>Please check back later.",
 
-    about_desc:        "Opened June 2019.<br>Carefully selected items for everyday living from craftspeople across Japan.<br>In addition to permanent stock, we regularly hold themed exhibitions and solo shows.<br>Relocated May 2026 and renamed ARC FUKAMEKI minoh.<br>\"ARC\" means bridge — a place where makers and users connect, and where a richer life takes shape.",
+    about_desc:        "Opened June 2019.<br>Carefully selected items for everyday living from craftspeople across Japan.<br>In addition to permanent stock, we regularly hold themed exhibitions and solo shows.<br>Relocated May 2026 and renamed <a href='preopen.html' style='color:inherit;text-decoration:underline;text-underline-offset:3px;'>ARC FUKAMEKI minoh</a>.<br>\"ARC\" means bridge — a place where makers and users connect, and where a richer life takes shape.",
 
     payment_label:     "Payment",
     payment_val:       "Cash, Credit Card, PayPay",
@@ -330,9 +356,21 @@ var LANG_TRANSLATIONS = {
     km_artist_title:   "Meie Kamiue",
     km_artist_body:    "Ceramicist based in Osaka. After gaining experience in Mexico, she creates works that express a unique world through bold painting and delicate forms, making the most of the raw qualities of clay.",
 
+    // calendar
+    cal_title:         "Business Calendar",
+    cal_legend_ex:     "Open: Exhibition",
+    cal_legend_open:   "Open: Regular",
+    cal_josetsu:       "Regular display",
+    cal_artist_in:     "Artist in store",
+    cal_notice:        "Please note that dates listed are subject to change without prior notice.",
+    cal_changes_none:  "Changes: none",
+    cal_page_link:     "View full calendar →",
+
     // products.html
     tab_products:      "By Product",
     tab_artists:       "By Artist",
+    tab_genres:        "By Genre",
+    soldout_hide:      "Hide sold-out",
 
     // product detail pages
     price_tax:         "(incl. tax)",
@@ -340,7 +378,9 @@ var LANG_TRANSLATIONS = {
     spec_material:     "Material",
     spec_care:         "Care",
     spec_notes:        "Notes",
-    btn_buy:           "Purchase"
+    btn_buy:           "Purchase",
+    btn_purchase:      "Purchase on BASE",
+    purchase_intl_note: "International shipping is available via BASE. Orders from around the world are welcome."
   },
 
   zh: {
@@ -354,9 +394,9 @@ var LANG_TRANSLATIONS = {
     news_title:     "最新消息",
     ex_label:       "展览",
     ex_title:       "企划展",
-    ex_period:      "2026.05.24 – 06.07",
-    ex_name:        "AMPIANA POP UP",
-    ex_desc:        "来自品牌「AMPIANA」的快闪活动，展出以马达加斯加拉菲草制作的包袋与小物。",
+    ex_period:      "2026.06.06 – 06.13",
+    ex_name:        "纸上征江 个展",
+    ex_desc:        "陶艺家纸上征江的个展。MAHOROBA茶器与大胆绘饰等新作一一呈现。",
     ex_btn:         "查看详情",
     access_title:   "交通方式",
     info_title:     "店铺信息",
@@ -429,13 +469,19 @@ var LANG_TRANSLATIONS = {
 
     coming_sub:        "详情准备中，<br>请稍后查看。",
     natsumeku_title:   "夏目",
+    natsumeku_desc:    "夏末四位作家联合展览。以玻璃工艺、服饰、饰品为主，汇聚点缀日常生活的手工艺品。",
+    natsumeku_period_v: "2026年7月18日（六）— 7月25日（六）",
+    natsumeku_hours_v:  "13:00 — 18:00",
+    natsumeku_access_v: "阪急电铁箕面线箕面站步行5分钟<br>无停车场",
+    aug_title:         "处暑，循线而行",
+    aug_desc:          "作者倾注的时光凝结为美丽的线条。<br>夏秋交替之际，精致的手工品与日常生活相伴相融。<br>现货展售，部分品项接受订制。",
     kamiue_title:      "纸上征江 个展",
     yoshida_title:     "yoshida pottery 个展",
     jhen_title:        "郑惠中日常服展",
 
     shop_coming:       "网络商店准备中，<br>请稍后查看。",
 
-    about_desc:        "2019年6月开业。<br>精心挑选来自全国各地工匠的手工制品及生活好物。<br>除常设销售外，还定期举办主题企划展及个展。<br>2026年5月迁址，更名为ARC FUKAMEKI minoh。<br>「ARC」意为桥梁——希望成为连接制作者与使用者、孕育丰富生活的场所。",
+    about_desc:        "2019年6月开业。<br>精心挑选来自全国各地工匠的手工制品及生活好物。<br>除常设销售外，还定期举办主题企划展及个展。<br>2026年5月迁址，更名为<a href='preopen.html' style='color:inherit;text-decoration:underline;text-underline-offset:3px;'>ARC FUKAMEKI minoh</a>。<br>「ARC」意为桥梁——希望成为连接制作者与使用者、孕育丰富生活的场所。",
 
     payment_label:     "支付方式",
     payment_val:       "现金、信用卡、PayPay",
@@ -494,9 +540,21 @@ var LANG_TRANSLATIONS = {
     km_artist_title:   "纸上征江",
     km_artist_body:    "大阪为据点的陶艺家。经墨西哥制陶经历后，以大胆绘饰与精细造型表现独特的艺术世界，充分发挥陶土素材本身的质感。",
 
+    // calendar
+    cal_title:         "营业日历",
+    cal_legend_ex:     "营业日（企划展）",
+    cal_legend_open:   "营业日（常设）",
+    cal_josetsu:       "常设展示",
+    cal_artist_in:     "作家到店",
+    cal_notice:        "日历上记载的日程可能会在未提前通知的情况下变动，敬请谅解。",
+    cal_changes_none:  "变更：无",
+    cal_page_link:     "查看完整日历 →",
+
     // products.html
     tab_products:      "商品一览",
     tab_artists:       "按作家",
+    tab_genres:        "按品类",
+    soldout_hide:      "隐藏售罄",
 
     // product detail pages
     price_tax:         "（含税）",
@@ -504,13 +562,20 @@ var LANG_TRANSLATIONS = {
     spec_material:     "材质",
     spec_care:         "使用说明",
     spec_notes:        "注意事项",
-    btn_buy:           "立即购买"
+    btn_buy:           "立即购买",
+    btn_purchase:      "在BASE购买",
+    purchase_intl_note: "BASE平台支持国际配送，欢迎来自世界各地的订购。"
   }
 };
 
 /* ニュース記事（多言語） */
 var NEWS_ARTICLES = {
   ja: [
+    {
+      date: "2026.06.13",
+      title: "営業カレンダーを更新しました",
+      body: "詳細は<a href='index.html#calendar' style='color:inherit;'>こちら</a>をご覧ください。"
+    },
     {
       date: "2026.05.09",
       title: "企画展紹介ページ「AMPIANA POP UP」を更新しました",
@@ -554,6 +619,11 @@ var NEWS_ARTICLES = {
   ],
   en: [
     {
+      date: "2026.06.13",
+      title: "Business calendar updated",
+      body: "Please see <a href='index.html#calendar' style='color:inherit;'>here</a> for details."
+    },
+    {
       date: "2026.05.09",
       title: "Exhibition page \"AMPIANA POP UP\" has been updated",
       body: "The exhibition introduction page \"AMPIANA POP UP\" has been updated. Please see <a href='ampiana2026.html' style='color:inherit;'>here</a> for details."
@@ -595,6 +665,11 @@ var NEWS_ARTICLES = {
     }
   ],
   zh: [
+    {
+      date: "2026.06.13",
+      title: "营业日历已更新",
+      body: "详情请点击<a href='index.html#calendar' style='color:inherit;'>这里</a>查看。"
+    },
     {
       date: "2026.05.09",
       title: "企划展介绍页面「AMPIANA POP UP」已更新",
@@ -671,6 +746,11 @@ function setLang(lang) {
     }).join('');
   }
 
+  // 日本語以外でのみ表示する要素を切り替え
+  document.querySelectorAll('.lang-non-ja').forEach(function(el) {
+    el.style.display = (lang === 'ja') ? 'none' : '';
+  });
+
   // セレクトボックスの表示を更新
   document.querySelectorAll('.lang-select').forEach(function(sel) {
     sel.value = lang;
@@ -690,6 +770,9 @@ function setLang(lang) {
 
   // 商品詳細ページの翻訳を適用
   applyProductTranslations(lang);
+
+  // 商品一覧ページのカード名を翻訳
+  applyProductCardNames(lang);
 
   // ページ固有のコールバック（product.html 等で使用）
   if (typeof window.onLangChange === 'function') {
@@ -763,6 +846,32 @@ function applyProductTranslations(lang) {
   applySpec('spec_material', 'material');
   applySpec('spec_care', 'care');
   applySpec('spec_notes', 'notes');
+}
+
+// products.html のカード一覧の商品名を翻訳
+function applyProductCardNames(lang) {
+  if (!window.PRODUCT_TRANSLATIONS) return;
+  document.querySelectorAll('a.product-card[href]').forEach(function(card) {
+    var href = card.getAttribute('href');
+    var fname = href.split('/').pop().split('?')[0];
+    var pt = PRODUCT_TRANSLATIONS[fname];
+    if (!pt) return;
+    var nameEl = card.querySelector('.product-name');
+    if (!nameEl) return;
+    // テキストノードのみ更新（soldout-label spanは保持）
+    var textNode = null;
+    for (var i = 0; i < nameEl.childNodes.length; i++) {
+      if (nameEl.childNodes[i].nodeType === 3) { textNode = nameEl.childNodes[i]; break; }
+    }
+    if (!textNode) return;
+    if (!textNode._origText) textNode._origText = textNode.nodeValue;
+    if (lang === 'ja') {
+      textNode.nodeValue = textNode._origText;
+    } else {
+      var tr = pt[lang];
+      if (tr && tr.name) textNode.nodeValue = tr.name + ' ';
+    }
+  });
 }
 
 /* =====================================================

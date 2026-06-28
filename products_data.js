@@ -1930,7 +1930,7 @@ window.PRODUCTS_DATA = {
 
 
   "katayama_futamono": {
-    artist: "片山裕二（陶房月見清楽）",
+    artist: "片山裕二",
     name: "ふたもの",
     price: "¥4,950",
     category: "Ceramics",
@@ -2274,9 +2274,125 @@ window.PRODUCTS_DATA = {
     images: ["43cee3ad87692da229c899edf9a4b866","b2f1fb56f61992c6d083b7acbf27b296","33d68a2725b66ea16d448ffbfad49931","ef77bfb6bd3397c89ced1563079dc61c"],
     baseUrl: "https://fukameki.thebase.in/items/93500500"
   },
+
+  '148555224': {
+    artist: "atelier Rough atour",
+    name: "リネンガーゼ布巾",
+    price: "¥1,650",
+    category: "Fabric",
+    size: "約22〜22.5cm角",
+    material: "リネンガーゼ 100%",
+    description: "センター角ステッチが施されたリネンガーゼ素材のマルチクロス。手拭き、敷物、台拭きなど幅広くお使いいただけます。天然素材のため、ネップや個体差がございます。",
+    img: "photo/index/p148555224_01.jpg",
+    images: ["870757332f50fc7179570d387d0a1300","3296b13c01e1d79a22b5f53516c97704","a712daebb2abba2a18f9ad89605a8f24","47f78a54b125aa9b578da15719001067"],
+    baseUrl: "https://fukameki.thebase.in/items/148555224"
+  },
+
+  '148555420': {
+    artist: "atelier Rough atour",
+    name: "アンティークリネン 敷物（正方形）",
+    price: "¥2,750",
+    category: "Fabric",
+    size: "約19.5〜20.5cm角",
+    material: "アンティークリネン",
+    description: "アンティークリネンを使用したシンプルな正方形のクロスです。経年のカッコ良い風合いが引き立つ敷物として。個体差、ネップ、スレ、シミが見られる場合がございます。",
+    img: "photo/index/p148555420_01.jpg",
+    images: ["6e70c9d6b4447fbadab90c388773b974","b59c7a48c194cd52d05ca86ea52218f5","68fbbbbd0d17d9d4960481fa3d3f9179","b00cf5aa0e3156bab7310035de98c2b1","c3f21d9f9846011e43b09a6fa0d7da5b","f26d85ef86411402b55c6048c63fd83a"],
+    baseUrl: "https://fukameki.thebase.in/items/148555420"
+  },
+
+  '148554759': {
+    artist: "atelier Rough atour",
+    name: "アンティークリネン ポットマット",
+    price: "¥3,300",
+    category: "Fabric",
+    size: "約13cm角",
+    material: "アンティークリネン",
+    description: "アンティークリネンを使用したシンプルなポットマットです。程よいクッション性がありつつ、安定感のある使えるマットです。",
+    img: "photo/index/p148554759_01.jpg",
+    images: ["be16c190ed903bf7df5e01c626b7b1b0","22bbd5d78f4c029e07d8b4c8b1916819","86d20aeb94eeca445036fb01e498e8f3","d76156d8d442182dc0f91fbebc537afa","53c9c6ac5fb00437fdf447c518ea0073","d0e530a768b034e9dce29087831adb76"],
+    baseUrl: "https://fukameki.thebase.in/items/148554759"
+  },
+
+  '148553885': {
+    artist: "atelier Rough atour",
+    name: "アンティークリネン 敷布/テーブルランナー",
+    price: "¥6,600",
+    category: "Fabric",
+    size: "約80cm × 17cm",
+    material: "アンティークリネン",
+    description: "アンティークリネンを使用したシンプルな長い敷布です。茶敷布として、水滴や熱から守り、茶器を引き立ててくれます。",
+    img: "photo/index/p148553885_01.jpg",
+    images: ["edc1abf55ba9bf9dd813104e728c41e6","0a9a74bce0175f233a3e0a7f471b16e8","e0177a5c89831951df5397b299f14faf","d5fc42ca6a885add8aeca193e1e99153","3c161ed190f8302c0593cca57821f48a","28d66e91b11aa2df11e103dfe398bd01","4b35abbe53847a3d8600976722ced3ed","0fd53e8ab6e9f9d4de7413fa90cf7569"],
+    baseUrl: "https://fukameki.thebase.in/items/148553885"
+  },
+
+  '148553566': {
+    artist: "atelier Rough atour",
+    name: "ギャザーロングスカート",
+    price: "¥33,000",
+    category: "Fabric",
+    size: "着丈約85cm、ウエスト約70cm（ゴム）",
+    care: "家庭洗濯可",
+    material: "リネン 100%（表地）、コットンローン（裏地）",
+    description: "細かいギャザーが入ったリネン素材のロングスカート。オフホワイトのリネンにグレーのコットンの裏地が深みを出し、透け防止にもなっています。両脇ポケット付き、ウエストドローコード付き。",
+    img: "photo/index/p148553566_01.jpg",
+    images: ["e83cca6648f6ad1688c2ead8e1c113ca","ccea27e357132989a59ac3459864553e","124824673d25abf3484c7892c0d31fd3","d32ed31075dd361e99265375596c112b","7d405c6552d30d7015031b284551599c","e3d608f7089c74d9f82836b31aa9f339","9d106ceb6e85073cf33780602fec02c8","cca214e97b8aaf645c186138a3c65089","f883d3e7851836e597e1acb918638a41"],
+    baseUrl: "https://fukameki.thebase.in/items/148553566"
+  },
+
+  '148552520': {
+    artist: "atelier Rough atour",
+    name: "Nunnery ワンピース",
+    price: "¥37,400",
+    category: "Fabric",
+    size: "着丈約127cm、袖口周り約46cm",
+    care: "家庭洗濯可",
+    material: "リネン 100%（裏地なし）",
+    description: "修道院の制服をイメージしたワンピース。ウエストのタックとラインが美しいアイテムです。グレージュカラー。後ろ衿ボタン1つ、ウエストベルト付き、両脇ポケット付き。",
+    img: "photo/index/p148552520_01.jpg",
+    images: ["643929dba8b79f2478d3f2a3d91b8304","4c4cade39f14dd013374a99cba78f8a4","87a459a37fd0e669bdb94fa8d40b5774","c93847078205f7b15216318594e056e1"],
+    baseUrl: "https://fukameki.thebase.in/items/148552520"
+  },
+
+  '148013481': {
+    artist: "片山裕二",
+    name: "鉢（余玄）",
+    price: "¥5,500",
+    category: "Ceramics",
+    size: "φ約19.0cm、h約6.5cm",
+    care: "レンジ不可、食洗機非推奨、オーブン・直火不可。お使い前に浸水してください。",
+    material: "陶器（ガス釜仕上げ）",
+    description: "数回焼成して炭化により黒を出しています。お使い頂く前に、浸水させて器に十分水を含ませてください。色残りを防ぐため、お使い後は早めに洗ってよく乾かしてください。",
+    img: "photo/index/p148013481_01.jpg",
+    images: ["a2667c9a915450a3e14fa4ad8e983e55","be0ba579e871dcf27739d6f92b70979b","709c546f026d6d0edebb27c3a5298342","828b022d0ab03a18813e92624dc3ed57","7fdc9eb918fb641eac3ab7d5c19f0a2a","74968f24c516f6ad92e2cb01b8ef5bf9","bafbb402ed641389447ab9353b3e8fa9","3104dd161219088cc5022abd63e94f34"],
+    baseUrl: "https://fukameki.thebase.in/items/148013481"
+  },
+
+  '139505739': {
+    artist: "片山裕二",
+    name: "リム皿（余玄）6寸",
+    price: "¥5,500",
+    category: "Ceramics",
+    size: "φ約20.0cm、h約4cm",
+    care: "レンジ不可、食洗機非推奨、オーブン・直火不可。お使い前に浸水してください。",
+    material: "陶器（ガス釜仕上げ）",
+    description: "数回焼成して炭化により黒を出しています。お使い頂く前に、浸水させて器に十分水を含ませてください。色残りを防ぐため、お使い後は早めに洗ってよく乾かしてください。",
+    img: "photo/index/p139505739_01.jpg",
+    images: ["f0479de5591848cfe0d0fb68111278b4","35092ba512c6062dfa9dfbe81caa76c8","51d77baa67d4dfef646ba47fe7f3fd83","12a8ff4cac82c2ebd84d343a967f3751","d8ca93792913a1ee48a4323f98fdcce3","2b8809e6b06e5b7ace1b0b545be79644","9fe179fa4730b692ce4bebfb3b98a0cf","f158c91049023f476614bc4fbed1c18d"],
+    baseUrl: "https://fukameki.thebase.in/items/139505739"
+  },
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [
+  'product_148555224.html',
+  'product_148555420.html',
+  'product_148554759.html',
+  'product_148553885.html',
+  'product_148553566.html',
+  'product_148552520.html',
+  'product_148013481.html',
+  'product_139505739.html',
   'product_110861062.html',
   'product_145365169.html',
   'product_110860974.html',

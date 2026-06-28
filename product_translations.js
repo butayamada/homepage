@@ -2750,8 +2750,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
     desc: '以「挂分け」叠釉技法呈现如光般渐变的瓷质盖碗。盖・碗・茶托三件套。瓷器的通透感与釉色之美共同呈现出端雅的姿态。',
     specs: { size: '口径约9cm・高约5cm・容量140cc（含盖茶托总高约7.5cm）', material: '瓷器', care: '可微波炉・不可洗碗机・不可烤箱・不可直火' }
   }
+};
 
-  'product_110861062.html': {
+window.PRODUCT_TRANSLATIONS['product_110861062.html'] = {
     en: {
       name: "Rattan Brooch 1",
       desc: "A round, flower-like brooch. Handwoven rattan, dyed and varnish-coated. Features a rotating pin closure for security.",
@@ -2768,8 +2769,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_145365169.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_145365169.html'] = {
     en: {
       name: "Rattan Brooch 2",
       desc: "A round, flower-like brooch. Handwoven rattan, dyed and varnish-coated. Features a rotating pin closure for security.",
@@ -2786,8 +2788,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_110860974.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_110860974.html'] = {
     en: {
       name: "Rattan Barrette 1",
       desc: "Handwoven rattan barrette, dyed and varnish-coated.",
@@ -2804,8 +2807,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_110861037.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_110861037.html'] = {
     en: {
       name: "Rattan Barrette 2",
       desc: "Handwoven rattan barrette, dyed and varnish-coated.",
@@ -2822,8 +2826,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_93501527.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_93501527.html'] = {
     en: {
       name: "Mini Basket Brooch 1",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2840,8 +2845,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_93501333.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_93501333.html'] = {
     en: {
       name: "Mini Basket Brooch 2",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2858,8 +2864,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_93501235.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_93501235.html'] = {
     en: {
       name: "Mini Basket Brooch 3",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2876,8 +2883,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_93501116.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_93501116.html'] = {
     en: {
       name: "Mini Basket Brooch 4",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2894,8 +2902,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_67894870.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_67894870.html'] = {
     en: {
       name: "Mini Basket Brooch 5",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2912,8 +2921,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_93500887.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_93500887.html'] = {
     en: {
       name: "Mini Basket Brooch 6",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2930,8 +2940,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_93500669.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_93500669.html'] = {
     en: {
       name: "Mini Basket Brooch 7",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2948,8 +2959,9 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
-  },
-  'product_93500500.html': {
+};
+
+window.PRODUCT_TRANSLATIONS['product_93500500.html'] = {
     en: {
       name: "Mini Basket Brooch 8",
       desc: "Handwoven rattan mini basket brooch, dyed and varnish-coated with leather and fabric accents. Each piece is unique.",
@@ -2966,5 +2978,180 @@ window.PRODUCT_TRANSLATIONS['product_143983119.html'] = {
         care: "避免沾水、摩擦和碰撞。若沾湿请充分晾干后再使用。"
       }
     }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148555224.html'] = {
+  en: {
+    name: 'Linen Gauze Cloth',
+    desc: 'A linen gauze multi-cloth with center square stitching for slip prevention. Perfect for hand wiping, draping, or as a kitchen cloth. Natural material with possible size variations.',
+    artist_profile: 'An atelier creating workwear-inspired pieces under the concept of simple daily wear used carefully for a long time. They prioritize machine-washable fabrics and garments that develop character with repeated wear.',
+    specs: {
+        size: 'Approx. 22-22.5 cm square',
+        material: '100% linen gauze'
+      }
   },
+  zh: {
+    name: '亚麻纱布擦巾',
+    desc: '采用亚麻纱布制成的多功能布巾，中央正方形缝线防滑设计。可用于擦手、铺垫或厨房用途。天然素材，尺寸可能略有差异。',
+    artist_profile: '以简约日常着、长久细心使用为理念，以工装服饰为灵感打造单品的工作室。选用可机洗面料，珍视随着反复穿着而逐渐成熟的服装。',
+    specs: {
+        size: '约22～22.5cm见方',
+        material: '100%亚麻纱布'
+      }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148555420.html'] = {
+  en: {
+    name: 'Antique Linen Mat (Square)',
+    desc: 'A simple square cloth made from antique linen. The beautifully aged texture makes it perfect as a mat or coaster. Natural variations, neps, and slight imperfections are part of its vintage character.',
+    artist_profile: 'An atelier creating workwear-inspired pieces under the concept of simple daily wear used carefully for a long time. They prioritize machine-washable fabrics and garments that develop character with repeated wear.',
+    specs: {
+        size: 'Approx. 19.5-20.5 cm square',
+        material: 'Antique linen'
+      }
+  },
+  zh: {
+    name: '古董亚麻垫（正方形）',
+    desc: '使用古董亚麻制作的简约正方形桌垫。经年岁月形成的质感令人心动，适合作为杯垫或摆件底垫使用。由于是古董素材，可能存在个体差异及细微瑕疵。',
+    artist_profile: '以简约日常着、长久细心使用为理念，以工装服饰为灵感打造单品的工作室。选用可机洗面料，珍视随着反复穿着而逐渐成熟的服装。',
+    specs: {
+        size: '约19.5～20.5cm见方',
+        material: '古董亚麻'
+      }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148554759.html'] = {
+  en: {
+    name: 'Antique Linen Pot Mat',
+    desc: 'A simple pot mat made from antique linen. Provides gentle cushioning and a stable base. The beautifully aged texture adds character to any table setting.',
+    artist_profile: 'An atelier creating workwear-inspired pieces under the concept of simple daily wear used carefully for a long time. They prioritize machine-washable fabrics and garments that develop character with repeated wear.',
+    specs: {
+        size: 'Approx. 13 cm square',
+        material: 'Antique linen'
+      }
+  },
+  zh: {
+    name: '古董亚麻壶垫',
+    desc: '使用古董亚麻制成的简约壶垫，具有适度的缓冲性和稳定感。古董亚麻独特的岁月感，让茶桌更添风情。',
+    artist_profile: '以简约日常着、长久细心使用为理念，以工装服饰为灵感打造单品的工作室。选用可机洗面料，珍视随着反复穿着而逐渐成熟的服装。',
+    specs: {
+        size: '约13cm见方',
+        material: '古董亚麻'
+      }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148553885.html'] = {
+  en: {
+    name: 'Antique Linen Table Runner',
+    desc: 'A long, simple cloth made from antique linen. Designed as a tea cloth, it protects against water drops and heat while beautifully showcasing teaware.',
+    artist_profile: 'An atelier creating workwear-inspired pieces under the concept of simple daily wear used carefully for a long time. They prioritize machine-washable fabrics and garments that develop character with repeated wear.',
+    specs: {
+        size: 'Approx. 80 cm x 17 cm',
+        material: 'Antique linen'
+      }
+  },
+  zh: {
+    name: '古董亚麻桌旗/铺巾',
+    desc: '使用古董亚麻制成的简约长形铺巾。最初设计作为茶席铺布，可防水防热，同时将茶器衬托得更加优雅。',
+    artist_profile: '以简约日常着、长久细心使用为理念，以工装服饰为灵感打造单品的工作室。选用可机洗面料，珍视随着反复穿着而逐渐成熟的服装。',
+    specs: {
+        size: '约80cm × 17cm',
+        material: '古董亚麻'
+      }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148553566.html'] = {
+  en: {
+    name: 'Gathered Long Skirt',
+    desc: 'A linen long skirt with delicate gathering. Off-white linen lined with gray cotton for depth and opacity. Features two side pockets and an elastic waistband with drawstring. Machine washable.',
+    artist_profile: 'An atelier creating workwear-inspired pieces under the concept of simple daily wear used carefully for a long time. They prioritize machine-washable fabrics and garments that develop character with repeated wear.',
+    specs: {
+        size: 'Length approx. 85 cm, waist approx. 70 cm (elastic)',
+        material: 'Linen 100% (outer), cotton lawn (lining)',
+        care: 'Machine washable'
+      }
+  },
+  zh: {
+    name: '细褶长裙',
+    desc: '采用亚麻面料制作的细褶长裙。米白色亚麻面料配以灰色棉质里衬，增添层次感并防止透明。设有两侧口袋及松紧腰带（附抽绳调节）。可机洗。',
+    artist_profile: '以简约日常着、长久细心使用为理念，以工装服饰为灵感打造单品的工作室。选用可机洗面料，珍视随着反复穿着而逐渐成熟的服装。',
+    specs: {
+        size: '裙长约85cm，腰围约70cm（松紧）',
+        material: '亚麻100%（面料）、棉质细布（里衬）',
+        care: '可机洗'
+      }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148552520.html'] = {
+  en: {
+    name: 'Nunnery Dress',
+    desc: 'A dress inspired by convent uniforms, with beautiful waist tucks and silhouette. Greige linen, unlined. Features two side pockets, one back neck button, and an included waist belt. Machine washable.',
+    artist_profile: 'An atelier creating workwear-inspired pieces under the concept of simple daily wear used carefully for a long time. They prioritize machine-washable fabrics and garments that develop character with repeated wear.',
+    specs: {
+        size: 'Length approx. 127 cm, sleeve opening approx. 46 cm',
+        material: 'Linen 100% (unlined)',
+        care: 'Machine washable'
+      }
+  },
+  zh: {
+    name: 'Nunnery 连衣裙',
+    desc: '以修道院制服为灵感设计的连衣裙，腰部褶裥与线条优美大方。灰米色亚麻面料，无里衬。配有两侧口袋、后领口单颗纽扣及腰带。可机洗。',
+    artist_profile: '以简约日常着、长久细心使用为理念，以工装服饰为灵感打造单品的工作室。选用可机洗面料，珍视随着反复穿着而逐渐成熟的服装。',
+    specs: {
+        size: '裙长约127cm，袖口周长约46cm',
+        material: '亚麻100%（无里衬）',
+        care: '可机洗'
+      }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148013481.html'] = {
+  en: {
+    name: 'Bowl (Yogen)',
+    desc: 'Fired multiple times to achieve deep black through carbonization. Please soak in water before first use to allow the vessel to absorb moisture. After use, wash promptly and dry thoroughly to prevent staining.',
+    artist_profile: 'Katayama Yuji (Ceramics Studio Tsukimi Seiraku)<br>Born 1978 in Fukui Prefecture. After 12 years as a Spanish chef in Tokyo and Yokohama, he returned to his hometown in 2014. Completed the Fukui Prefecture Ceramics Guidance Center in 2016 and established his studio in Fukui City.',
+    specs: {
+        size: 'phi approx. 19.0 cm, H approx. 6.5 cm',
+        material: 'Stoneware (gas-fired kiln)',
+        care: 'No microwave, dishwasher not recommended, no oven or direct flame. Soak before first use.'
+      }
+  },
+  zh: {
+    name: '碗（余玄）',
+    desc: '经多次烧制，通过炭化呈现深邃的黑色。首次使用前请先浸水，让器皿充分吸水。使用后请及时清洗并充分晾干，以防色素残留。',
+    artist_profile: '片山裕二（陶房月见清乐）<br>1978年生于福井县。在东京、横滨从事西班牙料理厨师工作12年后，于2014年回到家乡。2016年修完福井县陶艺指导所课程，在福井市月见清乐建立工房。',
+    specs: {
+        size: '直径约19.0cm，高约6.5cm',
+        material: '陶器（燃气窑烧制）',
+        care: '不可使用微波炉，不建议洗碗机，不可使用烤箱或明火。首次使用前请先浸水。'
+      }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_139505739.html'] = {
+  en: {
+    name: 'Rim Plate (Yogen) 6-sun',
+    desc: 'Fired multiple times to achieve deep black through carbonization. Please soak in water before first use to allow the vessel to absorb moisture. After use, wash promptly and dry thoroughly to prevent staining.',
+    artist_profile: 'Katayama Yuji (Ceramics Studio Tsukimi Seiraku)<br>Born 1978 in Fukui Prefecture. After 12 years as a Spanish chef in Tokyo and Yokohama, he returned to his hometown in 2014. Completed the Fukui Prefecture Ceramics Guidance Center in 2016 and established his studio in Fukui City.',
+    specs: {
+        size: 'phi approx. 20.0 cm, H approx. 4 cm',
+        material: 'Stoneware (gas-fired kiln)',
+        care: 'No microwave, dishwasher not recommended, no oven or direct flame. Soak before first use.'
+      }
+  },
+  zh: {
+    name: '宽沿盘（余玄）六寸',
+    desc: '经多次烧制，通过炭化呈现深邃的黑色。首次使用前请先浸水，让器皿充分吸水。使用后请及时清洗并充分晾干，以防色素残留。',
+    artist_profile: '片山裕二（陶房月见清乐）<br>1978年生于福井县。在东京、横滨从事西班牙料理厨师工作12年后，于2014年回到家乡。2016年修完福井县陶艺指导所课程，在福井市月见清乐建立工房。',
+    specs: {
+        size: '直径约20.0cm，高约4cm',
+        material: '陶器（燃气窑烧制）',
+        care: '不可使用微波炉，不建议洗碗机，不可使用烤箱或明火。首次使用前请先浸水。'
+      }
+  }
 };

@@ -2455,6 +2455,11 @@ window.PRODUCTS_DATA = {
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [
+  'product_62411091.html',
+  'product_148655981.html',
+  'product_62410486.html',
+  'product_61472005.html',
+  'product_61469734.html',
   'product_148555224.html',
   'product_148555420.html',
   'product_148554759.html',

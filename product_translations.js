@@ -3133,6 +3133,121 @@ window.PRODUCT_TRANSLATIONS['product_148013481.html'] = {
   }
 };
 
+window.PRODUCT_TRANSLATIONS['product_62411091.html'] = {
+  en: {
+    name: 'Compote',
+    desc: 'A vessel with soft cream-white tones deliberately letting the black clay peek through — an antique-like presence. Pleasingly weighted for stability.',
+    artist_profile: 'Itoh Mitsuru<br>Born 1971 in Tokyo. Graduated from Tama Art University in 1997. Apprenticed under Nobuo Ohta at the Kyutsui company kiln "Tokyo." Opened his own kiln in Shinagawa, Tokyo in 2006.',
+    specs: {
+      size: 'phi approx. 22 cm, H approx. 10.5 cm',
+      material: 'Black clay (white slip, clear glaze)',
+      care: 'No dishwasher. Soak in lukewarm water for half a day before first use.'
+    }
+  },
+  zh: {
+    name: '高脚果盘',
+    desc: '柔和的米白色中刻意透出黑土底色，宛如古董般的气质。分量适中，稳定感十足。',
+    artist_profile: '伊藤满<br>1971年生于东京。1997年毕业于多摩美术大学。师从九つ井公司自家窑"陶郷"的太田信夫。2006年在东京品川开设自己的窑并延续至今。',
+    specs: {
+      size: '直径约22㎝，高约10.5㎝',
+      material: '黑土（白化妆土、透明釉）',
+      care: '不可使用洗碗机。首次使用前请在温水中浸泡半天。'
+    }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_148655981.html'] = {
+  en: {
+    name: 'Jug',
+    desc: 'A vessel with soft cream-white tones deliberately letting the black clay peek through — an antique-like presence. Can also be used as a kitchen utensil holder.',
+    artist_profile: 'Itoh Mitsuru<br>Born 1971 in Tokyo. Graduated from Tama Art University in 1997. Apprenticed under Nobuo Ohta at the Kyutsui company kiln "Tokyo." Opened his own kiln in Shinagawa, Tokyo in 2006.',
+    specs: {
+      size: 'H approx. 13 cm, phi approx. 9 cm, W approx. 12 cm (incl. handle)',
+      material: 'Black clay (white slip, clear glaze)',
+      care: 'No dishwasher. Soak in lukewarm water for half a day before first use.'
+    }
+  },
+  zh: {
+    name: '水壶',
+    desc: '柔和的米白色中刻意透出黑土底色，宛如古董般的气质。也可用作厨房收纳。',
+    artist_profile: '伊藤满<br>1971年生于东京。1997年毕业于多摩美术大学。师从九つ井公司自家窑"陶郷"的太田信夫。2006年在东京品川开设自己的窑并延续至今。',
+    specs: {
+      size: '高约13㎝，直径约9㎝，宽约12㎝（含把手）',
+      material: '黑土（白化妆土、透明釉）',
+      care: '不可使用洗碗机。首次使用前请在温水中浸泡半天。'
+    }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_62410486.html'] = {
+  en: {
+    name: 'Cutlery Holder (Large)',
+    desc: 'A vessel with soft cream-white tones deliberately letting the black clay peek through — an antique-like presence. Ideal for kitchen tools or as a vase, with food-safe silicone finish.',
+    artist_profile: 'Itoh Mitsuru<br>Born 1971 in Tokyo. Graduated from Tama Art University in 1997. Apprenticed under Nobuo Ohta at the Kyutsui company kiln "Tokyo." Opened his own kiln in Shinagawa, Tokyo in 2006.',
+    specs: {
+      size: 'H approx. 14.5 cm, phi approx. 8 cm',
+      material: 'Black clay (white slip, clear glaze)',
+      care: 'No dishwasher. Soak in lukewarm water for half a day before first use.'
+    }
+  },
+  zh: {
+    name: '餐具收纳筒（大）',
+    desc: '柔和的米白色中刻意透出黑土底色，宛如古董般的气质。可用于收纳厨房工具，食器级硅胶工艺也适合作花器使用。',
+    artist_profile: '伊藤满<br>1971年生于东京。1997年毕业于多摩美术大学。师从九つ井公司自家窑"陶郷"的太田信夫。2006年在东京品川开设自己的窑并延续至今。',
+    specs: {
+      size: '高约14.5㎝，直径约8㎝',
+      material: '黑土（白化妆土、透明釉）',
+      care: '不可使用洗碗机。首次使用前请在温水中浸泡半天。'
+    }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_61472005.html'] = {
+  en: {
+    name: 'Rinka Plate',
+    desc: 'A vessel with soft cream-white tones deliberately letting the black clay peek through — an antique-like presence.',
+    artist_profile: 'Itoh Mitsuru<br>Born 1971 in Tokyo. Graduated from Tama Art University in 1997. Apprenticed under Nobuo Ohta at the Kyutsui company kiln "Tokyo." Opened his own kiln in Shinagawa, Tokyo in 2006.',
+    specs: {
+      size: 'phi approx. 19 cm, H approx. 1 cm',
+      material: 'Black clay (white slip, clear glaze)',
+      care: 'No dishwasher. Soak in lukewarm water for half a day before first use.'
+    }
+  },
+  zh: {
+    name: '轮花盘',
+    desc: '柔和的米白色中刻意透出黑土底色，宛如古董般的气质。',
+    artist_profile: '伊藤满<br>1971年生于东京。1997年毕业于多摩美术大学。师从九つ井公司自家窑"陶郷"的太田信夫。2006年在东京品川开设自己的窑并延续至今。',
+    specs: {
+      size: '直径约19㎝，高约1㎝',
+      material: '黑土（白化妆土、透明釉）',
+      care: '不可使用洗碗机。首次使用前请在温水中浸泡半天。'
+    }
+  }
+};
+
+window.PRODUCT_TRANSLATIONS['product_61469734.html'] = {
+  en: {
+    name: 'Cutlery Holder (Small)',
+    desc: 'A vessel with soft cream-white tones deliberately letting the black clay peek through — an antique-like presence. Ideal for kitchen tools or as a vase, with food-safe silicone finish.',
+    artist_profile: 'Itoh Mitsuru<br>Born 1971 in Tokyo. Graduated from Tama Art University in 1997. Apprenticed under Nobuo Ohta at the Kyutsui company kiln "Tokyo." Opened his own kiln in Shinagawa, Tokyo in 2006.',
+    specs: {
+      size: 'H approx. 10 cm, phi approx. 6.5 cm',
+      material: 'Black clay (white slip, clear glaze)',
+      care: 'No dishwasher. Soak in lukewarm water for half a day before first use.'
+    }
+  },
+  zh: {
+    name: '餐具收纳筒（小）',
+    desc: '柔和的米白色中刻意透出黑土底色，宛如古董般的气质。可用于收纳厨房工具，食器级硅胶工艺也适合作花器使用。',
+    artist_profile: '伊藤满<br>1971年生于东京。1997年毕业于多摩美术大学。师从九つ井公司自家窑"陶郷"的太田信夫。2006年在东京品川开设自己的窑并延续至今。',
+    specs: {
+      size: '高约10㎝，直径约6.5㎝',
+      material: '黑土（白化妆土、透明釉）',
+      care: '不可使用洗碗机。首次使用前请在温水中浸泡半天。'
+    }
+  }
+};
+
 window.PRODUCT_TRANSLATIONS['product_139505739.html'] = {
   en: {
     name: 'Rim Plate (Yogen) 6-sun',

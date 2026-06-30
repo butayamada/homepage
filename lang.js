@@ -295,7 +295,7 @@ var LANG_TRANSLATIONS = {
     kamiue_title:      "Yukue Kamiue Solo Exhibition",
     yoshida_title:     "yoshida pottery Solo Exhibition",
     jhen_title:        "Jhen Sensei's Everyday Clothes Exhibition",
-    hashida_title:     "Toshiya Hashida Solo Exhibition",
+    hashida_title:     "Toshiya Hanada Solo Exhibition",
 
     shop_coming:       "Online shop coming soon.<br>Please check back later.",
 

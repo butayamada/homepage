@@ -105,6 +105,7 @@ var LANG_TRANSLATIONS = {
     yoshida_title:     "yoshida pottery 個展",
     jhen_title:        "ヂェン先生の日常着展",
     hashida_title:     "端田敏也 個展",
+    fuyugomori_title:  "冬ごもり",
 
     // onlineshop.html
     shop_coming:       "オンラインショップは準備中です。<br>今しばらくお待ちください。",
@@ -296,6 +297,7 @@ var LANG_TRANSLATIONS = {
     yoshida_title:     "yoshida pottery Solo Exhibition",
     jhen_title:        "Jhen Sensei's Everyday Clothes Exhibition",
     hashida_title:     "Toshiya Hanada Solo Exhibition",
+    fuyugomori_title:  "Fuyugomori",
 
     shop_coming:       "Online shop coming soon.<br>Please check back later.",
 
@@ -481,6 +483,7 @@ var LANG_TRANSLATIONS = {
     yoshida_title:     "yoshida pottery 个展",
     jhen_title:        "郑惠中日常服展",
     hashida_title:     "端田敏也 个展",
+    fuyugomori_title:  "冬居",
 
     shop_coming:       "网络商店准备中，<br>请稍后查看。",
 

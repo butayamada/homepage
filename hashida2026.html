@@ -149,6 +149,13 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
   font-size: 0.65rem; letter-spacing: 0.12em;
   color: var(--light-gray); margin-bottom: 1rem; line-height: 1.6;
 }
+.artist-card-ig {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.65rem; letter-spacing: 0.1em;
+  color: var(--mid-gray); text-decoration: none; transition: color 0.2s;
+}
+.artist-card-ig:hover { color: var(--black); }
 @media (max-width: 600px) {
   .artists-section { padding: 4rem 1.5rem; }
   .artists-grid { grid-template-columns: 1fr; gap: 1.8rem; }
@@ -184,6 +191,10 @@ footer p { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dark-gray); t
     <div class="artist-card">
       <p class="artist-card-name">端田敏也</p>
       <p class="artist-card-genre">陶芸</p>
+      <a href="https://www.instagram.com/smoochy.s/" target="_blank" rel="noopener" class="artist-card-ig">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @smoochy.s
+      </a>
     </div>
   </div>
 </section>

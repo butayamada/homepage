@@ -16,6 +16,7 @@ window.PRODUCTS_DATA = {
     baseUrl: "https://fukameki.thebase.in/items/149871262"
   },
   "149871338": {
+    soldout: true,
     artist: "前田彰子",
     name: "リングレスト「しずく」小さめ",
     price: "¥3,300",

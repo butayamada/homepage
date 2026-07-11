@@ -1149,7 +1149,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var fname = PRODUCTS_ORDER[i];
       var key = fname.replace(/^product_/, '').replace(/\.html$/, '');
       var p = PRODUCTS_DATA[key];
-      if (!p) continue;
+      if (!p || p.soldout) continue;
       // price は数値（3080）・文字列（"¥3,080"）どちらでも正規化
       var priceStr = typeof p.price === 'number'
         ? '¥' + p.price.toLocaleString('ja-JP')

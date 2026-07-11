@@ -4,6 +4,17 @@
 var BASE_IMG = 'https://baseec-img-mng.akamaized.net/images/item/origin/';
 window.PRODUCTS_DATA = {
 
+  "149871262": {
+    artist: "前田彰子",
+    name: "リングレスト「しずく」大きめ",
+    price: "¥3,850",
+    category: "Glass",
+    description: "ガラス作家、前田彰子制作のリングレストです。しずく形の愛らしいフォルムで、指輪やピアスなどアクセサリーをそっと受け止めてくれます。厚みとポテっとした丸みが手になじみ、インテリアとしても絵になる一品です。",
+    care: "耐熱ではありません。電子レンジ・食洗機使用不可。",
+    img: "photo/index/p149871262_01.jpg",
+    images: ["8de260539725033ba9030c96da6700aa","25f80fde62a63cdd4d082e65842012cb","eb1cc59de07bf9280735f03c8416e366"],
+    baseUrl: "https://fukameki.thebase.in/items/149871262"
+  },
   "149871338": {
     artist: "前田彰子",
     name: "リングレスト「しずく」小さめ",
@@ -2499,6 +2510,7 @@ window.PRODUCTS_DATA = {
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [
+  'product_149871262.html',
   'product_149871338.html',
   'product_149871111.html',
   'product_149870960.html',

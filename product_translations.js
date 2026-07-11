@@ -1087,6 +1087,66 @@ window.PRODUCT_TRANSLATIONS = {
     }
   },
 
+  'product_149871338.html': {
+    en: {
+      name: "Ring Rest \"Shizuku\" (Small)",
+      desc: "A charming droplet-shaped ring rest that gently cradles rings, earrings, and other accessories. The satisfying thickness and rounded form fits comfortably in the hand and makes a beautiful decorative accent too.",
+      artist_profile: "Maeda Shoko<br>Creates her own work alongside assisting at a glass workshop in Fukuoka. Active through solo exhibitions, events, and consignment. Motto: unadorned, simple items for easy everyday use.",
+      specs: { care: "Not heat-resistant. Not microwave or dishwasher safe." }
+    },
+    zh: {
+      name: "首饰托「水滴」小款",
+      desc: "水滴形状的可爱首饰托，能温柔地承托戒指、耳环等饰品。厚实而圆润的造型握感舒适，也是极具美感的室内装饰品。",
+      artist_profile: "前田彰子<br>在福冈的玻璃工房一边协助工作，一边创作自己的作品。以个展、活动展出及寄售等方式进行创作活动。创作理念：朴实简约，适合日常随手使用的物品。",
+      specs: { care: "非耐热。不可使用微波炉及洗碗机。" }
+    }
+  },
+
+  'product_149871111.html': {
+    en: {
+      name: "Hanging Flower Vase — Clear",
+      desc: "A wall-mounted flower vase with sturdy wire included. The clear glass is beautifully transparent, and when light hits it, the vase seems to melt into the surrounding space.",
+      artist_profile: "Maeda Shoko<br>Creates her own work alongside assisting at a glass workshop in Fukuoka. Active through solo exhibitions, events, and consignment. Motto: unadorned, simple items for easy everyday use.",
+      specs: { care: "Not heat-resistant. Not microwave or dishwasher safe." }
+    },
+    zh: {
+      name: "悬挂花器 透明",
+      desc: "附带结实挂钩的壁挂式花器。透明玻璃质感通透，光线照射时如同融入周围空间，令人心旷神怡。",
+      artist_profile: "前田彰子<br>在福冈的玻璃工房一边协助工作，一边创作自己的作品。以个展、活动展出及寄售等方式进行创作活动。创作理念：朴实简约，适合日常随手使用的物品。",
+      specs: { care: "非耐热。不可使用微波炉及洗碗机。" }
+    }
+  },
+
+  'product_149870960.html': {
+    en: {
+      name: "POT — Clear",
+      desc: "A glass pot (clear). Water can be added and sipped from the small cup used as a lid. No fixed purpose — Maeda uses hers for storing beans. A charming piece for easy everyday use.",
+      artist_profile: "Maeda Shoko<br>Creates her own work alongside assisting at a glass workshop in Fukuoka. Active through solo exhibitions, events, and consignment. Motto: unadorned, simple items for easy everyday use.",
+      specs: { care: "Not heat-resistant. Not microwave or dishwasher safe." }
+    },
+    zh: {
+      name: "POT 透明",
+      desc: "玻璃罐（透明）。可注入清水，将附带的小杯作为盖子使用。用途不限，前田本人用它来储存豆子。适合日常随意使用的可爱单品。",
+      artist_profile: "前田彰子<br>在福冈的玻璃工房一边协助工作，一边创作自己的作品。以个展、活动展出及寄售等方式进行创作活动。创作理念：朴实简约，适合日常随手使用的物品。",
+      specs: { care: "非耐热。不可使用微波炉及洗碗机。" }
+    }
+  },
+
+  'product_149870834.html': {
+    en: {
+      name: "POT — Colour",
+      desc: "A glass pot (colour: soft green and yellow). A small cup doubles as the lid for drinking. No fixed purpose — use it however you like. Available in two delicate tints.",
+      artist_profile: "Maeda Shoko<br>Creates her own work alongside assisting at a glass workshop in Fukuoka. Active through solo exhibitions, events, and consignment. Motto: unadorned, simple items for easy everyday use.",
+      specs: { care: "Not heat-resistant. Not microwave or dishwasher safe." }
+    },
+    zh: {
+      name: "POT 彩色",
+      desc: "玻璃罐（彩色：浅绿与浅黄）。附带的小杯可用作盖子饮用。用途随意，提供两种淡雅色彩可选。",
+      artist_profile: "前田彰子<br>在福冈的玻璃工房一边协助工作，一边创作自己的作品。以个展、活动展出及寄售等方式进行创作活动。创作理念：朴实简约，适合日常随手使用的物品。",
+      specs: { care: "非耐热。不可使用微波炉及洗碗机。" }
+    }
+  },
+
   'product_113571039.html': {
     en: {
       name: "Jagged Glass Flower Vase — Colour",

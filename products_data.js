@@ -4,6 +4,50 @@
 var BASE_IMG = 'https://baseec-img-mng.akamaized.net/images/item/origin/';
 window.PRODUCTS_DATA = {
 
+  "149871338": {
+    artist: "前田彰子",
+    name: "リングレスト「しずく」小さめ",
+    price: "¥3,300",
+    category: "Glass",
+    description: "ガラス作家、前田彰子制作のリングレストです。しずく形の愛らしいフォルムで、指輪やピアスなどアクセサリーをそっと受け止めてくれます。厚みとポテっとした丸みが手になじみ、インテリアとしても絵になる一品です。",
+    care: "耐熱ではありません。電子レンジ・食洗機使用不可。",
+    img: "photo/index/p149871338_01.jpg",
+    images: ["eadfa707e3cecc344fc20e35cf63efd9","646edcbfd7216c081298541308321dbf","76038debb5f321065922823e878cf298","7bebe6659f3cb3ea7ad033332104b024","9fbf8d6d3dc7d3e4b9c3c0eee9a44b3b"],
+    baseUrl: "https://fukameki.thebase.in/items/149871338"
+  },
+  "149871111": {
+    artist: "前田彰子",
+    name: "つり花入れ クリア",
+    price: "¥3,850",
+    category: "Glass",
+    description: "ガラス作家、前田彰子制作のつり花入れです。丈夫なワイヤーが付属された壁掛け専用の花器です。クリアタイプで透明感が美しく、光が当たると空間に溶け込むように飾れます。",
+    care: "耐熱ではありません。電子レンジ・食洗機使用不可。",
+    img: "photo/index/p149871111_01.jpg",
+    images: ["2fa8f6ac742392e12f3a39aa7e9fff30","66f93726525ee078da8c521da7e8f253","79f25905839cf7d85860c4babf1c56d5","b8daea23be4853ef7ad4d4ab30a0152c","b93e9eb2af0757b7b8c653b2cda7f5a2","1647fc14ee4677a4b9a7aa20b187e58c","c8f49b416aca2f771efeabb8d18bd853","b73b21639b913fedf33523c25cf5ad13"],
+    baseUrl: "https://fukameki.thebase.in/items/149871111"
+  },
+  "149870960": {
+    artist: "前田彰子",
+    name: "POT クリア",
+    price: "¥12,100",
+    category: "Glass",
+    description: "ガラス作家、前田彰子制作のPOTです。水を入れて、蓋として被せてあるコップで飲むことも。用途に決まりはなく、前田さんはお豆の保存容器として使っています。日常で気軽に使える愛らしい一品です。",
+    care: "耐熱ではありません。電子レンジ・食洗機使用不可。",
+    img: "photo/index/p149870960_01.jpg",
+    images: ["1eb70fac517f90933b8a4b2a7dccaa5b","19441ba96106ada332ab1b0c139bd409","85e03a6825d153f2356703287e2255a0","00262a4a8eadbdee019017f8ac71bf26","ba8be450f51ecd0bf1e83c964d4bf34b"],
+    baseUrl: "https://fukameki.thebase.in/items/149870960"
+  },
+  "149870834": {
+    artist: "前田彰子",
+    name: "POT カラー",
+    price: "¥14,300",
+    category: "Glass",
+    description: "ガラス作家、前田彰子制作のPOT（カラータイプ）です。水を入れて、蓋として被せてあるコップで飲むことも。用途に決まりはなく、薄付きのグリーンとイエローの2色展開です。",
+    care: "耐熱ではありません。電子レンジ・食洗機使用不可。",
+    img: "photo/index/p149870834_01.jpg",
+    images: ["eb04a94034094d0c845093d468cabde6","e02a38f1d6db9d1c83a9851a8d0f1a77","5b140a19686ae73bad5cf02d280920d4","58f310c476180157fea6dfe3ad99d692","30d68b38105de9a13e9dc6fa63b347ca","7d2374c89a8c124b3aa7d3d8cf38b2fe","ff0151b4e431d4ea973f91bde7925849"],
+    baseUrl: "https://fukameki.thebase.in/items/149870834"
+  },
   "62411091": {
     artist: "伊藤満",
     name: "コンポート",
@@ -2455,6 +2499,10 @@ window.PRODUCTS_DATA = {
 }; // END PRODUCTS_DATA
 
 window.PRODUCTS_ORDER = [
+  'product_149871338.html',
+  'product_149871111.html',
+  'product_149870960.html',
+  'product_149870834.html',
   'product_62411091.html',
   'product_148655981.html',
   'product_62410486.html',

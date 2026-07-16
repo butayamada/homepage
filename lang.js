@@ -198,7 +198,36 @@ var LANG_TRANSLATIONS = {
     spec_notes:        "注意事項",
     btn_buy:           "購入はこちら",
     btn_purchase:      "BASEで購入する",
-    purchase_intl_note: ""
+    purchase_intl_note: "",
+
+    // チャットウィジェット（chat_widget.js）
+    chat_label:            "相談",
+    chat_title:            "お問い合わせ — Chat",
+    chat_greeting:         "こんにちは。よくあるご質問にはすぐにお答えします。",
+    chat_chip_hours:       "営業時間",
+    chat_chip_access:      "アクセス",
+    chat_chip_exhibition:  "展示情報",
+    chat_chip_shop:        "オンライン購入",
+    chat_chip_other:       "その他の質問",
+    chat_placeholder:      "ご質問をどうぞ",
+    chat_send:             "送信",
+    chat_related:          "関連する質問",
+    chat_escalation_intro: "この内容はスタッフから直接お答えします。ご連絡先をお知らせください。",
+    chat_esc_name:         "お名前",
+    chat_esc_email:        "メールアドレス",
+    chat_esc_question:     "ご質問内容",
+    chat_esc_send:         "この内容で送信する",
+    chat_esc_success:      "お問い合わせありがとうございます。内容を確認のうえ、折り返しご連絡いたします。お急ぎの場合はInstagramのDMもご利用いただけます。",
+    chat_esc_error:        "送信に失敗しました。しばらく経ってからもう一度お試しください。",
+    chat_close:            "閉じる",
+
+    // 表紙+詳細ページ構成（指示書06）のnavラベル
+    nav_event:   "Events",
+    nav_about:   "About",
+    nav_access:  "Access",
+    nav_calendar: "Calendar",
+    nav_shop:    "Online Shop",
+    nav_contact: "Contact"
   },
 
   en: {
@@ -384,7 +413,34 @@ var LANG_TRANSLATIONS = {
     spec_notes:        "Notes",
     btn_buy:           "Purchase",
     btn_purchase:      "Purchase on BASE",
-    purchase_intl_note: "International shipping is available via BASE. Orders from around the world are welcome."
+    purchase_intl_note: "International shipping is available via BASE. Orders from around the world are welcome.",
+
+    chat_label:            "Chat",
+    chat_title:            "Contact — Chat",
+    chat_greeting:         "Hello! I can answer common questions right away.",
+    chat_chip_hours:       "Hours",
+    chat_chip_access:      "Access",
+    chat_chip_exhibition:  "Exhibitions",
+    chat_chip_shop:        "Online Shop",
+    chat_chip_other:       "Other Question",
+    chat_placeholder:      "Ask a question",
+    chat_send:             "Send",
+    chat_related:          "Related questions",
+    chat_escalation_intro: "Our staff will answer this directly. Please share your contact details.",
+    chat_esc_name:         "Name",
+    chat_esc_email:        "Email",
+    chat_esc_question:     "Your question",
+    chat_esc_send:         "Send",
+    chat_esc_success:      "Thank you for contacting us. We will confirm the details and get back to you. For urgent matters, you're also welcome to DM us on Instagram.",
+    chat_esc_error:        "Something went wrong sending this. Please try again in a moment.",
+    chat_close:            "Close",
+
+    nav_event:   "Events",
+    nav_about:   "About",
+    nav_access:  "Access",
+    nav_calendar: "Calendar",
+    nav_shop:    "Online Shop",
+    nav_contact: "Contact"
   },
 
   zh: {
@@ -399,7 +455,7 @@ var LANG_TRANSLATIONS = {
     ex_label:       "展览",
     ex_title:       "企划展",
     ex_period:      "2026.07.18 – 07.25",
-    ex_name:        "夏目",
+    ex_name:        "夏之迹",
     ex_desc:        "夏末四位作家联合展览。以玻璃工艺、服饰、饰品为主，汇聚点缀日常生活的手工艺品。",
     ex_btn:         "查看详情",
     access_title:   "交通方式",
@@ -472,7 +528,7 @@ var LANG_TRANSLATIONS = {
     color_access_v:     "从阪急电铁箕面线箕面站步行5分钟<br>无停车场",
 
     coming_sub:        "详情准备中，<br>请稍后查看。",
-    natsumeku_title:   "夏目",
+    natsumeku_title:   "夏之迹",
     natsumeku_desc:    "夏末四位作家联合展览。以玻璃工艺、服饰、饰品为主，汇聚点缀日常生活的手工艺品。",
     natsumeku_period_v: "2026年7月18日（六）— 7月25日（六）",
     natsumeku_hours_v:  "13:00 — 18:00",
@@ -570,7 +626,34 @@ var LANG_TRANSLATIONS = {
     spec_notes:        "注意事项",
     btn_buy:           "立即购买",
     btn_purchase:      "在BASE购买",
-    purchase_intl_note: "BASE平台支持国际配送，欢迎来自世界各地的订购。"
+    purchase_intl_note: "BASE平台支持国际配送，欢迎来自世界各地的订购。",
+
+    chat_label:            "咨询",
+    chat_title:            "咨询 — Chat",
+    chat_greeting:         "您好，我可以立即回答常见问题。",
+    chat_chip_hours:       "营业时间",
+    chat_chip_access:      "交通方式",
+    chat_chip_exhibition:  "展览信息",
+    chat_chip_shop:        "网上购买",
+    chat_chip_other:       "其他问题",
+    chat_placeholder:      "请输入您的问题",
+    chat_send:             "发送",
+    chat_related:          "相关问题",
+    chat_escalation_intro: "此问题将由工作人员直接回复，请留下您的联系方式。",
+    chat_esc_name:         "姓名",
+    chat_esc_email:        "邮箱",
+    chat_esc_question:     "您的问题",
+    chat_esc_send:         "发送",
+    chat_esc_success:      "感谢您的咨询，我们确认内容后会尽快回复。如有急事，也欢迎通过Instagram私信联系我们。",
+    chat_esc_error:        "发送失败，请稍后再试一次。",
+    chat_close:            "关闭",
+
+    nav_event:   "Events",
+    nav_about:   "About",
+    nav_access:  "Access",
+    nav_calendar: "Calendar",
+    nav_shop:    "Online Shop",
+    nav_contact: "Contact"
   }
 };
 

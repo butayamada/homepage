@@ -13,7 +13,8 @@ window.PRODUCTS_DATA = {
     care: "耐熱ではありません。電子レンジ・食洗機使用不可。",
     img: "photo/index/p149871262_01.jpg",
     images: ["8de260539725033ba9030c96da6700aa","25f80fde62a63cdd4d082e65842012cb","eb1cc59de07bf9280735f03c8416e366"],
-    baseUrl: "https://fukameki.thebase.in/items/149871262"
+    baseUrl: "https://fukameki.thebase.in/items/149871262",
+    soldout: true
   },
   "149871338": {
     soldout: true,
@@ -47,7 +48,8 @@ window.PRODUCTS_DATA = {
     care: "耐熱ではありません。電子レンジ・食洗機使用不可。",
     img: "photo/index/p149870960_01.jpg",
     images: ["1eb70fac517f90933b8a4b2a7dccaa5b","19441ba96106ada332ab1b0c139bd409","85e03a6825d153f2356703287e2255a0","00262a4a8eadbdee019017f8ac71bf26","ba8be450f51ecd0bf1e83c964d4bf34b"],
-    baseUrl: "https://fukameki.thebase.in/items/149870960"
+    baseUrl: "https://fukameki.thebase.in/items/149870960",
+    invId: "1777346394549"
   },
   "149870834": {
     artist: "前田彰子",
@@ -71,7 +73,9 @@ window.PRODUCTS_DATA = {
     care: "食洗機使用不可。使用前にぬるま湯で半日浸水推奨。",
     img: "photo/index/p62411091_01.jpg",
     images: ["866cfa93d63ba5390649c89f920cb822","8c29dcb26d8a38850cdae26a2614b00e","e202acaf5e800e413fc34d7a8e5e1d11","2d29e66c54d108147f68f43a6584d666","9a5c45fd12d2084af2404a1470aab598","9e37c0d6d6b3341d58a4f87eec93b183","51bb0715ba1f3da9af4acc0903c6388c","3a3dc88cc2a6d103a40273b6bec21cce","9629a2119f0b58e012b4ec38158afb79"],
-    baseUrl: "https://fukameki.thebase.in/items/62411091"
+    baseUrl: "https://fukameki.thebase.in/items/62411091",
+    shopify: "gid://shopify/ProductVariant/46128215621818",
+    invId: "1782804875107"
   },
 
   "148655981": {
@@ -85,7 +89,9 @@ window.PRODUCTS_DATA = {
     care: "食洗機使用不可。使用前にぬるま湯で半日浸水推奨。",
     img: "photo/index/p148655981_01.jpg",
     images: ["3a15254a87a87cae55b2a7a707e766f9","2374d89160c7453d65dcd711afba2377","648d6b023f165f123747ccac368a7329"],
-    baseUrl: "https://fukameki.thebase.in/items/148655981"
+    baseUrl: "https://fukameki.thebase.in/items/148655981",
+    shopify: "gid://shopify/ProductVariant/46128215556282",
+    invId: "1782805006510"
   },
 
   "62410486": {
@@ -99,7 +105,9 @@ window.PRODUCTS_DATA = {
     care: "食洗機使用不可。使用前にぬるま湯で半日浸水推奨。",
     img: "photo/index/p62410486_01.jpg",
     images: ["1de44b7f6bb1f5b700ad9f4a1377e1dd","8af90048e5784b42e7d6fd900b3a2090","386171739283847220da392a44d010b6","c30f17af5a65670e87c12e7fd2830bbc","b2e0bc5aa1e987a377afc503d9af160f","65482f185b8257d75776dce7aca58104","8196da6bcd5af9e096b4284fdb8cc5f0","9200752bc6ba1ae1eead2044a5600021"],
-    baseUrl: "https://fukameki.thebase.in/items/62410486"
+    baseUrl: "https://fukameki.thebase.in/items/62410486",
+    shopify: "gid://shopify/ProductVariant/46128215359674",
+    invId: "1782805108289"
   },
 
   "61472005": {
@@ -113,7 +121,8 @@ window.PRODUCTS_DATA = {
     care: "食洗機使用不可。使用前にぬるま湯で半日浸水推奨。",
     img: "photo/index/p61472005_01.jpg",
     images: ["09f3e644801c15f133cd0b1548049d22","da2366487f0288e14ac07a76b19ae582","9c8232999e454b57362971f09164c5f0","908671c256e53347604d142e9639bf20","c08889e7762adbbb02f31890c11009f0","a47f9fa661fbe2a42707ce4efc4b46a3"],
-    baseUrl: "https://fukameki.thebase.in/items/61472005"
+    baseUrl: "https://fukameki.thebase.in/items/61472005",
+    invId: "1782805196291"
   },
 
   "61469734": {
@@ -127,7 +136,9 @@ window.PRODUCTS_DATA = {
     care: "食洗機使用不可。使用前にぬるま湯で半日浸水推奨。",
     img: "photo/index/p61469734_01.jpg",
     images: ["028392138a5623fb578b3ec43f8b4e61","c80829c251b92274a64ed32c1ef9f08d","29620de74a43462a1ade77631468ea94","46fbfc1786a9096189f99508848886ab","2cb42aa871ea8c3acbda4e86e04c73b8","b16fb5679fb7fa793d76f0678858fbb8","9e320ebaa2a856d5e58b0b19c98d93d6","622022bc5e36fc4f079927cadc803475"],
-    baseUrl: "https://fukameki.thebase.in/items/61469734"
+    baseUrl: "https://fukameki.thebase.in/items/61469734",
+    shopify: "gid://shopify/ProductVariant/46128214933690",
+    invId: "1782805275786"
   },
 
   "139504696": {
@@ -140,7 +151,9 @@ window.PRODUCTS_DATA = {
     care: "レンジ・食洗機使用可。急激な温度変化に注意。",
     img: "photo/index/p139504696_01.jpg",
     images: ["be64686ae5118c13812609a65e9e3815","c5940a6ecd356a1d46315f9912f3912e","4f87f8be64c40d5bf55c411bd9ffed8a","dcae4f90d78b9e88b003dbd97389db71","f736cc526122683640ef266aea515dae","c1ca95db16c3b81d2fba02e94b343140","60acf217c17bd43c7305e3d3306431e6","307ff9bf1ca7be91db44f27beb31cc0b","f21ed2cd7349aa0cd6833ff9c4eebd87","bfa744c5b43b0fe190f3b7694156204f"],
-    baseUrl: "https://fukameki.thebase.in/items/139504696"
+    baseUrl: "https://fukameki.thebase.in/items/139504696",
+    shopify: "gid://shopify/ProductVariant/46128255697082",
+    invId: "1782807727370"
   },
 
   "98892230": {
@@ -153,7 +166,9 @@ window.PRODUCTS_DATA = {
     care: "レンジ・食洗機使用不可。オイル仕上げのため定期的なオイルケアを推奨。",
     img: "photo/index/p98892230_01.jpg",
     images: ["079165a872c068960b7fa8bf25a692ad","22c123d2d4d378c84ac75a5dc295738f","00f2ce199ec3d06914255c1fd98a17ee","3250f43e8b4ba995685a69efdd792af8","0315a3d495b276307bee285e5e46e396"],
-    baseUrl: "https://fukameki.thebase.in/items/98892230"
+    baseUrl: "https://fukameki.thebase.in/items/98892230",
+    shopify: "gid://shopify/ProductVariant/46128256024762",
+    invId: "1782887724834"
   },
 
   "95190098": {
@@ -181,6 +196,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p88815090_01.jpg",
     images: ["1a7ef5138860b7a27842f67c122cfbd5","02e441bd395c8f2042b65108b7b2141d","71d082dad374b386b1616c08d2baaaa2","fa3312f39c3860fce7015ca7c42129a9"],
     baseUrl: "https://fukameki.thebase.in/items/88815090"
+,
+    shopify: "gid://shopify/ProductVariant/46128256155834"
   },
 
   "139495741": {
@@ -194,6 +211,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p139495741_01.jpg",
     images: ["9d582db11d2d8f4f852a102badcc9637","970512dbe266fb4f2b839af9d526190b","0ff86ea4a2922bd4d6b310fd2d7620ad","224a515711580b7250c22e32da30790d"],
     baseUrl: "https://fukameki.thebase.in/items/139495741"
+,
+    shopify: "gid://shopify/ProductVariant/46128256286906"
   },
 
   "139495480": {
@@ -220,7 +239,9 @@ window.PRODUCTS_DATA = {
     care: "レンジ・食洗機使用不可。オイル仕上げのため定期的なオイルケアを推奨。",
     img: "photo/index/p95189885_01.jpg",
     images: ["bfd09c5025419c157934aca64c8fc5ef","bb9d4017d3343f4c80af1ebb97c57d80","a229dc04ef870f24aeb19684118aea9c","f4ef07ad94bab566afbf6522cfe03584","3bb084a687ee580bc8f6b42c8c660466"],
-    baseUrl: "https://fukameki.thebase.in/items/95189885"
+    baseUrl: "https://fukameki.thebase.in/items/95189885",
+    shopify: "gid://shopify/ProductVariant/46128256745658",
+    invId: "1782890138415"
   },
 
   "95189456": {
@@ -234,6 +255,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p95189456_01.jpg",
     images: ["d35117492724d9c536502cdfa5e2e4e8","35bc1526f8baee973702af94d36bb06a","a0d07f783330bb4456ab5ca555a36665","4fe192c9778f275be4fb46508acb6700","4b087f7f506ba2e24e6daebe7093804e","b58b6466dfa6feca3f4057538d7e09c6","1c45c984187a12cddf381e300fd86fce"],
     baseUrl: "https://fukameki.thebase.in/items/95189456"
+,
+    shopify: "gid://shopify/ProductVariant/46128256811194"
   },
 
   "95189624": {
@@ -246,7 +269,9 @@ window.PRODUCTS_DATA = {
     care: "レンジ・食洗機使用不可。オイル仕上げのため定期的なオイルケアを推奨。",
     img: "photo/index/p95189624_01.jpg",
     images: ["d58ce3a095683f8f7582ed788903ebf8","fb42b45185fd0d47fa67df45f0311560","bd2b8ea0f7ff7917f9c939016b0be098","45d48950e83ff8f54444c0005cc25071","092fa2b2d3a5c9f79f44f97f7090063e","97d3390f424c7abf486960f9c2eb3b3f"],
-    baseUrl: "https://fukameki.thebase.in/items/95189624"
+    baseUrl: "https://fukameki.thebase.in/items/95189624",
+    shopify: "gid://shopify/ProductVariant/46128257106106",
+    invId: "1782890282731"
   },
 
   "139496523": {
@@ -274,6 +299,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p110820832_01.jpg",
     images: ["a7eb894d9b309ca68e43665c126e614d","3df54160d2f63db42bd8fdf515968b45","afd6ce717e9c97ef4dafad7553fff4d5","aa914406a3bb78be8a035a78e6d480d6","3eda8d2bd8235f919adafdc3545a2782","2503cc48caebc94b5c5aa9878610b580","aa8bb3fdf20ae046e12c5e493bf26a78","51d4d40f13ef8afb5e5e4166902e10e1","e612eeac0c8a5388609606b1e905a056"],
     baseUrl: "https://fukameki.thebase.in/items/110820832"
+,
+    shopify: "gid://shopify/ProductVariant/46128259465402"
   },
 
   "110820530": {
@@ -327,6 +354,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p110820417_01.jpg",
     images: ["d06f4321b999d320b5de7218e7560fe8","53822cf1dc7a959f8bfad4205e360b8c","5203879c028a5d686e95dea84c943037","df900036231e07c6b4da5f9b8fd80759","49bcf094b5d14fd7d80a2cd08d0257a0","6922d4792805c4042fe6788a9e70d7c2","dd800280e08c3932e268393def17e0b2","048b3f58935e02bc8e2f80d6b43f1e6b"],
     baseUrl: "https://fukameki.thebase.in/items/110820417"
+,
+    shopify: "gid://shopify/ProductVariant/46128260907194"
   },
 
   "139486861": {
@@ -340,6 +369,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p139486861_01.jpg",
     images: ["8988fd821540dfa16c8c8a91121ef108","73d7c01448d8606d63212492da797252","eac41c73da2895b54aabb6ada8ade21f","31f8be8c502ee6eaec15bf05528050ff","92c697ba0ffd5c70175c894fa6fd9065","163725ab6e98df517a5b47a78d403943","b44a694740d611819fb2e29effda766c","680f2116e162fdf9824a278e05cd3dcf","99ab5c2ab72d2810ec7b2396f6346ec4","e2c41a0717ebff0db978831fa0862135"],
     baseUrl: "https://fukameki.thebase.in/items/139486861"
+,
+    shopify: "gid://shopify/ProductVariant/46128261005498"
   },
 
   "139487002": {
@@ -379,6 +410,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p139488635_01.jpg",
     images: ["d7e229bf42d80309fb61220147ccf2ad","fc2c17dc3eed11a41f66ad8c6e095982","b9c2ec6fc0ecf4f44504f0e8c685aba3","ecaeb4791790449d093b08e68fb5107c","8c56401f161247138e183119df468358","f7d80e241f90ec240253f783d084cf35","7b4f8119a6921d044736191cade0d3e5","f9f0ddfbf3f6fc9566b2a850207269c7","328bc86ec568f7aca3e69d1f5db1ec15","56dfc8a5bba475abf34f10a147250868","11a56349b00ad46e9b640c177b3ef135"],
     baseUrl: "https://fukameki.thebase.in/items/139488635"
+,
+    shopify: "gid://shopify/ProductVariant/46128261791930"
   },
 
   "72229485": {
@@ -393,6 +426,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p72229485_01.jpg",
     images: ["316d2edced2b3f4b04e2fa041410722b","181c555413887d2e11531573d697338f","fa1815622ae33c9592375e1db7c7fa51","e19afc4deeec27a27177d7ad134f7519"],
     baseUrl: "https://fukameki.thebase.in/items/72229485"
+,
+    shopify: "gid://shopify/ProductVariant/46128262086842"
   },
 
 
@@ -445,6 +480,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p53567162_01.jpg",
     images: ["5e9a38c395ecef2a663685839b7ba4e3","61f7534b8f79ebb928ef83768b706081","ff26fd27265a99ba44a7df4947987fb5","bddf10c52d668e59e00a641c2bc7d855","2f7cc739b5ac0bc31389df6edee50503","6d4a7e08446fa00f043f1f6b222096f4","3944fb87474b0213ff0eec14031b84d9","7594179757b4f1e8cbff0a99e23eac91","f639aa057c2cb65168d470235d1fe5de","a5861e486d8aeddfdd1ad83b26a80682"],
     baseUrl: "https://fukameki.thebase.in/items/53567162"
+,
+    shopify: "gid://shopify/ProductVariant/46128555819194"
   },
 
   "53569545": {
@@ -457,7 +494,8 @@ window.PRODUCTS_DATA = {
     description: "外側がコットン、内側がシルクの2重構造。あたたかいのに通気性があって蒸れない。耐久性が高く毛玉になりにくい、長く愛用できる靴下。",
     img: "photo/index/p53569545_01.jpg",
     images: ["f8c7d704522682db06aefc19fce0eabd","029f3eb4fa0efad9865e7153de77db56","5c97a29c8b80b163bb536ca788260d41","1e16d93d0c4fe8ec03cbe1e4c7ea0aff","31264c36c27482f65a51147a434db00c","326c238710d2c860eb65543489194e34","71b3f5de95ba23c77b9d53bdbd2655c6"],
-    baseUrl: "https://fukameki.thebase.in/items/53569545"
+    baseUrl: "https://fukameki.thebase.in/items/53569545",
+    shopify: "gid://shopify/ProductVariant/46128554016954"
   },
 
   "56866733": {
@@ -472,6 +510,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p56866733_01.jpg",
     images: ["c32378f1edb176eaa0431cb2bf2c9299","44a361daccafed2667e4db3212683c45","12d7b81cea2a25eb41fada31e568ad4b","4615a251ab1d77d70d377ea73085966a","b893ca2577591291b513ec3a86b832e5","6908f7396ee9ab942603f3876d0b6aa0","5904bd2b8244df1672b26fdae30f58d3"],
     baseUrl: "https://fukameki.thebase.in/items/56866733"
+,
+    shopify: "gid://shopify/ProductVariant/46128310321338"
   },
 
   "59665637": {
@@ -486,6 +526,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p59665637_01.jpg",
     images: ["43aa769eacb6c11d6d1752db725313bd","cfe8b34cb2eced68ea0ab52b2464417c","a52c4c419b6b09d158d7e5cac5618c5b","4d8cfd4c93f081b45b672eb26606f459","15985a51d8fece5847e477a22f55353a","1cfee764d9b6197b55e2fb494286c0c1","765aecd96b77964e03e68a8df272b715"],
     baseUrl: "https://fukameki.thebase.in/items/59665637"
+,
+    shopify: "gid://shopify/ProductVariant/46128443326650"
   },
 
   "59666641": {
@@ -500,6 +542,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p59666641_01.jpg",
     images: ["23af62d286c7c22632855e30fc7bfdec","85e5df54ffaac6fa4d36bda8bb9e8c6a","aa2e67eb6231bc955679a0554351de64","90b6283aee56b892f03ff309714c8c7e","5d44f777fcb0b2abd8203992f25a62a0","c5110647fb2b07cc5ba7a8d99b886b53","b8d9c5ffb5ba5832de8759df0ba4102f","9c335e1bf82645c712d42b9d195b9224","ae3654927e6a67dcd086de6144e71278"],
     baseUrl: "https://fukameki.thebase.in/items/59666641"
+,
+    shopify: "gid://shopify/ProductVariant/46128288366778"
   },
 
   "67725582": {
@@ -510,7 +554,8 @@ window.PRODUCTS_DATA = {
     description: "厚みのある丸みとやわらかな色調が特徴のガラス花器。福岡のガラス工房で制作。日常に寄り添うシンプルな美しさ。ひとつひとつ手作りのため個体差があります。",
     img: "photo/index/p67725582_01.jpg",
     images: ["e03164878817dac9b0a011cd34663bbe","0fbbf795f57f552b009ecd28fb1d0507","73035387686f0dcc1198b35504ab75c3","6164e5959f8a5a5087b36928a93993db","17da218d97176ba5c37a084f451ad2a0","db4edf9a4499bc943aae03f1749b9c59","693b2d97cd5ad32aa74b2398a33acfae"],
-    baseUrl: "https://fukameki.thebase.in/items/67725582"
+    baseUrl: "https://fukameki.thebase.in/items/67725582",
+    shopify: "gid://shopify/ProductVariant/46128231121082"
   },
 
   "67725695": {
@@ -545,7 +590,9 @@ window.PRODUCTS_DATA = {
     care: "レンジ・食洗機使用不可。",
     img: "photo/index/p67728595_01.jpg",
     images: ["d44dd901094f23e513845c5d01c6ddee","63526b56d8a55bb4b4ec1561f71f4435","3ad1474bd454d2dc1ac0a3e607ef6691","2451b0bc5ead3396d903ca433b3a10ee","78fa03a580b9a9f6ddedad24acd62bbf"],
-    baseUrl: "https://fukameki.thebase.in/items/67728595"
+    baseUrl: "https://fukameki.thebase.in/items/67728595",
+    shopify: "gid://shopify/ProductVariant/46128230432954",
+    invId: "1782624295761"
   },
 
   "67990320": {
@@ -558,6 +605,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p67990320_01.jpg",
     images: ["8f8f67cdff1ea8cb85ddeef82973de33","9378098f51fc6bf194f65d2e1485e743","14646b628775eea7f41d258bb0efdb8f","92470d7147168d1d0029257394260267","5d58e2d5f859c3f1d0bbb50775450196","9d00d39a85c1628db97020efbc1133ee","0bace2544f03c22f690fb04210a8eb64","78ff66bca3c82dbdf8d1b64a14af838d","a7b8ad6375a838c15d9c0a34e82c8084","4e6e4710baef7966775dc2b88b93d41e","454cdf90435ef1f0aff098b4741b8182","639e8cf71f4ae278a5fdffed7acdeeac","ac8ea452ca3314d236996f59de18ae0b","50f44f8ba3bd232d381304f9e102b642","2044112de26813c41906dfee48b5240a"],
     baseUrl: "https://fukameki.thebase.in/items/67990320"
+,
+    shopify: "gid://shopify/ProductVariant/46128290922682"
   },
 
   "68113493": {
@@ -571,7 +620,8 @@ window.PRODUCTS_DATA = {
     care: "食洗機使用不可。使用前にぬるま湯で半日浸水推奨。",
     img: "photo/index/p68113493_01.jpg",
     images: ["6be75160c9bd9f894623d9b356ef3902","b1161a7c89cc81ac6feb62f7fc7804ee","e2ecadd25def6d8eb50ab2e6dbe168f2","eb0a28c896d73a39a293f29b444aa42e","f4ee896d2e8f70dbf90408d0d820c05a","38021e5090d6d96f039a37755cb09486"],
-    baseUrl: "https://fukameki.thebase.in/items/68113493"
+    baseUrl: "https://fukameki.thebase.in/items/68113493",
+    invId: "1782805417225"
   },
 
   "69272148": {
@@ -585,6 +635,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p69272148_01.jpg",
     images: ["18a20285846c3e6e914f1f602a311745","d206b528e3a9ffec857f89b8f54cd660"],
     baseUrl: "https://fukameki.thebase.in/items/69272148"
+,
+    shopify: "gid://shopify/ProductVariant/46128519446714"
   },
 
   "70208577": {
@@ -652,6 +704,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p71052065_01.jpg",
     images: ["bdb64ad4b965d98975ea7509e29aa15a","b7fcacf63cd35582ab4d363cb9b0dca6","7a9baf88be6fced54f99f9bf123dec32","a366a1aab24044bf4b6ef5182892a3be","197d244966ae561547d9ba127c4400c1","a3b285bd7091cb29aaa659e9e75a856a"],
     baseUrl: "https://fukameki.thebase.in/items/71052065"
+,
+    shopify: "gid://shopify/ProductVariant/46128262512826"
   },
 
   "71137619": {
@@ -666,6 +720,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p71137619_01.jpg",
     images: ["5c9a3367147ef11de4832a30278fabf4","c40c5b1b8a32569ffca8265d479b64e1","fa2b41419d246f2d4cf12ef52450418b","bcf218c33a459d4e6daa840e93d75384","094a5ebb5f4c2aa6498e1f42f3e217b5","1898d584e1d3667ae5ac3f201277cd24"],
     baseUrl: "https://fukameki.thebase.in/items/71137619"
+,
+    shopify: "gid://shopify/ProductVariant/46128443130042"
   },
 
   "71137663": {
@@ -680,6 +736,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p71137663_01.jpg",
     images: ["6f31e6ee756bbb3ad9e2a7e7bee791da","278e4b9134a9ea075eb6f2190ef3f355","62e2ca8134d0b467901bda9782c256be","cfbf7380e43daafb5cd1809ad2edb4da","0fca4bee83a7fb1d0f516e3665e05c91"],
     baseUrl: "https://fukameki.thebase.in/items/71137663"
+,
+    shopify: "gid://shopify/ProductVariant/46128443359418"
   },
 
   "71137711": {
@@ -694,6 +752,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p71137711_01.jpg",
     images: ["656aa6118299c0f0e9d02038405f2385","63c7b9db6f5dee4cbcfa320d2c5ec170","87cf83a25fadb5929204605691f66af8","1ad91fa72178fea5bac88e497cbbd84b","2110cacd5b0774f4681ec4519bfe18b2","41bb30a811fbf5c7cf2be8f8dc4b4031"],
     baseUrl: "https://fukameki.thebase.in/items/71137711"
+,
+    shopify: "gid://shopify/ProductVariant/46128443490490"
   },
 
   "71137891": {
@@ -706,7 +766,8 @@ window.PRODUCTS_DATA = {
     description: "古美術品のような重厚感ある花入。丸みのある三角のような形で、花がなくても存在感を放つ作品。",
     img: "photo/index/p71137891_01.jpg",
     images: ["2ad3eb761d4b23a350e3f694c0213964","37ad1888ba6603de5e0f3f8e713b6e11","c4a71864893f2f6d52d28b12fe43a733","f741e9c3376fab6e48af37fb5b14ad06","2c20924f7f0ff44a6bcb8b1c8e492827","d8d3580acd0d21349f19e6b0c331e1df","0e2e683f95062e59fe6062a648622ff7","194b7b69ca3960861db4d6ea46b289a4"],
-    baseUrl: "https://fukameki.thebase.in/items/71137891"
+    baseUrl: "https://fukameki.thebase.in/items/71137891",
+    shopify: "gid://shopify/ProductVariant/46128444047546"
   },
 
   "71137987": {
@@ -747,6 +808,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p73388466_01.jpg",
     images: ["ec0bf50925577e2c7325dd7b55620339","7dbbbf206ed17d45fd4ceff50c96c531","e0d2bded2c4ac4c9f7ce9ed384254546","e821718eecffe94da9775237588c5d90"],
     baseUrl: "https://fukameki.thebase.in/items/73388466"
+,
+    shopify: "gid://shopify/ProductVariant/46128497492154"
   },
 
   "73388949": {
@@ -760,6 +823,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p73388949_01.jpg",
     images: ["a6f4a6210debaa0527810da3591d84a9","7ed0a13497872d2ff86fcded00a1290c","4d503f106c60552436a8a784dc02ab7a","9d997212872a65f930bcad0eabfcefd6","5e145e04e8492f914a1eefdfc08ca173","061c0aa2c4136036af1e505275a2e717","3e3ee385310853176cdfe8c7515458b4","bb5ae332a1785df27db49b666e91df2d","1225be36e6c3e0512e29ff2a42314ecf","33e1f39f36f072ac1261dd070c18df16"],
     baseUrl: "https://fukameki.thebase.in/items/73388949"
+,
+    shopify: "gid://shopify/ProductVariant/46128497328314"
   },
 
   "73389056": {
@@ -772,7 +837,8 @@ window.PRODUCTS_DATA = {
     care: "レンジ使用可。食洗機は手洗い推奨。",
     img: "photo/index/p73389056_01.jpg",
     images: ["b98c8308aba8bbaf21cf1368a216cc0a","20b8ec8a257bcba549a9918b088553d3","1b491c50185978f4d149ade5decb65f9","118d9be5f64db522ca4877e9b8f65d91","2bab6f2233f0c1848a18c6413dc87739","9e770fe837b1e7cf69e1805c21c9debe","1f6e107489e227c17bd4902a36d55e87"],
-    baseUrl: "https://fukameki.thebase.in/items/73389056"
+    baseUrl: "https://fukameki.thebase.in/items/73389056",
+    shopify: "gid://shopify/ProductVariant/46128497295546"
   },
 
 
@@ -786,7 +852,8 @@ window.PRODUCTS_DATA = {
     care: "レンジ使用可。食洗機は手洗い推奨。",
     img: "photo/index/p73389146_01.jpg",
     images: ["f492b451bf507657dc077ebf16182028","925d3b4d2302970604bcf085d0ac405b","abd0090169ccb7cb69d54a5004ba4ffe","63aa075049e9a8f3ccf82d37e3ae7e4c","d1f47cc7c1ed6f461723679976138587","def4cce3ecd45a3646864ad541ade348","6b9ec6aef50a282a092593a4acf0e7cd","3ed366a882e5bd39dfffbdfc0f821635","8bd5fec2befd67e46ee9df15acf7e93a","368b0f1f982bd0685202cca3df32f4bd","d51a33d5b07bd4e5121f0cf0a1b7a690"],
-    baseUrl: "https://fukameki.thebase.in/items/73389146"
+    baseUrl: "https://fukameki.thebase.in/items/73389146",
+    shopify: "gid://shopify/ProductVariant/46128497098938"
   },
 
   "73389252": {
@@ -800,6 +867,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p73389252_01.jpg",
     images: ["72303e807b0aeef17777c527914681ee","91b1e171819ebca60baf522e197ee7f3","057572515d4d73df045adb8e8d6bd18c","7a998a3ffa140f64be4566e31624546e","b55b83b760d134a7b6653f0d774d91ac","00a0a413562684054701a0f5b289e8d0","88f62219dc23028f3000c921fd89c519","662f7709c9a5eff5c19edda427eac24c"],
     baseUrl: "https://fukameki.thebase.in/items/73389252"
+,
+    shopify: "gid://shopify/ProductVariant/46128496967866"
   },
 
   "74057726": {
@@ -908,6 +977,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p84294099_01.jpg",
     images: ["b8debd12f55ae38b14d7c5d20cfac835","5f2e808f73e23979002b3b70baa17aad","92279b69ac18dd97de49aa1a199678e2","e88f93b4f1d2497deeb2db3160d12497","2c8091502e2bbc92cbf2cf507fc39685","da94d56588fabe2e4de728463fde0e5f","2aa12c8a8dcd6385246f2444742a1ef6","4ef30cfbb8b117b2ef939fb57c9fb3dd","0e0c51bcb6b2fc77e1673c11b4317a43","da840d847c2da3887b2b59b2682deea1","1f85045cf892ad4dc411620cbd46ac22","935af1b402810015fdee382ea51c97e8"],
     baseUrl: "https://fukameki.thebase.in/items/84294099"
+,
+    shopify: "gid://shopify/ProductVariant/46128456892602"
   },
 
 
@@ -923,6 +994,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p84312921_01.jpg",
     images: ["5bf8a1a1a28554a231ad2a4e1a161a9f","f09b993f5fc4e1061ff3956bfc3054f7","b7d5c057fda22a6153fcccb1e30795cd","129523d5a2e13b0cb9ce30877d3d8e1c","c0117d4dfc881151f970b9ba5a043024","93c8d3e835cc23f42fff6b5b83b85f50","8fa55bdcfe6874a73241ae802e90cc7d"],
     baseUrl: "https://fukameki.thebase.in/items/84312921"
+,
+    shopify: "gid://shopify/ProductVariant/46128355115194"
   },
 
   "85065960": {
@@ -937,6 +1010,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p85065960_01.jpg",
     images: ["b335e9da91b2dc0f694b418ea321c474","50a7e326bf686e858ccc01c12e15794a","b0565b8134c5ea9bfa88fa72f90ffdf0","7847d05d5f8dd8242c0b9017bdba9007","6506874c4bc5d390d2d4030270e53852","2fd7e22b5bc83bd85d663d08cf3a6ca2","48bef7f97e1698080494df6f7e85aa33","44e0a7e80a386d60d619055e9a28fc44","2aec8a690fcc3df6abdf8d4a95350a38"],
     baseUrl: "https://fukameki.thebase.in/items/85065960"
+,
+    shopify: "gid://shopify/ProductVariant/46128453681338"
   },
 
   "85066000": {
@@ -992,7 +1067,9 @@ window.PRODUCTS_DATA = {
     care: "食器洗い機可。洗浄後はよく乾かして保管を。",
     img: "photo/index/p85067386_01.jpg",
     images: ["1f2a2e5c8e851d32147d32b8d95901f5","9362225321a36dc3c8d5d8891801160a","ac187f608a5b7ae186084bbae88ee0b1","be55ae19c24e44b6066293ecd3f9bce7","bc6cb0bc9a83db20b3568d21f0ad3af5"],
-    baseUrl: "https://fukameki.thebase.in/items/85067386"
+    baseUrl: "https://fukameki.thebase.in/items/85067386",
+    shopify: "gid://shopify/ProductVariant/46128453189818",
+    invId: "1782111819092"
   },
 
   "85067498": {
@@ -1006,7 +1083,9 @@ window.PRODUCTS_DATA = {
     care: "食器洗い機可。洗浄後はよく乾かして保管を。",
     img: "photo/index/p85067498_01.jpg",
     images: ["f4bfd541d68cf893dc566a7e5b252025","e2afe0c0ac79ee641d44a3726ada79cb","3969120086d6d715f27a9e057ed9bfd5","4dcdf18336721270bb4470f8a172047d","58710f41207bf282bb17dcdfd9741e20","24e633e0536c1173aa401106c508808e"],
-    baseUrl: "https://fukameki.thebase.in/items/85067498"
+    baseUrl: "https://fukameki.thebase.in/items/85067498",
+    shopify: "gid://shopify/ProductVariant/46128452993210",
+    invId: "1782111874670"
   },
 
   "87073778": {
@@ -1032,6 +1111,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p88820288_01.jpg",
     images: ["96a0cf17fd72d0d7f3cfcc7dd2cc3a88","b3aa62774dc72ca62e5eaa1488324dae","84ec1921a9828935b3285c996947184f","f6696b941c68e18d933e6b5b51374c11","63704e108c391d2ae0ecb130997be26e"],
     baseUrl: "https://fukameki.thebase.in/items/88820288"
+,
+    shopify: "gid://shopify/ProductVariant/46128429170874"
   },
 
   "88820338": {
@@ -1045,6 +1126,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p88820338_01.jpg",
     images: ["27a8c5f71910ec9bb669f309efa8b2de","ec325b162cafe93d56f88d332006f602","894be9b5eef0f5fa6fb3ddc128699c77","b15f5cfc588fd4c7b90addb980623813","762f5d3c385541cd6b4f460e5f235fdc","00e6eba09bab5fd624624fe3c6d1b9c9"],
     baseUrl: "https://fukameki.thebase.in/items/88820338"
+,
+    shopify: "gid://shopify/ProductVariant/46128429007034"
   },
 
 
@@ -1059,6 +1142,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p88843222_01.jpg",
     images: ["3a632269a068ac799abee81eb396eb5e","e005faea7ebbaa14cd695213eccf1183","4bda37c61d3905b6e210b91121b4d298","b2c8dace092b9979874ca027da31ea20","bf12091747677244184dd33da792d870","de7abe42754a559accab4d6ff199ad4b"],
     baseUrl: "https://fukameki.thebase.in/items/88843222"
+,
+    shopify: "gid://shopify/ProductVariant/46128428056762"
   },
 
   "88904845": {
@@ -1072,6 +1157,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p88904845_01.jpg",
     images: ["11c49d7502a3843877ab3be160b747ba","fb85864979146233cf0a4b5477561c21","2c8665bf4bad09e8e42b64040ff701b0","36f41c15242f19135f313d59707330d5","710bd167a913ade1095c4dbcb908aede"],
     baseUrl: "https://fukameki.thebase.in/items/88904845"
+,
+    shopify: "gid://shopify/ProductVariant/46128359342266"
   },
 
   "89640192": {
@@ -1085,6 +1172,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p89640192_01.jpg",
     images: ["88dfb3344500fffc4bf39d42a802c69a","51bc51d22debd04fcd8268ecc542bcd6","94a2e67e2c8d1df2595e49c545a52101","390590afe2e5c5f9aa6f01c195c01993","d7cfdf58c45334c0e4078442e01d44d6","be055a5066793a8011493fde3a085939"],
     baseUrl: "https://fukameki.thebase.in/items/89640192"
+,
+    shopify: "gid://shopify/ProductVariant/46128421437626"
   },
 
   "91832463": {
@@ -1098,6 +1187,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91832463_01.jpg",
     images: ["ef83cac2f2369b1b47a0ad79a87573f0","1adf488de2d23579b39f8def5add3898","8dcea99a36bc59bb842defea72a156c1","eb455ae51d72dba3425706719b7ee9b4","6bb6f6a1717ef20609ac294b469f2edf","182ede58fd54e455456d4c3a3fac123b","f968f1905769d365cb2abf75c051fbad","76796fc96a6be0f57f01f27257285954","4cac6ba7388693be4ccbb26eb1b5285f","f74cc04ecda55475f8be256a8a23aef0","262278480d26ec2073f3d014f8888735","0d54974999e4d9f5a98ebc906b2d2d42"],
     baseUrl: "https://fukameki.thebase.in/items/91832463"
+,
+    shopify: "gid://shopify/ProductVariant/46128411705530"
   },
 
   "91833664": {
@@ -1111,6 +1202,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91833664_01.jpg",
     images: ["ef9fc115826dc5f9938bc6fea17becd8","753dd195246dbd3bbb87a5d7320c1293","8802cffcdb2562093e366b8133f9da70","db8221cc9e1048da769e3cad3b707e3a","017a1d87f7b5dd7a08ebfe010884cc4c","7fd4bcfc3609774c49b3226a91560f51","bfaaef13b80c28e4065335e223f08e37","795728e431b1c7fe6c961d25d203114e","af077bbf3df335c8b3d7435d91efd099","6399969252642a34c3d55e3e80a7a67a","8570da614c5beecf8f2eeca102a7ccf8"],
     baseUrl: "https://fukameki.thebase.in/items/91833664"
+,
+    shopify: "gid://shopify/ProductVariant/46128412197050"
   },
 
   "91833740": {
@@ -1124,6 +1217,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91833740_01.jpg",
     images: ["192001d596486507b2c8da7ab5c2c318","5e421f70c870e39617bd536f6a17a534","e115de291cab32c11498479c9c504d1c","7b41d0b021b4d88ee41074805064a167","b3b9ab41a3262559c679f5e8df2997d7","e9f73c17d65707afac4a1d4e41d727fb","0c013378e756ef78bacec2a1403e631e","ebe0e27f43d9612b113a2f7761154238","2b59e1183973f67117e4763c4c7ecbb5","497e89d0128be5c73904a182707607a1","f20d6b182e65a34f55ffa70caffd6dbe"],
     baseUrl: "https://fukameki.thebase.in/items/91833740"
+,
+    shopify: "gid://shopify/ProductVariant/46128412328122"
   },
 
   "91833890": {
@@ -1137,6 +1232,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91833890_01.jpg",
     images: ["e2905b8b4db1e8c144776e2e164270a4","1a8076b2060d69f8588c513e0f43c109","3daad3a2aa6226f30b5467498543cf3a","4b935c57cd84b1d4f084ac2cee905911","e5ca08e353afd3403d50bb232ed236d5","bc6eb86c3ad1b9cab3f21f628615659d","6459247f01234758b524794247f1da7e","297eec622389582929c0b7758a1e2427","9e761ccb7451dc8e3699e905117c019f","212e5b35e8424c07bd0edb9491d6db37"],
     baseUrl: "https://fukameki.thebase.in/items/91833890"
+,
+    shopify: "gid://shopify/ProductVariant/46128412655802"
   },
 
   "91834369": {
@@ -1150,6 +1247,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91834369_01.jpg",
     images: ["1c9930749cf0a8948203641caac37870","4b827f821308c4a9b4f8669aaf0a8127","25f4b87d2babab96a3896e72336fbade","c9de752bbd36dde004f148b1658f1e6d","4315219e32d0da5e4688cf8d931ccfca","3a0e521467e86e8337f3bf15deca4b95","1a99ef053e73b18f3bf36969db602f84","1ccf12b968b4e4d98f583c17ffbbb15d","6384e24fea4444b76f12a8151efeceeb","a5e7a93262f226fdaae53c12307e11dd","7792972369bdb8f92a772b55173eb8b1","1962c00f8a065b3e15e68561886ecf56","00d9ceca1c9490ccdeeaf83cd2042351"],
     baseUrl: "https://fukameki.thebase.in/items/91834369"
+,
+    shopify: "gid://shopify/ProductVariant/46128411836602"
   },
 
   "91922813": {
@@ -1163,6 +1262,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91922813_01.jpg",
     images: ["973de1d40a26166b1b6fcb008d79e3a3","a1c310a31ff423279d77e848a7febaaa","a73b39bcfea0c94a2805c62fc6e81cc2","de0bd7e22ad42213080e1daf5a54e48e","f436abeb4b48b35c8f3185cec35b0f77"],
     baseUrl: "https://fukameki.thebase.in/items/91922813"
+,
+    shopify: "gid://shopify/ProductVariant/46128410263738"
   },
 
   "91923086": {
@@ -1176,6 +1277,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91923086_01.jpg",
     images: ["8081623c4a6eef25b327efa70a97901b","1228ea42e84ed661e7eb608875526000","771639920960e3b7a4df674bdfdad4a8","4ab7109aa22b7bd7948d60976ac09382","e46a36fbd8bd0da75312aa918126a11c","37eac974f732ababc8616cf2d761c096"],
     baseUrl: "https://fukameki.thebase.in/items/91923086"
+,
+    shopify: "gid://shopify/ProductVariant/46128409051322"
   },
 
 
@@ -1190,6 +1293,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p91923608_01.jpg",
     images: ["485cea1f72a234f5eddc20ae1302abcd","d29819b81a40b6210bea679d747cadc7","43b8dd4a026f27838091e0fe9a8ca914","6141ca97dc239b39521b6ccfb083a17f","73d62200ac5fb2d59952f9fba3a837a3","675070a2479098eb2495b8dc2129a106","5d4c2684a5e9cb32ed539ab82db43618"],
     baseUrl: "https://fukameki.thebase.in/items/91923608"
+,
+    shopify: "gid://shopify/ProductVariant/46128409772218"
   },
 
   "95025278": {
@@ -1245,6 +1350,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p97606597_01.jpg",
     images: ["a907fe4fd003bd5d9be1a357088b3f77","790f962fb332f5315b2ca5daacc56710","b9b88e3ba09d7d32fe4f5c2f4144c85e","6737faf73a3fa6317a12075871b63051","264d4bf738369d6938aa0995500122e0"],
     baseUrl: "https://fukameki.thebase.in/items/97606597"
+,
+    shopify: "gid://shopify/ProductVariant/46128311140538"
   },
 
   "97615995": {
@@ -1297,6 +1404,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p101842342_01.jpg",
     images: ["9f90ad35bbcc497f00585029943898c5","e0976f4a8307d503e1ec0d70ca57971e","4f5d822d9fa4a29cfcb40a3bdda3cec9","e5c67a60376d7a1d7b7305ce121e078f","a73995969307e99292c3ac7536340bae","6047df9b17e7ce05d4b1c792a520d1ec"],
     baseUrl: "https://fukameki.thebase.in/items/101842342"
+,
+    shopify: "gid://shopify/ProductVariant/46128365830330"
   },
 
   "104648746": {
@@ -1309,7 +1418,8 @@ window.PRODUCTS_DATA = {
     description: "セラミックロゼットと糸巻きを組み合わせた置き型照明。ロータリースイッチ付き。E12キャンドル型電球（5W）対応。現代では出せない表情が魅力のヴィンテージ感あふれる作品。",
     img: "photo/index/p104648746_01.jpg",
     images: ["978b6c151c6ea60b99262c722d220c24","722a27a0730b1fe1091745cafb5fc1c9","c65a6144966372aa31cced59e4d3dbee","ef4c0b70e7e1c0a234d58e720f1faad9","2ac8f594f081b7469900dd28c31353f7","81e12d4d3fbaaa39ceecceedfbd90b3e","6dc371acc3eedfe8a5291fc42f20f6b2","b48088b1ae47ccdc4715c5d54cbd2367","a2d07b2ce4dcc4d54c822984ef46c9c5","db1231e5e41e419d5c5d6a04e2a8c652"],
-    baseUrl: "https://fukameki.thebase.in/items/104648746"
+    baseUrl: "https://fukameki.thebase.in/items/104648746",
+    shopify: "gid://shopify/ProductVariant/46128250814650"
   },
 
   "110858412": {
@@ -1324,6 +1434,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p110858412_01.jpg",
     images: ["caed4cccf5b525043544ca7de3b26fb8","5e88011df5acb76f9bf27de1dfcc941d","ab46266c9db21da29fe8c726ddd97774"],
     baseUrl: "https://fukameki.thebase.in/items/110858412"
+,
+    shopify: "gid://shopify/ProductVariant/46128355344570"
   },
 
   "110862212": {
@@ -1337,7 +1449,9 @@ window.PRODUCTS_DATA = {
     description: "高温で焼き付けて黒い箇所を残しつつ磨き上げた、アンティークのような佇まいのマドラー。手仕事のため色の残し方や箇所に個体差があります。",
     img: "photo/index/p110862212_01.jpg",
     images: ["3f0048be3287fdd8f4a52c3994185a9a","e7ac8ce4f096c37022de0764b245b6d5","a42090c01f7d2a74ad6a5dc0719d09d2","09daaed9b66aeb9dbd3baf8a5fe54ec4","43fb230b0fa80107ee8be9ed3c73dfc6"],
-    baseUrl: "https://fukameki.thebase.in/items/110862212"
+    baseUrl: "https://fukameki.thebase.in/items/110862212",
+    shopify: "gid://shopify/ProductVariant/46128354164922",
+    invId: "1782111926837"
   },
 
   "110888027": {
@@ -1351,7 +1465,9 @@ window.PRODUCTS_DATA = {
     description: "高温焼き付けで黒い箇所を残しつつ磨き上げた、アンティークの佇まいを感じるスプーン。細い持ち手で、Sサイズより長い小さなお匙。手仕事のため色の残し方に個体差あり。",
     img: "photo/index/p110888027_01.jpg",
     images: ["f0f5ac4d3ea0a8a57ecc374b35be743e","86ad922bea93dc5d3177950ddd51cf65","b6b51bf5596bbbc3873700b340a4f0ef","c602091b434238c8ba6b17955eaa0107","a1ecaf4063fe7994a1286af91c264202"],
-    baseUrl: "https://fukameki.thebase.in/items/110888027"
+    baseUrl: "https://fukameki.thebase.in/items/110888027",
+    shopify: "gid://shopify/ProductVariant/46128353968314",
+    invId: "1782111950607"
   },
 
   "110888450": {
@@ -1365,7 +1481,9 @@ window.PRODUCTS_DATA = {
     description: "高温焼き付けで黒い箇所を残しつつ磨き上げた、アンティークの佇まいを感じる小さなスプーン。細い持ち手が特徴。手仕事のため色の残し方に個体差あり。",
     img: "photo/index/p110888450_01.jpg",
     images: ["769b5f508e1837999f230fcb072a3d80","b22dc33e6db30e720ff10424c9ee6782","3924bc55893c6729ecc04a96dba79a3a","79584adfcbdb5686f8cd54307d3acdc1","42d10c78457c8449935b85301e40e872"],
-    baseUrl: "https://fukameki.thebase.in/items/110888450"
+    baseUrl: "https://fukameki.thebase.in/items/110888450",
+    shopify: "gid://shopify/ProductVariant/46128353935546",
+    invId: "1782111977120"
   },
 
   "113487185": {
@@ -1380,6 +1498,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113487185_01.jpg",
     images: ["6023e585579dd4622473ec76b370ea17","68540b85a83c3a3f610aa66b24711e3f","cddb82ce6e877b993f8881441d6bb924","83b06b1378853441a3511db9b7a30397","94a97302880dd53105bf118f95e5213c","a6b898e9727af699706f621e382df8f2","1b7c8a250d98a3ea8b91bf0bb7c263db","391b94ee35ab1b7a24056a0cc452a33a","57b1cbaa8b6c3c7e79d9633c5eeafd8f"],
     baseUrl: "https://fukameki.thebase.in/items/113487185"
+,
+    shopify: "gid://shopify/ProductVariant/46128342302906"
   },
 
   "113571039": {
@@ -1392,6 +1512,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113571039_01.jpg",
     images: ["283800c3ab04f1cdab3a4a58d4c3f4e2","a77ad0fd8d4a3e0dfe205967bc4c22e0","762ad855066298e015127f94d06e2224","2af95f43552e3d46f4b104166fa1b9f4","c0c0618dd5734cb375d01e57e9e91139","6bdaadc3df42657a828e8e27e5f0bbdd","662c8d2c1e46b6e8922abf5c57df77cb","a3f9d38fd43a58a9430addd9b31f96ed"],
     baseUrl: "https://fukameki.thebase.in/items/113571039"
+,
+    shopify: "gid://shopify/ProductVariant/46128231317690"
   },
 
   "113571780": {
@@ -1404,7 +1526,9 @@ window.PRODUCTS_DATA = {
     description: "ぽってり厚みと丸みのあるフォルムに○のポチがついた愛らしいガラスコップ。クリアで小ぶり。飾らず、日常で気軽に使えるものをモットーに制作。",
     img: "photo/index/p113571780_01.jpg",
     images: ["3039af64bb9920d7b4598d8405d39334","f3a901eae019e3af88078c8af3553441","68a08fa7959444638ac621005e5f8a70","3965deb19005b567eec5adf226833a64","379a114b717c23063ef2b081b82d52ad","e2b4f873dcb5b986ddd55f00038f1e05","bca5267ace2b188a445b96a730086f46","9a477639704cb6be7d45c72b2385f3bc"],
-    baseUrl: "https://fukameki.thebase.in/items/113571780"
+    baseUrl: "https://fukameki.thebase.in/items/113571780",
+    shopify: "gid://shopify/ProductVariant/46128230203578",
+    invId: "1782624479678"
   },
 
   "113572085": {
@@ -1417,7 +1541,9 @@ window.PRODUCTS_DATA = {
     description: "ぽってり厚みと丸みのあるフォルムに○のポチがついた愛らしいガラスコップ。カラータイプ（ポチはクリア）。飾らずシンプルに、日常で気軽に使えるものをモットーに制作。",
     img: "photo/index/p113572085_01.jpg",
     images: ["15af5fcfe9eac63295ae0187c129a518","1cac64b09a448c2bc0a94bd258c706e2","cd0d8f175ec5e05f773aacaf338dd95d","8ead6e24945902e89311735aec30aa22"],
-    baseUrl: "https://fukameki.thebase.in/items/113572085"
+    baseUrl: "https://fukameki.thebase.in/items/113572085",
+    invId: "1782624553649",
+    shopify: "gid://shopify/ProductVariant/46128230236346"
   },
 
   "113633629": {
@@ -1432,6 +1558,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113633629_01.jpg",
     images: ["bf434d6c841d3cd9e89197152bf27185","7abf9b54d7a55e1ec3d5738de4137d2e","778f096ea37fb32139036b654c845ac8","eac5ede1bad70fae3101ca075c5956e1","0c4036378354a7bf779656110b667295","2398a87e6d6f436ae351964ab69898fd","70d2a07b9288338f5de883d803a2a799","fed74b76cfa6def663fe855dfdb43062","66489f608f38439b67ac4ac0d90b9450","e0958f6d7b5a93a78203fd1bd1bc1f97","7c1794131751b0bcef61e20e50974af9","e88a5aa44622aa455a39646a33626c9a","686b5165a7ebc3c33dc12da0923c3601","d513fa784ff47d4a9313a4a73d773ed7","39659bc29fbd1c3f6b9c75673acba2fd"],
     baseUrl: "https://fukameki.thebase.in/items/113633629"
+,
+    shopify: "gid://shopify/ProductVariant/46128344563898"
   },
 
   "113662198": {
@@ -1446,6 +1574,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113662198_01.jpg",
     images: ["788c38961c35137489169cf1dc1633e2","ac83a795e06d07c775d0b90dd7abe87a","e810f620202184c984258af706be2729","7f81ccfeef8e32f980d6392464f90cfd","c8dfc05ec32c88d4185779e830bc9b78","908a10607bb9274dc90da554f13a8650","64cbd1e40a57c8a04df0961125611968","29fddead6d885509ea97be0a5979d277","42c01716685aa7b948c2b2bb7aefaf2e","9f025e79fe9485ab314dd04e7413a7be","80a9e724b990fa8f26fdbdde94df25b1"],
     baseUrl: "https://fukameki.thebase.in/items/113662198"
+,
+    shopify: "gid://shopify/ProductVariant/46128344465594"
   },
 
   "113662957": {
@@ -1459,6 +1589,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113662957_01.jpg",
     images: ["1d81076ead901099c7929f3d1aa38718","df7b9a1749418bb7faba27e27b4437ad","f73904e4bc766f8a8bc1dce07e54ff35","b0d3eb05edb490b464ef63752ec53d8c","771c8145af6ded2a2173e07eed33abd1","7359892e24c5dafef4868254b525e650","8272c95ea0ab7edf80bf72dfa01892b7","05682eb61c7273dcafcd90b46b9beecf","af2e3d83b8ee5f44994595a15d335836","4c67f1a90b783946dcb0a8b4ba71835c","45a4dbf7dbacd7866ec62c2cb81308c8","e56aad54f5a14421e3e13cfe89b7f6e9","cf9e29b7ba11bb9e46d69d8b109e6590","509efa4edf47fc915e3dc75ed0c80412","bc3fd7f83def0170c3d44c5e3acd668c","c6232f0bc2cdb0706d1a3b40c289e9d4","37b824f37a9662b742f39e41758c48ff"],
     baseUrl: "https://fukameki.thebase.in/items/113662957"
+,
+    shopify: "gid://shopify/ProductVariant/46128343711930"
   },
 
   "113663212": {
@@ -1472,6 +1604,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113663212_01.jpg",
     images: ["dc7a528978e59974815967837cdf348b","1cc4cbb5a6e63fddc6f8842ccd9f25b7","e05f1fe7a678ae32a7684b85c2560fef","648a58f536ac8d0e7cb21c6b6a13040c","3854fd0b227f4f99ea5f581a997a31c8","11b82866595960a7142526258542f37f","bdf327ffd12c2cfd789897bd332c07ed","b9b3f761fa551b2787cd9d7444ba44fb"],
     baseUrl: "https://fukameki.thebase.in/items/113663212"
+,
+    shopify: "gid://shopify/ProductVariant/46128343810234"
   },
 
   "113664270": {
@@ -1485,6 +1619,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113664270_01.jpg",
     images: ["ab372259fb13056ea5183f152a752561","92095edcb291268756009f5d4b84c6ae","5764979178acf31c614d9d5ae3507cac","1538b225f02b1662813b0c8913ec62c1","85432679294f46f945a1fd43c4a1ff00","deeeedffa4a9f3f5ceb22509252634a6","ab2d7dd6a46b4b0737296f941a499b33","d6ad6ba27a525afb32810d4070010ece","d8bb89e854121d56dfc0b148ffc402a0"],
     baseUrl: "https://fukameki.thebase.in/items/113664270"
+,
+    shopify: "gid://shopify/ProductVariant/46128344170682"
   },
 
   "113664649": {
@@ -1498,6 +1634,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p113664649_01.jpg",
     images: ["c713c9d9a9df6deee510fa50d9c613e0","4c2d5f3c7aa40ad5ea2fd3bd2f2f6751","0880217b654591e9edda9d2ec97f7cd8","1d70c50d796e461a1e50a2c40131dd2b","ac234159029d18b8a9714df8d0a0ab7c","3969cf8c70f3c11732dccb3f65d34028","1b784ffe2219b52505be9ea84db201e1","35d5259207c06aa8eeb8e0fd1175f5ea","845a0f87805d4c6c46e0b4ef9d0ba987"],
     baseUrl: "https://fukameki.thebase.in/items/113664649"
+,
+    shopify: "gid://shopify/ProductVariant/46128344105146"
   },
 
   "122620025": {
@@ -1524,6 +1662,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p122623071_01.jpg",
     images: ["c4c7c1c10e66886a382181e73e4e0aaf","1f0b4a1a890cf234e8ce46b8b4b9984c","b34ec7983b459b59a044e7eb9c7f845d","20d933930dc3468e08fbee0894084e53","ea9c47bf385cf70852d2fde7b4f347af","7035c7996ff4c2acbef172320a41b031","bfb6fd02f99bdd6365ae3f01a6a40af9"],
     baseUrl: "https://fukameki.thebase.in/items/122623071"
+,
+    shopify: "gid://shopify/ProductVariant/46128318677178"
   },
 
   "122623716": {
@@ -1537,6 +1677,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p122623716_01.jpg",
     images: ["ead09d776e1ffc3404b1e3a44eb5f8a0","9ebcee8122a4af76c0b3410ef5c9d3b8","5e8f76e8aefdc7cc8e491c6fb5278376","4dce93f30e7818b4166857613239eb06","0c29ca3deee66f365afce34b92aef8de","e034c8eee45f155232451b869e11b662","a4d109f7e9579280457c023d57f6fcf1","1084733c02a6b4087f28aa04caa644e0"],
     baseUrl: "https://fukameki.thebase.in/items/122623716"
+,
+    shopify: "gid://shopify/ProductVariant/46128319037626"
   },
 
   "122624816": {
@@ -1550,6 +1692,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p122624816_01.jpg",
     images: ["4f94d736e304f81ebf832220c1b4822e","d4f4dfe3ce1279ae1fc5d83aa52e0c03","e0430517468bb179db0e474402d5c04c","0800aabce6476c372af19becd2efd1de","2b0147717f324376b3d4946b04c5c01b","3ab1d42d977b120dcda95cbde76ba13b","571b896d34995b19f3ac6636405eb83b","ab39f7b060ef8fd5a0707cb468851b8e","0b42219878233f2cb7b3c6f7cde51fee","4f7044d49900d4d311f1c8c3cb4f9486"],
     baseUrl: "https://fukameki.thebase.in/items/122624816"
+,
+    shopify: "gid://shopify/ProductVariant/46128318841018"
   },
 
   "122629228": {
@@ -1562,6 +1706,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p122629228_01.jpg",
     images: ["4661e4cc75c0c338e196eb931ef293d1","3a6666287f544c4c7829ddd4095bcb0e","511e177bc886d839ab8995759e42663b","fada3e9bef26f885f2a11e5653915cf1","d3d55a5ec0ede16aa8a1187093eaeb5a","36e1da5b5810fef3f10fd7121ace0891","5996c732273b7000c11e025ee819960a","555aaa62b9da4edbe758f6f40bc3666b","2c3586501213522c2a42e075c474fbe8","dfeb70cd4f7d76cd63ce6d991e19e372"],
     baseUrl: "https://fukameki.thebase.in/items/122629228"
+,
+    shopify: "gid://shopify/ProductVariant/46128308420794"
   },
 
   "122795338": {
@@ -1585,7 +1731,8 @@ window.PRODUCTS_DATA = {
     description: "紙にまつわる作品を制作するhaseさん制作のスタンプ。流れのある繊細な文字デザインで、想いの伝わる印象的なスタンプです。インクなどの付属はございません。",
     img: "photo/index/p126457533_01.jpg",
     images: ["f9b41408cab9d42d69e7bf13edf656d4","617214753c4abc5654e598b1e0cad7ca","0c94c2918f6a8b1679815849bd25b420","8df7556138153e926b05a953232971b0","b2111061ec12e5b99f1e25ad1d0ffab4","0ac7be209beee586a62142a87ee5ac18","cad21257cdc58cee36e5bc1f8258a395","e9511d4b355d5db59a26a08aedcfa12c","6ec326e923a9643f27854d9a582917bf","353543ea65b1062bf73311755df9ea64","e4282faaf59d78ae4ddcf82db0e499ff","3d4a3630c02b69b60e8254c05cb5c64a"],
-    baseUrl: "https://fukameki.thebase.in/items/126457533"
+    baseUrl: "https://fukameki.thebase.in/items/126457533",
+    shopify: "gid://shopify/ProductVariant/46128307830970"
   },
 
   "128407692": {
@@ -1599,6 +1746,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p128407692_01.jpg",
     images: ["011c14772ac29149241362b8107ec355","c15c4f18025d7732473758e7cf02e44b","21621a3bdadbef150b6abde6f3b91834","7a019005886fcd96fdae65f71a5097f3"],
     baseUrl: "https://fukameki.thebase.in/items/128407692"
+,
+    shopify: "gid://shopify/ProductVariant/46128293576890"
   },
 
   "133184156": {
@@ -1612,6 +1761,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p133184156_01.jpg",
     images: ["d9fa39f8f335f8642da6b36a242ec3ff","b567bded21b65639c24c8b9005e55488","b7dbf1f7875ce344633516ba6f7b2b26","5bbd41f4a6dbc3fa4e03b67befebf10f","835a25d49f21f28405a7150d4c95c88f"],
     baseUrl: "https://fukameki.thebase.in/items/133184156"
+,
+    shopify: "gid://shopify/ProductVariant/46128278700218"
   },
 
   "133240425": {
@@ -1651,6 +1802,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p133241341_01.jpg",
     images: ["15d675fadac0780a4d6fd14e91dfdc2a","cf060071496c9425a3a843aa51697b29","f78f1b309729bec2bea967854aef802e","5304be0b6111e965a70173e1b0a2c269"],
     baseUrl: "https://fukameki.thebase.in/items/133241341"
+,
+    shopify: "gid://shopify/ProductVariant/46128289022138"
   },
 
   "133241547": {
@@ -1664,6 +1817,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p133241547_01.jpg",
     images: ["5703701669fb38c730b8fa28233b0a7c","0bc6e4fb16789977303e681b636a5a57","7039b2b3d40e8ed418c675f525810dd0"],
     baseUrl: "https://fukameki.thebase.in/items/133241547"
+,
+    shopify: "gid://shopify/ProductVariant/46128289120442"
   },
 
   "133243164": {
@@ -1728,6 +1883,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p133804955_01.jpg",
     images: ["2f5128dd380c6ddec575a177bf280142","3c67e365a36d333e4e8fa8d3b9d0e263","8f764016926d498a91821926c222857d","4649e45384aaa8461886f3c40c76404b","3db585d2d2c65389df81c1851f26bfcd","bea17e0fcf1f3f5e95b79bda24559bb9","ca4a813db5353c07b83946d86174a52b","295c6b3bb36b2e358e9783ec37da2532"],
     baseUrl: "https://fukameki.thebase.in/items/133804955"
+,
+    shopify: "gid://shopify/ProductVariant/46128290136250"
   },
 
   "133805441": {
@@ -1738,7 +1895,8 @@ window.PRODUCTS_DATA = {
     description: "布を裂きリボン状にして織り進めた一点の布。縦糸の組み合わせで様々な表情が生まれます。ループ付きで壁掛けも可能。",
     img: "photo/index/p133805441_01.jpg",
     images: ["1d2285dc9547231787b87660621b512e","8064768ad95e2c33589ae71ec44e6300","281c29e998483b3dde2f315695e0daac","f1c174ebef8528f409ccae3e85836f18","9d33a569c6a9e629103daa18b63717df"],
-    baseUrl: "https://fukameki.thebase.in/items/133805441"
+    baseUrl: "https://fukameki.thebase.in/items/133805441",
+    shopify: "gid://shopify/ProductVariant/46128290660538"
   },
 
   "139488326": {
@@ -1753,6 +1911,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p139488326_01.jpg",
     images: ["f1583998938fbbc3d8d29750b198f4bc","f92b0168dfd4960329d2fe779b8343f6","d1bb2be3683dfe16b3b7e4c265dd904e","df05fe0272994190cd22245a88f47d9a","ea5ada5e80e1106b9ad6f6b03a309b07","b32889b0a297a8181fda12e18ec06a7e","f255d338096a2f767ac8fec4c893788f","6740a1ca57a1bc46ccd7ac2550336c73","ddae46f2c03132d0b1ee41c2710ca8d6","cce4ff46c7e66acc5d4368888101644d"],
     baseUrl: "https://fukameki.thebase.in/items/139488326"
+,
+    shopify: "gid://shopify/ProductVariant/46128263037114"
   },
 
   "139488461": {
@@ -1767,6 +1927,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p139488461_01.jpg",
     images: ["e3f7adf7965c4b5428b774e9661f805a","b205e6c6e86fa5f8464f73e639d3a2a3","584430b469e8eab5c4665c6276fdce85","bb2a3fb7062edfd1fb0f2f9fba8ff4f7","44a1a3b744b28439d698ce928e95dad2","8feefc9a73101feb0c8bcee4b92f9338","3693b1b67be1a62e74f4a0a432a79ffa"],
     baseUrl: "https://fukameki.thebase.in/items/139488461"
+,
+    shopify: "gid://shopify/ProductVariant/46128262643898"
   },
 
   "139501824": {
@@ -1779,7 +1941,8 @@ window.PRODUCTS_DATA = {
     description: "楕円形のフラットプレート。手作りならではの歪みや個体差も味わいの一つです。",
     img: "photo/index/p139501824_01.jpg",
     images: ["8f7485871e5fdecb02a12639e3311d9d","802b19a49265679996cb8fb5b761f5a6","4e21009998cdc41f2ede22691bd6c140","153304fb2abbccc3eeee13565c4b4adc","63e4f346945dc3d015137a46e14edcef","0d085dfc38e458ba138fe3c08c3ee01e"],
-    baseUrl: "https://fukameki.thebase.in/items/139501824"
+    baseUrl: "https://fukameki.thebase.in/items/139501824",
+    invId: "1782806795405"
   },
 
   "139503593": {
@@ -1792,7 +1955,8 @@ window.PRODUCTS_DATA = {
     description: "ぽってりとした楕円形の皿。青みがかった白い釉薬と施釉の痕跡が表情を作ります。",
     img: "photo/index/p139503593_01.jpg",
     images: ["a437812eb34d1be69382648265b8eee0","9b74d8ad471325f87620a2a72bf319df","36347399649bae08053644e6ff156a54","dd816a083072b08b513d288e7ccb2aad","3665278b0e94e436e7515b251744d7c7"],
-    baseUrl: "https://fukameki.thebase.in/items/139503593"
+    baseUrl: "https://fukameki.thebase.in/items/139503593",
+    invId: "1782806969594"
   },
 
   "139503986": {
@@ -1805,7 +1969,8 @@ window.PRODUCTS_DATA = {
     description: "飴色の艶やかな楕円小皿。",
     img: "photo/index/p139503986_01.jpg",
     images: ["0abb3e8e6d0fa385e2449843ff17cd1a","5b90f246f8e0160115f0c94a0ac53b73","6973506ae67fde5c730f4befd78367b6","d21700532789c16580a172d7c31bcfa1","0283122980b55c1df8f9098f00428783","d66eb3015cf1102c39b05944aad9376b","63006ba295a58a292f8c9fd784662743"],
-    baseUrl: "https://fukameki.thebase.in/items/139503986"
+    baseUrl: "https://fukameki.thebase.in/items/139503986",
+    invId: "1782806449027"
   },
 
   "139504553": {
@@ -1818,7 +1983,8 @@ window.PRODUCTS_DATA = {
     description: "白と薄緑の2色展開。スープを盛るのに適した深さのある楕円皿。",
     img: "photo/index/p139504553_01.jpg",
     images: ["cc09e10be40586282ef9f1e8dd4b9da3","4b109a0e20b0f49094ec51b3c3c6de8e","c3a5100e31c107d27c02141e9e62d2d5","6bc32bd145bebaf3e3f2e1a0b68f67d6","de54df5ffcdd02e8d18874e61ebd3069","2e31f1d67927371fa81ea3f20e228237","8637f9692164d84aaff078ea3f189093","a832981c12bfd4cbe8cc7e410703b834","f1b5a03f8f0c7629a4572fec927046dc"],
-    baseUrl: "https://fukameki.thebase.in/items/139504553"
+    baseUrl: "https://fukameki.thebase.in/items/139504553",
+    invId: "1782806574230"
   },
 
   "139505054": {
@@ -1831,7 +1997,8 @@ window.PRODUCTS_DATA = {
     description: "動物モチーフの箸置き。4種類の動物から選べます。",
     img: "photo/index/p139505054_01.jpg",
     images: ["26896938cba3764ca9a3730065b2152c","79e829a590fe89b38db082a146ef787e","67ad5808acb829807fc23f5aae116aed","4e9302e0767d69680bffc82d026d4187","ee16c067b1523c8eb29c9149f7c3e31f","7514281cb8bfdd04d69a71cb05d5c16a","1000c924b1fe94ac87eea4c3374d4505","4e1b821f0f0b376c1471fecadf80ff42"],
-    baseUrl: "https://fukameki.thebase.in/items/139505054"
+    baseUrl: "https://fukameki.thebase.in/items/139505054",
+    invId: "1782806330105"
   },
 
   "139505242": {
@@ -1858,7 +2025,8 @@ window.PRODUCTS_DATA = {
     description: "古いブリキのカップをそのまま照明に仕立てた作品です。深みのある錆の色合いは経年による味わいであり、傷や欠陥ではありません。ミニボール球と回転式スイッチを使用。",
     img: "photo/index/p56898631_01.jpg",
     images: ["9d152acac65e7a7143c452b2a06ec6a2","4338ce82207f66ef0d1ed200a7d5b190","ed3ca617083fefbeb465e1873afbb644","32a93a9171165554046cfb7b7e36fa1d","5643462d4b8af23553fb85a4044c0e17","3c0bad50bc7fef4e4faed1f736854f17","d637027b88432fd20c02a38c1dffeb27","0ba3328fdf5706d63babcfc0232f8776","0160ea5b31a06387c691a9728af1f5d2","b3220fd72aa9113e08b0169de3601e7d"],
-    baseUrl: "https://fukameki.thebase.in/items/56898631"
+    baseUrl: "https://fukameki.thebase.in/items/56898631",
+    invId: "1776564083508"
   },
 
   "104649530": {
@@ -1886,7 +2054,8 @@ window.PRODUCTS_DATA = {
     description: "真鍮のポールランプ。先端に吊るされた円錐形シェードは、もともとフランスのコルネット菓子型。灯すと円錐の先端から柔らかな光が漏れ、周囲に繊細な影を落とします。シェードはスタンドから取り外し可能です。",
     img: "photo/index/p69925183_01.jpg",
     images: ["5c4559a63618a5b4df5ef0479a832fd5","5ebc87851e63139bcf12737c38fe735c","b3e46d4ca4a4e71b73ede40e4c8984ff","34a6fa8c623cdd74a31c25a7a00fd122","af403ba23f8a905444b20f3eed8302fb","52aa93ee8827b31901179134ed99674c","2c524ffaf478302ca27fcd78b5a30acd"],
-    baseUrl: "https://fukameki.thebase.in/items/69925183"
+    baseUrl: "https://fukameki.thebase.in/items/69925183",
+    invId: "1776564083503"
   },
 
   "69926400": {
@@ -1927,7 +2096,9 @@ window.PRODUCTS_DATA = {
     description: "黒い丸ベースから真鍮パイプが弧を描いて立ち上がり、アルミカップのシェードをのせた手工芸的なランプ。灯すとカップから光が漏れ周囲を柔らかく照らします。古いパーツを組み合わせた一品もので、個体ごとにパティナの風合いが異なります。",
     img: "photo/index/p69925697_01.jpg",
     images: ["a96226dd2c971508b6bad47843b605ed","b655f6f422eb3fd7858f95976ad62f6e","ee90a2e640c0cbc74a75f296ad07ceed","9abab408f9c76587607d63bdb06c2db4","8c7be3b7da7dafdea9edbf14a17d1dd9","7ea26e33af9ba2f88b3d60a32024a289"],
-    baseUrl: "https://fukameki.thebase.in/items/69925697"
+    baseUrl: "https://fukameki.thebase.in/items/69925697",
+    shopify: "gid://shopify/ProductVariant/46128249077946",
+    invId: "1776564083499"
   },
 
   "104648266": {
@@ -1968,7 +2139,8 @@ window.PRODUCTS_DATA = {
     description: "faro シリーズのトールバリエーション。縦に伸びたシルエットが灯台らしさをより強調します。白塗装の旋盤挽き脚の上に小さな燈楼部分が光る、存在感のある卓上照明です。",
     img: "photo/index/p69926669_01.jpg",
     images: ["441db35b269e7c69656591ede52189bd","ac9fdec226b11c9232dcc884d2ee8bc2","953c8b0e399efcf05c6b63114c66c59e","a6bdfdd3cd9bdf79e0d7706e384a0b90","f6b98068af42e9bb9024da420de0005e","0cb9417d6e0d06487f452f07c19fb9a1","85504b89b0930f3fbd9c6d26a126c0ad","5a5230cdd1a4866ce037c2f95275b0f8","4e08333c27522eef00790aacac31582b"],
-    baseUrl: "https://fukameki.thebase.in/items/69926669"
+    baseUrl: "https://fukameki.thebase.in/items/69926669",
+    invId: "1776564083498"
   },
 
   "62422641": {
@@ -1982,7 +2154,8 @@ window.PRODUCTS_DATA = {
     description: "貝形の菓子型をシェードにしたランプ。グレーの菓子型から真鍮パイプが上へと伸びる優美なフォルム。灯すと内側から柔らかな光が満ち、貝のような影を落とします。灯さずとも、その形は詩的な魅力を空間に添えます。",
     img: "photo/index/p62422641_01.jpg",
     images: ["62e3ad8db8c1d54f08bc094af30d0d1a","1b38f4f4a3e10cd0317f58c7980fde9f","e4462ac39bb5b07081bdb1a349c3f4ba","480c7ad9fdaa8fa680b6be6cd9f77edf","6d2050ee03e4f4c9422b1101023fbabe","b912ed0735e03cee9a05ed290d22c10b","a72098b3e43b3b20d61e79de507627a3","f48db3f9c3da440f9c7109520fff47df","01eb8b11ad2d8e7480b814eb6acadec7","ba4e3e45f4a6e0447b29d53c986e58d3","17e0fe72bd3202062cfa80a513bf6d7e","0e94d9f35a277871ecc6c526b0196f4a","aaceb5e854bfb6fc2a455299f76ab18a","f21ba4aa45703b71a6e972b863e9fe05","afed1b124e2bcf653c38dfdf9bdf8518"],
-    baseUrl: "https://fukameki.thebase.in/items/62422641"
+    baseUrl: "https://fukameki.thebase.in/items/62422641",
+    invId: "1776564083512"
   },
 
   "142036648": {
@@ -1996,7 +2169,8 @@ window.PRODUCTS_DATA = {
     description: "細いロッドがアイアンベースから伸び、先端に「open」「closed」の文字が入った木製ボードを掲げたオブジェ。店舗カウンターや工房の入口、個人の作業空間に。日々の区切りを示す小道具として。ボードは取り外し可能で、金属パーツは経年で自然なさびが生まれます。",
     img: "photo/index/p142036648_01.jpg",
     images: ["b63d6d942f423041e5a7415f858efee3","15456a97d03ff1cb1e6b7a1912ebc9ea","f3e09214bb71818a2e4333bc45a737c9","33112f0eae5cff8f2e07663a7a6e5251","629ce5541153df2c98db3f6766ed48a0","4d7404fa5bf164851a4766b83de97968","b3c0541505e01c8ba22dda6f1e399def","fa665c9cf2af6ba09a62e6ad1d8e652b","b3d660f1e37c541f0eabe427bf445bbb"],
-    baseUrl: "https://fukameki.thebase.in/items/142036648"
+    baseUrl: "https://fukameki.thebase.in/items/142036648",
+    invId: "1776564083520"
   },
 
   "81299780": {
@@ -2009,7 +2183,9 @@ window.PRODUCTS_DATA = {
     description: "アンティークの帽子掛けスタンドをランプに仕立てた作品。真鍮パーツとミズメ桜の組み合わせが気品ある佇まいを生み出します。灯さずとも、その存在感は空間に豊かな雰囲気をもたらします。",
     img: "photo/index/p81299780_01.jpg",
     images: ["e21b575fe4183192d21a655565f72f92","fea91894b1475f6616588136915c7709","58cfab1fff47e9062039383d647524c7","46b4d9bec2334acae97f83cdafa6bb51","d0a3f9dca6bb666ac0fe097e739eeb35","fc3b6396b21ce6010b914a22643fb68d","5cb22d2766d233550aa7b6f5c03eec4a","e39b52e6e2562e3a0f60f5567f49de72","a479859bb2522af3e3b9b0d3369c816d"],
-    baseUrl: "https://fukameki.thebase.in/items/81299780"
+    baseUrl: "https://fukameki.thebase.in/items/81299780",
+    shopify: "gid://shopify/ProductVariant/46128250552506",
+    invId: "1776564083500"
   },
 
   "69926185": {
@@ -2023,7 +2199,8 @@ window.PRODUCTS_DATA = {
     description: "ドアが開くと「open」の文字が浮かび上がり、閉じると「closed」になる壁掛け照明。内側から柔らかな光が漏れ出します。LEDで発熱が少なく安心して使えます。店舗の入口や工房、個人の部屋に。",
     img: "photo/index/p69926185_01.jpg",
     images: ["a370eedc27aad97586e55813ea46962d","dfdb7b882ee4bb30cf92c2bbaf2ca8b8","b38a9b9da48023135be17be76808683b","019ca5fc0129a57f3814abefa6930381","05011aa6451e7379b9c87f62ac295b43","da1f42c32b3d6e8d7782774b1c8cd14b","d9e9d5ae7476d118b7250f99b008b53a","83acfeb2bd9f039ebbaefec9a6ec25d0","a8cab938a872fe153b3416a7a2483b86","0859bee1b4e132ea1a4de1e397738cb6","7104b4392f1a8b6ffad4b3e8b392e7b3"],
-    baseUrl: "https://fukameki.thebase.in/items/69926185"
+    baseUrl: "https://fukameki.thebase.in/items/69926185",
+    invId: "1776564083516"
   },
 
   "69960464": {
@@ -2037,7 +2214,8 @@ window.PRODUCTS_DATA = {
     description: "丸いベースから真鍮パイプが伸び、先端に小さなヴィンテージ風ボックスを掲げたスタンドランプ。ボックスを開くと「open」の文字が柔らかく光ります。LEDで発熱が少なく安心。カウンターや窓辺、デスク脇に。",
     img: "photo/index/p69960464_01.jpg",
     images: ["a7feceaaa0bd2a1c4083f0424ca038ba","06bfb8015a0d04958a27aa09aef2e34e","650222acb768c90486baef9bfee301a5","29ff23274a89f396171c82c89b67fd36","998b57e163a5a630a0c8778f5decb972","1714bbe83a6c6fb755c6b002d7387498","b7d66c5c131a0094b45e97d981d1d323","d302ac4ac976b5a92025c40a9940ea19","e22e2ff8cf197626d5fd2eb16abd40ec","cc221e21501f91d26d7ec1b2d535f11c","6be67f3588f9f518a4173a92e1c7971a","f46e814d8f07291fd5436ead6dfd5089"],
-    baseUrl: "https://fukameki.thebase.in/items/69960464"
+    baseUrl: "https://fukameki.thebase.in/items/69960464",
+    invId: "1776564083517"
   },
 
   "104645367": {
@@ -2051,7 +2229,8 @@ window.PRODUCTS_DATA = {
     description: "枕として使われていたアンティーク木箱を再利用したスタンドランプ。丸ベースから真鍮パイプが伸び、アクリル板越しに「open」の文字が柔らかく光ります。少し上を向いた視線に愛らしさが宿ります。LEDで発熱が少なく安心して使えます。",
     img: "photo/index/p104645367_01.jpg",
     images: ["5292850f8a586ceed8dd8d64e798eb38","17539f6af5320d33831fbb1a2659d60a","fafd7c8db3eb6e14596e617ca05b6b79","604734f025df888f650c25e34e167a99","7745297483e733a9b15f7ceff20a20be","f0cbd44e4973f6421b7595754decc83a","83ba241c2540ebebfd41d2d53ad24ea5","7f59bf19433fed3bafb6c8ecae65d7ef","bdba6bcc5cda0030f6aaa47404a28515","7fc31c113d4bedbc8e891851eddd7fb8","a58d6f99d49f8787269eddb7bd9f2f31","4245e4a29efa8b4b820e740cebb7ae2a"],
-    baseUrl: "https://fukameki.thebase.in/items/104645367"
+    baseUrl: "https://fukameki.thebase.in/items/104645367",
+    invId: "1776564083518"
   },
 
 
@@ -2072,7 +2251,9 @@ window.PRODUCTS_DATA = {
     category: "Ceramics",
     img: "photo/index/imai_hashi_oki_01.jpg",
     images: [],
-    baseUrl: "https://fukameki.thebase.in/"
+    baseUrl: "https://fukameki.thebase.in/",
+    shopify: "gid://shopify/ProductVariant/46128252780730",
+    invId: "1782806330105"
   },
 
   "imai_daen_kozara": {
@@ -2082,7 +2263,9 @@ window.PRODUCTS_DATA = {
     category: "Ceramics",
     img: "photo/index/imai_daen_kozara_01.jpg",
     images: [],
-    baseUrl: "https://fukameki.thebase.in/"
+    baseUrl: "https://fukameki.thebase.in/",
+    shopify: "gid://shopify/ProductVariant/46128253403322",
+    invId: "1782806449027"
   },
 
   "imai_soup_sara": {
@@ -2092,7 +2275,9 @@ window.PRODUCTS_DATA = {
     category: "Ceramics",
     img: "photo/index/imai_soup_sara_01.jpg",
     images: [],
-    baseUrl: "https://fukameki.thebase.in/"
+    baseUrl: "https://fukameki.thebase.in/",
+    shopify: "gid://shopify/ProductVariant/46128253599930",
+    invId: "1782806574230"
   },
 
   "imai_candle_dish": {
@@ -2112,7 +2297,9 @@ window.PRODUCTS_DATA = {
     category: "Ceramics",
     img: "photo/index/imai_oval_flat_01.jpg",
     images: [],
-    baseUrl: "https://fukameki.thebase.in/"
+    baseUrl: "https://fukameki.thebase.in/",
+    shopify: "gid://shopify/ProductVariant/46128255041722",
+    invId: "1782806795405"
   },
 
   "imai_oval_egg": {
@@ -2122,7 +2309,9 @@ window.PRODUCTS_DATA = {
     category: "Ceramics",
     img: "photo/index/imai_oval_egg_01.jpg",
     images: [],
-    baseUrl: "https://fukameki.thebase.in/"
+    baseUrl: "https://fukameki.thebase.in/",
+    shopify: "gid://shopify/ProductVariant/46128255140026",
+    invId: "1782806969594"
   },
 
   "imai_hakkaku_bon": {
@@ -2132,7 +2321,8 @@ window.PRODUCTS_DATA = {
     category: "Ceramics",
     img: "photo/index/imai_hakkaku_bon_01.jpg",
     images: [],
-    baseUrl: "https://fukameki.thebase.in/"
+    baseUrl: "https://fukameki.thebase.in/",
+    invId: "1782807552112"
   },
 
   "144020454": {
@@ -2201,7 +2391,9 @@ window.PRODUCTS_DATA = {
     description: "厚みのある丸みが特徴のガラスのボウル。日常に気軽に使えるシンプルな美しさ。ひとつひとつ手作りのため個体差があります。",
     img: "photo/index/p144021497_01.jpg",
     images: ["dd2fad6603490f8e4c7950ba020d52b6","4996f2d2df7e2d248b8df43c91f7d446","7de6e808f8bfb96874d03f219707f51d","76f807000fe99bca02598e49453265fc","856611ab87500f5fd169061b30b35674","214669a097d0c2696d8fe742963921a7"],
-    baseUrl: "https://fukameki.thebase.in/items/144021497"
+    baseUrl: "https://fukameki.thebase.in/items/144021497",
+    shopify: "gid://shopify/ProductVariant/46128231448762",
+    invId: "1777429160662"
   },
 
   "144021364": {
@@ -2228,7 +2420,9 @@ window.PRODUCTS_DATA = {
     description: "複数の釉薬を重ねることで光のようなグラデーションを表現した「掛け分け」デザインの茶杯と茶托のセット。縦長の形が手に馴染み、茶托を添えることで凛とした美しい一時を生み出す。",
     img: "photo/index/p143941692_01.jpg",
     images: ["b868cd374a009ab1f8596c3f9072149a","04ea2bdf36a4502eeff643719a6f71e8","b287e739e5a12d7134ad0103147884d9","a26f57f1bf5150b74d9a0ff554463d34","e1b1e212e3774790356e88742174f20b","edd842e116b8e840075b6149497cae08","f453356aa0c5bcb95d1da701db9163b7"],
-    baseUrl: "https://fukameki.thebase.in/items/143941692"
+    baseUrl: "https://fukameki.thebase.in/items/143941692",
+    shopify: "gid://shopify/ProductVariant/46128238067898",
+    invId: "1777435349555"
   },
 
   "143983119": {
@@ -2242,7 +2436,9 @@ window.PRODUCTS_DATA = {
     description: "光のようなグラデーションを表現した「掛け分け」釉薬が特徴のガイワン（蓋碗）。蓋・碗・茶托の3点セット。磁器の透明感と釉薬の美しさが凛とした佇まいを生む。",
     img: "photo/index/p143983119_01.jpg",
     images: ["f7f7c82103f70b0bc5a7796c15accd1c","c076c2d3f992907488f5bc072710469c","46412c082f59af71cecce0a4f2c67ed3","46cf3c782911da962114d1e602c5823b","6b2e3b50cbcdf328cbffe45ff8894de5","0e91ef25b9f84f3d60115cc9959bbf86","a6053db4eeb318ad5861f5286c94be1a"],
-    baseUrl: "https://fukameki.thebase.in/items/143983119"
+    baseUrl: "https://fukameki.thebase.in/items/143983119",
+    shopify: "gid://shopify/ProductVariant/46128236200122",
+    invId: "1777435349557"
   },
 
   '110861062': {
@@ -2255,7 +2451,8 @@ window.PRODUCTS_DATA = {
     description: "花のようなまあるいブローチ。編み上げ、染色し、ニスでコーティングして仕上げています。回転式の安全ピンを使用しており、針が落ちにくい構造になっています。",
     img: "photo/index/p110861062_01.jpg",
     images: ["29ffee108c50e9f02da096b8d419cb50","af1e4901d1d67c1e63cdcc355889c586","0e708ba2258f3dc97aa0a723d6cb62ee","8a7f1359f395f943b758e936b2ba3408","cf8c63944b35e5c29fc971899e74fdbe","b3010171ec9276bc4792c598ab890ed9"],
-    baseUrl: "https://fukameki.thebase.in/items/110861062"
+    baseUrl: "https://fukameki.thebase.in/items/110861062",
+    shopify: "gid://shopify/ProductVariant/46128227483834"
   },
 
   '145365169': {
@@ -2268,7 +2465,8 @@ window.PRODUCTS_DATA = {
     description: "花のようなまあるいブローチ。編み上げ、染色し、ニスでコーティングして仕上げています。回転式の安全ピンを使用しており、針が落ちにくい構造になっています。",
     img: "photo/index/p145365169_01.jpg",
     images: ["3657b7e0286c5d762fccd753c3d64a43","b946bc6bfad73c61648c63bf98c09a6b","ad0c704fb262bf4443cbc8dd9075a727","71c71f84397a83f1a425d85c82718282","5ad6611faf5356c4101956f5045dcdd9","c47f75b1a94ab3ff00b6b575d6ce005a","ff05940da81b7ae071347ee27e2a2d38"],
-    baseUrl: "https://fukameki.thebase.in/items/145365169"
+    baseUrl: "https://fukameki.thebase.in/items/145365169",
+    shopify: "gid://shopify/ProductVariant/46128227582138"
   },
 
   '110860974': {
@@ -2281,7 +2479,8 @@ window.PRODUCTS_DATA = {
     description: "ラタンのバレッタ。編み上げ、染色し、ニスでコーティングして仕上げています。",
     img: "photo/index/p110860974_01.jpg",
     images: ["ae64e0baefec6492cea7c8b3365476f6","60356f38c284532f7057592780a34a44","ce5add051bc530ef01b703b78528dbd6","f0b8a44497e9648665f0016636014654","8d7e7d30c851eb12c66ee67e2be336ed","15576475bf03c5bfc1d76642d5ec48c4"],
-    baseUrl: "https://fukameki.thebase.in/items/110860974"
+    baseUrl: "https://fukameki.thebase.in/items/110860974",
+    shopify: "gid://shopify/ProductVariant/46128227647674"
   },
 
   '110861037': {
@@ -2294,7 +2493,8 @@ window.PRODUCTS_DATA = {
     description: "ラタンのバレッタ。編み上げ、染色し、ニスでコーティングして仕上げています。",
     img: "photo/index/p110861037_01.jpg",
     images: ["1f4e73238d37f7b42b81c824a88d5199","95a710b7f358d178c9f3e47c50096d19","b1b4953d12119c7fbc469bf816dce687","8f9bc56b729d695dd2261847b9bd4795","313a26b150a463e9e17f095567d00dd5"],
-    baseUrl: "https://fukameki.thebase.in/items/110861037"
+    baseUrl: "https://fukameki.thebase.in/items/110861037",
+    shopify: "gid://shopify/ProductVariant/46128228270266"
   },
 
   '93501527': {
@@ -2307,7 +2507,8 @@ window.PRODUCTS_DATA = {
     description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や持ち手に革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
     img: "photo/index/p93501527_01.jpg",
     images: ["3d6c7acd69f64562d2c6c10d498f6c2f","fa95c08d698e713bd86060e33de5d6c7","1707ec9b107513b18791af3908a8f30e","343a660dfb962a6d3646641ba8ebc810","5a7907a726679e173696caa152d4a621","cf0b5fb348d1cfe0398c8dd9ef89a2d2"],
-    baseUrl: "https://fukameki.thebase.in/items/93501527"
+    baseUrl: "https://fukameki.thebase.in/items/93501527",
+    shopify: "gid://shopify/ProductVariant/46128228368570"
   },
 
   '93501333': {
@@ -2320,7 +2521,8 @@ window.PRODUCTS_DATA = {
     description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や持ち手に革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
     img: "photo/index/p93501333_01.jpg",
     images: ["98641ed4a89daa5697f3f934a215ba70","a641d9bf97cef0eeee4265e23cb8602b","32e1544ac5e55ef70fbc88252f7284b3","6b85769447862971f33067e341b17491","310938d67b5b90ed678bd617301c28a7"],
-    baseUrl: "https://fukameki.thebase.in/items/93501333"
+    baseUrl: "https://fukameki.thebase.in/items/93501333",
+    shopify: "gid://shopify/ProductVariant/46128228499642"
   },
 
   '93501235': {
@@ -2385,7 +2587,8 @@ window.PRODUCTS_DATA = {
     description: "大きなカゴと同様に編まれています。編み上げ、染色し、ニスでコーティング、内布や革をつけて仕上げています。ひとつひとつ手作業のため、形・色・素材の組み合わせが異なります。",
     img: "photo/index/p93500669_01.jpg",
     images: ["bc10bf720a81e3039bb7356ac66d07cc","773b1fb19cd250eff647742472f062b4","7c2fe3ce4c62da03823f0bcf11e6b1a3","9c153b92e1f74b18811abb5ab5497bce"],
-    baseUrl: "https://fukameki.thebase.in/items/93500669"
+    baseUrl: "https://fukameki.thebase.in/items/93500669",
+    shopify: "gid://shopify/ProductVariant/46128228925626"
   },
 
   '93500500': {
@@ -2412,6 +2615,8 @@ window.PRODUCTS_DATA = {
     img: "photo/index/p148555224_01.jpg",
     images: ["870757332f50fc7179570d387d0a1300","3296b13c01e1d79a22b5f53516c97704","a712daebb2abba2a18f9ad89605a8f24","47f78a54b125aa9b578da15719001067"],
     baseUrl: "https://fukameki.thebase.in/items/148555224"
+,
+    shopify: "gid://shopify/ProductVariant/46128213852346"
   },
 
   '148555420': {
@@ -2424,7 +2629,9 @@ window.PRODUCTS_DATA = {
     description: "アンティークリネンを使用したシンプルな正方形のクロスです。経年のカッコ良い風合いが引き立つ敷物として。個体差、ネップ、スレ、シミが見られる場合がございます。",
     img: "photo/index/p148555420_01.jpg",
     images: ["6e70c9d6b4447fbadab90c388773b974","b59c7a48c194cd52d05ca86ea52218f5","68fbbbbd0d17d9d4960481fa3d3f9179","b00cf5aa0e3156bab7310035de98c2b1","c3f21d9f9846011e43b09a6fa0d7da5b","f26d85ef86411402b55c6048c63fd83a"],
-    baseUrl: "https://fukameki.thebase.in/items/148555420"
+    baseUrl: "https://fukameki.thebase.in/items/148555420",
+    shopify: "gid://shopify/ProductVariant/46128213885114",
+    invId: "1781418039835"
   },
 
   '148554759': {
@@ -2437,7 +2644,9 @@ window.PRODUCTS_DATA = {
     description: "アンティークリネンを使用したシンプルなポットマットです。程よいクッション性がありつつ、安定感のある使えるマットです。",
     img: "photo/index/p148554759_01.jpg",
     images: ["be16c190ed903bf7df5e01c626b7b1b0","22bbd5d78f4c029e07d8b4c8b1916819","86d20aeb94eeca445036fb01e498e8f3","d76156d8d442182dc0f91fbebc537afa","53c9c6ac5fb00437fdf447c518ea0073","d0e530a768b034e9dce29087831adb76"],
-    baseUrl: "https://fukameki.thebase.in/items/148554759"
+    baseUrl: "https://fukameki.thebase.in/items/148554759",
+    shopify: "gid://shopify/ProductVariant/46128214737082",
+    invId: "1781417962527"
   },
 
   '148553885': {
@@ -2450,7 +2659,9 @@ window.PRODUCTS_DATA = {
     description: "アンティークリネンを使用したシンプルな長い敷布です。茶敷布として、水滴や熱から守り、茶器を引き立ててくれます。",
     img: "photo/index/p148553885_01.jpg",
     images: ["edc1abf55ba9bf9dd813104e728c41e6","0a9a74bce0175f233a3e0a7f471b16e8","e0177a5c89831951df5397b299f14faf","d5fc42ca6a885add8aeca193e1e99153","3c161ed190f8302c0593cca57821f48a","28d66e91b11aa2df11e103dfe398bd01","4b35abbe53847a3d8600976722ced3ed","0fd53e8ab6e9f9d4de7413fa90cf7569"],
-    baseUrl: "https://fukameki.thebase.in/items/148553885"
+    baseUrl: "https://fukameki.thebase.in/items/148553885",
+    shopify: "gid://shopify/ProductVariant/46128214802618",
+    invId: "1781418009032"
   },
 
   '148553566': {
@@ -2464,7 +2675,9 @@ window.PRODUCTS_DATA = {
     description: "細かいギャザーが入ったリネン素材のロングスカート。オフホワイトのリネンにグレーのコットンの裏地が深みを出し、透け防止にもなっています。両脇ポケット付き、ウエストドローコード付き。",
     img: "photo/index/p148553566_01.jpg",
     images: ["e83cca6648f6ad1688c2ead8e1c113ca","ccea27e357132989a59ac3459864553e","124824673d25abf3484c7892c0d31fd3","d32ed31075dd361e99265375596c112b","7d405c6552d30d7015031b284551599c","e3d608f7089c74d9f82836b31aa9f339","9d106ceb6e85073cf33780602fec02c8","cca214e97b8aaf645c186138a3c65089","f883d3e7851836e597e1acb918638a41"],
-    baseUrl: "https://fukameki.thebase.in/items/148553566"
+    baseUrl: "https://fukameki.thebase.in/items/148553566",
+    shopify: "gid://shopify/ProductVariant/46128214835386",
+    invId: "1782622913581"
   },
 
   '148552520': {
@@ -2478,7 +2691,9 @@ window.PRODUCTS_DATA = {
     description: "修道院の制服をイメージしたワンピース。ウエストのタックとラインが美しいアイテムです。グレージュカラー。後ろ衿ボタン1つ、ウエストベルト付き、両脇ポケット付き。",
     img: "photo/index/p148552520_01.jpg",
     images: ["643929dba8b79f2478d3f2a3d91b8304","4c4cade39f14dd013374a99cba78f8a4","87a459a37fd0e669bdb94fa8d40b5774","c93847078205f7b15216318594e056e1"],
-    baseUrl: "https://fukameki.thebase.in/items/148552520"
+    baseUrl: "https://fukameki.thebase.in/items/148552520",
+    shopify: "gid://shopify/ProductVariant/46128214900922",
+    invId: "1782622983357"
   },
 
   '148013481': {
@@ -2492,7 +2707,8 @@ window.PRODUCTS_DATA = {
     description: "数回焼成して炭化により黒を出しています。お使い頂く前に、浸水させて器に十分水を含ませてください。色残りを防ぐため、お使い後は早めに洗ってよく乾かしてください。",
     img: "photo/index/p148013481_01.jpg",
     images: ["a2667c9a915450a3e14fa4ad8e983e55","be0ba579e871dcf27739d6f92b70979b","709c546f026d6d0edebb27c3a5298342","828b022d0ab03a18813e92624dc3ed57","7fdc9eb918fb641eac3ab7d5c19f0a2a","74968f24c516f6ad92e2cb01b8ef5bf9","bafbb402ed641389447ab9353b3e8fa9","3104dd161219088cc5022abd63e94f34"],
-    baseUrl: "https://fukameki.thebase.in/items/148013481"
+    baseUrl: "https://fukameki.thebase.in/items/148013481",
+    shopify: "gid://shopify/ProductVariant/46128215752890"
   },
 
   '139505739': {
@@ -2506,7 +2722,9 @@ window.PRODUCTS_DATA = {
     description: "数回焼成して炭化により黒を出しています。お使い頂く前に、浸水させて器に十分水を含ませてください。色残りを防ぐため、お使い後は早めに洗ってよく乾かしてください。",
     img: "photo/index/p139505739_01.jpg",
     images: ["f0479de5591848cfe0d0fb68111278b4","35092ba512c6062dfa9dfbe81caa76c8","51d77baa67d4dfef646ba47fe7f3fd83","12a8ff4cac82c2ebd84d343a967f3751","d8ca93792913a1ee48a4323f98fdcce3","2b8809e6b06e5b7ace1b0b545be79644","9fe179fa4730b692ce4bebfb3b98a0cf","f158c91049023f476614bc4fbed1c18d"],
-    baseUrl: "https://fukameki.thebase.in/items/139505739"
+    baseUrl: "https://fukameki.thebase.in/items/139505739",
+    shopify: "gid://shopify/ProductVariant/46128215785658",
+    invId: "1778501091784"
   },
 }; // END PRODUCTS_DATA
 

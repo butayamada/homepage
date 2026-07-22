@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>コンタクト (TEST) — ARC FUKAMEKI minoh</title>
+<meta name="description" content="ARC FUKAMEKI minohへのお問合せ。商品・企画展・その他のご質問はこちらのフォームから。Contact ARC FUKAMEKI minoh.">
+<link rel="canonical" href="https://fukameki.jp/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="コンタクト — ARC FUKAMEKI minoh">
+<meta property="og:description" content="商品・企画展・その他のご質問はこちらのフォームから。">
+<meta property="og:url" content="https://fukameki.jp/contact.html">
+<meta property="og:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Noto+Serif+JP:wght@200;300&family=Cormorant+Garamond:ital,wght@1,300&family=Inter+Tight:wght@200;300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ma_common.css?v=9">
+<style>
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:start;overflow:hidden;}
+.cf-grid>*{min-width:0;}
+.cf-desc{font-size:.9rem;line-height:2.2;letter-spacing:.03em;}
+.cf-note{font-size:.78rem;line-height:2;color:var(--hai);margin-top:1.6rem;}
+.cf-note a{border-bottom:1px solid var(--line);}
+.cf-note a:hover{border-bottom-color:var(--sumi);}
+.cf-form{display:flex;flex-direction:column;gap:1.5rem;}
+.cf-group{display:flex;flex-direction:column;gap:.5rem;}
+.cf-label{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--hai);}
+.cf-input,.cf-textarea{
+  font-family:'Noto Serif JP',serif;font-weight:300;font-size:.9rem;letter-spacing:.03em;
+  background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:.65rem 0;color:var(--sumi);outline:none;width:100%;
+  transition:border-color .3s;
+}
+.cf-input::placeholder,.cf-textarea::placeholder{color:rgba(27,26,24,.3);}
+.cf-input:focus,.cf-textarea:focus{border-bottom-color:var(--sumi);}
+.cf-textarea{resize:vertical;min-height:120px;}
+.cf-submit{
+  font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  background:var(--sumi);color:var(--washi);border:1px solid var(--sumi);
+  padding:1rem 2.2rem;cursor:pointer;align-self:flex-start;margin-top:.4rem;
+  transition:opacity .3s;
+}
+.cf-submit:hover{opacity:.8;}
+.cf-back{background:transparent;color:var(--sumi);}
+.cf-confirm-table{width:100%;font-size:.85rem;letter-spacing:.03em;line-height:1.8;}
+.cf-confirm-table td{padding:1rem 0;border-bottom:1px solid var(--line);vertical-align:top;}
+.cf-confirm-table td:first-child{font-family:'Inter Tight',sans-serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--hai);width:7.5rem;}
+.cf-success{display:none;font-size:.9rem;color:var(--hai);letter-spacing:.04em;line-height:2;padding:2rem 0;}
+@media (max-width:960px){ .cf-grid{grid-template-columns:1fr;gap:3rem;} }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="メインナビゲーション">
+  <a href="index_test.html" class="nav-logo" aria-label="ARC FUKAMEKI minoh — トップへ">
+    <img src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+      <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+      <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+      <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+      <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+      <li><a href="contact_test.html" data-i18n="nav_contact" aria-current="page">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <button class="nav-btn" id="cartOpen" aria-haspopup="dialog" aria-expanded="false">Cart (<span id="cartCount">0</span>)</button>
+    <button type="button" class="hamburger" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+      <span class="hamburger-label">MENU</span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="メニュー">
+  <button type="button" class="mobile-menu-close" id="menuClose">閉じる — Close</button>
+  <ul class="mobile-menu-links">
+    <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+    <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+    <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+    <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+    <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+    <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <p class="mobile-menu-en en-note">ARC FUKAMEKI minoh — Minoh, Osaka</p>
+  <div class="mobile-menu-lang">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+</div>
+
+<main>
+<section class="section" aria-label="問合せ — Contact">
+  <div class="sec-head reveal">
+    <h1 class="sec-title-v jp-display">問合せ</h1>
+    <p class="sec-en en-note">Contact</p>
+  </div>
+
+  <div class="cf-grid reveal">
+    <div>
+      <p class="cf-desc" data-i18n="contact_desc">
+        商品・企画展・その他のご質問は、下記フォームよりお問合せください。<br>通常、ご返信までに２〜３営業日を要しますことをご容赦くださいませ。
+      </p>
+      <p class="cf-note">
+        Instagram — <a href="https://www.instagram.com/arcfukameki_minoh" target="_blank" rel="noopener">@arcfukameki_minoh</a><br>
+        チャットでもご質問いただけます。右下のアイコンからどうぞ。
+      </p>
+    </div>
+    <div>
+      <!-- Step 1: 入力フォーム -->
+      <form class="cf-form" id="contact-form" onsubmit="showConfirm(event)">
+        <div class="cf-group">
+          <label class="cf-label" for="cf-name" data-i18n="contact_label_name">お名前 <span style="color:#b5473a;">※必須</span></label>
+          <input class="cf-input" type="text" id="cf-name" name="name" required placeholder="山田 太郎" data-i18n-placeholder="contact_ph_name">
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cf-email" data-i18n="contact_label_email">メールアドレス <span style="color:#b5473a;">※必須</span></label>
+          <input class="cf-input" type="email" id="cf-email" name="email" required placeholder="example@email.com">
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cf-subject" data-i18n="contact_label_subject">件名</label>
+          <input class="cf-input" type="text" id="cf-subject" name="subject" placeholder="商品について" data-i18n-placeholder="contact_ph_subject">
+        </div>
+        <div class="cf-group">
+          <label class="cf-label" for="cf-message" data-i18n="contact_label_message">メッセージ <span style="color:#b5473a;">※必須</span></label>
+          <textarea class="cf-textarea" id="cf-message" name="message" required placeholder="ご質問・ご要望をご記入ください" data-i18n-placeholder="contact_ph_message"></textarea>
+        </div>
+        <button class="cf-submit" type="submit" data-i18n="contact_btn_confirm">内容を確認する</button>
+      </form>
+
+      <!-- Step 2: 確認画面 -->
+      <div id="contact-confirm" style="display:none;">
+        <p style="font-size:.85rem;color:var(--hai);letter-spacing:.03em;line-height:2;margin-bottom:2rem;" data-i18n="contact_confirm_msg">以下の内容で送信します。よろしければ「送信する」を押してください。</p>
+        <table class="cf-confirm-table">
+          <tr><td data-i18n="contact_conf_name">お名前</td><td id="conf-name"></td></tr>
+          <tr><td data-i18n="contact_conf_email">メール</td><td id="conf-email"></td></tr>
+          <tr><td data-i18n="contact_conf_subject">件名</td><td id="conf-subject"></td></tr>
+          <tr><td data-i18n="contact_conf_message">メッセージ</td><td id="conf-message" style="white-space:pre-wrap;"></td></tr>
+        </table>
+        <div style="display:flex;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap;">
+          <button class="cf-submit cf-back" onclick="backToForm()" data-i18n="contact_btn_back">戻る</button>
+          <button class="cf-submit" id="btn-send" onclick="sendForm()" data-i18n="contact_btn_send">送信する</button>
+        </div>
+      </div>
+
+      <!-- Step 3: 送信完了 -->
+      <div class="cf-success" id="form-success">
+        <p data-i18n="contact_success">お問い合わせありがとうございます。<br>内容を確認のうえ、折り返しご連絡いたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span class="foot-vert" aria-hidden="true">大阪箕面</span>
+  <img class="foot-logo" loading="lazy" src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  <p class="foot-addr">〒562-0001 大阪府箕面市箕面2丁目3-10 — 阪急箕面駅より徒歩5分</p>
+  <div class="foot-links">
+    <a href="https://www.instagram.com/arcfukameki_minoh" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact_test.html" data-i18n="contact_title">お問合せ</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 ARC FUKAMEKI minoh</p>
+</footer>
+
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Cart — 買い物かご">
+  <div class="cart-head">
+    <p class="label">籠 — Cart</p>
+    <button class="cart-close" id="cartClose" aria-label="かごを閉じる">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">かごは空です — Your cart is empty.</p>
+  </div>
+  <div class="cart-foot">
+    <p class="cart-subtotal"><span>Subtotal — 小計</span><span id="cartSubtotal">&yen;0</span></p>
+    <button class="checkout" id="cartCheckout" type="button">Checkout</button>
+    <p class="cart-note" id="cartNote">Shopifyによる安全な決済<br>Secure checkout by Shopify.</p>
+  </div>
+</aside>
+
+<div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
+
+<script src="lang.js?v=9" defer></script>
+<script src="chat_knowledge.js?v=9" defer></script>
+<script src="chat_widget.js?v=9" defer></script>
+<script src="shop_config.js?v=9" defer></script>
+<script src="ma_nav.js?v=9" defer></script>
+
+<script>
+// ★ FormspreeのURL（本番と同一・変更禁止）
+var FORMSPREE_URL = 'https://formspree.io/f/mlgodarw';
+
+function showConfirm(e) {
+  e.preventDefault();
+  var name    = document.getElementById('cf-name').value.trim();
+  var email   = document.getElementById('cf-email').value.trim();
+  var subject = document.getElementById('cf-subject').value.trim() || '（未入力）';
+  var message = document.getElementById('cf-message').value.trim();
+  document.getElementById('conf-name').textContent    = name;
+  document.getElementById('conf-email').textContent   = email;
+  document.getElementById('conf-subject').textContent = subject;
+  document.getElementById('conf-message').textContent = message;
+  document.getElementById('contact-form').style.display    = 'none';
+  document.getElementById('contact-confirm').style.display = 'block';
+}
+
+function backToForm() {
+  document.getElementById('contact-confirm').style.display = 'none';
+  document.getElementById('contact-form').style.display    = 'block';
+}
+
+function sendForm() {
+  var btn = document.getElementById('btn-send');
+  btn.textContent = '送信中...';
+  btn.disabled = true;
+
+  var data = {
+    name:    document.getElementById('cf-name').value.trim(),
+    email:   document.getElementById('cf-email').value.trim(),
+    subject: document.getElementById('cf-subject').value.trim() || 'お問い合わせ',
+    message: document.getElementById('cf-message').value.trim()
+  };
+
+  fetch(FORMSPREE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function(res) {
+    if (res.ok) {
+      document.getElementById('contact-confirm').style.display = 'none';
+      document.getElementById('form-success').style.display    = 'block';
+    } else {
+      btn.textContent = '送信する';
+      btn.disabled = false;
+      alert('送信に失敗しました。しばらく経ってからもう一度お試しください。');
+    }
+  })
+  .catch(function() {
+    btn.textContent = '送信する';
+    btn.disabled = false;
+    alert('送信に失敗しました。ネットワークをご確認ください。');
+  });
+}
+</script>
+</body>
+</html>

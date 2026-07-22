@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>商品紹介 (TEST) — Craft Collection｜ARC FUKAMEKI minoh</title>
+<meta name="description" content="作家の手仕事による器・道具の商品紹介。Handmade ceramics, glass, and woodwork from Japanese craftspeople.">
+<link rel="canonical" href="https://fukameki.jp/products.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="商品紹介 — Craft Collection｜ARC FUKAMEKI minoh">
+<meta property="og:description" content="作家の手仕事による器・道具の商品紹介。Handmade ceramics, glass, and woodwork from Japanese craftspeople.">
+<meta property="og:url" content="https://fukameki.jp/products.html">
+<meta property="og:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="商品紹介 — Craft Collection｜ARC FUKAMEKI minoh">
+<meta name="twitter:description" content="作家の手仕事による器・道具の商品紹介。Handmade ceramics, glass, and woodwork from Japanese craftspeople.">
+<meta name="twitter:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<script src="products_data.js"></script>
+<script src="products_status.js?v=1"></script>
+<script src="products_sync.js?v=1"></script>
+<script src="artists_data.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Noto+Serif+JP:wght@200;300&family=Cormorant+Garamond:ital,wght@1,300&family=Inter+Tight:wght@200;300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ma_common.css?v=9">
+<script>document.documentElement.className += ' js';</script>
+<style>
+body{font-size:16px;}
+
+.shop-link{margin-top:1.4rem;}
+.shop-link img{height:40px;width:auto;mix-blend-mode:multiply;opacity:.85;}
+
+/* ---------- view tabs / filters (hairline — no filled buttons) ---------- */
+.view-tabs{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin:3rem 0 2rem;border-bottom:1px solid var(--line);}
+.view-tab{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;padding:.7rem 1.6rem .7rem 0;color:var(--hai);border-bottom:1px solid transparent;margin-bottom:-1px;transition:color .3s,border-color .3s;}
+.view-tab.active{color:var(--sumi);border-bottom-color:var(--sumi);}
+.view-tab:hover{color:var(--sumi);}
+.soldout-toggle-wrap{display:flex;align-items:center;gap:.5rem;font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.14em;color:var(--hai);cursor:pointer;user-select:none;margin-bottom:.8rem;white-space:nowrap;}
+.soldout-toggle-wrap input[type="checkbox"]{width:13px;height:13px;cursor:pointer;accent-color:var(--sumi);flex-shrink:0;}
+body.hide-soldout .product-card:has(.soldout-label){display:none;}
+
+.artist-filter,.genre-filter{display:none;flex-wrap:wrap;gap:.6rem;margin-bottom:3rem;}
+.artist-filter.visible,.genre-filter.visible{display:flex;}
+.artist-btn,.genre-btn{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.14em;padding:.4rem .9rem;border:1px solid var(--line);color:var(--hai);transition:color .3s,border-color .3s;}
+.artist-btn:hover,.genre-btn:hover{color:var(--sumi);border-color:var(--sumi);}
+.artist-btn.active,.genre-btn.active{color:var(--sumi);border-color:var(--sumi);}
+
+/* ---------- artist spotlight ---------- */
+#artist-spotlight{display:none;margin-bottom:5rem;padding-bottom:4rem;border-bottom:1px solid var(--line);}
+.spotlight-name{font-family:'Shippori Mincho',serif;font-weight:500;font-size:clamp(2rem,5vw,3.6rem);letter-spacing:.12em;line-height:1.3;margin-bottom:1.8rem;}
+.spotlight-bio{font-size:.9rem;line-height:2.2;color:var(--hai);letter-spacing:.04em;white-space:pre-line;max-width:600px;margin-bottom:2.5rem;}
+.spotlight-img{width:100%;max-width:440px;overflow:hidden;background:#eae6de;border:1px solid var(--line);position:relative;padding-top:75%;margin-bottom:2.5rem;}
+.spotlight-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.spotlight-img:hover img{transform:scale(1.03);}
+.works-label{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--hai);margin-bottom:1.5rem;}
+@media (max-width:600px){ .spotlight-img{max-width:100%;} }
+
+/* ---------- products grid — ヴィトリン(sepia枠)は不要、ヘアライン枠のみに簡素化 ---------- */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,3vw,2.4rem);row-gap:clamp(2.4rem,5vh,3.5rem);overflow:hidden;}
+.products-grid>*{min-width:0;}
+.product-card{display:block;text-decoration:none;color:inherit;}
+.product-image{position:relative;padding-top:125%;overflow:hidden;border:1px solid var(--line);background:#eae6de;}
+.product-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.1,.25,1);}
+.product-card:hover .product-image img{transform:scale(1.05);}
+.product-info{padding-top:1rem;}
+.product-cat{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--hai);margin-bottom:.4rem;}
+.product-name{font-family:'Noto Serif JP',serif;font-weight:300;font-size:.88rem;letter-spacing:.06em;line-height:1.7;margin-bottom:.3rem;color:var(--sumi);}
+.product-price{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.85rem;letter-spacing:.08em;color:var(--hai);}
+.soldout-label{color:#b5473a;font-size:.62rem;letter-spacing:.04em;margin-left:.4em;font-family:'Cormorant Garamond',serif;}
+@media (max-width:960px){ .products-grid{grid-template-columns:repeat(2,1fr);} }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="メインナビゲーション">
+  <a href="index_test.html" class="nav-logo" aria-label="ARC FUKAMEKI minoh — トップへ">
+    <img src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+      <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+      <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+      <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+      <li><a href="products_test.html" data-i18n="nav_shop" aria-current="page">Online Shop</a></li>
+      <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <button class="nav-btn" id="cartOpen" aria-haspopup="dialog" aria-expanded="false">Cart (<span id="cartCount">0</span>)</button>
+    <button type="button" class="hamburger" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+      <span class="hamburger-label">MENU</span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="メニュー">
+  <button type="button" class="mobile-menu-close" id="menuClose">閉じる — Close</button>
+  <ul class="mobile-menu-links">
+    <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+    <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+    <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+    <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+    <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+    <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <p class="mobile-menu-en en-note">ARC FUKAMEKI minoh — Minoh, Osaka</p>
+  <div class="mobile-menu-lang">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+</div>
+
+<main>
+<section class="section" id="products" aria-label="商品紹介 — Online Shop">
+  <div class="sec-head reveal">
+    <h1 class="sec-title-v jp-display">品々</h1>
+    <p class="sec-en en-note" data-i18n="products_title">商品紹介</p>
+  </div>
+  <div class="shop-link reveal">
+    <a href="https://fukameki.thebase.in/" target="_blank" rel="noopener"><img src="fukameki_logo_data/base_logo_vertical_black.png" alt="BASE オンラインショップ"></a>
+  </div>
+
+  <p class="reveal" style="margin:.8rem 0 1.5rem;">
+    <button type="button" class="shop-notice-open-link" data-shop-notice-open data-i18n="shop_notice_link">オンラインショップご利用案内</button>
+  </p>
+
+  <div class="view-tabs reveal">
+    <div style="display:flex;flex-wrap:wrap;">
+      <button class="view-tab active" id="tab-products" onclick="switchView('products')" data-i18n="tab_products">商品別</button>
+      <button class="view-tab" id="tab-artists" onclick="switchView('artists')" data-i18n="tab_artists">作家別</button>
+      <button class="view-tab" id="tab-genres" onclick="switchView('genres')" data-i18n="tab_genres">ジャンル別</button>
+    </div>
+  </div>
+  <div class="artist-filter" id="artist-filter"></div>
+  <div class="genre-filter" id="genre-filter"></div>
+
+  <div id="artist-spotlight">
+    <h2 class="spotlight-name" id="spotlight-name"></h2>
+    <p class="spotlight-bio" id="spotlight-bio"></p>
+    <div class="spotlight-img"><img id="spotlight-img" src="" alt=""></div>
+    <p class="works-label">Works</p>
+  </div>
+
+  <div class="products-grid" id="products-grid"></div>
+</section>
+</main>
+
+<footer>
+  <span class="foot-vert" aria-hidden="true">大阪箕面</span>
+  <img class="foot-logo reveal" loading="lazy" src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  <p class="foot-addr">〒562-0001 大阪府箕面市箕面2丁目3-10 — 阪急箕面駅より徒歩5分</p>
+  <div class="foot-links">
+    <a href="https://www.instagram.com/arcfukameki_minoh" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact_test.html" data-i18n="contact_title">お問合せ</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 ARC FUKAMEKI minoh</p>
+</footer>
+
+<!-- cart drawer (Shopify Storefront Cart API — shop_config.js が開閉・内容を制御) -->
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Cart — 買い物かご">
+  <div class="cart-head">
+    <p class="label">籠 — Cart</p>
+    <button class="cart-close" id="cartClose" aria-label="かごを閉じる">&times;</button>
+  </div>
+  <div class="cart-message" id="cartMessage" style="display:none;"></div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">かごは空です — Your cart is empty.</p>
+  </div>
+  <div class="cart-foot">
+    <p class="cart-subtotal"><span>Subtotal — 小計</span><span id="cartSubtotal">&yen;0</span></p>
+    <button class="checkout" id="cartCheckout" type="button">Checkout</button>
+    <p class="cart-note" id="cartNote">Shopifyによる安全な決済<br>Secure checkout by Shopify.</p>
+  </div>
+</aside>
+<div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
+
+<script src="product_translations.js?v=9" defer></script>
+<script src="lang.js?v=12" defer></script>
+<script src="chat_knowledge.js?v=9" defer></script>
+<script src="chat_widget.js?v=9" defer></script>
+<script src="shop_config.js?v=10" defer></script>
+<script src="ma_nav.js?v=9" defer></script>
+<script src="shop_notice_release.js?v=1" defer></script>
+<script src="shop_notice.js?v=3" defer></script>
+
+<script>
+// ジャンル分類（本番 products.html の GENRE_LIST / GENRE_MAP を移植・無改変）
+var GENRE_LIST = ['食器（陶器）', '食器（木工）', '食器（ガラス）', 'カトラリー', 'ランプ', '衣類', 'アクセサリー', '靴', '花器', '造形', 'キャンドル', 'スタンプ', 'その他'];
+
+var GENRE_MAP = {
+  'product_110861062.html': 'アクセサリー',
+  'product_145365169.html': 'アクセサリー',
+  'product_110860974.html': 'アクセサリー',
+  'product_110861037.html': 'アクセサリー',
+  'product_93501527.html': 'アクセサリー',
+  'product_93501333.html': 'アクセサリー',
+  'product_93501235.html': 'アクセサリー',
+  'product_93501116.html': 'アクセサリー',
+  'product_67894870.html': 'アクセサリー',
+  'product_93500887.html': 'アクセサリー',
+  'product_93500669.html': 'アクセサリー',
+  'product_93500500.html': 'アクセサリー',
+  'product_katayama_futamono.html': '食器（陶器）',
+  'product_imai_hashi_oki.html': '食器（陶器）',
+  'product_imai_daen_kozara.html': '食器（陶器）',
+  'product_imai_soup_sara.html': '食器（陶器）',
+  'product_imai_candle_dish.html': 'キャンドル',
+  'product_imai_oval_flat.html': '食器（陶器）',
+  'product_imai_oval_egg.html': '食器（陶器）',
+  'product_imai_hakkaku_bon.html': '食器（陶器）',
+  'product_139504696.html': '食器（陶器）',
+  'product_98892230.html': '食器（木工）',
+  'product_95190098.html': '食器（木工）',
+  'product_88815090.html': '食器（木工）',
+  'product_139495741.html': '食器（木工）',
+  'product_139495480.html': '食器（木工）',
+  'product_95189885.html': '食器（木工）',
+  'product_95189456.html': '食器（木工）',
+  'product_95189624.html': '食器（木工）',
+  'product_139496523.html': '食器（木工）',
+  'product_110820832.html': '食器（木工）',
+  'product_110820530.html': '食器（木工）',
+  'product_139487392.html': '食器（木工）',
+  'product_139487457.html': '食器（木工）',
+  'product_110820417.html': '食器（木工）',
+  'product_139486861.html': '食器（木工）',
+  'product_139487002.html': '食器（木工）',
+  'product_110809143.html': '食器（木工）',
+  'product_139488635.html': '食器（木工）',
+  'product_72229485.html': '食器（木工）',
+  'product_29992076.html': 'アクセサリー',
+  'product_36646372.html': '靴',
+  'product_51106366.html': 'アクセサリー',
+  'product_53567162.html': '靴',
+  'product_53569545.html': '衣類',
+  'product_56866733.html': '食器（陶器）',
+  'product_59665637.html': '食器（陶器）',
+  'product_59666641.html': '食器（陶器）',
+  'product_67725582.html': '花器',
+  'product_67725695.html': '花器',
+  'product_67725762.html': '花器',
+  'product_67728595.html': '食器（ガラス）',
+  'product_67990320.html': '靴',
+  'product_68113493.html': '食器（陶器）',
+  'product_69272148.html': '食器（ガラス）',
+  'product_69960464.html': 'ランプ',
+  'product_70208577.html': '食器（陶器）',
+  'product_70208645.html': '食器（陶器）',
+  'product_70954900.html': '衣類',
+  'product_71052047.html': '食器（木工）',
+  'product_71052065.html': '食器（木工）',
+  'product_71137619.html': '食器（陶器）',
+  'product_71137663.html': '食器（陶器）',
+  'product_71137711.html': '食器（陶器）',
+  'product_71137891.html': '花器',
+  'product_71137987.html': '花器',
+  'product_72229323.html': '食器（木工）',
+  'product_73388466.html': '食器（陶器）',
+  'product_73388949.html': '食器（陶器）',
+  'product_73389056.html': '食器（陶器）',
+  'product_73389146.html': '食器（陶器）',
+  'product_73389252.html': '食器（陶器）',
+  'product_74057726.html': '花器',
+  'product_76769582.html': '衣類',
+  'product_76769906.html': '衣類',
+  'product_77352229.html': 'アクセサリー',
+  'product_81884449.html': '花器',
+  'product_82614394.html': '食器（陶器）',
+  'product_83357756.html': '食器（木工）',
+  'product_84294099.html': 'アクセサリー',
+  'product_84312921.html': 'アクセサリー',
+  'product_85065960.html': 'カトラリー',
+  'product_85066000.html': 'カトラリー',
+  'product_85066852.html': 'カトラリー',
+  'product_85067300.html': 'カトラリー',
+  'product_85067386.html': 'カトラリー',
+  'product_85067498.html': 'カトラリー',
+  'product_87073778.html': 'アクセサリー',
+  'product_88820288.html': '花器',
+  'product_88820338.html': '花器',
+  'product_88843222.html': 'その他',
+  'product_88904845.html': '食器（陶器）',
+  'product_89640192.html': '食器（陶器）',
+  'product_91832463.html': '食器（陶器）',
+  'product_91833664.html': '食器（陶器）',
+  'product_91833740.html': '食器（陶器）',
+  'product_91833890.html': '食器（陶器）',
+  'product_91834369.html': '食器（陶器）',
+  'product_91922813.html': '食器（陶器）',
+  'product_91923086.html': '食器（陶器）',
+  'product_91923608.html': '食器（陶器）',
+  'product_95025278.html': '食器（ガラス）',
+  'product_95025488.html': '食器（ガラス）',
+  'product_97605977.html': '食器（陶器）',
+  'product_97606597.html': '食器（陶器）',
+  'product_97615995.html': '食器（陶器）',
+  'product_97639680.html': '食器（陶器）',
+  'product_97690557.html': '食器（陶器）',
+  'product_101842342.html': 'その他',
+  'product_104648746.html': 'ランプ',
+  'product_110858412.html': 'アクセサリー',
+  'product_110862212.html': 'カトラリー',
+  'product_110888027.html': 'カトラリー',
+  'product_110888450.html': 'カトラリー',
+  'product_113487185.html': '食器（陶器）',
+  'product_113571039.html': '花器',
+  'product_113571780.html': '食器（ガラス）',
+  'product_113572085.html': '食器（ガラス）',
+  'product_113633629.html': '食器（陶器）',
+  'product_113662198.html': '食器（陶器）',
+  'product_113662957.html': '食器（陶器）',
+  'product_113663212.html': '食器（陶器）',
+  'product_113664270.html': '食器（陶器）',
+  'product_113664649.html': '食器（陶器）',
+  'product_122620025.html': '造形',
+  'product_122623071.html': '造形',
+  'product_122623716.html': '造形',
+  'product_122624816.html': '造形',
+  'product_122629228.html': 'キャンドル',
+  'product_122795338.html': '食器（陶器）',
+  'product_126457533.html': 'スタンプ',
+  'product_128407692.html': '食器（陶器）',
+  'product_133184156.html': 'その他',
+  'product_133240425.html': '食器（陶器）',
+  'product_133241095.html': '食器（陶器）',
+  'product_133241341.html': '食器（陶器）',
+  'product_133241547.html': '食器（陶器）',
+  'product_133243164.html': '食器（陶器）',
+  'product_133243483.html': '食器（陶器）',
+  'product_133243595.html': '食器（陶器）',
+  'product_133243930.html': '食器（陶器）',
+  'product_133804955.html': 'その他',
+  'product_133805441.html': 'その他',
+  'product_139488326.html': '食器（木工）',
+  'product_139488461.html': '食器（木工）',
+  'product_143941692.html': '食器（陶器）',
+  'product_143983119.html': '食器（陶器）',
+  'product_144020454.html': 'アクセサリー・小物',
+  'product_144020350.html': '花器',
+  'product_144020301.html': '花器',
+  'product_144116611.html': '花器',
+  'product_144021497.html': '食器（ガラス）',
+  'product_144021364.html': '花器',
+  'product_56898631.html': 'ランプ',
+  'product_104649530.html': 'ランプ',
+  'product_69925183.html': 'ランプ',
+  'product_69926400.html': 'ランプ',
+  'product_56898468.html': 'ランプ',
+  'product_69925697.html': 'ランプ',
+  'product_104648266.html': 'ランプ',
+  'product_62423097.html': 'ランプ',
+  'product_69926669.html': 'ランプ',
+  'product_62422641.html': 'ランプ',
+  'product_142036648.html': 'その他',
+  'product_81299780.html': 'ランプ',
+  'product_69926185.html': 'ランプ',
+  'product_104645367.html': 'ランプ',
+  'product_148555224.html': 'その他',
+  'product_148555420.html': 'その他',
+  'product_148554759.html': 'その他',
+  'product_148553885.html': 'その他',
+  'product_148553566.html': '衣類',
+  'product_148552520.html': '衣類',
+  'product_148013481.html': '食器（陶器）',
+  'product_139505739.html': '食器（陶器）',
+};
+
+// PRODUCTS_ORDER + PRODUCTS_DATA からグリッドを生成（テスト遷移先は product_test.html?id=）
+(function() {
+  var grid = document.getElementById('products-grid');
+  if (!grid || !window.PRODUCTS_DATA || !window.PRODUCTS_ORDER) return;
+  PRODUCTS_ORDER.forEach(function(fname) {
+    var key = fname.replace(/^product_/, '').replace(/\.html$/, '');
+    var p = PRODUCTS_DATA[key];
+    if (!p) return;
+    if (getProductStatus(key) !== 'active') return;
+    var priceStr = typeof p.price === 'number' ? '¥' + p.price.toLocaleString('ja-JP') : String(p.price);
+    var price = priceStr.indexOf('（税込）') === -1 ? priceStr + '（税込）' : priceStr;
+    var a = document.createElement('a');
+    a.href = 'product_test.html?id=' + key;
+    a.className = 'product-card';
+    a.dataset.genre = GENRE_MAP[fname] || (GENRE_LIST.indexOf(p.category) !== -1 ? p.category : 'その他');
+    if (p.shopify) a.dataset.shopifyGid = p.shopify;
+    a.innerHTML =
+      '<div class="product-image"><img src="' + p.img + '" alt="' + p.artist + ' ' + p.name + '" loading="lazy"></div>' +
+      '<div class="product-info">' +
+        '<p class="product-cat">' + p.artist + '</p>' +
+        '<p class="product-name">' + p.name + '</p>' +
+        '<p class="product-price">' + price + '</p>' +
+      '</div>';
+    grid.appendChild(a);
+  });
+})();
+
+// Shopify商品の販売可否を一括取得（個別160リクエスト方式は禁止 — nodes()で1回にまとめる）
+function batchCheckAvailability() {
+  if (!window.SHOP_CONFIG || !window.fetch) return;
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#products-grid .product-card[data-shopify-gid]'));
+  if (!cards.length) return;
+  var gids = cards.map(function(c) { return c.dataset.shopifyGid; });
+  var endpoint = 'https://' + SHOP_CONFIG.domain + '/api/' + SHOP_CONFIG.apiVersion + '/graphql.json';
+  var query = 'query($ids:[ID!]!){nodes(ids:$ids){... on ProductVariant{id product{availableForSale}}}}';
+  fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOP_CONFIG.storefrontAccessToken },
+    body: JSON.stringify({ query: query, variables: { ids: gids } })
+  }).then(function(r) { return r.json(); }).then(function(json) {
+    var nodes = json.data && json.data.nodes;
+    if (!nodes) return;
+    var byGid = {};
+    nodes.forEach(function(n) { if (n && n.id) byGid[n.id] = n; });
+    cards.forEach(function(card) {
+      var n = byGid[card.dataset.shopifyGid];
+      var forSale = n && n.product ? n.product.availableForSale : true;
+      applyCardAvailability(card, forSale);
+    });
+  }).catch(function() { /* 取得失敗時は既存表示を維持し、画面を壊さない */ });
+}
+
+function applyCardAvailability(card, availableForSale) {
+  var existing = card.querySelector('.soldout-label');
+  if (availableForSale === false) {
+    if (!existing) {
+      var nameEl = card.querySelector('.product-name');
+      if (nameEl) {
+        var badge = document.createElement('span');
+        badge.className = 'soldout-label';
+        badge.textContent = '（soldout）';
+        nameEl.appendChild(badge);
+      }
+    }
+  } else if (existing) {
+    existing.remove();
+  }
+}
+
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') batchCheckAvailability();
+});
+
+// タブ・作家別・ジャンル別フィルタ、soldout非表示トグル（本番 products.html のロジックを踏襲）
+document.addEventListener('DOMContentLoaded', function() {
+  batchCheckAvailability();
+  var artistSet = [];
+  document.querySelectorAll('.product-card .product-cat').forEach(function(el) {
+    var name = el.textContent.trim();
+    if (name && artistSet.indexOf(name) === -1) artistSet.push(name);
+  });
+
+  var filter = document.getElementById('artist-filter');
+  var allBtn = document.createElement('button');
+  allBtn.className = 'artist-btn active';
+  allBtn.textContent = 'すべて';
+  allBtn.onclick = function() { setActiveBtn(this, '.artist-btn'); filterByArtist(null); };
+  filter.appendChild(allBtn);
+  artistSet.forEach(function(artist) {
+    var btn = document.createElement('button');
+    btn.className = 'artist-btn';
+    btn.textContent = artist;
+    btn.onclick = function() { setActiveBtn(this, '.artist-btn'); filterByArtist(artist); };
+    filter.appendChild(btn);
+  });
+
+  var genreFilter = document.getElementById('genre-filter');
+  var allGenreBtn = document.createElement('button');
+  allGenreBtn.className = 'genre-btn active';
+  allGenreBtn.textContent = 'すべて';
+  allGenreBtn.onclick = function() { setActiveBtn(this, '.genre-btn'); filterByGenre(null); };
+  genreFilter.appendChild(allGenreBtn);
+  GENRE_LIST.forEach(function(genre) {
+    var btn = document.createElement('button');
+    btn.className = 'genre-btn';
+    btn.textContent = genre;
+    btn.onclick = function() { setActiveBtn(this, '.genre-btn'); filterByGenre(genre); };
+    genreFilter.appendChild(btn);
+  });
+});
+
+function switchView(mode) {
+  var tabProducts = document.getElementById('tab-products');
+  var tabArtists = document.getElementById('tab-artists');
+  var tabGenres = document.getElementById('tab-genres');
+  var artistFilter = document.getElementById('artist-filter');
+  var genreFilter = document.getElementById('genre-filter');
+  var spotlight = document.getElementById('artist-spotlight');
+
+  tabProducts.classList.remove('active');
+  tabArtists.classList.remove('active');
+  tabGenres.classList.remove('active');
+  artistFilter.classList.remove('visible');
+  genreFilter.classList.remove('visible');
+
+  if (mode === 'artists') {
+    tabArtists.classList.add('active');
+    artistFilter.classList.add('visible');
+    filterByGenre(null);
+  } else if (mode === 'genres') {
+    tabGenres.classList.add('active');
+    genreFilter.classList.add('visible');
+    filterByArtist(null);
+    spotlight.style.display = 'none';
+    setActiveBtn(document.querySelector('.genre-btn'), '.genre-btn');
+  } else {
+    tabProducts.classList.add('active');
+    filterByArtist(null);
+    filterByGenre(null);
+    spotlight.style.display = 'none';
+    setActiveBtn(document.querySelector('.artist-btn'), '.artist-btn');
+  }
+}
+
+function filterByArtist(artist) {
+  var cards = document.querySelectorAll('#products-grid .product-card');
+  var spotlight = document.getElementById('artist-spotlight');
+  var firstCard = null;
+  cards.forEach(function(card) {
+    if (!artist) { card.style.display = ''; return; }
+    var cat = card.querySelector('.product-cat');
+    var match = cat && cat.textContent.trim() === artist;
+    card.style.display = match ? '' : 'none';
+    if (match && !firstCard) firstCard = card;
+  });
+  if (!artist) { spotlight.style.display = 'none'; return; }
+
+  var data = window.ARTISTS_DATA && window.ARTISTS_DATA[artist];
+  document.getElementById('spotlight-name').textContent = artist;
+  var bioEl = document.getElementById('spotlight-bio');
+  var bio = (data && data.bio) ? data.bio : '';
+  bioEl.textContent = bio;
+  bioEl.style.display = bio ? '' : 'none';
+  var imgEl = document.getElementById('spotlight-img');
+  if (data && data.photo) {
+    imgEl.src = data.photo;
+  } else if (firstCard) {
+    var cardImg = firstCard.querySelector('.product-image img');
+    if (cardImg) imgEl.src = cardImg.src;
+  }
+  imgEl.alt = artist;
+  spotlight.style.display = 'block';
+}
+
+function filterByGenre(genre) {
+  document.querySelectorAll('#products-grid .product-card').forEach(function(card) {
+    card.style.display = (!genre || card.dataset.genre === genre) ? '' : 'none';
+  });
+}
+
+function setActiveBtn(btn, selector) {
+  document.querySelectorAll(selector).forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
+</script>
+</body>
+</html>

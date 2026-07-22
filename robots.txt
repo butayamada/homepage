@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /index_test.html
+Disallow: /*_test.html
+
+Sitemap: https://fukameki.jp/sitemap.xml

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<!-- 本番化時: 静的SEOのため gen_products.py をこのテンプレートに合わせて改修し、product_{ID}.html 139枚を再生成する方針（今は動的1枚で代替） -->
+<title id="page-title">商品紹介 (TEST) — ARC FUKAMEKI minoh</title>
+<meta id="meta-description" name="description" content="作家の手仕事による器・道具。ARC FUKAMEKI minoh の商品紹介。Handmade craft objects from ARC FUKAMEKI minoh, Osaka.">
+<link id="link-canonical" rel="canonical" href="https://fukameki.jp/products.html">
+<meta id="og-type" property="og:type" content="product">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta id="og-title" property="og:title" content="商品紹介 — ARC FUKAMEKI minoh">
+<meta id="og-description" property="og:description" content="作家の手仕事による器・道具。ARC FUKAMEKI minoh の商品紹介。Handmade craft objects from ARC FUKAMEKI minoh, Osaka.">
+<meta id="og-url" property="og:url" content="https://fukameki.jp/products.html">
+<meta id="og-image" property="og:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta id="twitter-title" name="twitter:title" content="商品紹介 — ARC FUKAMEKI minoh">
+<meta id="twitter-description" name="twitter:description" content="作家の手仕事による器・道具。ARC FUKAMEKI minoh の商品紹介。Handmade craft objects from ARC FUKAMEKI minoh, Osaka.">
+<meta id="twitter-image" name="twitter:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<script src="products_data.js"></script>
+<script src="products_status.js?v=1"></script>
+<script src="products_sync.js?v=1"></script>
+<script src="artists_data.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Noto+Serif+JP:wght@200;300&family=Cormorant+Garamond:ital,wght@1,300&family=Inter+Tight:wght@200;300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ma_common.css?v=9">
+<script>document.documentElement.className += ' js';</script>
+<style>
+body{font-size:16px;}
+
+/* ---------- breadcrumb ---------- */
+.crumb{padding:calc(var(--nav-h) + 3vh) clamp(1.5rem,6vw,7rem) 0;font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.1em;color:var(--hai);display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;}
+.crumb a{color:var(--hai);border-bottom:1px solid var(--line);padding-bottom:2px;}
+.crumb a:hover{color:var(--sumi);border-color:var(--sumi);}
+.crumb span.sep{opacity:.5;}
+.crumb span.here{color:var(--sumi);}
+
+/* ---------- 1画面1作品パネル（ヴィトリン処理は不要 — ヘアライン枠のみ） ---------- */
+.work-panel{display:grid;grid-template-columns:55fr 45fr;align-items:start;gap:clamp(2rem,6vw,6rem);padding:5vh clamp(1.5rem,6vw,7rem) 8vh;}
+.work-panel>*{min-width:0;}
+.work-figure{width:100%;}
+.vitrine{position:relative;padding-top:110%;overflow:hidden;border:1px solid var(--line);background:#eae6de;}
+.vitrine img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;}
+.thumb{position:relative;padding-top:100%;overflow:hidden;border:1px solid var(--line);background:#eae6de;cursor:pointer;opacity:.55;transition:opacity .3s;}
+.thumb.active,.thumb:hover{opacity:1;}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.work-caption{max-width:30rem;}
+.cat-label{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--hai);margin-bottom:.8rem;}
+.work-artist{font-size:.9rem;letter-spacing:.06em;color:var(--hai);margin-bottom:.6rem;}
+.work-name{font-family:'Shippori Mincho',serif;font-weight:500;font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:.12em;line-height:1.5;margin-bottom:.8rem;}
+.soldout-badge{color:#b5473a;font-size:.72rem;letter-spacing:.06em;margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-style:italic;}
+.work-price{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.15rem;letter-spacing:.1em;color:var(--sumi);margin-bottom:1.8rem;}
+.acquire-buy{display:inline-block;font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;background:var(--sumi);color:var(--washi);border:1px solid var(--sumi);padding:1rem 2.2rem;transition:opacity .3s;}
+.acquire-buy:hover{opacity:.8;color:var(--washi);}
+.purchase-note{font-size:.7rem;color:var(--hai);letter-spacing:.04em;line-height:1.9;margin-top:1.2rem;max-width:26rem;}
+
+/* ---------- detail sections ---------- */
+.detail-sec{padding:0 clamp(1.5rem,6vw,7rem) 7vh;max-width:44rem;}
+.detail-label{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--hai);margin-bottom:1.4rem;}
+.work-desc{font-size:.88rem;line-height:2.2;color:var(--sumi);letter-spacing:.03em;}
+.spec-table{width:100%;border-collapse:collapse;}
+.spec-table td{padding:1rem 0;border-bottom:1px solid var(--line);font-size:.85rem;letter-spacing:.03em;line-height:1.8;vertical-align:top;}
+.spec-table td:first-child{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--hai);width:7rem;white-space:nowrap;padding-top:1.2rem;}
+.artist-profile-text{font-size:.88rem;line-height:2.2;color:var(--hai);letter-spacing:.03em;white-space:pre-line;}
+
+/* ---------- related products ---------- */
+.related{padding:0 clamp(1.5rem,6vw,7rem) 14vh;}
+.related-grid{display:flex;gap:clamp(1.2rem,3vw,2.4rem);flex-wrap:wrap;}
+.related-grid .product-card{display:block;text-decoration:none;color:inherit;width:calc(33.333% - 1.6rem);min-width:140px;flex:1 1 160px;}
+.related-grid .product-image{position:relative;padding-top:125%;overflow:hidden;border:1px solid var(--line);background:#eae6de;}
+.related-grid .product-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.related-grid .product-name{font-family:'Noto Serif JP',serif;font-weight:300;font-size:.85rem;letter-spacing:.04em;margin-top:.8rem;line-height:1.7;color:var(--sumi);}
+.related-grid .product-price{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.8rem;letter-spacing:.08em;color:var(--hai);margin-top:.2rem;}
+
+.not-found{text-align:center;padding:14rem 2rem;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:1.2rem;color:var(--hai);letter-spacing:.06em;}
+.not-found a{display:inline-block;margin-top:1.5rem;font-family:'Inter Tight',sans-serif;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:.5em;}
+
+@media (max-width:960px){
+  .work-panel{grid-template-columns:1fr;padding:4vh clamp(1.5rem,6vw,4rem) 6vh;}
+  .crumb{padding:calc(var(--nav-h) + 2vh) clamp(1.5rem,6vw,4rem) 0;}
+  .detail-sec,.related{padding-left:clamp(1.5rem,6vw,4rem);padding-right:clamp(1.5rem,6vw,4rem);}
+}
+@media (max-width:480px){
+  .related-grid .product-card{width:calc(50% - 1rem);}
+}
+.variant-toggle-btn{display:inline-flex;align-items:center;gap:.5em;font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1px solid rgba(27,26,24,.3);color:inherit;padding:.75em 1.3em;cursor:pointer;transition:border-color .3s;}
+.variant-toggle-btn:hover{border-color:rgba(27,26,24,.6);}
+.variant-panel{border:1px solid rgba(27,26,24,.15);margin-top:.7rem;}
+.variant-list{list-style:none;margin:0;padding:0;}
+.variant-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid rgba(27,26,24,.1);}
+.variant-row:last-child{border-bottom:none;}
+.variant-row-info{display:flex;flex-direction:column;gap:.25rem;min-width:0;}
+.variant-row-name{font-family:'Noto Serif JP',serif;font-weight:300;font-size:.82rem;letter-spacing:.03em;}
+.variant-row-stock{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.64rem;letter-spacing:.04em;color:var(--hai);}
+.variant-row-stock.is-out{color:#b5473a;}
+.variant-row-stock.is-unknown{font-style:italic;}
+.variant-row-add{flex-shrink:0;font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;background:var(--sumi);color:var(--washi);border:1px solid var(--sumi);padding:.6em 1em;white-space:nowrap;}
+.variant-row-add:disabled{background:transparent;color:var(--hai);border-color:rgba(27,26,24,.2);cursor:not-allowed;}
+.stock-note{font-size:.72rem;color:var(--hai);letter-spacing:.04em;margin-bottom:1rem;}
+.stock-note.is-out{color:#b5473a;}
+.stock-checking{font-size:.66rem;color:var(--hai);font-style:italic;padding:.6rem 1rem 0;}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="メインナビゲーション">
+  <a href="index_test.html" class="nav-logo" aria-label="ARC FUKAMEKI minoh — トップへ">
+    <img src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+      <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+      <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+      <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+      <li><a href="products_test.html" data-i18n="nav_shop" aria-current="page">Online Shop</a></li>
+      <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <button class="nav-btn" id="cartOpen" aria-haspopup="dialog" aria-expanded="false">Cart (<span id="cartCount">0</span>)</button>
+    <button type="button" class="hamburger" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+      <span class="hamburger-label">MENU</span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="メニュー">
+  <button type="button" class="mobile-menu-close" id="menuClose">閉じる — Close</button>
+  <ul class="mobile-menu-links">
+    <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+    <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+    <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+    <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+    <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+    <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <p class="mobile-menu-en en-note">ARC FUKAMEKI minoh — Minoh, Osaka</p>
+  <div class="mobile-menu-lang">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+</div>
+
+<main id="main-content">
+  <div class="not-found" id="not-found" style="display:none;">
+    <p>商品が見つかりませんでした。</p>
+    <a href="products_test.html">Collection へ戻る →</a>
+  </div>
+
+  <div id="product-detail" style="display:none;">
+    <p class="crumb reveal">
+      <a href="products_test.html">Collection</a>
+      <span class="sep">/</span>
+      <span id="crumb-artist"></span>
+      <span class="sep">/</span>
+      <span class="here" id="crumb-name"></span>
+    </p>
+
+    <div class="work-panel reveal">
+      <figure class="work-figure">
+        <div class="vitrine"><img id="main-img" src="" alt=""></div>
+        <div class="thumbs" id="thumbnails"></div>
+      </figure>
+      <div class="work-caption">
+        <p class="cat-label" id="p-category"></p>
+        <p class="work-artist" id="p-artist"></p>
+        <h1 class="work-name" id="p-name"></h1>
+        <p class="soldout-badge" id="p-soldout" style="display:none;">（soldout）</p>
+        <p class="work-price" id="p-price"></p>
+        <p style="margin-bottom:1rem;">
+          <button type="button" class="shop-notice-open-link" data-shop-notice-open data-i18n="shop_notice_link">オンラインショップご利用案内</button>
+        </p>
+        <a href="#" target="_blank" rel="noopener" class="acquire-buy" id="p-buy-base" style="display:none;">BASEで購入 →</a>
+        <p class="stock-note" id="p-stock-note" style="display:none;"></p>
+        <div id="p-variant-toggle-wrap" style="display:none;margin-bottom:1rem;">
+          <button type="button" class="variant-toggle-btn" id="p-variant-toggle" aria-expanded="false">種類を選択する — Select option ▾</button>
+          <div class="variant-panel" id="p-variant-panel" style="display:none;" role="region" aria-label="種類一覧 — Variants">
+            <ul class="variant-list" id="p-variant-list"></ul>
+            <p class="stock-checking" id="p-variant-checking" style="display:none;">在庫を確認中 — Checking stock…</p>
+          </div>
+        </div>
+        <button type="button" class="acquire-buy" id="p-buy-shopify" data-shop-add style="display:none;">カートに追加</button>
+        <p class="purchase-note lang-non-ja" data-i18n="purchase_intl_note" style="display:none;"></p>
+      </div>
+    </div>
+
+    <section class="detail-sec reveal" id="desc-section">
+      <p class="detail-label">Description</p>
+      <div class="work-desc" id="p-desc"></div>
+    </section>
+
+    <section class="detail-sec reveal" id="spec-section">
+      <p class="detail-label">Details</p>
+      <table class="spec-table" id="spec-table"></table>
+    </section>
+
+    <section class="detail-sec" id="artist-section" style="display:none;">
+      <p class="detail-label">Artist</p>
+      <p class="artist-profile-text" id="p-artist-bio"></p>
+    </section>
+
+    <section class="related" id="related-section" style="display:none;">
+      <p class="detail-label">More from this artist</p>
+      <div class="related-grid" id="related-grid"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <span class="foot-vert" aria-hidden="true">大阪箕面</span>
+  <img class="foot-logo reveal" src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh" loading="lazy">
+  <p class="foot-addr">〒562-0001 大阪府箕面市箕面2丁目3-10 — 阪急箕面駅より徒歩5分</p>
+  <div class="foot-links">
+    <a href="https://www.instagram.com/arcfukameki_minoh" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact_test.html" data-i18n="contact_title">お問合せ</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 ARC FUKAMEKI minoh</p>
+</footer>
+
+<!-- cart drawer (Shopify Storefront Cart API — shop_config.js が開閉・内容を制御) -->
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Cart — 買い物かご">
+  <div class="cart-head">
+    <p class="label">籠 — Cart</p>
+    <button class="cart-close" id="cartClose" aria-label="かごを閉じる">&times;</button>
+  </div>
+  <div class="cart-message" id="cartMessage" style="display:none;"></div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">かごは空です — Your cart is empty.</p>
+  </div>
+  <div class="cart-foot">
+    <p class="cart-subtotal"><span>Subtotal — 小計</span><span id="cartSubtotal">&yen;0</span></p>
+    <button class="checkout" id="cartCheckout" type="button">Checkout</button>
+    <p class="cart-note" id="cartNote">Shopifyによる安全な決済<br>Secure checkout by Shopify.</p>
+  </div>
+</aside>
+
+<div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
+
+<script src="product_translations.js?v=9"></script>
+<script src="lang.js?v=12"></script>
+<script src="chat_knowledge.js?v=9"></script>
+<script src="chat_widget.js?v=9"></script>
+<script src="shop_config.js?v=10"></script>
+<script src="ma_nav.js?v=9"></script>
+<script src="shop_notice_release.js?v=1"></script>
+<script src="shop_notice.js?v=3"></script>
+<script>
+(function() {
+  var BASE_IMG_URL = 'https://baseec-img-mng.akamaized.net/images/item/origin/';
+
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name);
+  }
+
+  function switchImg(src) {
+    document.getElementById('main-img').src = src;
+    document.querySelectorAll('.thumb').forEach(function(t) {
+      t.classList.toggle('active', t.dataset.src === src);
+    });
+  }
+
+  /* ---------- Shopify variant 在庫表示・選択UI ----------
+     quantityAvailable は Storefront公開トークンでは unauthenticated_read_product_inventory
+     スコープが無いため取得不可（2026-07-21 確認）。取得できた場合のみ数値表示し、
+     できない場合は個数を推定せず「取得不可」と明示する。 */
+  var currentProduct = null;
+  var currentVariants = null;
+  var fetchGeneration = 0;
+  var pollTimer = null;
+  var panelOpen = false;
+
+  // lang.js の LANG_TRANSLATIONS を shop_config.js 経由で参照（現在の arc_lang に基づき都度翻訳）
+  function t(key, fallback) {
+    if (window.ShopCart && window.ShopCart.t) return window.ShopCart.t(key, fallback);
+    return fallback || key;
+  }
+
+  function variantDisplayName(v) {
+    if (v.selectedOptions && v.selectedOptions.length) {
+      var parts = v.selectedOptions
+        .filter(function (o) { return o.value && o.value !== 'Default Title' && o.name !== 'Title'; })
+        .map(function (o) { return o.value; });
+      if (parts.length) return parts.join(' / ');
+    }
+    if (v.title && v.title !== 'Default Title') return v.title;
+    return '';
+  }
+
+  function variantStockInfo(v) {
+    if (typeof v.quantityAvailable === 'number') {
+      if (v.quantityAvailable > 0) return { buyable: true, label: t('shop_stock_remaining', '{n} left').replace('{n}', v.quantityAvailable), unknown: false, out: false };
+      if (v.availableForSale === false) return { buyable: false, label: t('shop_out_of_stock', 'Sold out'), unknown: false, out: true };
+      // quantityAvailable===0 だが availableForSale===true → 取り寄せ設定の可能性があるため断定しない
+      if (v.currentlyNotInStock) return { buyable: true, label: t('shop_backorder', 'Backorder available'), unknown: false, out: false };
+      return { buyable: false, label: t('shop_out_of_stock', 'Sold out'), unknown: false, out: true };
+    }
+    if (!v.availableForSale) return { buyable: false, label: t('shop_out_of_stock', 'Sold out'), unknown: false, out: true };
+    return { buyable: true, label: t('shop_stock_unknown', 'Stock count unavailable'), unknown: true, out: false };
+  }
+
+  function fetchVariants(variantGid) {
+    var endpoint = 'https://' + SHOP_CONFIG.domain + '/api/' + SHOP_CONFIG.apiVersion + '/graphql.json';
+    var query = 'query($id:ID!){node(id:$id){... on ProductVariant{product{variants(first:50){edges{node{' +
+      'id title selectedOptions{name value} availableForSale quantityAvailable currentlyNotInStock' +
+      '}}}}}}}';
+    return fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOP_CONFIG.storefrontAccessToken
+      },
+      body: JSON.stringify({ query: query, variables: { id: variantGid } })
+    }).then(function (r) { return r.json(); }).then(function (json) {
+      var node = json.data && json.data.node;
+      var edges = node && node.product && node.product.variants && node.product.variants.edges;
+      if (!edges || !edges.length) throw new Error('no variants');
+      return edges.map(function (e) { return e.node; });
+    });
+  }
+
+  function setCheckingUI(on) {
+    var el = document.getElementById('p-variant-checking');
+    if (el) el.style.display = on ? '' : 'none';
+  }
+
+  function refreshAvailability(showLoading) {
+    if (!currentProduct || !currentProduct.shopify) return Promise.resolve();
+    var myGen = ++fetchGeneration;
+    if (showLoading) setCheckingUI(true);
+    return fetchVariants(currentProduct.shopify).then(function (variants) {
+      if (myGen !== fetchGeneration) return; // 古いレスポンスは無視
+      currentVariants = variants;
+      renderVariantUI();
+    }).catch(function () {
+      if (myGen !== fetchGeneration) return;
+      // 取得失敗時も画面・カート機能は止めない。フォールバックとして登録済みGIDのみ・個数不明で表示
+      if (!currentVariants) {
+        currentVariants = [{
+          id: currentProduct.shopify, title: currentProduct.name, selectedOptions: [],
+          availableForSale: true, quantityAvailable: null, currentlyNotInStock: false
+        }];
+        renderVariantUI();
+      }
+    }).then(function () {
+      if (myGen === fetchGeneration) setCheckingUI(false);
+    });
+  }
+
+  function addToCartFlow(btn, variantId) {
+    if (btn.disabled) return;
+    btn.disabled = true;
+    var original = btn.textContent;
+    var addingLabel = t('shop_cart_adding', 'Adding to cart');
+    btn.textContent = addingLabel;
+    refreshAvailability(false).then(function () {
+      var v = currentVariants && currentVariants.filter(function (x) { return x.id === variantId; })[0];
+      if (v && !variantStockInfo(v).buyable) {
+        if (window.ShopCart && window.ShopCart.showMessage) {
+          window.ShopCart.showMessage('shop_sold_out_other');
+        }
+        renderVariantUI();
+        btn.disabled = false;
+        btn.textContent = original;
+        return;
+      }
+      return window.ShopCart.add(variantId).catch(function () {
+        btn.textContent = t('shop_cart_add_failed', 'Could not add to cart');
+      }).then(function () {
+        return refreshAvailability(false);
+      }).then(function () {
+        btn.disabled = false;
+        if (btn.textContent === addingLabel) btn.textContent = original;
+      });
+    });
+  }
+
+  function renderVariantUI() {
+    if (!currentProduct || !currentVariants) return;
+    var variants = currentVariants;
+    var stockNote = document.getElementById('p-stock-note');
+    var toggleWrap = document.getElementById('p-variant-toggle-wrap');
+    var list = document.getElementById('p-variant-list');
+    var shopBtn = document.getElementById('p-buy-shopify');
+
+    var named = variants.filter(function (v) { return variantDisplayName(v); });
+    var isMulti = variants.length > 1 && named.length > 0;
+
+    if (isMulti) {
+      stockNote.style.display = 'none';
+      shopBtn.style.display = 'none';
+      toggleWrap.style.display = '';
+      list.innerHTML = '';
+      variants.forEach(function (v) {
+        var info = variantStockInfo(v);
+        var li = document.createElement('li');
+        li.className = 'variant-row';
+        var infoDiv = document.createElement('div');
+        infoDiv.className = 'variant-row-info';
+        var nameEl = document.createElement('span');
+        nameEl.className = 'variant-row-name';
+        nameEl.textContent = variantDisplayName(v) || v.title;
+        var stockEl = document.createElement('span');
+        stockEl.className = 'variant-row-stock' + (info.out ? ' is-out' : '') + (info.unknown ? ' is-unknown' : '');
+        stockEl.textContent = info.label;
+        infoDiv.appendChild(nameEl);
+        infoDiv.appendChild(stockEl);
+        var addBtn = document.createElement('button');
+        addBtn.type = 'button';
+        addBtn.className = 'variant-row-add';
+        addBtn.textContent = t('shop_add_to_cart_row', 'Add');
+        addBtn.disabled = !info.buyable;
+        addBtn.addEventListener('click', function () { addToCartFlow(addBtn, v.id); });
+        li.appendChild(infoDiv);
+        li.appendChild(addBtn);
+        list.appendChild(li);
+      });
+    } else {
+      toggleWrap.style.display = 'none';
+      var only = variants[0];
+      var info2 = variantStockInfo(only);
+      stockNote.style.display = '';
+      stockNote.className = 'stock-note' + (info2.out ? ' is-out' : '');
+      stockNote.textContent = info2.label;
+      shopBtn.style.display = '';
+      shopBtn.disabled = !info2.buyable;
+      shopBtn.textContent = info2.buyable ? t('shop_add_to_cart', 'Add to cart') : t('shop_out_of_stock', 'Sold out');
+      shopBtn.onclick = function () { addToCartFlow(shopBtn, only.id); };
+    }
+  }
+
+  function updateShopStaticLabels() {
+    var toggle = document.getElementById('p-variant-toggle');
+    if (toggle) toggle.textContent = t('shop_select_variant', 'Select option') + ' ▾';
+    var checking = document.getElementById('p-variant-checking');
+    if (checking) checking.textContent = t('shop_stock_checking', 'Checking stock') + '…';
+  }
+
+  function openVariantPanel() {
+    var panel = document.getElementById('p-variant-panel');
+    var toggle = document.getElementById('p-variant-toggle');
+    if (!panel || !toggle) return;
+    panel.style.display = '';
+    toggle.setAttribute('aria-expanded', 'true');
+    panelOpen = true;
+    refreshAvailability(true);
+    if (pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(function () { refreshAvailability(false); }, 12000);
+  }
+  function closeVariantPanel() {
+    var panel = document.getElementById('p-variant-panel');
+    var toggle = document.getElementById('p-variant-toggle');
+    if (!panel || !toggle) return;
+    panel.style.display = 'none';
+    toggle.setAttribute('aria-expanded', 'false');
+    panelOpen = false;
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var toggle = document.getElementById('p-variant-toggle');
+    if (toggle) toggle.addEventListener('click', function () { panelOpen ? closeVariantPanel() : openVariantPanel(); });
+    updateShopStaticLabels();
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible' && currentProduct) refreshAvailability(false);
+  });
+  // 言語切替時（shop_config.js が setLang をラップして呼び出す）に在庫UIの文言を再翻訳する
+  window.onShopLangChange = function () {
+    updateShopStaticLabels();
+    if (currentVariants) renderVariantUI();
+  };
+
+  function renderRelated(p, id) {
+    var section = document.getElementById('related-section');
+    var grid = document.getElementById('related-grid');
+    grid.innerHTML = '';
+    var others = [];
+    for (var key in PRODUCTS_DATA) {
+      if (key === id) continue;
+      if (getProductStatus(key) !== 'active') continue;
+      if (PRODUCTS_DATA[key].artist === p.artist) others.push([key, PRODUCTS_DATA[key]]);
+      if (others.length >= 3) break;
+    }
+    if (!others.length) { section.style.display = 'none'; return; }
+    others.forEach(function(entry) {
+      var rp = entry[1];
+      var priceStr = typeof rp.price === 'number' ? '¥' + rp.price.toLocaleString('ja-JP') : String(rp.price);
+      var price = priceStr.indexOf('（税込）') === -1 ? priceStr + '（税込）' : priceStr;
+      var a = document.createElement('a');
+      a.className = 'product-card';
+      a.href = 'product_test.html?id=' + entry[0];
+      a.innerHTML =
+        '<div class="product-image"><img src="' + rp.img + '" alt="' + rp.artist + ' ' + rp.name + '" loading="lazy"></div>' +
+        '<p class="product-name">' + rp.name + '</p>' +
+        '<p class="product-price">' + price + '</p>';
+      grid.appendChild(a);
+    });
+    section.style.display = '';
+  }
+
+  function priceNumber(price) {
+    if (typeof price === 'number') return price;
+    var n = String(price).replace(/[^\d]/g, '');
+    return n ? parseInt(n, 10) : 0;
+  }
+
+  function renderSEO(p, id) {
+    var pageUrl = 'https://fukameki.jp/product_' + id + '.html';
+    var title = p.artist + ' ' + p.name + ' — ARC FUKAMEKI minoh';
+    var desc = (p.description || (p.artist + 'による' + p.name + '。ARC FUKAMEKI minoh の商品紹介。')).slice(0, 120);
+
+    document.getElementById('page-title').textContent = title + ' (TEST)';
+    document.getElementById('meta-description').setAttribute('content', desc);
+    document.getElementById('link-canonical').setAttribute('href', pageUrl);
+    document.getElementById('og-title').setAttribute('content', title);
+    document.getElementById('og-description').setAttribute('content', desc);
+    document.getElementById('og-url').setAttribute('content', pageUrl);
+    document.getElementById('twitter-title').setAttribute('content', title);
+    document.getElementById('twitter-description').setAttribute('content', desc);
+
+    var ldProduct = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: p.name,
+      image: /^https?:\/\//.test(p.img) ? p.img : 'https://fukameki.jp/' + p.img,
+      description: p.description || desc,
+      brand: { '@type': 'Brand', name: p.artist },
+      offers: {
+        '@type': 'Offer',
+        price: priceNumber(p.price),
+        priceCurrency: 'JPY',
+        availability: p.soldout ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+        url: p.baseUrl
+      }
+    };
+    var ldBreadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Collection', item: 'https://fukameki.jp/products.html' },
+        { '@type': 'ListItem', position: 2, name: p.artist },
+        { '@type': 'ListItem', position: 3, name: p.name }
+      ]
+    };
+    var ldScript = document.createElement('script');
+    ldScript.type = 'application/ld+json';
+    ldScript.id = 'ld-product';
+    ldScript.textContent = JSON.stringify([ldProduct, ldBreadcrumb]);
+    var existing = document.getElementById('ld-product');
+    if (existing) existing.remove();
+    document.head.appendChild(ldScript);
+  }
+
+  function render(p, id) {
+    renderSEO(p, id);
+
+    var mainImg = document.getElementById('main-img');
+    mainImg.src = p.img;
+    mainImg.alt = p.artist + ' ' + p.name;
+
+    var thumbsEl = document.getElementById('thumbnails');
+    thumbsEl.innerHTML = '';
+    var allImages = (p.images || []).map(function(hash) { return /^https?:\/\//.test(hash) ? hash : BASE_IMG_URL + hash + '.jpg'; });
+    if (allImages.length > 0) allImages[0] = p.img;
+    else allImages = [p.img];
+    allImages.forEach(function(src, i) {
+      var div = document.createElement('div');
+      div.className = 'thumb' + (i === 0 ? ' active' : '');
+      div.dataset.src = src;
+      div.onclick = function() { switchImg(src); };
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      div.appendChild(img);
+      thumbsEl.appendChild(div);
+    });
+
+    document.getElementById('p-category').textContent = p.category || '';
+    document.getElementById('p-artist').textContent = p.artist;
+    document.getElementById('p-name').textContent = p.name;
+    document.getElementById('crumb-artist').textContent = p.artist;
+    document.getElementById('crumb-name').textContent = p.name;
+    document.getElementById('p-soldout').style.display = p.soldout ? '' : 'none';
+
+    var priceStr = typeof p.price === 'number' ? '¥' + p.price.toLocaleString('ja-JP') : String(p.price);
+    document.getElementById('p-price').innerHTML = priceStr + '<span data-i18n="price_tax" style="font-family:\'Inter Tight\',sans-serif;font-size:.62rem;letter-spacing:.05em;color:var(--hai);margin-left:.4rem;">（税込）</span>';
+    document.getElementById('p-desc').textContent = p.description || '';
+    document.getElementById('desc-section').style.display = p.description ? '' : 'none';
+
+    var rows = '';
+    if (p.size) rows += '<tr><td data-i18n="spec_size">サイズ</td><td>' + p.size + '</td></tr>';
+    if (p.material) rows += '<tr><td data-i18n="spec_material">素材</td><td>' + p.material + '</td></tr>';
+    if (p.care) rows += '<tr><td data-i18n="spec_care">取り扱い</td><td>' + p.care + '</td></tr>';
+    var specSection = document.getElementById('spec-section');
+    if (!rows) { specSection.style.display = 'none'; } else { document.getElementById('spec-table').innerHTML = rows; }
+
+    var baseBtn = document.getElementById('p-buy-base');
+    var shopBtn = document.getElementById('p-buy-shopify');
+    var stockNote = document.getElementById('p-stock-note');
+    var toggleWrap = document.getElementById('p-variant-toggle-wrap');
+    var pStatus = getProductStatus(id);
+    currentProduct = null;
+    currentVariants = null;
+    if (pStatus !== 'active') {
+      shopBtn.style.display = 'none';
+      baseBtn.style.display = 'none';
+      stockNote.style.display = 'none';
+      toggleWrap.style.display = 'none';
+    } else if (p.shopify) {
+      baseBtn.style.display = 'none';
+      currentProduct = p;
+      refreshAvailability(true);
+    } else {
+      shopBtn.style.display = 'none';
+      stockNote.style.display = 'none';
+      toggleWrap.style.display = 'none';
+      baseBtn.style.display = '';
+      baseBtn.href = p.baseUrl;
+    }
+
+    var artistData = window.ARTISTS_DATA && window.ARTISTS_DATA[p.artist];
+    var artistSection = document.getElementById('artist-section');
+    if (artistData && artistData.bio) {
+      document.getElementById('p-artist-bio').textContent = artistData.bio;
+      artistSection.style.display = '';
+    } else {
+      artistSection.style.display = 'none';
+    }
+
+    renderRelated(p, id);
+    document.getElementById('product-detail').style.display = '';
+  }
+
+  function applyDynamicProductLang(lang, p, id) {
+    if (window.LANG_TRANSLATIONS && LANG_TRANSLATIONS[lang]) {
+      var t = LANG_TRANSLATIONS[lang];
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+    }
+    if (lang !== 'ja' && window.PRODUCT_TRANSLATIONS) {
+      var key = 'product_' + id + '.html';
+      var pt = PRODUCT_TRANSLATIONS[key];
+      if (pt && pt[lang]) {
+        var tr = pt[lang];
+        if (tr.name) { document.getElementById('p-name').textContent = tr.name; document.getElementById('crumb-name').textContent = tr.name; }
+        if (tr.desc) document.getElementById('p-desc').textContent = tr.desc;
+        if (tr.artist_profile) document.getElementById('p-artist-bio').innerHTML = tr.artist_profile;
+        if (tr.specs) {
+          function applySpec(i18nKey, val) {
+            var label = document.querySelector('[data-i18n="' + i18nKey + '"]');
+            if (label && label.nextElementSibling && val) label.nextElementSibling.textContent = val;
+          }
+          applySpec('spec_material', tr.specs.material);
+          applySpec('spec_care', tr.specs.care);
+          applySpec('spec_notes', tr.specs.notes);
+        }
+      }
+    } else if (lang === 'ja') {
+      // 日本語へ戻す: render() が既に原文をセットしているので再描画するだけでよい
+      document.getElementById('p-name').textContent = p.name;
+      document.getElementById('crumb-name').textContent = p.name;
+      document.getElementById('p-desc').textContent = p.description || '';
+      var artistData = window.ARTISTS_DATA && window.ARTISTS_DATA[p.artist];
+      if (artistData && artistData.bio) document.getElementById('p-artist-bio').textContent = artistData.bio;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var id = getParam('id');
+    if (id && window.PRODUCTS_DATA && window.PRODUCTS_DATA[id]) {
+      var p = window.PRODUCTS_DATA[id];
+      render(p, id);
+      var lang = localStorage.getItem('arc_lang') || 'ja';
+      applyDynamicProductLang(lang, p, id);
+      window.onLangChange = function(newLang) { applyDynamicProductLang(newLang, p, id); };
+    } else {
+      document.getElementById('not-found').style.display = '';
+    }
+  });
+})();
+</script>
+</body>
+</html>

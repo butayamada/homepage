@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>アバウト (TEST) — ARC FUKAMEKI minoh</title>
+<meta name="description" content="ARC FUKAMEKI minohについて。百年を経た箕面の平屋で、手仕事の器と道具を選び静かに並べています。About ARC FUKAMEKI minoh — a house of crafted objects in Minoh, Osaka.">
+<link rel="canonical" href="https://fukameki.jp/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="アバウト — ARC FUKAMEKI minoh">
+<meta property="og:description" content="百年を経た箕面の平屋で、手仕事の器と道具を選び静かに並べています。">
+<meta property="og:url" content="https://fukameki.jp/about.html">
+<meta property="og:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Noto+Serif+JP:wght@200;300&family=Cormorant+Garamond:ital,wght@1,300&family=Inter+Tight:wght@200;300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ma_common.css?v=9">
+<style>
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:center;overflow:hidden;}
+.about-grid>*{min-width:0;}
+.about-ph{position:relative;padding-top:118%;overflow:hidden;background:#eae6de;}
+.about-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.about-text{max-width:34em;}
+.about-jp{font-size:clamp(.95rem,1.6vw,1.05rem);line-height:2.4;letter-spacing:.06em;}
+@media (max-width:960px){ .about-grid{grid-template-columns:1fr;gap:3rem;} }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="メインナビゲーション">
+  <a href="index_test.html" class="nav-logo" aria-label="ARC FUKAMEKI minoh — トップへ">
+    <img src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+      <li><a href="about_test.html" data-i18n="nav_about" aria-current="page">About</a></li>
+      <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+      <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+      <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+      <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <button class="nav-btn" id="cartOpen" aria-haspopup="dialog" aria-expanded="false">Cart (<span id="cartCount">0</span>)</button>
+    <button type="button" class="hamburger" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+      <span class="hamburger-label">MENU</span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="メニュー">
+  <button type="button" class="mobile-menu-close" id="menuClose">閉じる — Close</button>
+  <ul class="mobile-menu-links">
+    <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+    <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+    <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+    <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+    <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+    <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <p class="mobile-menu-en en-note">ARC FUKAMEKI minoh — Minoh, Osaka</p>
+  <div class="mobile-menu-lang">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+</div>
+
+<main>
+<section class="section" aria-label="店について — About">
+  <div class="sec-head reveal">
+    <h1 class="sec-title-v jp-display">店について</h1>
+    <p class="sec-en en-note">About</p>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-ph">
+      <img src="photo/renewal_clean/r15.jpg" alt="古民家の引戸と丸い照明、石壁" loading="lazy">
+    </div>
+    <div class="about-text">
+      <p class="about-jp" data-i18n="about_desc">2019年6月オープン。<br>手仕事品を中心に暮らしを充たすアイテムを全国各地よりセレクト。<br>常設販売のほか、季節やテーマに合わせた企画展示、個展を定期的に開催。<br>2026年5月移転、ARC FUKAMEKI minoh（アルクフカメキ箕面）に名称変更。<br>ARCは架け橋の意。<br>作り手と使い手がつながり心豊かな時間がうまれる場所でありたいと考えています。</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span class="foot-vert" aria-hidden="true">大阪箕面</span>
+  <img class="foot-logo" loading="lazy" src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  <p class="foot-addr">〒562-0001 大阪府箕面市箕面2丁目3-10 — 阪急箕面駅より徒歩5分</p>
+  <div class="foot-links">
+    <a href="https://www.instagram.com/arcfukameki_minoh" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact_test.html" data-i18n="contact_title">お問合せ</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 ARC FUKAMEKI minoh</p>
+</footer>
+
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Cart — 買い物かご">
+  <div class="cart-head">
+    <p class="label">籠 — Cart</p>
+    <button class="cart-close" id="cartClose" aria-label="かごを閉じる">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">かごは空です — Your cart is empty.</p>
+  </div>
+  <div class="cart-foot">
+    <p class="cart-subtotal"><span>Subtotal — 小計</span><span id="cartSubtotal">&yen;0</span></p>
+    <button class="checkout" id="cartCheckout" type="button">Checkout</button>
+    <p class="cart-note" id="cartNote">Shopifyによる安全な決済<br>Secure checkout by Shopify.</p>
+  </div>
+</aside>
+
+<div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
+
+<script src="lang.js?v=9" defer></script>
+<script src="chat_knowledge.js?v=9" defer></script>
+<script src="chat_widget.js?v=9" defer></script>
+<script src="shop_config.js?v=9" defer></script>
+<script src="ma_nav.js?v=9" defer></script>
+</body>
+</html>

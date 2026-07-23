@@ -2281,6 +2281,7 @@ window.PRODUCTS_DATA = {
   },
 
   "imai_candle_dish": {
+    soldout: true,
     artist: "今井律湖（益子）",
     name: "キャンドルディッシュ",
     price: "¥5,500",

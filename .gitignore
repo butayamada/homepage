@@ -1,1 +1,21 @@
 _dev/
+
+# 秘密情報
+.env
+.env.*
+!.env.example
+
+# エージェント・エディタ作業用設定
+.codex/
+.claude/
+
+# 一時ファイル・ログ・バックアップ
+tmp/
+*.bak
+*.bak_*
+*.log
+__pycache__/
+*.pyc
+node_modules/
+tools/*_log.txt
+tools/shopify_register_ledger.json

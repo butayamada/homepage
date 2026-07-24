@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>営業日 (TEST) — ARC FUKAMEKI minoh</title>
+<meta name="description" content="ARC FUKAMEKI minohの営業カレンダー。企画展・常設展示の営業日をご確認いただけます。Business calendar for ARC FUKAMEKI minoh.">
+<link rel="canonical" href="https://fukameki.jp/calendar.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="営業日 — ARC FUKAMEKI minoh">
+<meta property="og:description" content="営業カレンダー。企画展・常設展示の営業日をご確認いただけます。">
+<meta property="og:url" content="https://fukameki.jp/calendar.html">
+<meta property="og:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Noto+Serif+JP:wght@200;300&family=Cormorant+Garamond:ital,wght@1,300&family=Inter+Tight:wght@200;300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ma_common.css?v=9">
+<style>
+/* ---------- calendar（〈間〉配色: ex=sumi+下線, open=sumi, closed=hai40%） ---------- */
+.cal-wrap{max-width:900px;}
+.cal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.5rem;}
+.cal-month-num{font-family:'Shippori Mincho',serif;font-weight:500;font-size:clamp(3.2rem,6vw,5rem);color:var(--sumi);line-height:1;}
+.cal-slash{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--hai);margin:0 .6rem;align-self:flex-end;padding-bottom:.5rem;}
+.cal-month-sub{display:flex;flex-direction:column;align-self:flex-end;padding-bottom:.3rem;}
+.cal-year,.cal-month-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;letter-spacing:.1em;color:var(--hai);line-height:1.3;}
+.cal-legend{text-align:right;}
+.cal-legend-item{display:flex;align-items:center;justify-content:flex-end;gap:.6rem;font-size:.68rem;letter-spacing:.05em;color:var(--hai);line-height:2.1;}
+.cal-legend-dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex-shrink:0;}
+.cal-legend-dot.ex{border:1.5px solid var(--sumi);}
+.cal-legend-dot.open{border:1.5px solid var(--hai);}
+.cal-legend-hours{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.78rem;color:var(--hai);margin-top:.4rem;}
+
+.cal-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.cal-table thead th{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--hai);text-align:left;padding:0 0 1rem .4rem;border-bottom:1px solid var(--line);}
+.cal-table tbody td{vertical-align:top;padding:.9rem .4rem 1.1rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);height:88px;position:relative;}
+.cal-table tbody td:last-child{border-right:none;}
+.cal-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1rem;display:inline-block;padding-bottom:1px;}
+.cal-num.ex{color:var(--sumi);border-bottom:1px solid var(--sumi);}
+.cal-num.open{color:var(--sumi);}
+.cal-num.closed{color:rgba(163,157,146,.4);}
+.cal-event{font-size:.6rem;letter-spacing:.03em;line-height:1.6;color:var(--hai);margin-top:.4rem;font-weight:300;}
+.cal-event.ex{color:var(--sumi);}
+.cal-event-sub{font-size:.56rem;color:var(--hai);display:block;}
+.cal-bar{position:absolute;top:0;left:0;right:0;height:2px;background:var(--sumi);opacity:.5;}
+.cal-ex-bar td.bar{position:relative;}
+.cal-ex-bar td.bar::after{content:'';position:absolute;left:0;right:-1px;bottom:14px;height:2px;background:var(--sumi);opacity:.5;}
+.cal-ex-bar td.bar-start::after{left:16px;}
+.cal-ex-bar td.bar-end::after{right:50%;}
+
+@media (max-width:960px){
+  .cal-table tbody td{height:70px;padding:.7rem .3rem .8rem;}
+  .cal-event{font-size:.54rem;}
+}
+@media (max-width:480px){
+  .cal-month-num{font-size:2.8rem;}
+  .cal-table tbody td{height:58px;padding:.5rem .2rem .6rem;}
+  .cal-event{display:none;}
+  .cal-legend-item{font-size:.6rem;}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="メインナビゲーション">
+  <a href="index_test.html" class="nav-logo" aria-label="ARC FUKAMEKI minoh — トップへ">
+    <img src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+      <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+      <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+      <li><a href="calendar_test.html" data-i18n="nav_calendar" aria-current="page">Calendar</a></li>
+      <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+      <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <button class="nav-btn" id="cartOpen" aria-haspopup="dialog" aria-expanded="false">Cart (<span id="cartCount">0</span>)</button>
+    <button type="button" class="hamburger" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+      <span class="hamburger-label">MENU</span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="メニュー">
+  <button type="button" class="mobile-menu-close" id="menuClose">閉じる — Close</button>
+  <ul class="mobile-menu-links">
+    <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+    <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+    <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+    <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+    <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+    <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <p class="mobile-menu-en en-note">ARC FUKAMEKI minoh — Minoh, Osaka</p>
+  <div class="mobile-menu-lang">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+</div>
+
+<main>
+<section class="section" aria-label="営業日 — Calendar">
+  <div class="sec-head reveal">
+    <h1 class="sec-title-v jp-display">営業日</h1>
+    <p class="sec-en en-note">Calendar</p>
+  </div>
+
+  <div class="cal-wrap reveal">
+    <!-- June 2026 -->
+    <div data-cal-month="2026-06">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:.2rem;">
+          <span class="cal-month-num">6</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub"><span class="cal-year">2026</span><span class="cal-month-en">June</span></div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        </div>
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="cal-num ex">1</span><p class="cal-event">AMPIANA<br>POP UP</p></td>
+            <td><span class="cal-num ex">2</span></td>
+            <td><span class="cal-num ex">3</span></td>
+            <td><span class="cal-num ex">4</span></td>
+            <td><span class="cal-num closed">5</span></td>
+            <td><span class="cal-num ex">6</span><p class="cal-event ex">紙上征江個展<br><span class="cal-event-sub" data-i18n="cal_artist_in">作家在店</span></p></td>
+            <td><span class="cal-num ex">7</span></td>
+          </tr>
+          <tr class="cal-ex-bar">
+            <td class="bar bar-start"><span class="cal-num ex">8</span></td>
+            <td class="bar"><span class="cal-num ex">9</span></td>
+            <td class="bar"><span class="cal-num ex">10</span></td>
+            <td class="bar"><span class="cal-num ex">11</span></td>
+            <td class="bar"><span class="cal-num ex">12</span></td>
+            <td class="bar bar-end"><span class="cal-num ex">13</span></td>
+            <td><span class="cal-num closed">14</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">15</span><p class="cal-event" data-i18n="cal_josetsu">常設展示</p></td>
+            <td><span class="cal-num open">16</span></td>
+            <td><span class="cal-num open">17</span></td>
+            <td><span class="cal-num closed">18</span></td>
+            <td><span class="cal-num closed">19</span></td>
+            <td><span class="cal-num open">20</span></td>
+            <td><span class="cal-num open">21</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">22</span></td>
+            <td><span class="cal-num open">23</span></td>
+            <td><span class="cal-num open">24</span></td>
+            <td><span class="cal-num closed">25</span></td>
+            <td><span class="cal-num closed">26</span></td>
+            <td><span class="cal-num open">27</span></td>
+            <td><span class="cal-num open">28</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">29</span></td>
+            <td><span class="cal-num open">30</span></td>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- July 2026 -->
+    <div data-cal-month="2026-07" style="display:none;">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:.2rem;">
+          <span class="cal-month-num">7</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub"><span class="cal-year">2026</span><span class="cal-month-en">July</span></div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        </div>
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td></td><td></td>
+            <td><span class="cal-num open">1</span></td>
+            <td><span class="cal-num closed">2</span></td>
+            <td><span class="cal-num closed">3</span></td>
+            <td><span class="cal-num open">4</span></td>
+            <td><span class="cal-num open">5</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">6</span></td>
+            <td><span class="cal-num open">7</span></td>
+            <td><span class="cal-num open">8</span></td>
+            <td><span class="cal-num closed">9</span></td>
+            <td><span class="cal-num closed">10</span></td>
+            <td><span class="cal-num open">11</span></td>
+            <td><span class="cal-num open">12</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">13</span></td>
+            <td><span class="cal-num open">14</span></td>
+            <td><span class="cal-num open">15</span></td>
+            <td><span class="cal-num closed">16</span></td>
+            <td><span class="cal-num closed">17</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">18</span><p class="cal-event ex">ナツメク</p></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">19</span></td>
+          </tr>
+          <tr>
+            <td><div class="cal-bar"></div><span class="cal-num ex">20</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">21</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">22</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">23</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">24</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">25</span></td>
+            <td><span class="cal-num closed">26</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">27</span></td>
+            <td><span class="cal-num open">28</span></td>
+            <td><span class="cal-num open">29</span></td>
+            <td><span class="cal-num closed">30</span></td>
+            <td><span class="cal-num closed">31</span></td>
+            <td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- August 2026 -->
+    <div data-cal-month="2026-08" style="display:none;">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:.2rem;">
+          <span class="cal-month-num">8</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub"><span class="cal-year">2026</span><span class="cal-month-en">August</span></div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        </div>
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td><span class="cal-num open">1</span></td>
+            <td><span class="cal-num open">2</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">3</span></td>
+            <td><span class="cal-num open">4</span></td>
+            <td><span class="cal-num open">5</span></td>
+            <td><span class="cal-num closed">6</span></td>
+            <td><span class="cal-num closed">7</span></td>
+            <td><span class="cal-num open">8</span></td>
+            <td><span class="cal-num open">9</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">10</span></td>
+            <td><span class="cal-num open">11</span></td>
+            <td><span class="cal-num open">12</span></td>
+            <td><span class="cal-num closed">13</span></td>
+            <td><span class="cal-num closed">14</span></td>
+            <td><span class="cal-num open">15</span></td>
+            <td><span class="cal-num open">16</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">17</span></td>
+            <td><span class="cal-num open">18</span></td>
+            <td><span class="cal-num open">19</span></td>
+            <td><span class="cal-num closed">20</span></td>
+            <td><span class="cal-num closed">21</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">22</span><p class="cal-event ex">処暑、線を辿る</p></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">23</span></td>
+          </tr>
+          <tr>
+            <td><div class="cal-bar"></div><span class="cal-num ex">24</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">25</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">26</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">27</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">28</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">29</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">30</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num closed">31</span></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- September 2026 -->
+    <div data-cal-month="2026-09" style="display:none;">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:.2rem;">
+          <span class="cal-month-num">9</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub"><span class="cal-year">2026</span><span class="cal-month-en">September</span></div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        </div>
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td><span class="cal-num open">1</span></td>
+            <td><span class="cal-num open">2</span></td>
+            <td><span class="cal-num closed">3</span></td>
+            <td><span class="cal-num closed">4</span></td>
+            <td><span class="cal-num open">5</span></td>
+            <td><span class="cal-num open">6</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">7</span></td>
+            <td><span class="cal-num open">8</span></td>
+            <td><span class="cal-num open">9</span></td>
+            <td><span class="cal-num closed">10</span></td>
+            <td><span class="cal-num closed">11</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">12</span><p class="cal-event ex">yoshida pottery個展</p></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">13</span></td>
+          </tr>
+          <tr>
+            <td><div class="cal-bar"></div><span class="cal-num ex">14</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">15</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">16</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">17</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">18</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">19</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">20</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num closed">21</span></td>
+            <td><span class="cal-num open">22</span></td>
+            <td><span class="cal-num open">23</span></td>
+            <td><span class="cal-num closed">24</span></td>
+            <td><span class="cal-num closed">25</span></td>
+            <td><span class="cal-num open">26</span></td>
+            <td><span class="cal-num open">27</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">28</span></td>
+            <td><span class="cal-num open">29</span></td>
+            <td><span class="cal-num open">30</span></td>
+            <td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- October 2026 -->
+    <div data-cal-month="2026-10" style="display:none;">
+      <div class="cal-header">
+        <div style="display:flex;align-items:flex-end;gap:.2rem;">
+          <span class="cal-month-num">10</span>
+          <span class="cal-slash">/</span>
+          <div class="cal-month-sub"><span class="cal-year">2026</span><span class="cal-month-en">October</span></div>
+        </div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="cal-legend-dot ex"></span><span data-i18n="cal_legend_ex">営業日（企画展示）</span></div>
+          <div class="cal-legend-item"><span class="cal-legend-dot open"></span><span data-i18n="cal_legend_open">営業日（常設）</span></div>
+          <div class="cal-legend-hours">13:00 – 18:00 open</div>
+        </div>
+      </div>
+      <table class="cal-table">
+        <thead><tr><th>mon</th><th>tue</th><th>wed</th><th>thu</th><th>fri</th><th>sat</th><th>sun</th></tr></thead>
+        <tbody>
+          <tr>
+            <td></td><td></td><td></td>
+            <td><span class="cal-num closed">1</span></td>
+            <td><span class="cal-num closed">2</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">3</span><p class="cal-event ex">ヂェン先生の<br>日常着展</p></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">4</span></td>
+          </tr>
+          <tr>
+            <td><div class="cal-bar"></div><span class="cal-num ex">5</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">6</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">7</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">8</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">9</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">10</span></td>
+            <td><span class="cal-num closed">11</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">12</span></td>
+            <td><span class="cal-num open">13</span></td>
+            <td><span class="cal-num open">14</span></td>
+            <td><span class="cal-num closed">15</span></td>
+            <td><span class="cal-num closed">16</span></td>
+            <td><span class="cal-num open">17</span></td>
+            <td><span class="cal-num open">18</span></td>
+          </tr>
+          <tr>
+            <td><span class="cal-num open">19</span></td>
+            <td><span class="cal-num open">20</span></td>
+            <td><span class="cal-num open">21</span></td>
+            <td><span class="cal-num closed">22</span></td>
+            <td><span class="cal-num closed">23</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">24</span><p class="cal-event ex">端田敏也個展</p></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">25</span></td>
+          </tr>
+          <tr>
+            <td><div class="cal-bar"></div><span class="cal-num ex">26</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">27</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">28</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">29</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">30</span></td>
+            <td><div class="cal-bar"></div><span class="cal-num ex">31</span></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span class="foot-vert" aria-hidden="true">大阪箕面</span>
+  <img class="foot-logo" loading="lazy" src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  <p class="foot-addr">〒562-0001 大阪府箕面市箕面2丁目3-10 — 阪急箕面駅より徒歩5分</p>
+  <div class="foot-links">
+    <a href="https://www.instagram.com/arcfukameki_minoh" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact_test.html" data-i18n="contact_title">お問合せ</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 ARC FUKAMEKI minoh</p>
+</footer>
+
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Cart — 買い物かご">
+  <div class="cart-head">
+    <p class="label">籠 — Cart</p>
+    <button class="cart-close" id="cartClose" aria-label="かごを閉じる">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">かごは空です — Your cart is empty.</p>
+  </div>
+  <div class="cart-foot">
+    <p class="cart-subtotal"><span>Subtotal — 小計</span><span id="cartSubtotal">&yen;0</span></p>
+    <button class="checkout" id="cartCheckout" type="button">Checkout</button>
+    <p class="cart-note" id="cartNote">Shopifyによる安全な決済<br>Secure checkout by Shopify.</p>
+  </div>
+</aside>
+
+<div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
+
+<script src="lang.js?v=9" defer></script>
+<script src="chat_knowledge.js?v=9" defer></script>
+<script src="chat_widget.js?v=9" defer></script>
+<script src="shop_config.js?v=9" defer></script>
+<script src="ma_nav.js?v=9" defer></script>
+<script>
+(function() {
+  var now = new Date();
+  var ym = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+  var sections = document.querySelectorAll('[data-cal-month]');
+  var shown = false;
+  sections.forEach(function(el) {
+    if (el.dataset.calMonth === ym) { el.style.display = ''; shown = true; }
+    else { el.style.display = 'none'; }
+  });
+  if (!shown) {
+    sections.forEach(function(el) {
+      if (!shown && el.dataset.calMonth > ym) { el.style.display = ''; shown = true; }
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>イベント (TEST) — ARC FUKAMEKI minoh</title>
+<meta name="description" content="ARC FUKAMEKI minohの企画展情報。現在開催中の展示と、今後の展示予定。Current and upcoming exhibitions at ARC FUKAMEKI minoh.">
+<link rel="canonical" href="https://fukameki.jp/exhibitions.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARC FUKAMEKI minoh">
+<meta property="og:title" content="イベント — ARC FUKAMEKI minoh">
+<meta property="og:description" content="ARC FUKAMEKI minohの企画展情報。現在開催中の展示と、今後の展示予定。">
+<meta property="og:url" content="https://fukameki.jp/exhibitions.html">
+<meta property="og:image" content="https://fukameki.jp/photo/og/og_image.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Noto+Serif+JP:wght@200;300&family=Cormorant+Garamond:ital,wght@1,300&family=Inter+Tight:wght@200;300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ma_common.css?v=9">
+<style>
+.exh-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem);align-items:start;overflow:hidden;}
+.exh-grid>*{min-width:0;}
+.ex-main{display:flex;flex-direction:column;gap:1.6rem;}
+.ex-image{position:relative;padding-top:75%;overflow:hidden;background:#eae6de;border:1px solid var(--line);}
+.ex-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ex-period{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;letter-spacing:.14em;color:var(--hai);}
+.ex-name{font-family:'Shippori Mincho',serif;font-weight:500;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:.14em;margin:.6rem 0 1rem;}
+.ex-artist{font-size:.85rem;letter-spacing:.06em;color:var(--hai);margin-bottom:1.1rem;line-height:1.9;}
+.ex-desc{font-size:.88rem;line-height:2.1;letter-spacing:.03em;margin-bottom:1.6rem;}
+.ex-btn{display:inline-block;font-size:.75rem;letter-spacing:.2em;border-bottom:1px solid var(--line);padding-bottom:.35rem;transition:border-color .4s;}
+.ex-btn:hover,.ex-btn:focus-visible{border-bottom-color:var(--sumi);}
+.ex-past{padding-top:.2rem;}
+.ex-past-label{font-family:'Inter Tight',sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--hai);}
+.ex-past-list{margin-top:1.4rem;list-style:none;border-top:1px solid var(--line);}
+.ex-past-item{display:flex;flex-direction:column;gap:.4rem;padding:1.4rem 0;border-bottom:1px solid var(--line);transition:opacity .3s;}
+.ex-past-item:hover{opacity:.6;}
+.ex-past-date{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;letter-spacing:.1em;color:var(--hai);}
+.ex-past-name{font-size:.9rem;letter-spacing:.05em;}
+.ex-artist-sub{font-size:.68rem;letter-spacing:.04em;color:var(--hai);line-height:1.6;}
+.ex-past-arrow{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--hai);align-self:flex-end;margin-top:-1.4rem;}
+@media (max-width:960px){ .exh-grid{grid-template-columns:1fr;gap:3rem;} }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="メインナビゲーション">
+  <a href="index_test.html" class="nav-logo" aria-label="ARC FUKAMEKI minoh — トップへ">
+    <img src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="event_test.html" data-i18n="nav_event" aria-current="page">Events</a></li>
+      <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+      <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+      <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+      <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+      <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="ja">JA</option>
+        <option value="en">EN</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <button class="nav-btn" id="cartOpen" aria-haspopup="dialog" aria-expanded="false">Cart (<span id="cartCount">0</span>)</button>
+    <button type="button" class="hamburger" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+      <span class="hamburger-label">MENU</span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="メニュー">
+  <button type="button" class="mobile-menu-close" id="menuClose">閉じる — Close</button>
+  <ul class="mobile-menu-links">
+    <li><a href="event_test.html" data-i18n="nav_event">Events</a></li>
+    <li><a href="about_test.html" data-i18n="nav_about">About</a></li>
+    <li><a href="access_test.html" data-i18n="nav_access">Access</a></li>
+    <li><a href="calendar_test.html" data-i18n="nav_calendar">Calendar</a></li>
+    <li><a href="products_test.html" data-i18n="nav_shop">Online Shop</a></li>
+    <li><a href="contact_test.html" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <p class="mobile-menu-en en-note">ARC FUKAMEKI minoh — Minoh, Osaka</p>
+  <div class="mobile-menu-lang">
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
+</div>
+
+<main>
+<section class="section" aria-label="イベント — Events">
+  <div class="sec-head reveal">
+    <h1 class="sec-title-v jp-display">催し</h1>
+    <p class="sec-en en-note">Events</p>
+  </div>
+
+  <!-- ⚠️ この2カラム構成（メインビジュアル＋Next Exhibitions）は変更しないこと -->
+  <div class="exh-grid reveal">
+    <div class="ex-main">
+      <div class="ex-image">
+        <img src="photo/index/natsumeku_img01.jpg" alt="ナツメク">
+      </div>
+      <div class="ex-info">
+        <p class="ex-period" data-i18n="ex_period">2026.07.18 – 07.25</p>
+        <h2 class="ex-name" data-i18n="ex_name">ナツメク</h2>
+        <p class="ex-artist">deco＋、noragrassworks、fika、BRASSYARD</p>
+        <p class="ex-desc" data-i18n="ex_desc">夏の終わりに、作家4組が集まるグループ展。ガラス、衣服、アクセサリーを中心に、日常を彩る手仕事の品々が並びます。</p>
+        <a href="natsumeku2026.html" class="ex-btn" data-i18n="ex_btn">詳しく見る</a>
+      </div>
+    </div>
+
+    <div class="ex-past">
+      <p class="ex-past-label">Next Exhibitions</p>
+      <ul class="ex-past-list">
+        <li><a href="aug2026.html" class="ex-past-item">
+          <span class="ex-past-date">2026.08.22 – 08.30</span>
+          <span class="ex-past-name">処暑、線を辿る</span>
+          <span class="ex-artist-sub">caboche、水麗、谷口美波、松本美弥子（guest）（五十音順）</span>
+          <span class="ex-past-arrow">→</span>
+        </a></li>
+        <li><a href="yoshida2026.html" class="ex-past-item">
+          <span class="ex-past-date">2026.09.12 – 09.20</span>
+          <span class="ex-past-name">yoshida pottery 個展</span>
+          <span class="ex-artist-sub">yoshida pottery（個展）</span>
+          <span class="ex-past-arrow">→</span>
+        </a></li>
+        <li><a href="jhen2026.html" class="ex-past-item">
+          <span class="ex-past-date">2026.10.03 – 10.10</span>
+          <span class="ex-past-name">ヂェン先生の日常着展</span>
+          <span class="ex-artist-sub">鄭惠中（個展）</span>
+          <span class="ex-past-arrow">→</span>
+        </a></li>
+        <li><a href="hashida2026.html" class="ex-past-item">
+          <span class="ex-past-date">2026.10.24 – 11.01</span>
+          <span class="ex-past-name">端田敏也 個展</span>
+          <span class="ex-artist-sub">端田敏也（個展）</span>
+          <span class="ex-past-arrow">→</span>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span class="foot-vert" aria-hidden="true">大阪箕面</span>
+  <img class="foot-logo" loading="lazy" src="fukameki_logo_data/fukameki_logo_ok.png" alt="ARC FUKAMEKI minoh">
+  <p class="foot-addr">〒562-0001 大阪府箕面市箕面2丁目3-10 — 阪急箕面駅より徒歩5分</p>
+  <div class="foot-links">
+    <a href="https://www.instagram.com/arcfukameki_minoh" target="_blank" rel="noopener">Instagram</a>
+    <a href="contact_test.html" data-i18n="contact_title">お問合せ</a>
+  </div>
+  <p class="foot-copy">&copy; 2026 ARC FUKAMEKI minoh</p>
+</footer>
+
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Cart — 買い物かご">
+  <div class="cart-head">
+    <p class="label">籠 — Cart</p>
+    <button class="cart-close" id="cartClose" aria-label="かごを閉じる">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">かごは空です — Your cart is empty.</p>
+  </div>
+  <div class="cart-foot">
+    <p class="cart-subtotal"><span>Subtotal — 小計</span><span id="cartSubtotal">&yen;0</span></p>
+    <button class="checkout" id="cartCheckout" type="button">Checkout</button>
+    <p class="cart-note" id="cartNote">Shopifyによる安全な決済<br>Secure checkout by Shopify.</p>
+  </div>
+</aside>
+
+<div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
+
+<script src="lang.js?v=9" defer></script>
+<script src="chat_knowledge.js?v=9" defer></script>
+<script src="chat_widget.js?v=9" defer></script>
+<script src="shop_config.js?v=9" defer></script>
+<script src="ma_nav.js?v=9" defer></script>
+</body>
+</html>

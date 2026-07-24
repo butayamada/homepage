@@ -227,7 +227,30 @@ var LANG_TRANSLATIONS = {
     nav_access:  "Access",
     nav_calendar: "Calendar",
     nav_shop:    "Online Shop",
-    nav_contact: "Contact"
+    nav_contact: "Contact",
+
+    // Shopify連携（指示書22）動的メッセージ
+    shop_select_variant:   "種類を選択する",
+    shop_stock_checking:   "在庫を確認中",
+    shop_stock_unknown:    "在庫数を取得できません",
+    shop_stock_remaining:  "残り{n}点",
+    shop_backorder:        "入荷待ち",
+    shop_out_of_stock:     "在庫なし",
+    shop_stock_adjusted:   "在庫が変動したため、購入可能な数量に更新しました。",
+    shop_sold_out_other:   "この商品は他のお客様の購入により売り切れました。",
+    shop_add_to_cart:      "カートに追加",
+    shop_add_to_cart_row:  "カートに入れる",
+    shop_cart_adding:      "カート追加中",
+    shop_cart_add_failed:  "カート追加に失敗しました",
+
+    // オンラインショップ入場時の注意事項モーダル（UIラベルのみ翻訳対象。本文は日本語を正本とする）
+    shop_notice_title:     "オンラインショップご利用案内",
+    shop_notice_subtitle:  "ご注文前に必ずお読みください",
+    shop_notice_next:      "次へ",
+    shop_notice_back:      "戻る",
+    shop_notice_confirm:   "内容を確認しました。オンラインショップを見る",
+    shop_notice_link:      "オンラインショップご利用案内",
+    shop_notice_close:     "閉じる"
   },
 
   en: {
@@ -440,7 +463,28 @@ var LANG_TRANSLATIONS = {
     nav_access:  "Access",
     nav_calendar: "Calendar",
     nav_shop:    "Online Shop",
-    nav_contact: "Contact"
+    nav_contact: "Contact",
+
+    shop_select_variant:   "Select option",
+    shop_stock_checking:   "Checking stock",
+    shop_stock_unknown:    "Stock count unavailable",
+    shop_stock_remaining:  "{n} left",
+    shop_backorder:        "Backorder available",
+    shop_out_of_stock:     "Sold out",
+    shop_stock_adjusted:   "Quantity adjusted due to stock changes.",
+    shop_sold_out_other:   "Sold out due to other orders.",
+    shop_add_to_cart:      "Add to cart",
+    shop_add_to_cart_row:  "Add",
+    shop_cart_adding:      "Adding to cart",
+    shop_cart_add_failed:  "Could not add to cart",
+
+    shop_notice_title:     "Online Shop Notice",
+    shop_notice_subtitle:  "Please read before ordering",
+    shop_notice_next:      "Next",
+    shop_notice_back:      "Back",
+    shop_notice_confirm:   "I have read and understood — View shop",
+    shop_notice_link:      "Online Shop Guide",
+    shop_notice_close:     "Close"
   },
 
   zh: {
@@ -653,7 +697,28 @@ var LANG_TRANSLATIONS = {
     nav_access:  "Access",
     nav_calendar: "Calendar",
     nav_shop:    "Online Shop",
-    nav_contact: "Contact"
+    nav_contact: "Contact",
+
+    shop_select_variant:   "选择种类",
+    shop_stock_checking:   "正在确认库存",
+    shop_stock_unknown:    "库存数量无法获取",
+    shop_stock_remaining:  "剩余{n}件",
+    shop_backorder:        "可预订（到货后发货）",
+    shop_out_of_stock:     "缺货",
+    shop_stock_adjusted:   "由于库存变动，已为您更新为可购买的数量。",
+    shop_sold_out_other:   "该商品因其他顾客购买已售罄。",
+    shop_add_to_cart:      "加入购物车",
+    shop_add_to_cart_row:  "加入购物车",
+    shop_cart_adding:      "正在加入购物车",
+    shop_cart_add_failed:  "加入购物车失败",
+
+    shop_notice_title:     "网上商店须知",
+    shop_notice_subtitle:  "下单前请务必阅读",
+    shop_notice_next:      "下一页",
+    shop_notice_back:      "返回",
+    shop_notice_confirm:   "我已确认以上内容 — 查看网店",
+    shop_notice_link:      "网上商店须知",
+    shop_notice_close:     "关闭"
   }
 };
 

@@ -33,6 +33,8 @@
 <script src="products_data.js"></script>
 <script src="products_status.js?v=1"></script>
 <script src="products_sync.js?v=1"></script>
+<script src="products_catalog.generated.js?v=1"></script>
+<script src="shopify_catalog_bridge.js?v=1"></script>
 <script src="artists_data.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -326,7 +328,8 @@ body{font-size:16px;}
 
   function fetchVariants(variantGid) {
     var endpoint = 'https://' + SHOP_CONFIG.domain + '/api/' + SHOP_CONFIG.apiVersion + '/graphql.json';
-    var query = 'query($id:ID!){node(id:$id){... on ProductVariant{product{variants(first:50){edges{node{' +
+    var VARIANT_FETCH_LIMIT = 50;
+    var query = 'query($id:ID!){node(id:$id){... on ProductVariant{product{variants(first:' + VARIANT_FETCH_LIMIT + '){edges{node{' +
       'id title selectedOptions{name value} availableForSale quantityAvailable currentlyNotInStock' +
       '}}}}}}}';
     return fetch(endpoint, {
@@ -340,6 +343,12 @@ body{font-size:16px;}
       var node = json.data && json.data.node;
       var edges = node && node.product && node.product.variants && node.product.variants.edges;
       if (!edges || !edges.length) throw new Error('no variants');
+      if (edges.length >= VARIANT_FETCH_LIMIT) {
+        // 上限ちょうどの件数が返った場合、実際にはさらにバリエーションが存在し
+        // 取得しきれていない可能性がある（ページネーション未実装）。
+        // 黙って一部だけを表示するのは危険なため、明確なエラーとして扱う。
+        throw new Error('variant count reached fetch limit (' + VARIANT_FETCH_LIMIT + '); pagination not implemented');
+      }
       return edges.map(function (e) { return e.node; });
     });
   }
@@ -610,7 +619,13 @@ body{font-size:16px;}
 
     var priceStr = typeof p.price === 'number' ? '¥' + p.price.toLocaleString('ja-JP') : String(p.price);
     document.getElementById('p-price').innerHTML = priceStr + '<span data-i18n="price_tax" style="font-family:\'Inter Tight\',sans-serif;font-size:.62rem;letter-spacing:.05em;color:var(--hai);margin-left:.4rem;">（税込）</span>';
-    document.getElementById('p-desc').textContent = p.description || '';
+    // Shopifyカタログ商品は事前に許可タグ方式でサニタイズ済みのHTML（descriptionHtml）を持つ。
+    // それ以外（手入力商品）は従来どおりtextContentでプレーンテキスト表示する。
+    if (p.descriptionHtml) {
+      document.getElementById('p-desc').innerHTML = p.descriptionHtml;
+    } else {
+      document.getElementById('p-desc').textContent = p.description || '';
+    }
     document.getElementById('desc-section').style.display = p.description ? '' : 'none';
 
     var rows = '';
@@ -687,7 +702,11 @@ body{font-size:16px;}
       // 日本語へ戻す: render() が既に原文をセットしているので再描画するだけでよい
       document.getElementById('p-name').textContent = p.name;
       document.getElementById('crumb-name').textContent = p.name;
-      document.getElementById('p-desc').textContent = p.description || '';
+      if (p.descriptionHtml) {
+        document.getElementById('p-desc').innerHTML = p.descriptionHtml;
+      } else {
+        document.getElementById('p-desc').textContent = p.description || '';
+      }
       var artistData = window.ARTISTS_DATA && window.ARTISTS_DATA[p.artist];
       if (artistData && artistData.bio) document.getElementById('p-artist-bio').textContent = artistData.bio;
     }

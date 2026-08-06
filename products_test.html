@@ -32,8 +32,8 @@
 <script src="products_data.js"></script>
 <script src="products_status.js?v=1"></script>
 <script src="products_sync.js?v=1"></script>
-<script src="products_catalog.generated.js?v=1"></script>
-<script src="shopify_catalog_bridge.js?v=1"></script>
+<script src="products_catalog.generated.js?v=2"></script>
+<script src="shopify_catalog_bridge.js?v=2"></script>
 <script src="artists_data.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -202,7 +202,7 @@ body.hide-soldout .product-card:has(.soldout-label){display:none;}
 <div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
 
 <script src="product_translations.js?v=9" defer></script>
-<script src="lang.js?v=12" defer></script>
+<script src="lang.js?v=13" defer></script>
 <script src="chat_knowledge.js?v=9" defer></script>
 <script src="chat_widget.js?v=9" defer></script>
 <script src="shop_config.js?v=10" defer></script>
@@ -409,7 +409,9 @@ var GENRE_MAP = {
     a.dataset.genre = GENRE_MAP[fname] || (GENRE_LIST.indexOf(p.category) !== -1 ? p.category : 'その他');
     // headlessPublished が明示的に false の商品（生成物改変・異常時を含む）は、
     // ライブ在庫確認の対象にせず一覧上でも購入不可として扱う（詳細ページの閲覧のみ許可）。
-    var headlessBlocked = p.headlessPublished === false;
+    // fail-closed: true 以外（false/undefined/null/0/1/文字列/フィールドなし等）は
+    // すべて購入不可として扱う。明示的に true の場合のみライブ在庫確認の対象にする。
+    var headlessBlocked = p.shopify ? p.headlessPublished !== true : false;
     if (p.shopify && !headlessBlocked) a.dataset.shopifyGid = p.shopify;
     a.innerHTML =
       '<div class="product-image"><img src="' + p.img + '" alt="' + p.artist + ' ' + p.name + '" loading="lazy"></div>' +

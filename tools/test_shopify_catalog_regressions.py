@@ -124,6 +124,32 @@ for label, html in nonempty_cases.items():
 check("scriptタグの中身は可視テキストへ混入しない",
       "bad()" not in mod.sanitize_description("<script>bad()</script><p>本文</p>"))
 
+# ---------- 壊れたHTML: 危険コード除去と後続の通常文章保持を両立させる ----------
+broken_html_cases = [
+    ("script閉じタグ欠落", "<p>normal<script>bad()</p>tail", ["normal", "tail"], ["bad()"]),
+    ("style閉じタグ欠落", "<p>normal<style>.x{}</p>tail", ["normal", "tail"], [".x{}"]),
+    ("scriptが正しく閉じる", "<p>before<script>bad()</script>after</p>", ["before", "after"], ["bad()"]),
+    ("styleが正しく閉じる", "<p>before<style>.x{}</style>after</p>", ["before", "after"], [".x{}"]),
+    ("script閉じタグなしトップレベル", "<script>bad()<p>safe</p>", ["safe"], ["bad()"]),
+    ("style閉じタグなしトップレベル", "<style>.x{}<p>safe</p>", ["safe"], [".x{}"]),
+    ("iframe閉じタグ欠落", "<p>safe<iframe>bad</p>tail", ["safe", "tail"], ["bad"]),
+    ("svgのonload属性", "<p>safe<svg onload='bad()'>x</p>tail", ["safe", "tail"], ["onload", "bad()", "<svg"]),
+]
+for label, raw, must_keep, must_remove in broken_html_cases:
+    sanitized = mod.sanitize_description(raw)
+    keep_ok = all(s in sanitized for s in must_keep)
+    remove_ok = all(s not in sanitized for s in must_remove)
+    not_empty = not mod.visible_text_is_empty(sanitized)
+    check(f"壊れたHTML安全化・通常文章保持: {label} (keep) [{sanitized!r}]", keep_ok)
+    check(f"壊れたHTML安全化・危険コード除去: {label} (remove) [{sanitized!r}]", remove_ok)
+    check(f"壊れたHTML安全化・空説明扱いにならない: {label}", not_empty)
+
+# 危険なタグ・属性そのものが出力に一切残らないことも別途確認する。
+for tag in ("<script", "<style", "<iframe", "onload=", "onclick=", "onerror=", "javascript:"):
+    for label, raw, _, _ in broken_html_cases:
+        sanitized = mod.sanitize_description(raw)
+        check(f"危険タグ/属性が残らない: {label} に {tag} が含まれない", tag not in sanitized)
+
 # ---------- 空説明の商品はbuild_catalog_entriesで生成失敗 ----------
 p_empty_desc = make_product("gid://shopify/Product/3", description="<p></p>")
 try:

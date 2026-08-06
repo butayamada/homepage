@@ -33,8 +33,8 @@
 <script src="products_data.js"></script>
 <script src="products_status.js?v=1"></script>
 <script src="products_sync.js?v=1"></script>
-<script src="products_catalog.generated.js?v=1"></script>
-<script src="shopify_catalog_bridge.js?v=1"></script>
+<script src="products_catalog.generated.js?v=2"></script>
+<script src="shopify_catalog_bridge.js?v=2"></script>
 <script src="artists_data.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -265,7 +265,7 @@ body{font-size:16px;}
 <div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
 
 <script src="product_translations.js?v=9"></script>
-<script src="lang.js?v=12"></script>
+<script src="lang.js?v=13"></script>
 <script src="chat_knowledge.js?v=9"></script>
 <script src="chat_widget.js?v=9"></script>
 <script src="shop_config.js?v=10"></script>
@@ -399,6 +399,10 @@ body{font-size:16px;}
 
   function addToCartFlow(btn, variantId) {
     if (btn.disabled) return;
+    // 第3防御: カートAPI呼び出し直前にも headlessPublished を再確認する（fail-closed）。
+    // currentProduct は headlessPublished!==true の商品では常にnullになる設計だが、
+    // 呼び出し経路の変化に備えて多重チェックする。
+    if (!currentProduct || currentProduct.headlessPublished !== true) return;
     btn.disabled = true;
     var original = btn.textContent;
     var addingLabel = t('shop_cart_adding', 'Adding to cart');
@@ -698,7 +702,7 @@ body{font-size:16px;}
       baseBtn.style.display = 'none';
       stockNote.style.display = 'none';
       toggleWrap.style.display = 'none';
-    } else if (p.shopify && p.headlessPublished === false) {
+    } else if (p.shopify && p.headlessPublished !== true) {
       // 生成物改変・異常時の防御: Headless未公開が明示された商品は、
       // ライブ在庫取得を一切試みず、購入不可の案内のみを表示する。BASEフォールバックもしない。
       baseBtn.style.display = 'none';

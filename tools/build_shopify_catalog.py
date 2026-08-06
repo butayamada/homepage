@@ -51,35 +51,71 @@ RAW_CONTENT_TAGS = {"script", "style", "noscript", "iframe", "object", "template
 class DescriptionSanitizer(html.parser.HTMLParser):
     """Shopifyの商品説明HTMLから許可タグ以外を除去する（許可タグ方式のサニタイズ）。
     style/onclick等の属性はすべて落とし、スクリプト・イベントハンドラの混入を防ぐ。
-    script/style等のタグは中身のテキストごと除去する（コメント同様に「見えない」ものとして扱う）。"""
+    script/style等のタグは中身のテキストごと除去する（コメント同様に「見えない」ものとして扱う）。
+
+    CDATA_CONTENT_ELEMENTS を空にして、Python標準の「script/styleの中身を
+    </script>が見つかるまで無条件に生テキストとして飲み込む」挙動を無効化している。
+    これをそのままにすると、閉じタグが壊れている入力（例:
+    <p>normal<script>bad()</p>tail）で </script> が最後まで見つからず、
+    tail を含む後続の通常文章までまるごと読み捨てられてしまう。
+    その代わり、危険タグの中身をタグ単位のイベント（開始/終了タグ）で監視し、
+    危険タグ以外の開始/終了タグに遭遇した時点で「危険領域が暗黙に終わった」と
+    みなして通常処理へ復帰することで、後続の通常文章を保持する。"""
+
+    CDATA_CONTENT_ELEMENTS = ()
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.out = []
         self.skip_stack = []
+        self.open_tag_stack = []
+
+    def _recover_from_skip_if_needed(self, tag):
+        """skip中に、危険タグ以外の開始/終了タグが来た場合は、危険領域が暗黙に
+        終わったとみなして1段階だけ抜ける。可視文章の結合を避けるため区切りの
+        空白を1つ挿入する。"""
+        if not self.skip_stack:
+            return False
+        self.skip_stack.pop()
+        if not self.skip_stack:
+            self.out.append(" ")
+        return True
 
     def handle_starttag(self, tag, attrs):
         if tag in RAW_CONTENT_TAGS:
             self.skip_stack.append(tag)
             return
         if self.skip_stack:
-            return
+            self._recover_from_skip_if_needed(tag)
+            if self.skip_stack:
+                return
         if tag in ALLOWED_TAGS:
             self.out.append(f"<{tag}>")
+            self.open_tag_stack.append(tag)
 
     def handle_startendtag(self, tag, attrs):
-        if self.skip_stack:
+        if tag in RAW_CONTENT_TAGS:
             return
+        if self.skip_stack:
+            self._recover_from_skip_if_needed(tag)
+            if self.skip_stack:
+                return
         if tag in ALLOWED_TAGS:
             self.out.append(f"<{tag}></{tag}>")
 
     def handle_endtag(self, tag):
         if self.skip_stack:
-            if tag == self.skip_stack[-1]:
-                self.skip_stack.pop()
+            was_clean_match = (tag == self.skip_stack[-1])
+            self.skip_stack.pop()
+            if not was_clean_match and not self.skip_stack:
+                # 危険タグに対応しない閉じタグで復帰した（壊れたHTML）。可視文章の
+                # 結合を避けるため区切りの空白を1つ挿入する。
+                self.out.append(" ")
             return
-        if tag in ALLOWED_TAGS:
+        if tag in ALLOWED_TAGS and self.open_tag_stack and self.open_tag_stack[-1] == tag:
             self.out.append(f"</{tag}>")
+            self.open_tag_stack.pop()
+        # マッチしない/開いていない閉じタグは無視する（構造の完全一致は要求されない）。
 
     def handle_data(self, data):
         if self.skip_stack:
@@ -87,7 +123,10 @@ class DescriptionSanitizer(html.parser.HTMLParser):
         self.out.append(html_escape_text(data))
 
     def get_html(self):
-        return "".join(self.out)
+        # 閉じられないまま残った許可タグを末尾で自動的に閉じる（壊れた入力での例外・
+        # 不正なHTML断片の残留を防ぐ）。
+        tail = "".join(f"</{t}>" for t in reversed(self.open_tag_stack))
+        return "".join(self.out) + tail
 
 
 def html_escape_text(s):
@@ -99,6 +138,7 @@ def sanitize_description(raw_html):
         return ""
     parser = DescriptionSanitizer()
     parser.feed(raw_html)
+    parser.close()
     return parser.get_html()
 
 

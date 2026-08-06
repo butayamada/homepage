@@ -14,6 +14,10 @@
   if (typeof module === 'object' && module.exports) {
     module.exports = mod;
   }
+  if (root) {
+    // product_test.html 側から isValidBaseUrl 等の純粋関数を再利用できるよう公開する。
+    root.ShopifyCatalogBridge = mod;
+  }
   if (root && root.SHOPIFY_CATALOG && root.PRODUCTS_DATA) {
     mod.applyToWindow(root);
   }
@@ -49,6 +53,26 @@
     return value === true;
   }
 
+  // BASEリンクとして使用してよいURLかを安全側に限定する。
+  // https固定・ホスト名固定・パス形式固定。javascript: 等の危険URL・別ドメイン・
+  // 空文字・不正URLはすべて拒否する（購入導線を出さない側に倒す）。
+  var BASE_HOST = 'fukameki.thebase.in';
+  var BASE_PATH_RE = /^\/items\/[A-Za-z0-9_-]+$/;
+
+  function isValidBaseUrl(url) {
+    if (!url || typeof url !== 'string') return false;
+    var parsed;
+    try {
+      parsed = new URL(url);
+    } catch (e) {
+      return false;
+    }
+    if (parsed.protocol !== 'https:') return false;
+    if (parsed.hostname !== BASE_HOST) return false;
+    if (!BASE_PATH_RE.test(parsed.pathname)) return false;
+    return true;
+  }
+
   function catalogEntryToMergedProduct(entry, existing) {
     var vendor = entry.vendor;
     var shopifyTitle = entry.shopifyTitle || entry.name;
@@ -74,6 +98,9 @@
     // Headless未公開（true以外すべて）の商品は、ブラウザ側でも購入操作を一切許可しない
     // （生成物改変・異常値混入時の防御。fail-closed）。
     merged.headlessPublished = normalizeHeadlessPublished(entry.headlessPublished);
+    // このフラグが true の商品のみ「Shopify生成カタログ管理商品」として扱う。
+    // カタログ外の既存商品にはこの関数自体が実行されないため、このフラグは付与されない。
+    merged.shopifyCatalogManaged = true;
     // 全バリエーションが購入不可の場合のみ soldout 扱いとする。
     // 一覧から消すのではなく「販売不能」表示を継続するため、getProductStatus()による
     // グリッド非表示（soldout除外）の対象にはせず、カード側のavailableForSale再取得で
@@ -119,11 +146,31 @@
     win.PRODUCTS_ORDER = result.testPageOrder;
   }
 
+  /**
+   * 商品詳細ページの購入導線を一箇所で判定する（実装本体・ブラウザ/Node共用）。
+   *   A. shopifyCatalogManaged===true の商品:
+   *        headlessPublished===true のときだけ 'shopify'。それ以外は 'unavailable'
+   *        （BASEへは絶対にフォールバックしない）。
+   *   B. カタログ外の旧商品（shopifyCatalogManaged!==true）:
+   *        有効なBASE URLがあれば 'base'。なければ 'unavailable'
+   *        （古いShopify GIDが残っていてもHeadless状態が不明なため一切使用しない）。
+   */
+  function resolvePurchaseLane(p) {
+    if (p && p.shopifyCatalogManaged === true) {
+      if (p.headlessPublished === true) return { lane: 'shopify' };
+      return { lane: 'unavailable' };
+    }
+    if (p && isValidBaseUrl(p.baseUrl)) return { lane: 'base', baseUrl: p.baseUrl };
+    return { lane: 'unavailable' };
+  }
+
   return {
     artistLabelFromVendorOrTitle: artistLabelFromVendorOrTitle,
     minPrice: minPrice,
     stripTags: stripTags,
     normalizeHeadlessPublished: normalizeHeadlessPublished,
+    isValidBaseUrl: isValidBaseUrl,
+    resolvePurchaseLane: resolvePurchaseLane,
     catalogEntryToMergedProduct: catalogEntryToMergedProduct,
     buildCatalogMerge: buildCatalogMerge,
     applyToWindow: applyToWindow

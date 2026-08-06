@@ -33,7 +33,7 @@
 <script src="products_status.js?v=1"></script>
 <script src="products_sync.js?v=1"></script>
 <script src="products_catalog.generated.js?v=2"></script>
-<script src="shopify_catalog_bridge.js?v=2"></script>
+<script src="shopify_catalog_bridge.js?v=3"></script>
 <script src="artists_data.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -411,8 +411,11 @@ var GENRE_MAP = {
     // ライブ在庫確認の対象にせず一覧上でも購入不可として扱う（詳細ページの閲覧のみ許可）。
     // fail-closed: true 以外（false/undefined/null/0/1/文字列/フィールドなし等）は
     // すべて購入不可として扱う。明示的に true の場合のみライブ在庫確認の対象にする。
-    var headlessBlocked = p.shopify ? p.headlessPublished !== true : false;
-    if (p.shopify && !headlessBlocked) a.dataset.shopifyGid = p.shopify;
+    // 一覧はカタログ管理商品(132件)だけで構成されるが、念のためshopifyCatalogManagedも
+    // 明示的に確認する（多重防御）。
+    var isCatalogManaged = p.shopifyCatalogManaged === true;
+    var headlessBlocked = (p.shopify && isCatalogManaged) ? p.headlessPublished !== true : false;
+    if (p.shopify && isCatalogManaged && !headlessBlocked) a.dataset.shopifyGid = p.shopify;
     a.innerHTML =
       '<div class="product-image"><img src="' + p.img + '" alt="' + p.artist + ' ' + p.name + '" loading="lazy"></div>' +
       '<div class="product-info">' +

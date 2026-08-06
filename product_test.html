@@ -34,7 +34,7 @@
 <script src="products_status.js?v=1"></script>
 <script src="products_sync.js?v=1"></script>
 <script src="products_catalog.generated.js?v=2"></script>
-<script src="shopify_catalog_bridge.js?v=2"></script>
+<script src="shopify_catalog_bridge.js?v=3"></script>
 <script src="artists_data.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -399,10 +399,12 @@ body{font-size:16px;}
 
   function addToCartFlow(btn, variantId) {
     if (btn.disabled) return;
-    // 第3防御: カートAPI呼び出し直前にも headlessPublished を再確認する（fail-closed）。
-    // currentProduct は headlessPublished!==true の商品では常にnullになる設計だが、
+    // 第3防御: カートAPI呼び出し直前にも shopifyCatalogManaged と headlessPublished の
+    // 両方を明示的に再確認する（fail-closed）。旧商品（shopifyCatalogManaged!==true）に
+    // 古いShopify GIDが残っていても、この経路からはVariant GIDを一切送信しない。
+    // currentProduct はどちらか一方でも満たさない商品では常にnullになる設計だが、
     // 呼び出し経路の変化に備えて多重チェックする。
-    if (!currentProduct || currentProduct.headlessPublished !== true) return;
+    if (!currentProduct || currentProduct.shopifyCatalogManaged !== true || currentProduct.headlessPublished !== true) return;
     btn.disabled = true;
     var original = btn.textContent;
     var addingLabel = t('shop_cart_adding', 'Adding to cart');
@@ -697,31 +699,34 @@ body{font-size:16px;}
     var pStatus = getProductStatus(id);
     currentProduct = null;
     currentVariants = null;
+    // 購入導線の判定は shopify_catalog_bridge.js の resolvePurchaseLane() に一本化する
+    // （ブラウザ・Node回帰テストの両方が同じ実装本体を実行する）。
+    var lane = (window.ShopifyCatalogBridge ? window.ShopifyCatalogBridge.resolvePurchaseLane(p) : { lane: 'unavailable' });
+
     if (pStatus !== 'active') {
       shopBtn.style.display = 'none';
       baseBtn.style.display = 'none';
       stockNote.style.display = 'none';
       toggleWrap.style.display = 'none';
-    } else if (p.shopify && p.headlessPublished !== true) {
-      // 生成物改変・異常時の防御: Headless未公開が明示された商品は、
-      // ライブ在庫取得を一切試みず、購入不可の案内のみを表示する。BASEフォールバックもしない。
-      baseBtn.style.display = 'none';
-      shopBtn.style.display = 'none';
-      toggleWrap.style.display = 'none';
-      stockNote.style.display = '';
-      stockNote.textContent = t('shop_unavailable_now', '現在購入できません');
-      currentProduct = null;
-      currentVariants = null;
-    } else if (p.shopify) {
+    } else if (lane.lane === 'shopify') {
+      // A. Shopify生成カタログ管理商品（132商品）: headlessPublished===true の場合だけ到達する。
       baseBtn.style.display = 'none';
       currentProduct = p;
       refreshAvailability(true);
-    } else {
+    } else if (lane.lane === 'base') {
+      // B. カタログ外の旧商品で有効なBASE URLがある場合。古いShopify GIDは一切使用しない。
       shopBtn.style.display = 'none';
-      stockNote.style.display = 'none';
       toggleWrap.style.display = 'none';
+      stockNote.style.display = 'none';
       baseBtn.style.display = '';
-      baseBtn.href = p.baseUrl;
+      baseBtn.href = lane.baseUrl;
+    } else {
+      // 'unavailable': カタログ管理商品でHeadless未公開、または旧商品でBASE URL無効。
+      shopBtn.style.display = 'none';
+      toggleWrap.style.display = 'none';
+      baseBtn.style.display = 'none';
+      stockNote.style.display = '';
+      stockNote.textContent = t('shop_unavailable_now', '現在購入できません');
     }
 
     var artistData = window.ARTISTS_DATA && window.ARTISTS_DATA[p.artist];

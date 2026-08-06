@@ -90,6 +90,77 @@ function makeCatalogEntry(catalogId, existingAlias, headlessPublished, opts) {
     bridge.normalizeHeadlessPublished(true) === true);
 })();
 
+// ---------- shopifyCatalogManaged フラグ ----------
+(function () {
+  var existing = { 'legacy_a': { name: '旧商品', artist: '旧作家', baseUrl: 'https://fukameki.thebase.in/items/legacy_a' } };
+  var entry = makeCatalogEntry('shopify_x', null, true);
+  var merged = bridge.catalogEntryToMergedProduct(entry, undefined);
+  check('カタログ管理商品はshopifyCatalogManaged===true', merged.shopifyCatalogManaged === true);
+  check('カタログ外の既存商品にはフラグが付与されない（この関数を通過しない）', existing['legacy_a'].shopifyCatalogManaged === undefined);
+})();
+
+// ---------- isValidBaseUrl ----------
+(function () {
+  var cases = [
+    ['https://fukameki.thebase.in/items/29992076', true],
+    ['https://fukameki.thebase.in/items/56866733', true],
+    ['http://fukameki.thebase.in/items/29992076', false],
+    ['https://evil.com/items/29992076', false],
+    ['https://fukameki.thebase.in.evil.com/items/29992076', false],
+    ['javascript:alert(1)', false],
+    ['', false],
+    [null, false],
+    [undefined, false],
+    ['https://fukameki.thebase.in/', false],
+    ['https://fukameki.thebase.in/items/', false],
+    ['not a url', false]
+  ];
+  cases.forEach(function (c) {
+    check('isValidBaseUrl(' + JSON.stringify(c[0]) + ') === ' + c[1], bridge.isValidBaseUrl(c[0]) === c[1]);
+  });
+})();
+
+// ---------- resolvePurchaseLane: 実装本体を使った代表例の検証 ----------
+(function () {
+  // A. カタログ管理商品
+  check('managed=true, headless=true -> shopify',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: true, headlessPublished: true }).lane === 'shopify');
+  check('managed=true, headless=false -> unavailable',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: true, headlessPublished: false }).lane === 'unavailable');
+  check('managed=true, headless欠落 -> unavailable',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: true }).lane === 'unavailable');
+  check('managed=true, BASE URLあり, headless=false -> BASEへ行かない(unavailable)',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: true, headlessPublished: false, baseUrl: 'https://fukameki.thebase.in/items/1' }).lane === 'unavailable');
+
+  // B. 旧商品
+  check('managed欠落, 古いShopify GIDあり, 有効BASE URLあり -> base',
+    bridge.resolvePurchaseLane({ shopify: 'gid://shopify/ProductVariant/old-1', baseUrl: 'https://fukameki.thebase.in/items/56866733' }).lane === 'base');
+  check('managed=false, 古いShopify GIDあり, 有効BASE URLあり -> base',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: false, shopify: 'gid://shopify/ProductVariant/old-2', baseUrl: 'https://fukameki.thebase.in/items/29992076' }).lane === 'base');
+  check('managed欠落, Shopify GIDなし, 有効BASE URLあり -> base',
+    bridge.resolvePurchaseLane({ baseUrl: 'https://fukameki.thebase.in/items/29992076' }).lane === 'base');
+  check('managed欠落, BASE URLなし -> unavailable',
+    bridge.resolvePurchaseLane({}).lane === 'unavailable');
+  check('managed欠落, 別ドメインBASE URL -> unavailable',
+    bridge.resolvePurchaseLane({ baseUrl: 'https://evil.com/items/29992076' }).lane === 'unavailable');
+  check('managed欠落, javascript: URL -> unavailable',
+    bridge.resolvePurchaseLane({ baseUrl: "javascript:alert(1)" }).lane === 'unavailable');
+  check('旧Shopify GIDが残っていてもresolvePurchaseLaneの戻り値にVariant GIDが含まれない(base)',
+    JSON.stringify(bridge.resolvePurchaseLane({ shopify: 'gid://shopify/ProductVariant/old-3', baseUrl: 'https://fukameki.thebase.in/items/56866733' })).indexOf('old-3') === -1);
+
+  // 実データ代表例
+  check('実データ 29992076相当: BASE直接購入導線',
+    bridge.resolvePurchaseLane({ baseUrl: 'https://fukameki.thebase.in/items/29992076' }).lane === 'base');
+  check('実データ 56866733相当: 旧Shopify GIDを使わずBASE導線',
+    bridge.resolvePurchaseLane({ shopify: 'gid://shopify/ProductVariant/56866733-1', baseUrl: 'https://fukameki.thebase.in/items/56866733' }).lane === 'base');
+  check('実データ sp_8452790157498相当: カタログ管理商品としてShopify導線',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: true, headlessPublished: true, shopify: 'gid://shopify/ProductVariant/sp1' }).lane === 'shopify');
+  check('新規shopify_...商品相当: Shopify導線',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: true, headlessPublished: true }).lane === 'shopify');
+  check('Headless欠落モック相当: 購入不可',
+    bridge.resolvePurchaseLane({ shopifyCatalogManaged: true, headlessPublished: undefined }).lane === 'unavailable');
+})();
+
 // ---------- catalogId/alias重複時は例外 ----------
 (function () {
   var dupEntries = [makeCatalogEntry('dup', null, true), makeCatalogEntry('dup', null, true)];

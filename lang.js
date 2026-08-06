@@ -247,6 +247,16 @@ var LANG_TRANSLATIONS = {
     shop_cart_adding:      "カート追加中",
     shop_cart_add_failed:  "カート追加に失敗しました",
 
+    // ご注文備考（カートnote）
+    cart_note_heading:     "ご注文備考（任意）",
+    cart_note_hint:        "店舗受け取りのご希望や、ご注文に関する連絡事項をご記入ください。内容によりご希望に添えない場合がございます。",
+    cart_note_placeholder: "例：店舗受け取り希望",
+    cart_note_saving:      "保存中…",
+    cart_note_saved:       "保存済み",
+    cart_note_save_failed: "保存に失敗しました",
+    cart_note_too_long:    "500文字を超える内容は保存されません",
+    cart_note_checkout_save_failed: "ご注文備考の保存に失敗しました。もう一度お試しの上、チェックアウトへお進みください。",
+
     // オンラインショップ入場時の注意事項モーダル（UIラベルのみ翻訳対象。本文は日本語を正本とする）
     shop_notice_title:     "オンラインショップご利用案内",
     shop_notice_subtitle:  "ご注文前に必ずお読みください",
@@ -486,6 +496,15 @@ var LANG_TRANSLATIONS = {
     shop_cart_adding:      "Adding to cart",
     shop_cart_add_failed:  "Could not add to cart",
 
+    cart_note_heading:     "Order Note (optional)",
+    cart_note_hint:        "Let us know if you'd like to pick up in-store, or add any other notes about your order. We may not be able to accommodate all requests.",
+    cart_note_placeholder: "e.g. In-store pickup preferred",
+    cart_note_saving:      "Saving…",
+    cart_note_saved:       "Saved",
+    cart_note_save_failed: "Could not save",
+    cart_note_too_long:    "Content over 500 characters will not be saved",
+    cart_note_checkout_save_failed: "Could not save your order note. Please try again before checking out.",
+
     shop_notice_title:     "Online Shop Notice",
     shop_notice_subtitle:  "Please read before ordering",
     shop_notice_next:      "Next",
@@ -723,6 +742,15 @@ var LANG_TRANSLATIONS = {
     shop_add_to_cart_row:  "加入购物车",
     shop_cart_adding:      "正在加入购物车",
     shop_cart_add_failed:  "加入购物车失败",
+
+    cart_note_heading:     "订单备注（选填）",
+    cart_note_hint:        "如有到店自取意愿或其他订单相关事项，请在此填写。视情况可能无法满足您的需求。",
+    cart_note_placeholder: "例：希望到店自取",
+    cart_note_saving:      "保存中…",
+    cart_note_saved:       "已保存",
+    cart_note_save_failed: "保存失败",
+    cart_note_too_long:    "超过500字的内容将不会被保存",
+    cart_note_checkout_save_failed: "订单备注保存失败，请重试后再进行结账。",
 
     shop_notice_title:     "网上商店须知",
     shop_notice_subtitle:  "下单前请务必阅读",

@@ -164,6 +164,33 @@
     return { lane: 'unavailable' };
   }
 
+  /**
+   * Variant単位の販売可否判定（実装本体・ブラウザ/Node共用）。
+   * availableForSale === true が明示的に確認できない限り、quantityAvailable の値に
+   * かかわらず購入不可（fail-closed）。表示文言はここでは決めず、呼び出し側が
+   * state（'instock' | 'backorder' | 'outofstock' | 'unavailable' | 'unknown'）から選ぶ。
+   *   1. availableForSale !== true          -> unavailable（false時）/ unknown（それ以外）
+   *   2. currentlyNotInStock === true       -> backorder（受注販売・購入可能）
+   *   3. quantityAvailable が有限のnumberで > 0 -> instock（購入可能）
+   *   4. quantityAvailable === 0            -> outofstock（購入不可）
+   *   5. それ以外（欠落/null/文字列/NaN/Infinity/負数/配列・オブジェクト） -> unknown（購入不可）
+   */
+  function variantStockState(v) {
+    if (!v || v.availableForSale !== true) {
+      if (v && v.availableForSale === false) return { state: 'unavailable', buyable: false, unknown: false, out: true };
+      return { state: 'unknown', buyable: false, unknown: true, out: false };
+    }
+    if (v.currentlyNotInStock === true) {
+      return { state: 'backorder', buyable: true, unknown: false, out: false };
+    }
+    var q = v.quantityAvailable;
+    if (typeof q === 'number' && isFinite(q)) {
+      if (q > 0) return { state: 'instock', buyable: true, unknown: false, out: false, qty: q };
+      if (q === 0) return { state: 'outofstock', buyable: false, unknown: false, out: true };
+    }
+    return { state: 'unknown', buyable: false, unknown: true, out: false };
+  }
+
   return {
     artistLabelFromVendorOrTitle: artistLabelFromVendorOrTitle,
     minPrice: minPrice,
@@ -171,6 +198,7 @@
     normalizeHeadlessPublished: normalizeHeadlessPublished,
     isValidBaseUrl: isValidBaseUrl,
     resolvePurchaseLane: resolvePurchaseLane,
+    variantStockState: variantStockState,
     catalogEntryToMergedProduct: catalogEntryToMergedProduct,
     buildCatalogMerge: buildCatalogMerge,
     applyToWindow: applyToWindow

@@ -34,7 +34,7 @@
 <script src="products_status.js?v=1"></script>
 <script src="products_sync.js?v=1"></script>
 <script src="products_catalog.generated.js?v=2"></script>
-<script src="shopify_catalog_bridge.js?v=3"></script>
+<script src="shopify_catalog_bridge.js?v=4"></script>
 <script src="artists_data.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -318,16 +318,21 @@ body{font-size:16px;}
     return '';
   }
 
+  // 販売可否の判定本体は shopify_catalog_bridge.js の variantStockState() に集約している
+  // （一覧・詳細・Variant行・カート直前で判定がぶれないようにするため）。
+  // availableForSale === true が明示的に確認できない限り、quantityAvailable が正数でも
+  // 購入不可（fail-closed）。ここでは state から表示文言を選ぶだけ。
   function variantStockInfo(v) {
-    if (typeof v.quantityAvailable === 'number') {
-      if (v.quantityAvailable > 0) return { buyable: true, label: t('shop_stock_remaining', '{n} left').replace('{n}', v.quantityAvailable), unknown: false, out: false };
-      if (v.availableForSale === false) return { buyable: false, label: t('shop_out_of_stock', 'Sold out'), unknown: false, out: true };
-      // quantityAvailable===0 だが availableForSale===true → 取り寄せ設定の可能性があるため断定しない
-      if (v.currentlyNotInStock) return { buyable: true, label: t('shop_backorder', 'Backorder available'), unknown: false, out: false };
-      return { buyable: false, label: t('shop_out_of_stock', 'Sold out'), unknown: false, out: true };
+    var r = window.ShopifyCatalogBridge.variantStockState(v);
+    var label;
+    switch (r.state) {
+      case 'instock': label = t('shop_stock_remaining', '{n} left').replace('{n}', r.qty); break;
+      case 'backorder': label = t('shop_backorder', 'Backorder available'); break;
+      case 'outofstock': label = t('shop_out_of_stock', 'Sold out'); break;
+      case 'unavailable': label = t('shop_out_of_stock', 'Sold out'); break;
+      default: label = t('shop_stock_fetch_failed', 'Could not check stock. Please try again later.'); break;
     }
-    if (!v.availableForSale) return { buyable: false, label: t('shop_out_of_stock', 'Sold out'), unknown: false, out: true };
-    return { buyable: true, label: t('shop_stock_unknown', 'Stock count unavailable'), unknown: true, out: false };
+    return { buyable: r.buyable, label: label, unknown: r.unknown, out: r.out };
   }
 
   function fetchVariants(variantGid) {
@@ -412,9 +417,9 @@ body{font-size:16px;}
     refreshAvailability(false).then(function () {
       if (lastFetchFailed) {
         // ライブ在庫が確認できない状態ではVariant GIDをカートAPIへ送らない。
+        // renderVariantUI() がボタンのdisabled/表示状態を再描画するため、ここで
+        // 強制的に有効化・元テキストへ戻すと fail-closed の表示が上書きされてしまう。
         renderVariantUI();
-        btn.disabled = false;
-        btn.textContent = original;
         return;
       }
       var v = currentVariants && currentVariants.filter(function (x) { return x.id === variantId; })[0];
@@ -422,9 +427,8 @@ body{font-size:16px;}
         if (window.ShopCart && window.ShopCart.showMessage) {
           window.ShopCart.showMessage('shop_sold_out_other');
         }
+        // 同上: renderVariantUI() が正しいdisabled状態を描画するので上書きしない。
         renderVariantUI();
-        btn.disabled = false;
-        btn.textContent = original;
         return;
       }
       return window.ShopCart.add(variantId).catch(function () {
@@ -511,8 +515,19 @@ body{font-size:16px;}
       var only = variants[0];
       var info2 = variantStockInfo(only);
       stockNote.style.display = '';
-      stockNote.className = 'stock-note' + (info2.out ? ' is-out' : '');
-      stockNote.textContent = info2.label;
+      stockNote.className = 'stock-note' + (info2.out ? ' is-out' : '') + (info2.unknown ? ' is-unknown' : '');
+      stockNote.innerHTML = '';
+      stockNote.appendChild(document.createTextNode(info2.label));
+      if (info2.unknown) {
+        // availableForSale===trueだが数量が確認できない状態。購入不可のまま再試行できるようにする。
+        var retryBtn2 = document.createElement('button');
+        retryBtn2.type = 'button';
+        retryBtn2.className = 'variant-row-add';
+        retryBtn2.style.marginLeft = '.6em';
+        retryBtn2.textContent = t('shop_retry', '再試行');
+        retryBtn2.addEventListener('click', retryAvailability);
+        stockNote.appendChild(retryBtn2);
+      }
       shopBtn.style.display = '';
       shopBtn.disabled = !info2.buyable;
       shopBtn.textContent = info2.buyable ? t('shop_add_to_cart', 'Add to cart') : t('shop_out_of_stock', 'Sold out');

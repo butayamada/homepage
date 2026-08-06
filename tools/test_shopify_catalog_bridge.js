@@ -173,6 +173,54 @@ function makeCatalogEntry(catalogId, existingAlias, headlessPublished, opts) {
   check('catalogId重複でbuildCatalogMergeが例外送出', threw);
 })();
 
+// ---------- variantStockState: availableForSale欠落時のfail-closedマトリクス ----------
+(function () {
+  var matrix = [
+    // [availableForSale, quantityAvailable, currentlyNotInStock, expectBuyable, expectState]
+    [true, 1, false, true, 'instock'],
+    [true, 0, false, false, 'outofstock'],
+    [true, 0, true, true, 'backorder'],
+    [true, null, true, true, 'backorder'],
+    [true, undefined, false, false, 'unknown'],
+    [true, null, false, false, 'unknown'],
+    [true, '1', false, false, 'unknown'],
+    [true, -1, false, false, 'unknown'],
+    [true, NaN, false, false, 'unknown'],
+    [true, Infinity, false, false, 'unknown'],
+    [true, [1], false, false, 'unknown'],
+    [false, 1, false, false, 'unavailable'],
+    [undefined, 1, false, false, 'unknown'],
+    [null, 1, false, false, 'unknown'],
+    ['true', 1, false, false, 'unknown'],
+    [1, 1, false, false, 'unknown']
+  ];
+  matrix.forEach(function (row) {
+    var v = { availableForSale: row[0], quantityAvailable: row[1], currentlyNotInStock: row[2] };
+    var r = bridge.variantStockState(v);
+    var label = 'variantStockState(availableForSale=' + JSON.stringify(row[0]) + ', quantityAvailable=' + JSON.stringify(row[1]) + ', currentlyNotInStock=' + JSON.stringify(row[2]) + ')';
+    check(label + ' -> buyable===' + row[3], r.buyable === row[3]);
+    check(label + ' -> state===' + row[4], r.state === row[4]);
+  });
+
+  // Luna再現条件: availableForSale欠落・quantityAvailable=1 は購入不可(unknown)へ倒す
+  var lunaRepro = bridge.variantStockState({ quantityAvailable: 1 });
+  check('Luna再現(availableForSale欠落, quantityAvailable=1) -> buyable=false', lunaRepro.buyable === false);
+  check('Luna再現(availableForSale欠落, quantityAvailable=1) -> unknown=true', lunaRepro.unknown === true);
+})();
+
+// ---------- addToCartFlow相当の第4防御: variantStockStateがfalseならVariant GIDを送らない ----------
+(function () {
+  function simulateAddToCartFlow(v) {
+    // product_test.html の addToCartFlow() 内、fetch成功直後の再確認と同じ条件式。
+    if (!bridge.variantStockState(v).buyable) return { cartApiCalled: false };
+    return { cartApiCalled: true };
+  }
+  check('Luna再現条件でcartApiCalled===false（Variant GID送信0回相当）',
+    simulateAddToCartFlow({ quantityAvailable: 1 }).cartApiCalled === false);
+  check('正常応答(availableForSale=true, quantityAvailable=1)ではcartApiCalled===true',
+    simulateAddToCartFlow({ availableForSale: true, quantityAvailable: 1 }).cartApiCalled === true);
+})();
+
 console.log('\n=== SUMMARY ===');
 var failed = results.filter(function (r) { return !r[1]; });
 console.log((results.length - failed.length) + '/' + results.length + ' PASS');

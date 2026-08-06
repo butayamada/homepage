@@ -43,25 +43,47 @@ LEGACY_ALIAS_OVERRIDES = {
 
 # 許可するHTMLタグのみを残す簡易サニタイザ（許可タグ方式）。
 ALLOWED_TAGS = {"p", "br", "strong", "b", "em", "i", "ul", "ol", "li", "span"}
+# これらのタグの中身は、タグ自体だけでなく内部のテキストも除去する
+# （<script>...</script> のようなタグの中身が「可視テキスト」として漏れ出るのを防ぐため）。
+RAW_CONTENT_TAGS = {"script", "style", "noscript", "iframe", "object", "template"}
 
 
 class DescriptionSanitizer(html.parser.HTMLParser):
     """Shopifyの商品説明HTMLから許可タグ以外を除去する（許可タグ方式のサニタイズ）。
-    style/onclick等の属性はすべて落とし、スクリプト・イベントハンドラの混入を防ぐ。"""
+    style/onclick等の属性はすべて落とし、スクリプト・イベントハンドラの混入を防ぐ。
+    script/style等のタグは中身のテキストごと除去する（コメント同様に「見えない」ものとして扱う）。"""
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.out = []
+        self.skip_stack = []
 
     def handle_starttag(self, tag, attrs):
+        if tag in RAW_CONTENT_TAGS:
+            self.skip_stack.append(tag)
+            return
+        if self.skip_stack:
+            return
         if tag in ALLOWED_TAGS:
             self.out.append(f"<{tag}>")
 
+    def handle_startendtag(self, tag, attrs):
+        if self.skip_stack:
+            return
+        if tag in ALLOWED_TAGS:
+            self.out.append(f"<{tag}></{tag}>")
+
     def handle_endtag(self, tag):
+        if self.skip_stack:
+            if tag == self.skip_stack[-1]:
+                self.skip_stack.pop()
+            return
         if tag in ALLOWED_TAGS:
             self.out.append(f"</{tag}>")
 
     def handle_data(self, data):
+        if self.skip_stack:
+            return
         self.out.append(html_escape_text(data))
 
     def get_html(self):
@@ -78,6 +100,14 @@ def sanitize_description(raw_html):
     parser = DescriptionSanitizer()
     parser.feed(raw_html)
     return parser.get_html()
+
+
+def visible_text_is_empty(sanitized_html):
+    """サニタイズ後のHTMLからタグを除去し、可視文字（空白以外）が1文字も
+    残らない場合に空とみなす。&nbsp;等の非改行スペースのみの場合も空扱いとする。"""
+    text = re.sub(r"<[^>]*>", "", sanitized_html or "")
+    text = text.replace("&nbsp;", " ").replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
+    return text.strip() == ""
 
 
 class CatalogError(Exception):
@@ -117,7 +147,7 @@ def admin_graphql(token, query, variables=None):
 PUBLICATIONS_QUERY = "query { publications(first: 25) { edges { node { id name } } } }"
 
 PRODUCTS_QUERY = """
-query($cursor: String) {
+query($cursor: String, $headlessId: ID!) {
   products(first: 100, after: $cursor, query: "status:unlisted") {
     pageInfo { hasNextPage endCursor }
     edges {
@@ -141,9 +171,7 @@ query($cursor: String) {
             }
           }
         }
-        resourcePublications(first: 10) {
-          edges { node { publication { name } } }
-        }
+        headlessPublished: publishedOnPublication(publicationId: $headlessId)
       }
     }
   }
@@ -151,11 +179,26 @@ query($cursor: String) {
 """
 
 
-def fetch_unlisted_products(token):
+def resolve_headless_publication(token):
+    """Headless publicationを一意に特定する。0件・複数候補はいずれも停止（呼び出し側でCatalogErrorへ変換）。
+    resourcePublications(first:N)のような先頭範囲取得には依存せず、publication ID による
+    publishedOnPublication直接判定を後続クエリで使用する。"""
+    data = admin_graphql(token, PUBLICATIONS_QUERY)
+    pubs = [e["node"] for e in data["publications"]["edges"]]
+    candidates = [p for p in pubs if "headless" in p["name"].lower()]
+    if len(candidates) == 0:
+        raise CatalogError("Headless publicationが見つかりません（0件）。生成を中止します。")
+    if len(candidates) > 1:
+        names = ", ".join(f"{c['name']} ({c['id']})" for c in candidates)
+        raise CatalogError(f"Headless publicationの候補が複数あり一意に決定できません: {names}")
+    return candidates[0]
+
+
+def fetch_unlisted_products(token, headless_publication_id):
     products = []
     cursor = None
     while True:
-        data = admin_graphql(token, PRODUCTS_QUERY, {"cursor": cursor})
+        data = admin_graphql(token, PRODUCTS_QUERY, {"cursor": cursor, "headlessId": headless_publication_id})
         page = data["products"]
         products.extend(e["node"] for e in page["edges"])
         if not page["pageInfo"]["hasNextPage"]:
@@ -197,6 +240,8 @@ def build_catalog_entries(products, variant_to_hp_id):
     entries = []
     seen_product_gids = set()
     seen_variant_gids = set()
+    not_headless_published = []
+    empty_description = []
 
     for p in products:
         if p["status"] != "UNLISTED":
@@ -226,7 +271,15 @@ def build_catalog_entries(products, variant_to_hp_id):
         if not images:
             raise CatalogError(f"画像が0件の商品があります: {p['id']} ({p['title']})")
 
+        if p["headlessPublished"] is not True:
+            not_headless_published.append((p["id"], p["title"]))
+
+        sanitized_desc = sanitize_description(p["descriptionHtml"])
+        if visible_text_is_empty(sanitized_desc):
+            empty_description.append((p["id"], p["title"]))
+
         # alias（既存HP商品ID）の解決: 手動オーバーライド優先 → variant GID突合
+        # ※ alias は URL/カタログID の互換維持のみに用いる。商品タイトルの上書きには一切使わない。
         alias = LEGACY_ALIAS_OVERRIDES.get(p["id"])
         if not alias:
             matched = set()
@@ -246,12 +299,15 @@ def build_catalog_entries(products, variant_to_hp_id):
 
         product_type = p["productType"] if p["productType"] else "Other"
 
+        # 商品タイトルはShopify Product.titleをそのまま正本として保持する。
+        # name は内部互換のため同じ値を複製するだけで、既存HPの手入力名では一切上書きしない。
         entries.append({
             "catalogId": catalog_id,
             "productGid": p["id"],
             "representativeVariantGid": representative_variant,
+            "shopifyTitle": p["title"],
             "name": p["title"],
-            "descriptionHtml": sanitize_description(p["descriptionHtml"]),
+            "descriptionHtml": sanitized_desc,
             "vendor": p["vendor"] or "",
             "productType": product_type,
             "images": images,
@@ -267,9 +323,23 @@ def build_catalog_entries(products, variant_to_hp_id):
                 for v in variants_raw
             ],
             "shopifyStatus": p["status"],
+            "headlessPublished": p["headlessPublished"] is True,
             "existingAlias": alias,
             "updatedAt": p["updatedAt"],
         })
+
+    if not_headless_published:
+        listing = "\n".join(f"  - {title} ({gid})" for gid, title in not_headless_published)
+        raise CatalogError(
+            f"Headless未公開のUNLISTED商品が{len(not_headless_published)}件あります。生成を中止します。\n{listing}"
+        )
+
+    if empty_description:
+        listing = "\n".join(f"  - {title} ({gid})" for gid, title in empty_description)
+        raise CatalogError(
+            f"商品説明が空（サニタイズ後に可視文字なし）の商品が{len(empty_description)}件あります。"
+            f"生成を中止します。\n{listing}"
+        )
 
     # 並び順を固定: updatedAt 昇順 → 同値時は productGid 昇順（同一データからは常に同じ順序）
     entries.sort(key=lambda e: (e["updatedAt"], e["productGid"]))
@@ -296,11 +366,14 @@ def validate(entries):
             errors.append(f"DRAFT等の非UNLISTED商品が混入: {e['productGid']}")
         if not e["name"]:
             errors.append(f"商品名が空: {e['productGid']}")
-        if not e["descriptionHtml"] and False:
-            # 説明が空でも許容(Shopify側で未入力の場合があるため必須項目からは除外)。
-            pass
+        if e["name"] != e["shopifyTitle"]:
+            errors.append(f"name が shopifyTitle と一致しません: {e['productGid']}")
+        if visible_text_is_empty(e["descriptionHtml"]):
+            errors.append(f"商品説明が空（可視文字なし）: {e['productGid']}")
         if not e["images"]:
             errors.append(f"画像が空: {e['productGid']}")
+        if e["headlessPublished"] is not True:
+            errors.append(f"Headless未公開の商品が混入: {e['productGid']}")
 
     aliased = [e for e in entries if e["existingAlias"]]
     if len(aliased) != 89:
@@ -339,6 +412,7 @@ def render_js(entries, generated_at):
         lines.append(f"        catalogId: {js_string_literal(e['catalogId'])},")
         lines.append(f"        productGid: {js_string_literal(e['productGid'])},")
         lines.append(f"        representativeVariantGid: {js_string_literal(e['representativeVariantGid'])},")
+        lines.append(f"        shopifyTitle: {js_string_literal(e['shopifyTitle'])},")
         lines.append(f"        name: {js_string_literal(e['name'])},")
         lines.append(f"        descriptionHtml: {js_string_literal(e['descriptionHtml'])},")
         lines.append(f"        vendor: {js_string_literal(e['vendor'])},")
@@ -347,6 +421,7 @@ def render_js(entries, generated_at):
         variants_json = json.dumps(e["variants"], ensure_ascii=False)
         lines.append(f"        variants: {variants_json},")
         lines.append(f"        shopifyStatus: {js_string_literal(e['shopifyStatus'])},")
+        lines.append(f"        headlessPublished: {'true' if e['headlessPublished'] else 'false'},")
         lines.append(f"        existingAlias: {js_string_literal(e['existingAlias']) if e['existingAlias'] else 'null'},")
         lines.append(f"        updatedAt: {js_string_literal(e['updatedAt'])}")
         lines.append("      },")
@@ -372,7 +447,8 @@ def main():
     try:
         token = read_admin_token()
         variant_to_hp_id = load_existing_hp_ids()
-        products = fetch_unlisted_products(token)
+        headless_pub = resolve_headless_publication(token)
+        products = fetch_unlisted_products(token, headless_pub["id"])
         entries = build_catalog_entries(products, variant_to_hp_id)
     except CatalogError as e:
         print(f"エラー: {e}", file=sys.stderr)

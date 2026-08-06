@@ -407,19 +407,24 @@ var GENRE_MAP = {
     a.href = 'product_test.html?id=' + key;
     a.className = 'product-card';
     a.dataset.genre = GENRE_MAP[fname] || (GENRE_LIST.indexOf(p.category) !== -1 ? p.category : 'その他');
-    if (p.shopify) a.dataset.shopifyGid = p.shopify;
+    // headlessPublished が明示的に false の商品（生成物改変・異常時を含む）は、
+    // ライブ在庫確認の対象にせず一覧上でも購入不可として扱う（詳細ページの閲覧のみ許可）。
+    var headlessBlocked = p.headlessPublished === false;
+    if (p.shopify && !headlessBlocked) a.dataset.shopifyGid = p.shopify;
     a.innerHTML =
       '<div class="product-image"><img src="' + p.img + '" alt="' + p.artist + ' ' + p.name + '" loading="lazy"></div>' +
       '<div class="product-info">' +
         '<p class="product-cat">' + p.artist + '</p>' +
-        '<p class="product-name">' + p.name + '</p>' +
+        '<p class="product-name">' + p.name + (headlessBlocked ? '<span class="soldout-label" data-availability-fixed="1">（現在購入できません）</span>' : '') + '</p>' +
         '<p class="product-price">' + price + '</p>' +
       '</div>';
     grid.appendChild(a);
   });
 })();
 
-// Shopify商品の販売可否を一括取得（個別160リクエスト方式は禁止 — nodes()で1回にまとめる）
+// Shopify商品の販売可否を一括取得（個別160リクエスト方式は禁止 — nodes()で1回にまとめる）。
+// 応答不備（fetch失敗・HTTPエラー・GraphQL errors・data/node欠落・timeout・JSON解析失敗）は
+// すべて「unknown（在庫を確認できません）」へ倒す。availableForSale:true を推測で作らない。
 function batchCheckAvailability() {
   if (!window.SHOP_CONFIG || !window.fetch) return;
   var cards = Array.prototype.slice.call(document.querySelectorAll('#products-grid .product-card[data-shopify-gid]'));
@@ -427,38 +432,52 @@ function batchCheckAvailability() {
   var gids = cards.map(function(c) { return c.dataset.shopifyGid; });
   var endpoint = 'https://' + SHOP_CONFIG.domain + '/api/' + SHOP_CONFIG.apiVersion + '/graphql.json';
   var query = 'query($ids:[ID!]!){nodes(ids:$ids){... on ProductVariant{id product{availableForSale}}}}';
+  var TIMEOUT_MS = 8000;
+  var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  var timeoutId = controller ? setTimeout(function () { controller.abort(); }, TIMEOUT_MS) : null;
+
   fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOP_CONFIG.storefrontAccessToken },
-    body: JSON.stringify({ query: query, variables: { ids: gids } })
-  }).then(function(r) { return r.json(); }).then(function(json) {
-    var nodes = json.data && json.data.nodes;
-    if (!nodes) return;
+    body: JSON.stringify({ query: query, variables: { ids: gids } }),
+    signal: controller ? controller.signal : undefined
+  }).then(function (r) {
+    if (timeoutId) clearTimeout(timeoutId);
+    if (!r.ok) throw new Error('http ' + r.status);
+    return r.json();
+  }).then(function (json) {
+    if (json && json.errors) throw new Error('graphql errors');
+    var nodes = json && json.data && json.data.nodes;
+    if (!nodes) throw new Error('data missing');
     var byGid = {};
-    nodes.forEach(function(n) { if (n && n.id) byGid[n.id] = n; });
-    cards.forEach(function(card) {
+    nodes.forEach(function (n) { if (n && n.id) byGid[n.id] = n; });
+    cards.forEach(function (card) {
       var n = byGid[card.dataset.shopifyGid];
-      var forSale = n && n.product ? n.product.availableForSale : true;
-      applyCardAvailability(card, forSale);
+      if (!n || !n.product || typeof n.product.availableForSale !== 'boolean') {
+        applyCardAvailability(card, 'unknown');
+      } else {
+        applyCardAvailability(card, n.product.availableForSale ? 'available' : 'unavailable');
+      }
     });
-  }).catch(function() { /* 取得失敗時は既存表示を維持し、画面を壊さない */ });
+  }).catch(function () {
+    if (timeoutId) clearTimeout(timeoutId);
+    // 取得失敗（network error / HTTPエラー / GraphQL errors / data欠落 / timeout / JSON解析失敗）は
+    // 全カードを unknown 扱いにする。availableForSale:true を推測して作らない。
+    cards.forEach(function (card) { applyCardAvailability(card, 'unknown'); });
+  });
 }
 
-function applyCardAvailability(card, availableForSale) {
-  var existing = card.querySelector('.soldout-label');
-  if (availableForSale === false) {
-    if (!existing) {
-      var nameEl = card.querySelector('.product-name');
-      if (nameEl) {
-        var badge = document.createElement('span');
-        badge.className = 'soldout-label';
-        badge.textContent = '（soldout）';
-        nameEl.appendChild(badge);
-      }
-    }
-  } else if (existing) {
-    existing.remove();
-  }
+function applyCardAvailability(card, state) {
+  var existing = card.querySelector('.soldout-label:not([data-availability-fixed])');
+  if (existing) existing.remove();
+  if (state === 'available') return;
+  var nameEl = card.querySelector('.product-name');
+  if (!nameEl) return;
+  var badge = document.createElement('span');
+  badge.className = 'soldout-label';
+  var tFn = (window.ShopCart && window.ShopCart.t) || function (key, fallback) { return fallback; };
+  badge.textContent = state === 'unknown' ? '（' + tFn('shop_stock_check_failed_list', '在庫を確認できません') + '）' : '（soldout）';
+  nameEl.appendChild(badge);
 }
 
 document.addEventListener('visibilitychange', function() {

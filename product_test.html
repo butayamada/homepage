@@ -296,6 +296,10 @@ body{font-size:16px;}
   var fetchGeneration = 0;
   var pollTimer = null;
   var panelOpen = false;
+  // Storefront APIの応答が信頼できない状態（fetch失敗・HTTPエラー・GraphQL errors・
+  // data/node欠落・timeout・JSON解析失敗・存在しないVariant GID等）を明示的に保持する。
+  // true の間は在庫スナップショットの有無にかかわらず一切購入操作を許可しない。
+  var lastFetchFailed = false;
 
   // lang.js の LANG_TRANSLATIONS を shop_config.js 経由で参照（現在の arc_lang に基づき都度翻訳）
   function t(key, fallback) {
@@ -329,19 +333,29 @@ body{font-size:16px;}
   function fetchVariants(variantGid) {
     var endpoint = 'https://' + SHOP_CONFIG.domain + '/api/' + SHOP_CONFIG.apiVersion + '/graphql.json';
     var VARIANT_FETCH_LIMIT = 50;
+    var TIMEOUT_MS = 8000;
     var query = 'query($id:ID!){node(id:$id){... on ProductVariant{product{variants(first:' + VARIANT_FETCH_LIMIT + '){edges{node{' +
       'id title selectedOptions{name value} availableForSale quantityAvailable currentlyNotInStock' +
       '}}}}}}}';
+    var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timeoutId = controller ? setTimeout(function () { controller.abort(); }, TIMEOUT_MS) : null;
     return fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': SHOP_CONFIG.storefrontAccessToken
       },
-      body: JSON.stringify({ query: query, variables: { id: variantGid } })
-    }).then(function (r) { return r.json(); }).then(function (json) {
-      var node = json.data && json.data.node;
-      var edges = node && node.product && node.product.variants && node.product.variants.edges;
+      body: JSON.stringify({ query: query, variables: { id: variantGid } }),
+      signal: controller ? controller.signal : undefined
+    }).then(function (r) {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.json();
+    }).then(function (json) {
+      if (json && json.errors) throw new Error('graphql errors');
+      var node = json && json.data && json.data.node;
+      if (!node) throw new Error('node missing (unknown variant gid?)');
+      var edges = node.product && node.product.variants && node.product.variants.edges;
       if (!edges || !edges.length) throw new Error('no variants');
       if (edges.length >= VARIANT_FETCH_LIMIT) {
         // 上限ちょうどの件数が返った場合、実際にはさらにバリエーションが存在し
@@ -350,6 +364,9 @@ body{font-size:16px;}
         throw new Error('variant count reached fetch limit (' + VARIANT_FETCH_LIMIT + '); pagination not implemented');
       }
       return edges.map(function (e) { return e.node; });
+    }).catch(function (err) {
+      if (timeoutId) clearTimeout(timeoutId);
+      throw err;
     });
   }
 
@@ -364,18 +381,17 @@ body{font-size:16px;}
     if (showLoading) setCheckingUI(true);
     return fetchVariants(currentProduct.shopify).then(function (variants) {
       if (myGen !== fetchGeneration) return; // 古いレスポンスは無視
+      lastFetchFailed = false;
       currentVariants = variants;
       renderVariantUI();
     }).catch(function () {
       if (myGen !== fetchGeneration) return;
-      // 取得失敗時も画面・カート機能は止めない。フォールバックとして登録済みGIDのみ・個数不明で表示
-      if (!currentVariants) {
-        currentVariants = [{
-          id: currentProduct.shopify, title: currentProduct.name, selectedOptions: [],
-          availableForSale: true, quantityAvailable: null, currentlyNotInStock: false
-        }];
-        renderVariantUI();
-      }
+      // 取得失敗時（network error / HTTPエラー / GraphQL errors / data・node欠落 /
+      // 存在しないVariant GID / timeout / JSON解析失敗）は、購入可能と推測するフォールバックを
+      // 作らない。既存の在庫スナップショットがあっても「確認できない」状態として扱い、
+      // 購入操作をすべて無効化する。
+      lastFetchFailed = true;
+      renderVariantUI();
     }).then(function () {
       if (myGen === fetchGeneration) setCheckingUI(false);
     });
@@ -388,8 +404,15 @@ body{font-size:16px;}
     var addingLabel = t('shop_cart_adding', 'Adding to cart');
     btn.textContent = addingLabel;
     refreshAvailability(false).then(function () {
+      if (lastFetchFailed) {
+        // ライブ在庫が確認できない状態ではVariant GIDをカートAPIへ送らない。
+        renderVariantUI();
+        btn.disabled = false;
+        btn.textContent = original;
+        return;
+      }
       var v = currentVariants && currentVariants.filter(function (x) { return x.id === variantId; })[0];
-      if (v && !variantStockInfo(v).buyable) {
+      if (!v || !variantStockInfo(v).buyable) {
         if (window.ShopCart && window.ShopCart.showMessage) {
           window.ShopCart.showMessage('shop_sold_out_other');
         }
@@ -409,13 +432,41 @@ body{font-size:16px;}
     });
   }
 
+  function retryAvailability() {
+    refreshAvailability(true);
+  }
+
   function renderVariantUI() {
-    if (!currentProduct || !currentVariants) return;
-    var variants = currentVariants;
+    if (!currentProduct) return;
     var stockNote = document.getElementById('p-stock-note');
     var toggleWrap = document.getElementById('p-variant-toggle-wrap');
     var list = document.getElementById('p-variant-list');
     var shopBtn = document.getElementById('p-buy-shopify');
+
+    if (lastFetchFailed) {
+      // Storefront APIの応答が信頼できない。在庫スナップショットが残っていても
+      // 購入操作は一切許可せず、Variant GIDをカートAPIへ送らない。BASEフォールバックもしない。
+      toggleWrap.style.display = 'none';
+      list.innerHTML = '';
+      shopBtn.style.display = 'none';
+      stockNote.style.display = '';
+      stockNote.className = 'stock-note is-out';
+      stockNote.innerHTML = '';
+      var msg = document.createElement('span');
+      msg.textContent = t('shop_stock_fetch_failed', '在庫を確認できませんでした。しばらくしてから再度お試しください。');
+      var retryBtn = document.createElement('button');
+      retryBtn.type = 'button';
+      retryBtn.className = 'variant-row-add';
+      retryBtn.style.marginLeft = '.6em';
+      retryBtn.textContent = t('shop_retry', '再試行');
+      retryBtn.addEventListener('click', retryAvailability);
+      stockNote.appendChild(msg);
+      stockNote.appendChild(retryBtn);
+      return;
+    }
+
+    if (!currentVariants) return;
+    var variants = currentVariants;
 
     var named = variants.filter(function (v) { return variantDisplayName(v); });
     var isMulti = variants.length > 1 && named.length > 0;
@@ -647,6 +698,16 @@ body{font-size:16px;}
       baseBtn.style.display = 'none';
       stockNote.style.display = 'none';
       toggleWrap.style.display = 'none';
+    } else if (p.shopify && p.headlessPublished === false) {
+      // 生成物改変・異常時の防御: Headless未公開が明示された商品は、
+      // ライブ在庫取得を一切試みず、購入不可の案内のみを表示する。BASEフォールバックもしない。
+      baseBtn.style.display = 'none';
+      shopBtn.style.display = 'none';
+      toggleWrap.style.display = 'none';
+      stockNote.style.display = '';
+      stockNote.textContent = t('shop_unavailable_now', '現在購入できません');
+      currentProduct = null;
+      currentVariants = null;
     } else if (p.shopify) {
       baseBtn.style.display = 'none';
       currentProduct = p;

@@ -205,8 +205,10 @@ if (typeof document !== 'undefined') {
     if (cartScrim) cartScrim.classList.toggle('open', open);
     cartOpenBtn.setAttribute('aria-expanded', String(open));
     if (open) { if (cartCloseBtn) cartCloseBtn.focus(); } else { cartOpenBtn.focus(); }
-    // かごを閉じる際、未保存のご注文備考があれば保存しておく（正本はShopify Cart側のnote）。
-    if (!open && noteSaver) { flushNoteDebounce(); noteSaver.flush(); }
+    // かごを閉じる際（×ボタン／背景クリック／Esc、いずれもこの関数を通る）、
+    // 未保存のご注文備考があれば保存しておく（正本はShopify Cart側のnote）。
+    // 失敗してもunhandledrejection・console errorにしない（runBackgroundNoteSave内でcatch済み）。
+    if (!open && noteSaver) { flushNoteDebounce(); runBackgroundNoteSave(); }
   }
   cartOpenBtn.addEventListener('click', function () { setCart(true); });
   if (cartCloseBtn) cartCloseBtn.addEventListener('click', function () { setCart(false); });
@@ -215,10 +217,24 @@ if (typeof document !== 'undefined') {
     if (e.key === 'Escape' && cartDrawer.classList.contains('open')) setCart(false);
   });
 
+  /* ---------- Checkoutボタンのdisabled状態を一箇所で管理する ----------
+     自動保存中／Checkout処理中／disableCommerce後、という複数の理由が競合して
+     互いのdisabled解除を上書きしないよう、理由ごとのフラグからdisabled値を
+     毎回再計算する（直接 cartCheckoutBtn.disabled に代入する箇所を増やさない）。
+     commerceDisabled は一度trueになったら絶対にfalseへ戻さない。 */
+  var commerceDisabled = false;
+  var checkoutInProgress = false;
+  var noteAutoSaveBusy = false;
+  function recomputeCheckoutBtn() {
+    if (!cartCheckoutBtn) return;
+    cartCheckoutBtn.disabled = commerceDisabled || checkoutInProgress || noteAutoSaveBusy;
+  }
+
   /* ---------- 商品ページ等の「準備中」フォールバック表示 ---------- */
   function disableCommerce() {
+    commerceDisabled = true;
     cartOpenBtn.disabled = true;
-    if (cartCheckoutBtn) cartCheckoutBtn.disabled = true;
+    recomputeCheckoutBtn();
     if (cartItemsEl) cartItemsEl.innerHTML = '<p class="cart-empty">オンライン購入は現在準備中です — お問合せください。<br>Online purchase is temporarily unavailable — please contact us.</p>';
     document.querySelectorAll('[data-shop-add]').forEach(function (btn) {
       btn.disabled = true;
@@ -433,6 +449,10 @@ if (typeof document !== 'undefined') {
   var noteTooLongTimer = null;
 
   function renderNoteStatus(status) {
+    // 自動保存中はCheckoutボタンを無効化する（バックグラウンド保存・Checkout直前の保存いずれも同じ
+    // noteSaverを経由するため、ここで一元的にnoteAutoSaveBusyを更新する）。
+    noteAutoSaveBusy = (status === 'saving');
+    recomputeCheckoutBtn();
     if (!cartOrderNoteStatusEl) return;
     if (cartOrderNoteStatusEl.__toolong) return; // 「文字数超過」表示中は上書きしない（タイマーで自動的に戻す）
     cartOrderNoteStatusEl.classList.toggle('is-error', status === 'error');
@@ -463,12 +483,21 @@ if (typeof document !== 'undefined') {
     renderNoteStatus(state.saving ? 'saving' : (state.current === state.lastSaved ? 'saved' : null));
   }
 
+  // バックグラウンド保存（自動保存・かごを閉じる際のフラッシュ）はここでcatchする。
+  // 失敗はrenderNoteStatus('error')で既に画面表示済みなので、ここでは
+  // unhandledrejection・console errorを発生させないよう握り潰すだけでよい
+  // （入力内容はnoteSaver内部のcurrentに残るため次回保存時に自動的に再試行される）。
+  // Checkout直前の保存だけはこの関数を使わず、呼び出し元で個別にcatchして遷移を阻止する。
+  function runBackgroundNoteSave() {
+    return noteSaver.runSave().catch(function () {});
+  }
+
   var noteDebounceTimer = null;
   function scheduleNoteDebounce() {
     if (noteDebounceTimer) clearTimeout(noteDebounceTimer);
     noteDebounceTimer = setTimeout(function () {
       noteDebounceTimer = null;
-      noteSaver.runSave();
+      runBackgroundNoteSave();
     }, NOTE_DEBOUNCE_MS);
   }
   function flushNoteDebounce() {
@@ -499,24 +528,24 @@ if (typeof document !== 'undefined') {
   }
 
   if (cartCheckoutBtn) {
-    var checkoutInProgress = false;
     cartCheckoutBtn.addEventListener('click', function () {
-      if (checkoutInProgress) return; // 二重クリック防止
+      if (checkoutInProgress || commerceDisabled) return; // 二重クリック防止／準備中は絶対に進めない
       if (!cart) return;
       checkoutInProgress = true;
-      cartCheckoutBtn.disabled = true;
+      recomputeCheckoutBtn();
       flushNoteDebounce();
+      // Checkout直前の保存失敗だけは握り潰さず、遷移を阻止する（このcatchのみ意図的に非握り潰し）。
       Promise.resolve(noteSaver.runSave()).then(function () {
         if (cart && cart.checkoutUrl) {
           window.location.href = cart.checkoutUrl;
           return; // 遷移するため checkoutInProgress は戻さない
         }
         checkoutInProgress = false;
-        cartCheckoutBtn.disabled = false;
+        recomputeCheckoutBtn();
       }).catch(function () {
         // ご注文備考の保存に失敗した場合はCheckoutへ進ませない。入力内容は消さない。
         checkoutInProgress = false;
-        cartCheckoutBtn.disabled = false;
+        recomputeCheckoutBtn();
         showCartMessage('cart_note_checkout_save_failed');
       });
     });

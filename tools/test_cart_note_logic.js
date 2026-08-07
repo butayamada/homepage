@@ -204,6 +204,53 @@ pending.push((function () {
   check('reset(既存note)でShopify Cartのnoteから復元される', saver.getState().current === '既存Cartのnote' && saver.getState().lastSaved === '既存Cartのnote');
 })();
 
+// ---------- バックグラウンド保存（自動保存／かごを閉じる際のフラッシュ）はunhandledrejectionを出さない ----------
+// shop_config.js の runBackgroundNoteSave() と同じパターン（.catch(function(){})）を、
+// 実際にNodeのunhandledRejectionイベントで検証する。
+pending.push((function () {
+  var unhandled = [];
+  function onUnhandled(reason) { unhandled.push(reason); }
+  process.on('unhandledRejection', onUnhandled);
+
+  var saver = mod.createNoteSaver({
+    save: function () { return Promise.reject(new Error('network error')); },
+    onStatus: function () {}
+  });
+  saver.setValue('通信エラー時も消えないはずの入力内容');
+
+  // shop_config.js の runBackgroundNoteSave() と同一パターン: catchだけして握り潰す。
+  function runBackgroundNoteSave() {
+    return saver.runSave().catch(function () {});
+  }
+
+  return runBackgroundNoteSave().then(function () {
+    return sleep(50); // unhandledRejectionはマイクロタスク後に発火するため少し待つ
+  }).then(function () {
+    process.removeListener('unhandledRejection', onUnhandled);
+    check('保存失敗をcatchで握り潰してもunhandledRejectionが発生しない', unhandled.length === 0);
+    check('保存失敗後も入力内容が消えない（saver.current保持）', saver.getState().current === '通信エラー時も消えないはずの入力内容');
+    check('保存失敗後もlastSavedは更新されない（次回保存時に再試行される）', saver.getState().lastSaved === '');
+  });
+})());
+
+// ---------- Checkout直前の保存だけは握り潰さず、失敗を呼び出し元へ伝播する ----------
+pending.push((function () {
+  var saver = mod.createNoteSaver({
+    save: function () { return Promise.reject(new Error('graphql errors')); },
+    onStatus: function () {}
+  });
+  saver.setValue('Checkout直前に保存されるべき内容');
+  // shop_config.js のcheckoutクリックハンドラと同じ形（.catch()で握り潰さず呼び出し元が判定する）。
+  var caughtByCaller = false;
+  return Promise.resolve(saver.runSave()).then(function () {
+    check('Checkout直前の保存が成功したかのように扱われてはいけない', false);
+  }).catch(function () {
+    caughtByCaller = true;
+  }).then(function () {
+    check('Checkout直前の保存失敗は呼び出し元のcatchまで伝播する（握り潰さない）', caughtByCaller === true);
+  });
+})());
+
 Promise.all(pending).then(function () {
   console.log('\n=== SUMMARY ===');
   var failed = results.filter(function (r) { return !r[1]; });

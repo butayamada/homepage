@@ -93,7 +93,88 @@
     };
   }
 
-  return { truncateNoteInput: truncateNoteInput, createNoteSaver: createNoteSaver };
+  /**
+   * HTTP応答を確認したうえでGraphQL実行する共通本体。ブラウザ(fetch)・Nodeテスト(モック)の
+   * 両方から同じ判定を通す（テスト側で判定を再実装しない）。
+   * - res.ok !== true は本文の内容にかかわらず失敗として扱う（HTTP 200台以外を成功扱いにしない）
+   * - res.ok === true でも本文が無い/JSON解析できない場合（HTTP 204等）はres.json()の失敗でreject
+   * - レスポンス本文やトークンはconsoleへ出さない
+   */
+  function performGraphQL(fetchImpl, endpoint, token, query, variables) {
+    return fetchImpl(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': token
+      },
+      body: JSON.stringify({ query: query, variables: variables || {} })
+    }).then(function (res) {
+      if (!res || res.ok !== true) {
+        var httpErr = new Error('Shopify API request failed');
+        httpErr.httpStatus = res && res.status;
+        throw httpErr;
+      }
+      return res.json();
+    }).then(function (json) {
+      if (json && json.errors && json.errors.length) throw new Error(json.errors[0].message);
+      return json && json.data;
+    });
+  }
+
+  /**
+   * Cartを返すMutation共通のfail-closed抽出。cartCreate/cartLinesAdd/cartLinesUpdate/
+   * cartLinesRemove/cartNoteUpdate はいずれも成功時にCartオブジェクトを返す前提のため、
+   * mutation nodeの欠落・cart欠落・cart.id欠落はすべて失敗として扱う。
+   */
+  function extractMutationCart(payload, field) {
+    var node = payload && payload[field];
+    if (!node || typeof node !== 'object') {
+      throw new Error('Unexpected response: missing ' + field + ' result');
+    }
+    var userErrors = node.userErrors || [];
+    if (userErrors.length) {
+      var err = new Error(userErrors[0].message);
+      err.userErrors = userErrors;
+      throw err;
+    }
+    var cart = node.cart;
+    if (!cart || typeof cart !== 'object' || !cart.id) {
+      throw new Error('Unexpected response: missing cart in ' + field + ' result');
+    }
+    return { cart: cart, warnings: node.warnings || [] };
+  }
+
+  /**
+   * cartNoteUpdate専用の追加検証。extractMutationCartを通過した後、さらに:
+   * - 返却Cart IDが更新対象と一致すること
+   * - noteフィールドが応答内に存在すること（欠落とnull:nullは区別する）
+   * - 非空文字を送った場合は同一文字列の返却を必須とする
+   * - 空文字を送った場合のみ null/空文字どちらも成功扱いにしてよい
+   * を満たさない限り成功と認めない。入力値を成功結果として代用するフォールバックは行わない。
+   */
+  function validateNoteUpdateCart(cart, expectedCartId, sentNote) {
+    if (!cart || cart.id !== expectedCartId) {
+      throw new Error('cartNoteUpdate returned a different or missing cart id');
+    }
+    if (!Object.prototype.hasOwnProperty.call(cart, 'note')) {
+      throw new Error('cartNoteUpdate response missing note field');
+    }
+    var returnedNote = cart.note;
+    var matches = (returnedNote === sentNote) ||
+      (sentNote === '' && (returnedNote === null || returnedNote === ''));
+    if (!matches) {
+      throw new Error('cartNoteUpdate returned note does not match saved value');
+    }
+    return (typeof returnedNote === 'string') ? returnedNote : '';
+  }
+
+  return {
+    truncateNoteInput: truncateNoteInput,
+    createNoteSaver: createNoteSaver,
+    performGraphQL: performGraphQL,
+    extractMutationCart: extractMutationCart,
+    validateNoteUpdateCart: validateNoteUpdateCart
+  };
 });
 
 // 以降はブラウザのカートUI本体（DOM必須）。Node（回帰テスト）でrequire()した際は
@@ -251,29 +332,13 @@ if (typeof document !== 'undefined') {
   var RESULT_ERRORS = 'userErrors{code field message} warnings{code message target}';
 
   function gql(query, variables) {
-    return fetch(ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': window.SHOP_CONFIG.storefrontAccessToken
-      },
-      body: JSON.stringify({ query: query, variables: variables || {} })
-    }).then(function (res) { return res.json(); }).then(function (json) {
-      if (json.errors && json.errors.length) throw new Error(json.errors[0].message);
-      return json.data;
-    });
+    return window.CartNoteLogic.performGraphQL(fetch, ENDPOINT, window.SHOP_CONFIG.storefrontAccessToken, query, variables);
   }
 
   // userErrors は致命的失敗（throw）、warnings は非致命的（在庫調整等）— 呼び出し元に両方伝える
+  // Cart欠落・mutation node欠落はfail-closed（CartNoteLogic.extractMutationCartに実装本体あり）
   function extractResult(payload, field) {
-    var node = payload && payload[field];
-    var userErrors = (node && node.userErrors) || [];
-    if (userErrors.length) {
-      var err = new Error(userErrors[0].message);
-      err.userErrors = userErrors;
-      throw err;
-    }
-    return { cart: node.cart, warnings: (node && node.warnings) || [] };
+    return window.CartNoteLogic.extractMutationCart(payload, field);
   }
 
   function createCart() {
@@ -307,11 +372,18 @@ if (typeof document !== 'undefined') {
       .then(function (data) { return extractResult(data, 'cartLinesRemove'); });
   }
   // 注文メモ（Shopify Cart の note）。GraphQL変数として送信し、クエリ文字列へは連結しない。
+  // 通常のcart mutation共通のfail-closed（extractResult）に加え、cartNoteUpdate専用の
+  // Cart ID一致・note一致検証（CartNoteLogic.validateNoteUpdateCart）を必ず通す。
+  // 入力値を成功結果として代用するフォールバックは行わない。
   function updateNote(cartId, note) {
     var query = 'mutation($cartId: ID!, $note: String!) {' +
       ' cartNoteUpdate(cartId: $cartId, note: $note) { cart { ' + CART_FIELDS + ' } ' + RESULT_ERRORS + ' } }';
     return gql(query, { cartId: cartId, note: note })
-      .then(function (data) { return extractResult(data, 'cartNoteUpdate'); });
+      .then(function (data) {
+        var r = extractResult(data, 'cartNoteUpdate');
+        var validatedNote = window.CartNoteLogic.validateNoteUpdateCart(r.cart, cartId, note);
+        return { cart: r.cart, warnings: r.warnings, note: validatedNote };
+      });
   }
 
   var cart = null;
@@ -468,8 +540,10 @@ if (typeof document !== 'undefined') {
       }).then(function (r) {
         // note更新はライン内容を変えないため cart 全体は setCartRef を通さず反映のみ行う
         // （noteCartIdは既に一致しているのでsetCartRefを呼んでも実害はないが、意図を明確にする）
+        // r.note は updateNote() 内で Cart ID一致・note一致まで検証済みの値
+        // （入力値へのフォールバックは行わない — 未検証の値を保存済み扱いにしないため）。
         cart = r.cart;
-        return { note: (r.cart && typeof r.cart.note === 'string') ? r.cart.note : value };
+        return { note: r.note };
       });
     },
     onStatus: renderNoteStatus

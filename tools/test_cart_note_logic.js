@@ -251,6 +251,157 @@ pending.push((function () {
   });
 })());
 
+// ---------- performGraphQL: HTTP異常のfail-closed ----------
+// PR#6監査(Luna) FAIL対応: HTTPステータスを確認せずres.json()へ進む実装は、
+// HTTP 500でも正常形式のJSONが返れば成功扱いになってしまう。res.ok/statusを必ず確認する。
+function mockRes(status, ok, jsonImpl) {
+  return {
+    status: status,
+    ok: ok,
+    json: jsonImpl || function () { return Promise.resolve({ data: { ok: true } }); }
+  };
+}
+pending.push((function () {
+  var ENDPOINT = 'https://example.myshopify.com/api/2026-01/graphql.json';
+  var TOKEN = 'dummy-token';
+
+  function run(fetchImpl) {
+    return mod.performGraphQL(fetchImpl, ENDPOINT, TOKEN, 'query{x}', {});
+  }
+
+  // 1. HTTP 200 + 正常応答 → 成功
+  return run(function () { return Promise.resolve(mockRes(200, true, function () { return Promise.resolve({ data: { hello: 'world' } }); })); })
+    .then(function (data) {
+      check('HTTP 200+正常応答は成功しdataを返す', data && data.hello === 'world');
+
+      // 2. HTTP 201 (2xx) + 正常応答 → 成功として許容する
+      return run(function () { return Promise.resolve(mockRes(201, true, function () { return Promise.resolve({ data: { hello: 'created' } }); })); });
+    }).then(function (data) {
+      check('HTTP 201等の2xxは成功として許容する', data && data.hello === 'created');
+
+      // 3. HTTP 400 + 正常そうなJSON → 失敗
+      return run(function () { return Promise.resolve(mockRes(400, false, function () { return Promise.resolve({ data: { hello: 'world' } }); })); })
+        .then(function () { check('HTTP 400は失敗するべき（成功してしまった）', false); })
+        .catch(function (e) { check('HTTP 400+正常そうなJSONは失敗する', e.httpStatus === 400); });
+    }).then(function () {
+      // 4. HTTP 401
+      return run(function () { return Promise.resolve(mockRes(401, false)); })
+        .then(function () { check('HTTP 401は失敗するべき', false); })
+        .catch(function (e) { check('HTTP 401は失敗する', e.httpStatus === 401); });
+    }).then(function () {
+      // 5. HTTP 403
+      return run(function () { return Promise.resolve(mockRes(403, false)); })
+        .then(function () { check('HTTP 403は失敗するべき', false); })
+        .catch(function (e) { check('HTTP 403は失敗する', e.httpStatus === 403); });
+    }).then(function () {
+      // 6. HTTP 429
+      return run(function () { return Promise.resolve(mockRes(429, false)); })
+        .then(function () { check('HTTP 429は失敗するべき', false); })
+        .catch(function (e) { check('HTTP 429は失敗する', e.httpStatus === 429); });
+    }).then(function () {
+      // 7. HTTP 500 + 正常そうなJSON → 失敗（res.okが欠落した簡易モックを成功扱いにしない）
+      return run(function () { return Promise.resolve(mockRes(500, false, function () { return Promise.resolve({ data: { cartNoteUpdate: { cart: { id: 'x' } } } }); })); })
+        .then(function () { check('HTTP 500+正常そうなJSONは失敗するべき', false); })
+        .catch(function (e) { check('HTTP 500+正常そうなJSONは失敗する（本文の内容を見ない）', e.httpStatus === 500); });
+    }).then(function () {
+      // 8. HTTP 502 + HTML本文（json()が解析失敗する）
+      return run(function () {
+        return Promise.resolve(mockRes(502, false, function () { return Promise.reject(new SyntaxError('Unexpected token <')); }));
+      })
+        .then(function () { check('HTTP 502+HTML本文は失敗するべき', false); })
+        .catch(function (e) { check('HTTP 502+HTML本文は失敗する', e.httpStatus === 502); });
+    }).then(function () {
+      // 9. HTTP 204（正常なGraphQL応答本文がない）→ 失敗
+      return run(function () {
+        return Promise.resolve(mockRes(204, true, function () { return Promise.reject(new SyntaxError('Unexpected end of JSON input')); }));
+      })
+        .then(function () { check('HTTP 204は失敗するべき（本文が無い）', false); })
+        .catch(function () { check('HTTP 204は失敗する（本文が無いため）', true); });
+    }).then(function () {
+      // 10. JSON解析失敗（HTTPは200）
+      return run(function () {
+        return Promise.resolve(mockRes(200, true, function () { return Promise.reject(new SyntaxError('bad json')); }));
+      })
+        .then(function () { check('JSON解析失敗は失敗するべき', false); })
+        .catch(function () { check('JSON解析失敗は失敗する', true); });
+    }).then(function () {
+      // 11. GraphQL errors
+      return run(function () {
+        return Promise.resolve(mockRes(200, true, function () { return Promise.resolve({ errors: [{ message: 'boom' }] }); }));
+      })
+        .then(function () { check('GraphQL errorsは失敗するべき', false); })
+        .catch(function (e) { check('GraphQL errorsは失敗する', e.message === 'boom'); });
+    }).then(function () {
+      check('res.okが欠落した簡易モック(ok未定義)は成功扱いにしない', true); // 12-cで再確認
+      return run(function () { return Promise.resolve({ status: 200, json: function () { return Promise.resolve({ data: {} }); } }); })
+        .then(function () { check('res.ok欠落は失敗するべき', false); })
+        .catch(function () { check('res.ok欠落（undefined !== true）は失敗する', true); });
+    });
+})());
+
+// ---------- extractMutationCart / validateNoteUpdateCart: Cart欠落・note不一致のfail-closed ----------
+pending.push((function () {
+  function expectThrow(fn, label) {
+    try { fn(); check(label + ' で例外が発生するべき', false); }
+    catch (e) { check(label, true); }
+  }
+
+  // 12. mutation node欠落
+  expectThrow(function () { mod.extractMutationCart({}, 'cartNoteUpdate'); }, 'mutation node欠落は失敗する');
+
+  // 13. cart: null
+  expectThrow(function () { mod.extractMutationCart({ cartNoteUpdate: { cart: null, userErrors: [] } }, 'cartNoteUpdate'); }, 'cart:nullは失敗する');
+
+  // 14. cart: {}
+  expectThrow(function () { mod.extractMutationCart({ cartNoteUpdate: { cart: {}, userErrors: [] } }, 'cartNoteUpdate'); }, 'cart:{}（id欠落）は失敗する');
+
+  // 15. cart.id欠落（14と同義だが明示）
+  expectThrow(function () { mod.extractMutationCart({ cartNoteUpdate: { cart: { note: 'x' }, userErrors: [] } }, 'cartNoteUpdate'); }, 'cart.id欠落は失敗する');
+
+  // 21. userErrors
+  expectThrow(function () {
+    mod.extractMutationCart({ cartNoteUpdate: { cart: { id: 'gid://1', note: 'x' }, userErrors: [{ message: 'bad note' }] } }, 'cartNoteUpdate');
+  }, 'userErrorsありは失敗する');
+
+  // 22. warningsのみ + 正常Cart → 成功（致命的でない）
+  var okWithWarnings = mod.extractMutationCart({
+    cartLinesAdd: { cart: { id: 'gid://1' }, userErrors: [], warnings: [{ code: 'MERCHANDISE_OUT_OF_STOCK' }] }
+  }, 'cartLinesAdd');
+  check('warningsのみ+正常Cartは成功しwarningsを返す', okWithWarnings.warnings.length === 1 && okWithWarnings.cart.id === 'gid://1');
+
+  // 共通Mutation防御が既存操作を壊さないこと（cartCreate/cartLinesAdd/cartLinesUpdate/cartLinesRemove）
+  ['cartCreate', 'cartLinesAdd', 'cartLinesUpdate', 'cartLinesRemove'].forEach(function (field) {
+    var payload = {}; payload[field] = { cart: { id: 'gid://ok', note: '' }, userErrors: [] };
+    var r = mod.extractMutationCart(payload, field);
+    check(field + ' の正常応答は引き続き成功する', r.cart.id === 'gid://ok');
+  });
+
+  // ---- validateNoteUpdateCart ----
+  // 1. HTTP 200＋正常Cart＋一致note → 成功
+  var v1 = mod.validateNoteUpdateCart({ id: 'gid://cart1', note: '店舗受け取り希望' }, 'gid://cart1', '店舗受け取り希望');
+  check('Cart ID一致・note一致は成功しnoteを返す', v1 === '店舗受け取り希望');
+
+  // 16. Cart ID不一致
+  expectThrow(function () { mod.validateNoteUpdateCart({ id: 'gid://other', note: 'x' }, 'gid://cart1', 'x'); }, 'Cart ID不一致は失敗する');
+
+  // 17. noteプロパティ欠落
+  expectThrow(function () { mod.validateNoteUpdateCart({ id: 'gid://cart1' }, 'gid://cart1', 'x'); }, 'noteプロパティ欠落は失敗する');
+
+  // 18. 非空送信に対してnote:null
+  expectThrow(function () { mod.validateNoteUpdateCart({ id: 'gid://cart1', note: null }, 'gid://cart1', '非空の内容'); }, '非空送信に対するnote:nullは失敗する');
+
+  // 19. 送信値と異なるnote
+  expectThrow(function () { mod.validateNoteUpdateCart({ id: 'gid://cart1', note: '別の内容' }, 'gid://cart1', '送信した内容'); }, '送信値と異なるnoteは失敗する');
+
+  // 20. 空文字送信に対してnote:null → 成功（Shopifyの仕様上の同値）
+  var v20 = mod.validateNoteUpdateCart({ id: 'gid://cart1', note: null }, 'gid://cart1', '');
+  check('空文字送信に対するnote:nullは成功し空文字を返す（null→""正規化、入力値へのフォールバックではない）', v20 === '');
+
+  // 空文字送信に対してnote:''も成功
+  var v20b = mod.validateNoteUpdateCart({ id: 'gid://cart1', note: '' }, 'gid://cart1', '');
+  check('空文字送信に対するnote:""は成功する', v20b === '');
+})());
+
 Promise.all(pending).then(function () {
   console.log('\n=== SUMMARY ===');
   var failed = results.filter(function (r) { return !r[1]; });

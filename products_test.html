@@ -194,6 +194,15 @@ body.hide-soldout .product-card:has(.soldout-label){display:none;}
     <p class="cart-empty">かごは空です — Your cart is empty.</p>
   </div>
   <div class="cart-foot">
+    <div class="cart-order-note">
+      <label class="cart-order-note-label" for="cartOrderNote" data-i18n="cart_note_heading">ご注文備考（任意）</label>
+      <p class="cart-order-note-hint" data-i18n="cart_note_hint">店舗受け取りのご希望や、ご注文に関する連絡事項をご記入ください。内容によりご希望に添えない場合がございます。</p>
+      <textarea id="cartOrderNote" class="cart-order-note-textarea" maxlength="500" rows="3" data-i18n-placeholder="cart_note_placeholder" placeholder="例：店舗受け取り希望"></textarea>
+      <div class="cart-order-note-status">
+        <span class="cart-order-note-count" id="cartOrderNoteCount">0/500</span>
+        <span class="cart-order-note-state" id="cartOrderNoteStatus"></span>
+      </div>
+    </div>
     <p class="cart-subtotal"><span>Subtotal — 小計</span><span id="cartSubtotal">&yen;0</span></p>
     <button class="checkout" id="cartCheckout" type="button">Checkout</button>
     <p class="cart-note" id="cartNote">Shopifyによる安全な決済<br>Secure checkout by Shopify.</p>
@@ -202,10 +211,10 @@ body.hide-soldout .product-card:has(.soldout-label){display:none;}
 <div class="test-badge">TEST BUILD — 実装テスト用ページ</div>
 
 <script src="product_translations.js?v=9" defer></script>
-<script src="lang.js?v=13" defer></script>
+<script src="lang.js?v=14" defer></script>
 <script src="chat_knowledge.js?v=9" defer></script>
 <script src="chat_widget.js?v=9" defer></script>
-<script src="shop_config.js?v=10" defer></script>
+<script src="shop_config.js?v=11" defer></script>
 <script src="ma_nav.js?v=9" defer></script>
 <script src="shop_notice_release.js?v=1" defer></script>
 <script src="shop_notice.js?v=3" defer></script>

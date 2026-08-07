@@ -67,7 +67,15 @@
       onStatus('saving');
       inFlight = save(valueToSave).then(function (result) {
         inFlight = null;
-        lastSaved = (result && typeof result.note === 'string') ? result.note : valueToSave;
+        // save()の応答を厳格に検証する。result.noteがstringでvalueToSaveと完全一致する
+        // 場合だけ保存成功として扱う。入力値(valueToSave)を保存結果の代用にしない
+        // ——応答が壊れている/期待と異なる場合は「保存できたかどうか分からない」ため、
+        // fail-closedでlastSavedを更新せず失敗として扱う。
+        if (!result || typeof result !== 'object' ||
+            typeof result.note !== 'string' || result.note !== valueToSave) {
+          throw new Error('Unexpected save() result: note does not match saved value');
+        }
+        lastSaved = result.note;
         if (dirty) return runSave();
         onStatus('saved');
         return result;

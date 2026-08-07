@@ -402,6 +402,140 @@ pending.push((function () {
   check('空文字送信に対するnote:""は成功する', v20b === '');
 })());
 
+// ---------- createNoteSaver: save()応答の厳格検証（入力値fallback撤廃） ----------
+// PR#6 Luna再監査FAIL対応: save()が壊れた応答を返しても入力値(valueToSave)を
+// lastSavedへ代用してはいけない。result.noteがstringでvalueToSaveと完全一致する
+// 場合だけ成功として扱う（空文字列は有効な成功結果）。
+pending.push((function () {
+  function saverWith(resultForFirstCall) {
+    var calls = 0;
+    var statuses = [];
+    var saver = mod.createNoteSaver({
+      save: function (value) {
+        calls++;
+        return Promise.resolve(resultForFirstCall);
+      },
+      onStatus: function (s) { statuses.push(s); }
+    });
+    return { saver: saver, statuses: statuses, calls: function () { return calls; } };
+  }
+
+  var chain = Promise.resolve();
+
+  // 成功: 入力「abc」→ { note: 'abc' }
+  chain = chain.then(function () {
+    var t = saverWith({ note: 'abc' });
+    t.saver.setValue('abc');
+    return t.saver.runSave().then(function () {
+      check('{note:"abc"}（入力と完全一致）は保存成功しlastSavedが更新される', t.saver.getState().lastSaved === 'abc');
+      check('保存成功時にonStatus("saved")が呼ばれる', t.statuses.indexOf('saved') !== -1);
+    });
+  });
+
+  // 成功: 入力空文字 → { note: '' }
+  // 初期状態はcurrent===lastSaved===""のため、まず非空文字を保存してから空文字へ戻す
+  // （最初のsave()呼び出しの結果もvalueToSaveと一致させる必要がある——resultForFirstCallは
+  // saverWith()内で全呼び出し共通のため、二段階目のrunSave()だけを検証対象にする）。
+  chain = chain.then(function () {
+    var callCount = 0;
+    var statuses = [];
+    var saver = mod.createNoteSaver({
+      save: function (value) {
+        callCount++;
+        if (callCount === 1) return Promise.resolve({ note: '店舗受け取り希望' });
+        return Promise.resolve({ note: '' });
+      },
+      onStatus: function (s) { statuses.push(s); }
+    });
+    saver.setValue('店舗受け取り希望');
+    return saver.runSave().then(function () {
+      saver.setValue('');
+      return saver.runSave();
+    }).then(function () {
+      check('{note:""}（空文字保存結果）は有効で保存成功しlastSaved===""になる', saver.getState().lastSaved === '');
+    });
+  });
+
+  // 失敗ケース一覧: {}, null, undefined, {note:null}, {note:123}, {note:入力と異なる値}
+  var failureCases = [
+    { label: '{}', result: {} },
+    { label: 'null', result: null },
+    { label: 'undefined', result: undefined },
+    { label: '{note:null}', result: { note: null } },
+    { label: '{note:123}', result: { note: 123 } },
+    { label: '{note:入力値と異なる文字列}', result: { note: '入力値と異なる値' } }
+  ];
+  failureCases.forEach(function (fc) {
+    chain = chain.then(function () {
+      var t = saverWith(fc.result);
+      t.saver.setValue('保存されるべきでない入力値');
+      return t.saver.runSave().then(function () {
+        check('save()が' + fc.label + 'を返した場合はrunSave()が失敗するべき', false);
+      }).catch(function () {
+        check('save()が' + fc.label + 'を返した場合、lastSavedは変化しない（初期値のまま）', t.saver.getState().lastSaved === '');
+        check('save()が' + fc.label + 'を返した場合、currentには入力値が残る', t.saver.getState().current === '保存されるべきでない入力値');
+        check('save()が' + fc.label + 'を返した場合、dirty/再試行可能な状態になる（current!==lastSaved）', t.saver.getState().current !== t.saver.getState().lastSaved);
+        check('save()が' + fc.label + 'を返した場合、statusはerror', t.statuses.indexOf('error') !== -1);
+        check('save()が' + fc.label + 'を返した場合、入力値をlastSavedへ代用していない（fallback撤廃の確認）', t.saver.getState().lastSaved !== '保存されるべきでない入力値');
+      });
+    });
+  });
+
+  // 失敗後、正常応答へ戻して再試行すると保存が成功する
+  chain = chain.then(function () {
+    var callCount = 0;
+    var statuses = [];
+    var saver = mod.createNoteSaver({
+      save: function (value) {
+        callCount++;
+        if (callCount === 1) return Promise.resolve({}); // 1回目は不正応答
+        return Promise.resolve({ note: value }); // 2回目以降は正常応答
+      },
+      onStatus: function (s) { statuses.push(s); }
+    });
+    saver.setValue('リトライで保存される内容');
+    return saver.runSave().then(function () {
+      check('1回目の不正応答でrunSave()が失敗しない設計ではない（実際は失敗するべき）', false);
+    }).catch(function () {
+      check('1回目の不正応答は失敗として扱われる', saver.getState().lastSaved === '');
+      return saver.runSave();
+    }).then(function () {
+      check('不正応答の直後に正常応答で再試行すると保存が成功する', saver.getState().lastSaved === 'リトライで保存される内容');
+    });
+  });
+
+  // latest-wins: 最初の応答が不正、in-flight中に再編集され、明示的な再試行(呼び出し側の役割)が
+  // 正常応答となるケース。不正応答は失敗としてrejectされるため自動dirty再試行は発生しない
+  // （dirty経由の自動再試行は成功応答後のみ）— ここでは呼び出し側が再度runSave()する流れを検証する。
+  chain = chain.then(function () {
+    var d1 = deferred();
+    var saveCalls = [];
+    var statuses = [];
+    var saver = mod.createNoteSaver({
+      save: function (value) {
+        saveCalls.push(value);
+        if (saveCalls.length === 1) return d1.promise; // 1回目はin-flightのまま保留
+        return Promise.resolve({ note: value }); // 再試行時は正常応答
+      },
+      onStatus: function (s) { statuses.push(s); }
+    });
+    saver.setValue('最初の内容（不正応答予定）');
+    var p1 = saver.runSave(); // in-flight
+    saver.setValue('編集後の内容（正常応答予定）'); // in-flight中に再編集
+    d1.resolve({}); // 1回目（不正応答）が解決する
+    return p1.catch(function () {}).then(function () {
+      check('latest-wins: 不正応答直後もcurrentは最新編集値を保持している', saver.getState().current === '編集後の内容（正常応答予定）');
+      return saver.runSave(); // 呼び出し側が最新値で明示的に再試行する
+    }).then(function () {
+      check('latest-wins: 1回目が不正応答でも、最新値での再試行で最終的に保存成功する',
+        saveCalls.length === 2 && saveCalls[1] === '編集後の内容（正常応答予定）' &&
+        saver.getState().lastSaved === '編集後の内容（正常応答予定）');
+    });
+  });
+
+  return chain;
+})());
+
 Promise.all(pending).then(function () {
   console.log('\n=== SUMMARY ===');
   var failed = results.filter(function (r) { return !r[1]; });

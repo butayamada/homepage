@@ -81,7 +81,7 @@
     'text-transform:uppercase;background:var(--bone,#e9e5dd);color:var(--night,#0e0d0c);border:none;padding:.55rem 1.1rem;cursor:pointer;margin-top:.3rem;}' +
     '.chat-esc button:disabled{opacity:.5;cursor:default;}' +
     '.chat-esc-error{font-size:.68rem;color:#d9776e;letter-spacing:.05em;margin-top:.2rem;}' +
-    '@media (max-width:600px){.chat-panel{right:.6rem;bottom:calc(.6rem + 56px);width:calc(100vw - 1.2rem);}.chat-toggle{right:.6rem;bottom:.6rem;}' +
+    '@media (max-width:600px){.chat-panel{left:.6rem;right:.6rem;bottom:calc(.6rem + 56px);width:auto;max-width:none;box-sizing:border-box;}.chat-toggle{right:.6rem;bottom:.6rem;}' +
     '.chat-form-row{padding:.8rem;}.chat-form-row input[type=text]{font-size:16px;}}';
   document.head.appendChild(style);
 

@@ -41,16 +41,67 @@
     return str;
   }
 
-  /* ---------- URL安全性 ---------- */
-  // 許可: スキーム無し（相対パス。ただし "//" 始まりのプロトコル相対URLは拒否）
-  //       または "https:" スキームの絶対URL。
-  // 拒否: javascript:, data:, vbscript:, http:, その他すべてのスキーム。
+  /* ---------- 日付検証 ----------
+     'YYYY-MM-DD' 形式かつ実在するカレンダー日付だけを有効とする。
+     2026-02-30 のような形式は一致するが実在しない日付は、Date.UTCで
+     ロールオーバーした結果と入力値を突き合わせて確実に検出・拒否する。 */
+  function isValidIsoDate(str) {
+    if (typeof str !== 'string') return false;
+    var m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return false;
+    var y = parseInt(m[1], 10), mo = parseInt(m[2], 10), d = parseInt(m[3], 10);
+    if (mo < 1 || mo > 12 || d < 1 || d > 31) return false;
+    var dt = new Date(Date.UTC(y, mo - 1, d));
+    return dt.getUTCFullYear() === y && dt.getUTCMonth() === mo - 1 && dt.getUTCDate() === d;
+  }
+
+  /* ---------- URL安全性 ----------
+     絶対URLで許可するのは固定の許可リストに載ったホストだけ（HTTPSなら何でも
+     許可、ではない）。相対URLは既知の安全な文字集合のみ、コロンを含む文字列は
+     scheme偽装の可能性があるため無条件に拒否する。 */
+  var ALLOWED_ABSOLUTE_HOSTS = ['fukameki.jp', 'www.fukameki.jp', 'www.instagram.com', 'vh55x1-pa.myshopify.com'];
+  var INSTAGRAM_ALLOWED_PATH = /^\/arcfukameki_minoh\/?$/;
+  var SAFE_RELATIVE_PATH_RE = /^[A-Za-z0-9_\-./#?=&]+$/;
+
+  function hasControlChars(s) {
+    for (var i = 0; i < s.length; i++) {
+      var c = s.charCodeAt(i);
+      if (c < 32 || c === 127) return true;
+    }
+    return false;
+  }
+
   function isSafeUrl(href) {
     if (typeof href !== 'string' || href === '') return false;
-    if (href.slice(0, 2) === '//') return false;
+    if (hasControlChars(href)) return false;
+    if (href.indexOf('\\') !== -1) return false; // バックスラッシュはブラウザによってスラッシュ扱いされうるため拒否
+    if (href.slice(0, 2) === '//') return false; // プロトコル相対URL
+
     var schemeMatch = href.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/);
-    if (!schemeMatch) return true; // 相対パス
-    return schemeMatch[1].toLowerCase() === 'https';
+    if (!schemeMatch) {
+      // 相対パス: コロンを含めば拒否（"java\tscript:" 等のscheme偽装対策）。
+      if (href.indexOf(':') !== -1) return false;
+      return SAFE_RELATIVE_PATH_RE.test(href);
+    }
+
+    var scheme = schemeMatch[1].toLowerCase();
+    if (scheme !== 'https') return false; // http:, javascript:, data:, vbscript: 等はすべて拒否
+
+    var rest = href.slice(schemeMatch[0].length);
+    var m = rest.match(/^\/\/([^\/?#]*)([\/?#].*)?$/);
+    if (!m) return false;
+    var authority = m[1];
+    var pathAndRest = m[2] || '';
+    if (authority.indexOf('@') !== -1) return false; // user@host 形式は拒否
+    if (authority.indexOf(':') !== -1) return false; // ポート指定は現状不要のため拒否（安全側）
+
+    var host = authority.toLowerCase();
+    if (ALLOWED_ABSOLUTE_HOSTS.indexOf(host) === -1) return false; // 許可リストに完全一致するホストだけ
+    if (host === 'www.instagram.com') {
+      var pathOnly = pathAndRest.split('?')[0].split('#')[0];
+      if (!INSTAGRAM_ALLOWED_PATH.test(pathOnly)) return false; // ARC公式アカウントのURLだけ許可
+    }
+    return true;
   }
 
   /* ---------- 3. KB項目検証（構造） ---------- */
@@ -76,7 +127,17 @@
     } else if (!isSafeUrl(entry.source.href)) {
       reasons.push('SOURCE_URL_UNSAFE');
     }
-    if (typeof entry.reviewedAt !== 'string' || !entry.reviewedAt) reasons.push('REVIEWED_AT_MISSING');
+    if (!isValidIsoDate(entry.reviewedAt)) reasons.push('REVIEWED_AT_INVALID');
+    if (entry.validFrom !== null && entry.validFrom !== undefined && !isValidIsoDate(entry.validFrom)) {
+      reasons.push('VALID_FROM_INVALID');
+    }
+    if (entry.validUntil !== null && entry.validUntil !== undefined && !isValidIsoDate(entry.validUntil)) {
+      reasons.push('VALID_UNTIL_INVALID');
+    }
+    if (entry.validFrom && entry.validUntil && isValidIsoDate(entry.validFrom) && isValidIsoDate(entry.validUntil)
+      && entry.validFrom > entry.validUntil) {
+      reasons.push('VALID_RANGE_INVERTED');
+    }
     return { valid: reasons.length === 0, reasons: reasons };
   }
 
@@ -92,13 +153,24 @@
     return dup;
   }
 
-  /* ---------- 4. 有効期限判定 ---------- */
-  // nowStr は 'YYYY-MM-DD'。文字列比較で判定する（ISO日付は辞書順=時系列順）。
+  /* ---------- 4. 有効期限判定 ----------
+     直接呼び出されてもfail-closedになるよう、validateEntryStructureを経由せず
+     ここでも日付の実在性・範囲の整合性を自前で再検証する。
+     nowStr は 'YYYY-MM-DD'。実在する日付同士なら文字列比較で時系列判定できる。 */
   function isWithinValidity(entry, nowStr) {
     if (!entry) return false;
-    if (typeof nowStr !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(nowStr)) return false;
-    if (entry.validFrom && nowStr < entry.validFrom) return false;
-    if (entry.validUntil && nowStr > entry.validUntil) return false;
+    if (!isValidIsoDate(nowStr)) return false; // 不正なnowStrは期限内とみなさない
+    var vf = entry.validFrom;
+    var vu = entry.validUntil;
+    if (vf !== null && vf !== undefined) {
+      if (!isValidIsoDate(vf)) return false; // 壊れたvalidFromは無条件で期限外扱い
+    }
+    if (vu !== null && vu !== undefined) {
+      if (!isValidIsoDate(vu)) return false; // 壊れたvalidUntilは無条件で期限外扱い
+    }
+    if (vf && vu && vf > vu) return false; // 前後逆転は無条件で期限外扱い
+    if (vf && nowStr < vf) return false;
+    if (vu && nowStr > vu) return false;
     return true;
   }
 
@@ -202,6 +274,44 @@
     }).slice(0, 3);
   }
 
+  /* ---------- ページURL・商品参照IDの安全な抽出 ----------
+     location.href をそのままメール本文へ入れると、Cart ID・token等の
+     機密queryごと本文へ流出しうる（旧実装のsplit('?')[0]は全query削除で
+     安全だったが、商品ページのidまで消えて同名商品を特定できなくなる問題があった）。
+     ここでは「product_test.htmlのidパラメータだけ」を明示的に許可し、
+     それ以外のqueryはページ種別を問わず一切保持しない。 */
+  var PRODUCT_ID_RE = /^[A-Za-z0-9_-]{1,64}$/;
+
+  function extractProductRefId(queryString) {
+    if (typeof queryString !== 'string' || !queryString) return null;
+    var q = queryString.charAt(0) === '?' ? queryString.slice(1) : queryString;
+    var params = q.split('&');
+    for (var i = 0; i < params.length; i++) {
+      var eq = params[i].indexOf('=');
+      var key = eq === -1 ? params[i] : params[i].slice(0, eq);
+      if (key !== 'id') continue;
+      var raw = eq === -1 ? '' : params[i].slice(eq + 1);
+      var val;
+      try { val = decodeURIComponent(raw); } catch (e) { return null; } // 不正なパーセントエンコードはfail-closed
+      return PRODUCT_ID_RE.test(val) ? val : null;
+    }
+    return null;
+  }
+
+  // rawUrl: 実行中ページの完全なURL文字列（location.href相当）。
+  // 通常ページ: query・fragmentを除去。product_test.htmlのみ、安全な既知形式のidだけ保持する。
+  function sanitizePageUrl(rawUrl) {
+    if (typeof rawUrl !== 'string') return '';
+    var noHash = rawUrl.split('#')[0];
+    var qIdx = noHash.indexOf('?');
+    var base = qIdx === -1 ? noHash : noHash.slice(0, qIdx);
+    var query = qIdx === -1 ? '' : noHash.slice(qIdx + 1);
+    var isProductPage = /(^|\/)product_test\.html$/.test(base);
+    if (!isProductPage) return base;
+    var id = extractProductRefId(query);
+    return id ? (base + '?id=' + id) : base;
+  }
+
   /* ---------- エスカレーション（未回答→店主確認）入力検証・送信ステートマシン ----------
      DOM/fetchに依存しない純粋ロジック。shop_config.js の CartNoteLogic.createNoteSaver と
      同じ方針（single-flight + 呼び出し側が注入したsend()の結果を厳格検証）。
@@ -238,6 +348,7 @@
         '質問時のページURL: ' + (fields.pageUrl || '') + '\n' +
         'ページtitle: ' + (fields.pageTitle || '') + '\n' +
         '商品名（取得できた場合）: ' + (fields.productName || '(なし)') + '\n' +
+        '商品参照ID: ' + (fields.productRefId || '(なし)') + '\n' +
         '参照したKB ID: ' + (kbIds.length ? kbIds.join(', ') : '(なし)') + '\n' +
         '未回答理由: ' + (fields.reasonCode || 'NO_MATCH') + '\n' +
         '送信日時: ' + (fields.timestampIso || '') + '\n\n' +
@@ -288,6 +399,7 @@
     MATCH_THRESHOLD: MATCH_THRESHOLD,
     normalize: normalize,
     applySynonyms: applySynonyms,
+    isValidIsoDate: isValidIsoDate,
     isSafeUrl: isSafeUrl,
     validateEntryStructure: validateEntryStructure,
     findDuplicateIds: findDuplicateIds,
@@ -302,6 +414,8 @@
     NAME_MAX: NAME_MAX,
     EMAIL_MAX: EMAIL_MAX,
     QUESTION_MAX: QUESTION_MAX,
+    extractProductRefId: extractProductRefId,
+    sanitizePageUrl: sanitizePageUrl,
     validateEscalationInput: validateEscalationInput,
     buildEscalationPayload: buildEscalationPayload,
     createEscalationSubmitter: createEscalationSubmitter

@@ -237,15 +237,25 @@
         if (text) productName = text.slice(0, 200);
       }
     } catch (e) {}
+    var rawHref = (typeof location !== 'undefined' && location.href) ? location.href : '';
+    var rawSearch = (typeof location !== 'undefined' && location.search) ? location.search : '';
     return {
-      pageUrl: (typeof location !== 'undefined' && location.href) ? location.href.split('?')[0].split('#')[0] : '',
+      // 商品ページのみ、安全な既知形式のidだけを残して他のqueryはすべて除去する
+      // （token・cart等の機密queryを本文へ流出させない。Core.sanitizePageUrl参照）。
+      pageUrl: Core.sanitizePageUrl(rawHref),
       pageTitle: (typeof document !== 'undefined' && document.title) ? document.title.slice(0, 200) : '',
-      productName: productName
+      productName: productName,
+      productRefId: Core.extractProductRefId(rawSearch)
     };
   }
 
+  var escFormCounter = 0;
+
   function addEscalation(rawQuery, reasonCode) {
     chatLog.push({ q: rawQuery, matchedId: null });
+    escFormCounter += 1;
+    var idPrefix = 'chat-esc-' + escFormCounter + '-';
+
     var div = document.createElement('div');
     div.className = 'chat-msg bot';
     var p = document.createElement('p');
@@ -257,19 +267,28 @@
 
     var nameLabel = document.createElement('label');
     nameLabel.textContent = t('chat_esc_name', 'Name');
+    nameLabel.htmlFor = idPrefix + 'name';
     var nameInput = document.createElement('input');
     nameInput.type = 'text';
+    nameInput.id = idPrefix + 'name';
+    nameInput.required = true;
     nameInput.maxLength = Core.NAME_MAX;
 
     var emailLabel = document.createElement('label');
     emailLabel.textContent = t('chat_esc_email', 'Email');
+    emailLabel.htmlFor = idPrefix + 'email';
     var emailInput = document.createElement('input');
     emailInput.type = 'email';
+    emailInput.id = idPrefix + 'email';
+    emailInput.required = true;
     emailInput.maxLength = Core.EMAIL_MAX;
 
     var qLabel = document.createElement('label');
     qLabel.textContent = t('chat_esc_question', 'Your question');
+    qLabel.htmlFor = idPrefix + 'question';
     var qInput = document.createElement('textarea');
+    qInput.id = idPrefix + 'question';
+    qInput.required = true;
     qInput.maxLength = Core.QUESTION_MAX;
     qInput.value = rawQuery || '';
 
@@ -344,6 +363,7 @@
         pageUrl: ctx.pageUrl,
         pageTitle: ctx.pageTitle,
         productName: ctx.productName,
+        productRefId: ctx.productRefId,
         kbIdsReferenced: kbIdsReferenced,
         reasonCode: reasonCode,
         timestampIso: new Date().toISOString(),

@@ -152,19 +152,112 @@ var pending = [];
   check('ZH回答がnull（非string）なら構造検証で無効', Core.validateEntryStructure(missingZhType).valid === false);
 })();
 
-/* ==================== 12. source不正スキーム ==================== */
+/* ==================== 12. source不正スキーム・出典URL許可リスト（F-01B） ==================== */
 (function () {
   check('javascript:スキームは不安全', Core.isSafeUrl('javascript:alert(1)') === false);
   check('data:スキームは不安全', Core.isSafeUrl('data:text/html,<script>alert(1)</script>') === false);
   check('vbscript:スキームは不安全', Core.isSafeUrl('vbscript:msgbox(1)') === false);
   check('http:（非https）は不安全', Core.isSafeUrl('http://example.com') === false);
   check('プロトコル相対URL(//)は不安全', Core.isSafeUrl('//evil.example.com') === false);
-  check('https:は安全', Core.isSafeUrl('https://example.com/page') === true);
+  check('許可リスト外のhttps（例: example.com）は不安全', Core.isSafeUrl('https://example.com/page') === false);
   check('相対パスは安全', Core.isSafeUrl('about_test.html') === true);
+
+  // F-01B: 許可リストに完全一致するホストだけ許可する
+  check('許可リストのfukameki.jpは安全', Core.isSafeUrl('https://fukameki.jp/') === true);
+  check('許可リストのwww.fukameki.jpは安全', Core.isSafeUrl('https://www.fukameki.jp/access.html') === true);
+  check('許可リストのvh55x1-pa.myshopify.comは安全', Core.isSafeUrl('https://vh55x1-pa.myshopify.com/products/x') === true);
+  check('ARC公式Instagramアカウントは安全', Core.isSafeUrl('https://www.instagram.com/arcfukameki_minoh') === true);
+  check('ARC公式Instagramアカウント（末尾スラッシュ）は安全', Core.isSafeUrl('https://www.instagram.com/arcfukameki_minoh/') === true);
+  check('Instagramの別アカウントは不安全（ARC公式のみ許可）', Core.isSafeUrl('https://www.instagram.com/someoneelse') === false);
+
+  check('https://evil.example/ は不安全', Core.isSafeUrl('https://evil.example/') === false);
+  check('https://fukameki.jp.evil.example/ は不安全（サブドメイン偽装拒否）', Core.isSafeUrl('https://fukameki.jp.evil.example/') === false);
+  check('https://instagram.com.evil.example/ は不安全（サブドメイン偽装拒否）', Core.isSafeUrl('https://instagram.com.evil.example/') === false);
+  check('https://user@fukameki.jp/ は不安全（ユーザー情報を含むURL拒否）', Core.isSafeUrl('https://user@fukameki.jp/') === false);
+  check('バックスラッシュを含むURLは不安全', Core.isSafeUrl('https://fukameki.jp/\\@evil.example/') === false);
+  check('制御文字を含むURLは不安全', Core.isSafeUrl('https://fukameki.jp/' + String.fromCharCode(10) + '@evil.example/') === false);
+  check('相対パスでもコロンを含めば不安全（scheme偽装対策）', Core.isSafeUrl('java:script:alert(1)') === false);
 
   var badSource = baseEntry({ id: 'badsrc', source: { label: 'x', href: 'javascript:alert(1)' }, q: ['不正source質問'], keywords: ['不正source'] });
   check('sourceが不正スキームの項目は構造検証で無効', Core.validateEntryStructure(badSource).valid === false);
   check('不正sourceの項目はfindAnswerableEntryで取得不可', Core.findAnswerableEntry('badsrc', [badSource], NOW) === null);
+
+  var allowlistBypassSource = baseEntry({ id: 'evilsrc', source: { label: 'x', href: 'https://evil.example/' }, q: ['許可リスト外source質問'], keywords: ['許可リスト外'] });
+  check('許可リスト外のhttps sourceの項目は構造検証で無効', Core.validateEntryStructure(allowlistBypassSource).valid === false);
+  check('許可リスト外のhttps sourceの項目はfindAnswerableEntryで取得不可', Core.findAnswerableEntry('evilsrc', [allowlistBypassSource], NOW) === null);
+})();
+
+/* ==================== 13. 日付の実在性検証（F-01A） ==================== */
+(function () {
+  check('reviewedAt:"garbage"はisValidIsoDateでfalse', Core.isValidIsoDate('garbage') === false);
+  check('"zzzz"はisValidIsoDateでfalse', Core.isValidIsoDate('zzzz') === false);
+  check('"2026/08/01"（区切り文字違い）はisValidIsoDateでfalse', Core.isValidIsoDate('2026/08/01') === false);
+  check('"2026-02-30"（実在しない日付）はisValidIsoDateでfalse', Core.isValidIsoDate('2026-02-30') === false);
+  check('"2026-08-10"（実在する日付）はisValidIsoDateでtrue', Core.isValidIsoDate('2026-08-10') === true);
+  check('"2028-02-29"（正常なうるう年）はisValidIsoDateでtrue', Core.isValidIsoDate('2028-02-29') === true);
+  check('"2026-02-29"（不正なうるう年・2026年は平年）はisValidIsoDateでfalse', Core.isValidIsoDate('2026-02-29') === false);
+  check('"2100-02-29"（不正なうるう年・100で割り切れ400で割り切れない）はisValidIsoDateでfalse', Core.isValidIsoDate('2100-02-29') === false);
+  check('"2000-02-29"（正常なうるう年・400で割り切れる）はisValidIsoDateでtrue', Core.isValidIsoDate('2000-02-29') === true);
+
+  var garbageReviewed = baseEntry({ id: 'badreview', reviewedAt: 'garbage', q: ['reviewedAt不正質問'], keywords: ['reviewedAt不正'] });
+  check('reviewedAt:"garbage"の項目は構造検証で無効', Core.validateEntryStructure(garbageReviewed).valid === false);
+  check('reviewedAt:"garbage"の項目はfindAnswerableEntryで取得不可', Core.findAnswerableEntry('badreview', [garbageReviewed], NOW) === null);
+
+  var badValidUntil = baseEntry({ id: 'badvu', validUntil: 'zzzz', q: ['validUntil不正質問'], keywords: ['validUntil不正'] });
+  check('validUntil:"zzzz"の項目は構造検証で無効', Core.validateEntryStructure(badValidUntil).valid === false);
+  check('validUntil:"zzzz"の項目はisWithinValidityで直接呼んでもfalse（fail-closed）', Core.isWithinValidity(badValidUntil, NOW) === false);
+  check('validUntil:"zzzz"の項目はfindAnswerableEntryで取得不可', Core.findAnswerableEntry('badvu', [badValidUntil], NOW) === null);
+
+  var badValidFromFormat = baseEntry({ id: 'badvf', validFrom: '2026/08/01', q: ['validFrom不正質問'], keywords: ['validFrom不正'] });
+  check('validFrom:"2026/08/01"（区切り文字違い）の項目は構造検証で無効', Core.validateEntryStructure(badValidFromFormat).valid === false);
+  check('validFrom:"2026/08/01"の項目はisWithinValidityで直接呼んでもfalse（fail-closed）', Core.isWithinValidity(badValidFromFormat, NOW) === false);
+
+  var nonexistentValidUntil = baseEntry({ id: 'badvu2', validUntil: '2026-02-30', q: ['validUntil実在しない質問'], keywords: ['validUntil実在しない'] });
+  check('validUntil:"2026-02-30"（実在しない日付）の項目は構造検証で無効', Core.validateEntryStructure(nonexistentValidUntil).valid === false);
+  check('validUntil:"2026-02-30"の項目はisWithinValidityで直接呼んでもfalse（fail-closed）', Core.isWithinValidity(nonexistentValidUntil, NOW) === false);
+
+  var inverted = baseEntry({ id: 'inverted', validFrom: '2026-12-31', validUntil: '2026-01-01', q: ['前後逆転質問'], keywords: ['前後逆転'] });
+  check('validFrom > validUntil（前後逆転）の項目は構造検証で無効', Core.validateEntryStructure(inverted).valid === false);
+  check('前後逆転の項目はisWithinValidityで直接呼んでもfalse（fail-closed）', Core.isWithinValidity(inverted, NOW) === false);
+  check('前後逆転の項目はfindAnswerableEntryで取得不可', Core.findAnswerableEntry('inverted', [inverted], NOW) === null);
+
+  var normalEntry = baseEntry({ id: 'normaldate', validFrom: '2026-01-01', validUntil: '2026-12-31', q: ['正常期間質問'], keywords: ['正常期間'] });
+  check('不正なnowStr（"garbage"）を渡すとisWithinValidityは期限内とみなさない', Core.isWithinValidity(normalEntry, 'garbage') === false);
+  check('不正なnowStr（"2026-13-40"）を渡してもisWithinValidityは期限内とみなさない', Core.isWithinValidity(normalEntry, '2026-13-40') === false);
+  check('正常なnowStrなら期間内の項目はisWithinValidity=true', Core.isWithinValidity(normalEntry, NOW) === true);
+})();
+
+/* ==================== 14. 商品ページ識別情報（F-01C） ==================== */
+(function () {
+  check('id=product-73388466 は保持される', Core.extractProductRefId('id=product-73388466') === 'product-73388466');
+  check('id + token + cart混在時、idだけ抽出しtoken/cartは無視される',
+    Core.extractProductRefId('id=product-73388466&token=SECRET&cart=SECRET') === 'product-73388466');
+  check('idが無ければnull', Core.extractProductRefId('token=SECRET&cart=SECRET') === null);
+  check('idが空文字ならnull', Core.extractProductRefId('id=') === null);
+  check('idに不正文字（記号等）が含まれればnull', Core.extractProductRefId('id=<script>alert(1)</script>') === null);
+  check('idが長さ上限を超えればnull', Core.extractProductRefId('id=' + 'a'.repeat(100)) === null);
+  check('不正なパーセントエンコードはnull（fail-closed）', Core.extractProductRefId('id=%zz') === null);
+
+  check('product_test.htmlはidだけ保持しtoken/cartは除去される',
+    Core.sanitizePageUrl('https://fukameki.jp/product_test.html?id=product-73388466&token=SECRET&cart=SECRET') ===
+    'https://fukameki.jp/product_test.html?id=product-73388466');
+  check('product_test.htmlでもidが不正ならquery自体を保持しない',
+    Core.sanitizePageUrl('https://fukameki.jp/product_test.html?id=<bad>&token=SECRET') ===
+    'https://fukameki.jp/product_test.html');
+  check('product_test.html以外のページはqueryを一切保持しない（idを渡されても消える）',
+    Core.sanitizePageUrl('https://fukameki.jp/contact_test.html?id=product-73388466&foo=bar') ===
+    'https://fukameki.jp/contact_test.html');
+  check('fragmentは常に除去される',
+    Core.sanitizePageUrl('https://fukameki.jp/about_test.html#section') === 'https://fukameki.jp/about_test.html');
+
+  var payload = Core.buildEscalationPayload({
+    name: '山田太郎', email: 'yamada@example.com', question: '在庫はありますか',
+    productRefId: 'product-73388466', productName: '田中文哉 リム皿',
+    pageUrl: 'https://fukameki.jp/product_test.html?id=product-73388466'
+  });
+  check('payloadに商品参照IDが独立項目として含まれる', payload.message.indexOf('商品参照ID: product-73388466') !== -1);
+  check('payloadに商品名と安全化済み商品URLの両方が含まれる',
+    payload.message.indexOf('田中文哉 リム皿') !== -1 && payload.message.indexOf('product_test.html?id=product-73388466') !== -1);
 })();
 
 /* ==================== 13. prompt injection風入力・HTML/script文字列 ==================== */

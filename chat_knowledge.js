@@ -82,8 +82,19 @@ CHAT_ROOT.CHAT_KB = [
     reviewedAt: "2026-08-10",
     validFrom: "2026-08-10",
     validUntil: "2026-08-21",
-    q: ["企画展", "展示情報", "今の展示", "current exhibition", "現在の展示"],
+    // F-03: 「企画展」「展示情報」等の汎用語をqから削除し、企画展に関するあらゆる
+    // 質問（作家・販売方法・オンライン開始日等）を吸着していた誤ルーティングを解消。
+    // 「現在開催中かどうか」を明示的に尋ねる表現だけをqへ登録する。汎用語はkeywordsに
+    // 残すが、keywordsだけではMATCH_THRESHOLD(3)へ到達しない（+1ずつのため）。
+    // F-04B: exhibition_nextと同時に閾値以上でマッチした場合、片方だけを回答せず
+    // MULTI_INTENTでescalateする（chat_core.jsのfindConflictPair参照）。
+    q: [
+      "現在の企画展", "今の企画展", "現在の展示", "今の展示", "開催中の企画展", "今やっている企画展",
+      "current exhibition", "what is the current exhibition", "what exhibition is currently on", "what exhibition is on now",
+      "当前展览", "现在的展览", "目前有什么展览"
+    ],
     keywords: ["企画展", "展示", "展覧会", "exhibition", "展览"],
+    conflictsWith: ["exhibition_next"],
     answer: {
       ja: "現在開催中の企画展はありません。次回は8月22日から30日まで「処暑、線を辿る」を開催予定です。詳しくは企画展ページをご確認ください。",
       en: "There is no exhibition currently in progress. Our next exhibition, “処暑、線を辿る,” is scheduled for August 22–30. Please see the exhibition page for details.",
@@ -103,8 +114,22 @@ CHAT_ROOT.CHAT_KB = [
     // 一覧の先頭「処暑、線を辿る」が始まる前日までを有効期限とし、
     // それ以降は自動的に回答不能にして店主の再確認を促す。
     validUntil: "2026-08-21",
-    q: ["次の展示", "今後の展示予定", "next exhibition", "upcoming exhibition"],
+    // F-03: 「次の展示」「next exhibition」「upcoming exhibition」等の広すぎる部分一致qを
+    // 削除し、日程・予定を具体的に尋ねる表現へ限定。作家・販売方法・オンライン開始日
+    // を尋ねる質問（現在の登録回答では直接答えられない）はここへもマッチさせない。
+    // F-04A: 「次の企画展はいつですか」等の日程表現を追加。
+    // F-04B: exhibition_currentと同時に閾値以上でマッチした場合はMULTI_INTENTでescalate。
+    q: [
+      "次の企画展はいつからですか", "次回の企画展はいつですか", "次の展示はいつからですか",
+      "次の企画展の会期はいつまでですか", "今後の展示予定を教えてください",
+      "次の企画展はいつですか", "次の企画展はいつ", "次回の日程", "次の企画展の日程", "次回展示の日程",
+      "When is your next exhibition?", "What are your upcoming exhibition dates?", "When does the next exhibition start?",
+      "when is the next exhibition", "next exhibition dates", "when is the next",
+      "下一次展览什么时候开始", "接下来的展览日期是什么", "今后有什么展览安排",
+      "下一次展览是什么时候", "下次展览的日期", "下一次展览什么时候"
+    ],
     keywords: ["次回", "今後", "予定", "next", "upcoming", "以后", "接下来"],
+    conflictsWith: ["exhibition_current"],
     answer: {
       ja: "次回以降の展示予定: 「処暑、線を辿る」(8/22–8/30)、「yoshida pottery 個展」(9/12–9/20)、「ヂェン先生の日常着展」(10/3–10/10)、「端田敏也 個展」(10/24–11/1)です。",
       en: "Upcoming exhibitions: Aug 22–30, Sep 12–20, Oct 3–10, and Oct 24–Nov 1 — see the exhibition section for details.",
@@ -125,7 +150,12 @@ CHAT_ROOT.CHAT_KB = [
     reviewedAt: "2026-08-10",
     validFrom: "2026-08-10",
     validUntil: "2026-08-31",
-    q: ["オンライン購入", "通販", "ネットで買える", "online shop", "buy online"],
+    // F-03: 自然な問い合わせ文言を追加（回答本文・state・authority・有効期間は無変更）。
+    q: [
+      "オンライン購入", "通販", "ネットで買える", "online shop", "buy online",
+      "オンラインでの購入方法を教えてください", "オンラインで購入するにはどうすればいいですか",
+      "How can I buy online?", "如何在线购买商品"
+    ],
     keywords: ["オンライン", "通販", "ネット", "購入", "買う", "online", "buy", "purchase", "网上", "购买"],
     answer: {
       ja: "現在、オンラインでの商品購入はBASEショップをご利用ください。新しいオンラインストアは準備中です。公開後は本ホームページからご案内します。",
@@ -179,7 +209,12 @@ CHAT_ROOT.CHAT_KB = [
     reviewedAt: "2026-08-10",
     validFrom: null,
     validUntil: null,
-    q: ["どんな商品", "取扱い商品", "扱っているもの", "what products"],
+    // F-03: 自然な問い合わせ文言を追加。
+    q: [
+      "どんな商品", "取扱い商品", "扱っているもの", "what products",
+      "どんな商品を売っていますか", "何を取り扱っていますか",
+      "What kinds of products do you sell?", "你们销售什么商品"
+    ],
     keywords: ["商品", "陶器", "硝子", "ガラス", "木工", "布", "ファブリック", "products", "ceramics", "glass", "woodwork", "fabric", "商品种类"],
     answer: {
       ja: "陶器・ガラス・木工・布・照明など、作家の手仕事による生活道具を扱っています。",
@@ -197,7 +232,12 @@ CHAT_ROOT.CHAT_KB = [
     reviewedAt: "2026-08-10",
     validFrom: null,
     validUntil: null,
-    q: ["作家について", "作家一覧", "誰が作ってる", "about the artists"],
+    // F-03: 自然な問い合わせ文言を追加。
+    q: [
+      "作家について", "作家一覧", "誰が作ってる", "about the artists",
+      "作家さんについて教えてください", "どんな作家さんの商品がありますか",
+      "Can you tell me about the artists?", "请介绍一下商品的作者"
+    ],
     keywords: ["作家", "作り手", "artist", "artists", "craftsperson", "作者"],
     answer: {
       ja: "作家ごとの一覧は商品紹介ページの「作家別」タブからご覧いただけます。",

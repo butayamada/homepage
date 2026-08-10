@@ -138,6 +138,24 @@
       && entry.validFrom > entry.validUntil) {
       reasons.push('VALID_RANGE_INVERTED');
     }
+    // conflictsWith（任意項目）: 存在する場合は配列・各要素が空でない文字列・自己参照なし・
+    // 重複なしを要求する。KB全体に対する参照先ID存在チェックはfilterAnswerableKB側で行う
+    // （このエントリ単体では他エントリの情報を持たないため）。
+    if (entry.conflictsWith !== undefined) {
+      if (!Array.isArray(entry.conflictsWith)) {
+        reasons.push('CONFLICTS_WITH_INVALID');
+      } else {
+        var seenConflict = {};
+        var conflictOk = true;
+        entry.conflictsWith.forEach(function (cid) {
+          if (typeof cid !== 'string' || !cid) conflictOk = false;
+          else if (cid === entry.id) conflictOk = false;
+          else if (seenConflict[cid]) conflictOk = false;
+          else seenConflict[cid] = true;
+        });
+        if (!conflictOk) reasons.push('CONFLICTS_WITH_INVALID');
+      }
+    }
     return { valid: reasons.length === 0, reasons: reasons };
   }
 
@@ -185,6 +203,19 @@
     return true;
   }
 
+  // conflictsWithの参照先IDがKB内に実在するかどうかはKB全体を見ないと判定できないため、
+  // ここ（KB全体を扱う関数）でのみチェックする。存在しないIDを参照するentryはfail-closedで
+  // 回答不可にする。
+  function hasUnknownConflictReference(entry, kb) {
+    if (!Array.isArray(entry.conflictsWith)) return false;
+    var validIds = {};
+    kb.forEach(function (e) { if (e && typeof e.id === 'string') validIds[e.id] = true; });
+    for (var i = 0; i < entry.conflictsWith.length; i++) {
+      if (!validIds[entry.conflictsWith[i]]) return true;
+    }
+    return false;
+  }
+
   function filterAnswerableKB(kb, nowStr) {
     kb = Array.isArray(kb) ? kb : [];
     var duplicateIds = findDuplicateIds(kb);
@@ -192,7 +223,8 @@
     var excluded = {};
     kb.forEach(function (e) {
       if (!e || typeof e.id !== 'string') return;
-      if (isAnswerable(e, duplicateIds, nowStr)) {
+      var unknownRef = validateEntryStructure(e).valid && hasUnknownConflictReference(e, kb);
+      if (isAnswerable(e, duplicateIds, nowStr) && !unknownRef) {
         answerable.push(e);
       } else {
         var reason = 'UNANSWERABLE';
@@ -200,6 +232,7 @@
         else if (e.state !== 'active') reason = 'STATE_' + String(e.state).toUpperCase();
         else if (ALLOWED_AUTHORITIES.indexOf(e.authority) === -1) reason = 'AUTHORITY_INVALID';
         else if (!validateEntryStructure(e).valid) reason = 'STRUCTURE_INVALID';
+        else if (unknownRef) reason = 'CONFLICTS_WITH_UNKNOWN_ID';
         else if (!isWithinValidity(e, nowStr)) reason = 'EXPIRED';
         excluded[e.id] = reason;
       }
@@ -230,13 +263,36 @@
     return null;
   }
 
+  // qualifying（閾値以上）の候補同士に、どちらか一方でもconflictsWith指定があれば
+  // その2件を返す。KB配列内の出現順で並べて返し、順序を固定する。
+  function findConflictPair(qualifyingEntries, kb) {
+    for (var i = 0; i < qualifyingEntries.length; i++) {
+      for (var j = i + 1; j < qualifyingEntries.length; j++) {
+        var a = qualifyingEntries[i], b = qualifyingEntries[j];
+        var aConflicts = Array.isArray(a.conflictsWith) && a.conflictsWith.indexOf(b.id) !== -1;
+        var bConflicts = Array.isArray(b.conflictsWith) && b.conflictsWith.indexOf(a.id) !== -1;
+        if (aConflicts || bConflicts) {
+          var pair = [a.id, b.id];
+          pair.sort(function (x, y) {
+            var ix = kb.findIndex(function (e) { return e && e.id === x; });
+            var iy = kb.findIndex(function (e) { return e && e.id === y; });
+            return ix - iy;
+          });
+          return pair;
+        }
+      }
+    }
+    return null;
+  }
+
   function matchQuery(rawQuery, kb, synonyms, nowStr) {
     var norm = applySynonyms(normalize(rawQuery), synonyms);
     var filtered = filterAnswerableKB(kb, nowStr);
     var scored = filtered.answerable.map(function (e) { return { entry: e, score: scoreEntry(norm, e) }; });
     scored.sort(function (a, b) { return b.score - a.score; });
-    var top = scored[0];
-    if (!top || top.score < MATCH_THRESHOLD) {
+    var qualifying = scored.filter(function (s) { return s.score >= MATCH_THRESHOLD; });
+
+    if (!qualifying.length) {
       // 除外された項目の中に、もし governance フィルタがなければ一致していたはずのものがあるかを
       // 診断用に確認する（未回答理由の精度を上げるためだけで、回答はしない）。
       var allScored = (kb || []).filter(function (e) { return e && typeof e.id === 'string'; })
@@ -248,7 +304,17 @@
       }
       return { type: 'escalate', reasonCode: 'NO_MATCH', matchedId: null };
     }
-    var second = scored[1];
+
+    // MULTI_INTENT判定は回答・choiceより優先する。特定の文言一致ではなく、
+    // 閾値以上に達した候補同士のconflictsWithメタデータで判定するため、
+    // JA/EN/ZHいずれの言い換えでも同じ仕組みで検出できる。
+    var conflictPair = findConflictPair(qualifying.map(function (s) { return s.entry; }), kb);
+    if (conflictPair) {
+      return { type: 'escalate', reasonCode: 'MULTI_INTENT', matchedIds: conflictPair };
+    }
+
+    var top = qualifying[0];
+    var second = qualifying[1];
     if (second && second.score === top.score) {
       return { type: 'choice', options: [top.entry, second.entry] };
     }
@@ -259,6 +325,9 @@
   function escalationReason(matchResult) {
     if (!matchResult) return 'NO_MATCH';
     if (matchResult.type === 'escalate') {
+      if (matchResult.reasonCode === 'MULTI_INTENT') {
+        return 'MULTI_INTENT:' + (matchResult.matchedIds || []).join(',');
+      }
       if (matchResult.reasonCode === 'MATCHED_BUT_UNANSWERABLE') {
         return 'MATCHED_BUT_UNANSWERABLE:' + (matchResult.matchedId || 'unknown');
       }

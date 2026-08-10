@@ -418,6 +418,69 @@ pending.push((function () {
   });
 })();
 
+/* ==================== 15. Phase2: 店主承認済み模範回答2件（exhibition_current / online_shop） ==================== */
+(function () {
+  var ec = REAL_KB.filter(function (e) { return e.id === 'exhibition_current'; })[0];
+  var os = REAL_KB.filter(function (e) { return e.id === 'online_shop'; })[0];
+
+  check('exhibition_currentがREAL_KBに存在する', !!ec);
+  check('online_shopがREAL_KBに存在する', !!os);
+
+  // 9. 両項目の構造検証がPASS
+  check('exhibition_currentの構造検証がPASS', Core.validateEntryStructure(ec).valid === true);
+  check('online_shopの構造検証がPASS', Core.validateEntryStructure(os).valid === true);
+
+  // 8. 両項目のauthorityがowner_script
+  check('exhibition_currentのauthorityはowner_script', ec.authority === 'owner_script');
+  check('online_shopのauthorityはowner_script', os.authority === 'owner_script');
+
+  // 7. JA/EN/ZHの3言語が登録されている
+  ['ja', 'en', 'zh'].forEach(function (lang) {
+    check('exhibition_current.answer.' + lang + 'が非空文字列', typeof ec.answer[lang] === 'string' && ec.answer[lang].trim() !== '');
+    check('online_shop.answer.' + lang + 'が非空文字列', typeof os.answer[lang] === 'string' && os.answer[lang].trim() !== '');
+  });
+
+  // 1. 2026-08-10の「現在の企画展」で承認済み回答が返る
+  var r1 = Core.matchQuery('現在の企画展を教えてください', REAL_KB, REAL_SYNONYMS, '2026-08-10');
+  check('2026-08-10「現在の企画展」は承認済み回答が返る', r1.type === 'answer' && r1.entry.id === 'exhibition_current');
+  // 2. 回答に「ナツメク」が含まれない
+  if (r1.type === 'answer') {
+    check('企画展回答に「ナツメク」が含まれない', r1.entry.answer.ja.indexOf('ナツメク') === -1
+      && r1.entry.answer.en.indexOf('Natsumeku') === -1 && r1.entry.answer.zh.indexOf('夏目') === -1);
+  } else {
+    check('企画展回答に「ナツメク」が含まれない', false);
+  }
+  check('exhibition_current.keywordsに「ナツメク」が含まれない', ec.keywords.indexOf('ナツメク') === -1);
+
+  // 3. 2026-08-22では企画展回答が期限切れになり、escalateになる
+  var r2 = Core.matchQuery('現在の企画展を教えてください', REAL_KB, REAL_SYNONYMS, '2026-08-22');
+  check('2026-08-22「現在の企画展」は期限切れでescalateになる', r2.type === 'escalate');
+  check('2026-08-21はまだ期限内（isWithinValidity=true）', Core.isWithinValidity(ec, '2026-08-21') === true);
+  check('2026-08-22は期限切れ（isWithinValidity=false）', Core.isWithinValidity(ec, '2026-08-22') === false);
+
+  // 4. 2026-08-10の「オンライン購入」で承認済み回答が返る
+  var r3 = Core.matchQuery('オンライン購入について教えてください', REAL_KB, REAL_SYNONYMS, '2026-08-10');
+  check('2026-08-10「オンライン購入」は承認済み回答が返る', r3.type === 'answer' && r3.entry.id === 'online_shop');
+  // 5. BASE・新オンラインストア準備中・本ホームページで案内、の3点を含む
+  if (r3.type === 'answer') {
+    check('オンライン購入回答にBASEの案内が含まれる', r3.entry.answer.ja.indexOf('BASE') !== -1);
+    check('オンライン購入回答に新オンラインストア準備中の案内が含まれる', r3.entry.answer.ja.indexOf('準備中') !== -1);
+    check('オンライン購入回答に本ホームページでの案内が含まれる', r3.entry.answer.ja.indexOf('本ホームページ') !== -1);
+  } else {
+    check('オンライン購入回答にBASE/準備中/本ホームページの案内が含まれる', false);
+  }
+
+  // 6. 2026-09-01ではオンライン購入回答が期限切れになり、escalateになる
+  var r4 = Core.matchQuery('オンライン購入について教えてください', REAL_KB, REAL_SYNONYMS, '2026-09-01');
+  check('2026-09-01「オンライン購入」は期限切れでescalateになる', r4.type === 'escalate');
+  check('2026-08-31はまだ期限内（isWithinValidity=true）', Core.isWithinValidity(os, '2026-08-31') === true);
+  check('2026-09-01は期限切れ（isWithinValidity=false）', Core.isWithinValidity(os, '2026-09-01') === false);
+
+  // sourceが許可リスト内の相対URLであることの確認
+  check('exhibition_current.sourceはevent_test.htmlで安全', ec.source.href === 'event_test.html' && Core.isSafeUrl(ec.source.href) === true);
+  check('online_shop.sourceはproducts_test.htmlで安全', os.source.href === 'products_test.html' && Core.isSafeUrl(os.source.href) === true);
+})();
+
 Promise.all(pending).then(function () {
   console.log('\n=== SUMMARY ===');
   var failed = results.filter(function (r) { return !r[1]; });

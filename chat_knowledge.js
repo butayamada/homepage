@@ -74,23 +74,23 @@ CHAT_ROOT.CHAT_KB = [
   {
     id: "exhibition_current",
     category: "exhibition",
-    // review_required: 2026-07-25に会期終了済みの「ナツメク」を現在開催中として
-    // 回答してしまう問題が確認されているため、店主確認まで回答不可とする。
-    // 回答文自体は推測で書き換えず、登録済みの原文のまま保持する。
-    state: "review_required",
-    authority: "website",
+    // owner_script: 店主承認済みの模範回答（Phase2）。会期終了済みの「ナツメク」を
+    // 現在開催中と回答していた問題を解消し、次回展示への案内に更新した。
+    // validUntilを過ぎたら期限切れとして自動的に回答不能になり、店主の再確認を促す。
+    state: "active",
+    authority: "owner_script",
     reviewedAt: "2026-08-10",
-    validFrom: null,
-    validUntil: "2026-07-25",
+    validFrom: "2026-08-10",
+    validUntil: "2026-08-21",
     q: ["企画展", "展示情報", "今の展示", "current exhibition", "現在の展示"],
-    keywords: ["企画展", "展示", "展覧会", "ナツメク", "exhibition", "展览"],
+    keywords: ["企画展", "展示", "展覧会", "exhibition", "展览"],
     answer: {
-      ja: "現在の企画展は「ナツメク」（2026.07.18–07.25）。deco＋、noragrassworks、fika、BRASSYARDの4組によるグループ展です。",
-      en: "The current exhibition is \"Natsumeku\" (2026.07.18–07.25), a group show by deco+, noragrassworks, fika, and BRASSYARD.",
-      zh: "当前展览为「夏目」（2026.07.18–07.25），由 deco+、noragrassworks、fika、BRASSYARD 四组作家共同展出。"
+      ja: "現在開催中の企画展はありません。次回は8月22日から30日まで「処暑、線を辿る」を開催予定です。詳しくは企画展ページをご確認ください。",
+      en: "There is no exhibition currently in progress. Our next exhibition, “処暑、線を辿る,” is scheduled for August 22–30. Please see the exhibition page for details.",
+      zh: "目前没有正在举办的企划展。下一场「処暑、線を辿る」计划于8月22日至30日举行。详情请查看企划展页面。"
     },
     source: { label: "企画展", href: "event_test.html" },
-    updated: "2026-07-11"
+    updated: "2026-08-10"
   },
   {
     id: "exhibition_next",
@@ -116,23 +116,24 @@ CHAT_ROOT.CHAT_KB = [
   {
     id: "online_shop",
     category: "shop",
-    // review_required: 「現在はBASEのみ」という説明が、現在進行中のShopify移行
-    // （リニューアルテストページでのカート実装等）と整合しないため、
-    // 店主確認まで回答不可とする。回答文は推測で書き換えず原文のまま保持する。
-    state: "review_required",
-    authority: "website",
+    // owner_script: 店主承認済みの模範回答（Phase2）。「現在はBASEのみ」という
+    // 旧回答がShopify移行状況と整合しない問題を解消し、BASE案内＋新オンライン
+    // ストア準備中の案内に更新した。validUntilを過ぎたら期限切れとして
+    // 自動的に回答不能になり、店主の再確認を促す。
+    state: "active",
+    authority: "owner_script",
     reviewedAt: "2026-08-10",
-    validFrom: null,
-    validUntil: null,
+    validFrom: "2026-08-10",
+    validUntil: "2026-08-31",
     q: ["オンライン購入", "通販", "ネットで買える", "online shop", "buy online"],
     keywords: ["オンライン", "通販", "ネット", "購入", "買う", "online", "buy", "purchase", "网上", "购买"],
     answer: {
-      ja: "現在はBASEのオンラインショップにて商品をご購入いただけます。商品ページの「購入はこちら」からお進みください。",
-      en: "Online purchases are currently handled via our BASE shop. Use the \"Purchase\" link on each product page.",
-      zh: "目前可通过BASE网店购买商品，请点击商品页面的「立即购买」链接。"
+      ja: "現在、オンラインでの商品購入はBASEショップをご利用ください。新しいオンラインストアは準備中です。公開後は本ホームページからご案内します。",
+      en: "Online purchases are currently available through our BASE shop. A new online store is in preparation. We will announce it on this website after it opens.",
+      zh: "目前可通过BASE网店在线购买商品。新的在线商店正在筹备中，公开后将在本网站通知。"
     },
     source: { label: "商品紹介", href: "products_test.html" },
-    updated: "2026-07-11"
+    updated: "2026-08-10"
   },
   {
     id: "contact",

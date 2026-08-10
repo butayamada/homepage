@@ -3,11 +3,28 @@
    運用ループ: エスカレーションで届いた質問に店主が回答したら、
    そのQ&Aをここに3言語で追記する。answerは登録文の逐語出力のみで、
    chat_widget.js は生成・要約・言い換えを一切行わない。
+
+   ガバナンス項目（chat_core.js が判定に使用）:
+   - state: "active"（回答可）| "review_required"（店主確認待ち・回答不可）
+            | "disabled"（無効・回答不可）
+   - authority: この回答の根拠元。"website"（本サイトのページ記載内容）
+            | "shopify"（Shopify側の設定・データ）| "owner_script"（店主承認済みスクリプト・原文）
+   - reviewedAt: 最終確認日（YYYY-MM-DD）
+   - validFrom / validUntil: 有効期間（YYYY-MM-DD、null=無期限側）。
+     現在日がこの範囲外の項目は state に関わらず回答不可（chat_core.jsが判定）。
    ===================================================== */
-window.CHAT_KB = [
+// Node（回帰テスト）から require() してもエラーにならないよう window が無い環境ではglobalへ
+// （shop_config.js と同方針）。ブラウザでの挙動は従来通り window.CHAT_KB のまま。
+var CHAT_ROOT = typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this);
+CHAT_ROOT.CHAT_KB = [
   {
     id: "hours",
     category: "store",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["営業時間", "何時から", "何時まで", "opening hours", "open hours"],
     keywords: ["営業", "時間", "何時", "オープン", "hours", "open", "close", "时间", "营业"],
     answer: {
@@ -21,6 +38,11 @@ window.CHAT_KB = [
   {
     id: "closed_days",
     category: "store",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["定休日", "休み", "何曜日休み", "closed days"],
     keywords: ["定休", "休み", "休業", "閉まってる", "closed", "holiday", "休息"],
     answer: {
@@ -34,6 +56,11 @@ window.CHAT_KB = [
   {
     id: "access",
     category: "store",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["アクセス", "住所", "場所", "行き方", "access", "address", "location"],
     keywords: ["アクセス", "住所", "場所", "行き方", "駅", "access", "address", "location", "地址", "交通"],
     answer: {
@@ -47,6 +74,14 @@ window.CHAT_KB = [
   {
     id: "exhibition_current",
     category: "exhibition",
+    // review_required: 2026-07-25に会期終了済みの「ナツメク」を現在開催中として
+    // 回答してしまう問題が確認されているため、店主確認まで回答不可とする。
+    // 回答文自体は推測で書き換えず、登録済みの原文のまま保持する。
+    state: "review_required",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: "2026-07-25",
     q: ["企画展", "展示情報", "今の展示", "current exhibition", "現在の展示"],
     keywords: ["企画展", "展示", "展覧会", "ナツメク", "exhibition", "展览"],
     answer: {
@@ -60,6 +95,14 @@ window.CHAT_KB = [
   {
     id: "exhibition_next",
     category: "exhibition",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    // event_test.html の Next Exhibitions 一覧と一致することを確認済み。
+    // 一覧の先頭「処暑、線を辿る」が始まる前日までを有効期限とし、
+    // それ以降は自動的に回答不能にして店主の再確認を促す。
+    validUntil: "2026-08-21",
     q: ["次の展示", "今後の展示予定", "next exhibition", "upcoming exhibition"],
     keywords: ["次回", "今後", "予定", "next", "upcoming", "以后", "接下来"],
     answer: {
@@ -73,6 +116,14 @@ window.CHAT_KB = [
   {
     id: "online_shop",
     category: "shop",
+    // review_required: 「現在はBASEのみ」という説明が、現在進行中のShopify移行
+    // （リニューアルテストページでのカート実装等）と整合しないため、
+    // 店主確認まで回答不可とする。回答文は推測で書き換えず原文のまま保持する。
+    state: "review_required",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["オンライン購入", "通販", "ネットで買える", "online shop", "buy online"],
     keywords: ["オンライン", "通販", "ネット", "購入", "買う", "online", "buy", "purchase", "网上", "购买"],
     answer: {
@@ -86,6 +137,11 @@ window.CHAT_KB = [
   {
     id: "contact",
     category: "store",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["問い合わせ", "連絡先", "メールで質問", "contact", "how to contact"],
     keywords: ["問い合わせ", "連絡", "メール", "contact", "email", "联系", "咨询"],
     answer: {
@@ -99,6 +155,11 @@ window.CHAT_KB = [
   {
     id: "instagram",
     category: "store",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["インスタ", "instagram", "sns"],
     keywords: ["インスタ", "instagram", "sns", "ig"],
     answer: {
@@ -112,6 +173,11 @@ window.CHAT_KB = [
   {
     id: "product_categories",
     category: "shop",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["どんな商品", "取扱い商品", "扱っているもの", "what products"],
     keywords: ["商品", "陶器", "硝子", "ガラス", "木工", "布", "ファブリック", "products", "ceramics", "glass", "woodwork", "fabric", "商品种类"],
     answer: {
@@ -125,6 +191,11 @@ window.CHAT_KB = [
   {
     id: "artists",
     category: "shop",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["作家について", "作家一覧", "誰が作ってる", "about the artists"],
     keywords: ["作家", "作り手", "artist", "artists", "craftsperson", "作者"],
     answer: {
@@ -138,6 +209,11 @@ window.CHAT_KB = [
   {
     id: "stock",
     category: "shop",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["在庫ある", "在庫確認", "売り切れ", "is it in stock"],
     keywords: ["在庫", "売り切れ", "soldout", "stock", "availability", "库存", "缺货"],
     answer: {
@@ -151,6 +227,11 @@ window.CHAT_KB = [
   {
     id: "payment_instore",
     category: "store",
+    state: "active",
+    authority: "website",
+    reviewedAt: "2026-08-10",
+    validFrom: null,
+    validUntil: null,
     q: ["支払い方法", "決済方法", "payment method"],
     keywords: ["支払い", "決済", "現金", "クレジット", "payment", "cash", "credit", "paypay", "支付", "付款"],
     answer: {
@@ -164,7 +245,7 @@ window.CHAT_KB = [
 ];
 
 /* 同義語辞書: マッチング前に本文中の語をKBの代表語へ正規化置換する */
-window.CHAT_SYNONYMS = {
+CHAT_ROOT.CHAT_SYNONYMS = {
   "開いてる": "営業",
   "空いてる": "営業",
   "オープンしてる": "営業",

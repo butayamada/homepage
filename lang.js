@@ -217,8 +217,9 @@ var LANG_TRANSLATIONS = {
     chat_esc_email:        "メールアドレス",
     chat_esc_question:     "ご質問内容",
     chat_esc_send:         "この内容で送信する",
-    chat_esc_success:      "お問い合わせありがとうございます。内容を確認のうえ、折り返しご連絡いたします。お急ぎの場合はInstagramのDMもご利用いただけます。",
+    chat_esc_success:      "お問い合わせありがとうございます。内容を確認のうえ、メールにて折り返しご連絡いたします。",
     chat_esc_error:        "送信に失敗しました。しばらく経ってからもう一度お試しください。",
+    chat_esc_validation:   "お名前・メールアドレス・ご質問内容をご確認ください。",
     chat_close:            "閉じる",
 
     // 表紙+詳細ページ構成（指示書06）のnavラベル
@@ -468,8 +469,9 @@ var LANG_TRANSLATIONS = {
     chat_esc_email:        "Email",
     chat_esc_question:     "Your question",
     chat_esc_send:         "Send",
-    chat_esc_success:      "Thank you for contacting us. We will confirm the details and get back to you. For urgent matters, you're also welcome to DM us on Instagram.",
+    chat_esc_success:      "Thank you for contacting us. We will confirm the details and reply by email.",
     chat_esc_error:        "Something went wrong sending this. Please try again in a moment.",
+    chat_esc_validation:   "Please check your name, email address, and question.",
     chat_close:            "Close",
 
     nav_event:   "Events",
@@ -715,8 +717,9 @@ var LANG_TRANSLATIONS = {
     chat_esc_email:        "邮箱",
     chat_esc_question:     "您的问题",
     chat_esc_send:         "发送",
-    chat_esc_success:      "感谢您的咨询，我们确认内容后会尽快回复。如有急事，也欢迎通过Instagram私信联系我们。",
+    chat_esc_success:      "感谢您的咨询，我们确认内容后会通过邮件回复您。",
     chat_esc_error:        "发送失败，请稍后再试一次。",
+    chat_esc_validation:   "请检查您的姓名、邮箱地址和问题内容。",
     chat_close:            "关闭",
 
     nav_event:   "Events",

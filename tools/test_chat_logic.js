@@ -481,6 +481,62 @@ pending.push((function () {
   check('online_shop.sourceはproducts_test.htmlで安全', os.source.href === 'products_test.html' && Core.isSafeUrl(os.source.href) === true);
 })();
 
+/* ==================== 16. F-03: 企画展誤ルーティング修正の回帰確認 ==================== */
+(function () {
+  // 正しく回答するべきケース
+  var shouldAnswer = [
+    ['現在の企画展は何ですか', 'exhibition_current'],
+    ['What exhibition is currently on?', 'exhibition_current'],
+    ['次の企画展はいつからですか', 'exhibition_next'],
+    ['次の企画展の会期はいつまでですか', 'exhibition_next'],
+    ['When is your next exhibition?', 'exhibition_next'],
+    ['オンラインでの購入方法を教えてください', 'online_shop'],
+    ['どんな商品を売っていますか', 'product_categories'],
+    ['作家さんについて教えてください', 'artists']
+  ];
+  shouldAnswer.forEach(function (c) {
+    var r = Core.matchQuery(c[0], REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-03: 「' + c[0] + '」は' + c[1] + 'へ正しくルーティングされる',
+      r.type === 'answer' && r.entry.id === c[1]);
+  });
+
+  // escalateするべきケース（回答不能な質問。無関係な別KB回答へもマッチしないこと、
+  // choiceにならないことも合わせて確認する）
+  var shouldEscalate = [
+    '企画展の初日に来店した人と同時にオンラインでも買えますか',
+    '次の企画展にはどんな作家さんが出展しますか',
+    '企画展初日はどのように販売されますか',
+    '企画展の商品はいつからオンラインで買えますか',
+    'Which artists will be in the next exhibition?',
+    'When will exhibition items go on sale online?',
+    '企画展'
+  ];
+  shouldEscalate.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-03: 「' + q + '」はescalateになる（choiceにもならない・無関係な回答にもならない）', r.type === 'escalate');
+    check('F-03: 「' + q + '」はexhibition_currentへ誤マッチしない',
+      !(r.type === 'answer' && r.entry.id === 'exhibition_current'));
+  });
+
+  // 期限切れ時のfail-closedを維持（F-03の変更後も既存挙動が壊れていないこと）
+  var ecEntry2 = REAL_KB.filter(function (e) { return e.id === 'exhibition_current'; })[0];
+  var osEntry2 = REAL_KB.filter(function (e) { return e.id === 'online_shop'; })[0];
+  check('F-03後もexhibition_currentは2026-08-22で期限切れ（fail-closed維持）',
+    Core.isWithinValidity(ecEntry2, '2026-08-22') === false);
+  check('F-03後もonline_shopは2026-09-01で期限切れ（fail-closed維持）',
+    Core.isWithinValidity(osEntry2, '2026-09-01') === false);
+  var rExpired = Core.matchQuery('現在の企画展は何ですか', REAL_KB, REAL_SYNONYMS, '2026-08-22');
+  check('F-03後、期限切れ日時では現在の企画展がescalateになる', rExpired.type === 'escalate');
+
+  // 回答本文の完全一致（生成・言い換えなし）を維持
+  var rEc = Core.matchQuery('現在の企画展は何ですか', REAL_KB, REAL_SYNONYMS, NOW);
+  check('F-03後もexhibition_current回答文はKB登録文と完全一致',
+    rEc.type === 'answer' && rEc.entry.answer.ja === ecEntry2.answer.ja);
+  var rOs = Core.matchQuery('オンラインでの購入方法を教えてください', REAL_KB, REAL_SYNONYMS, NOW);
+  check('F-03後もonline_shop回答文はKB登録文と完全一致',
+    rOs.type === 'answer' && rOs.entry.answer.ja === osEntry2.answer.ja);
+})();
+
 Promise.all(pending).then(function () {
   console.log('\n=== SUMMARY ===');
   var failed = results.filter(function (r) { return !r[1]; });

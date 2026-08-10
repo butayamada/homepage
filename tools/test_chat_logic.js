@@ -537,6 +537,95 @@ pending.push((function () {
     rOs.type === 'answer' && rOs.entry.answer.ja === osEntry2.answer.ja);
 })();
 
+/* ==================== 17. F-04: 日程表現追加・MULTI_INTENT検出 ==================== */
+(function () {
+  // F-04A: 単一意図（日程・現在展示）は正しくルーティングされる
+  var singleIntent = [
+    ['次の企画展はいつですか', 'exhibition_next'],
+    ['次回の日程を教えてください', 'exhibition_next'],
+    ['現在の企画展は何ですか', 'exhibition_current'],
+    ['When is the next exhibition?', 'exhibition_next'],
+    ['下一次展览是什么时候', 'exhibition_next']
+  ];
+  singleIntent.forEach(function (c) {
+    var r = Core.matchQuery(c[0], REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-04A: 「' + c[0] + '」は' + c[1] + 'へ正しくルーティングされる',
+      r.type === 'answer' && r.entry.id === c[1]);
+  });
+
+  // F-04B: 複数意図はMULTI_INTENTでescalateする（JA/EN/ZHいずれも同じ仕組みで検出）
+  var multiIntent = [
+    '現在の企画展と次回の日程を同時に教えて',
+    '今の展示と次の企画展はいつか教えて',
+    'What is the current exhibition and when is the next one?',
+    '当前展览是什么，下一次展览什么时候开始'
+  ];
+  multiIntent.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-04B: 「' + q + '」はescalateになる', r.type === 'escalate');
+    check('F-04B: 「' + q + '」の理由はMULTI_INTENT', r.type === 'escalate' && r.reasonCode === 'MULTI_INTENT');
+    check('F-04B: 「' + q + '」のmatchedIdsは[exhibition_current, exhibition_next]',
+      r.type === 'escalate' && Array.isArray(r.matchedIds)
+      && r.matchedIds.length === 2
+      && r.matchedIds[0] === 'exhibition_current' && r.matchedIds[1] === 'exhibition_next');
+    check('F-04B: 「' + q + '」はexhibition_currentだけを回答しない',
+      !(r.type === 'answer' && r.entry.id === 'exhibition_current'));
+    check('F-04B: 「' + q + '」はexhibition_nextだけを回答しない',
+      !(r.type === 'answer' && r.entry.id === 'exhibition_next'));
+    check('F-04B: 「' + q + '」はchoiceにならない', r.type !== 'choice');
+    check('F-04B: 「' + q + '」のescalationReason()がMULTI_INTENTを保持',
+      Core.escalationReason(r) === 'MULTI_INTENT:exhibition_current,exhibition_next');
+  });
+
+  // F-04: 回答不能内容は引き続きescalate（日程回答を誤って返さない）
+  var stillEscalate = [
+    '次の企画展にはどんな作家さんが出展しますか',
+    '企画展初日はどのように販売されますか',
+    '企画展の商品はいつからオンラインで買えますか'
+  ];
+  stillEscalate.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-04: 「' + q + '」はescalateのまま（日程回答を返さない）', r.type === 'escalate');
+  });
+
+  // conflictsWith構造検証
+  function baseFixture(overrides) {
+    var e = {
+      id: 'f04_base', category: 'test', state: 'active', authority: 'website',
+      reviewedAt: '2026-08-01', validFrom: null, validUntil: null,
+      q: ['F04テスト固有クエリ文字列'], keywords: [],
+      answer: { ja: 'a', en: 'a', zh: 'a' },
+      source: { label: 'x', href: 'about_test.html' }
+    };
+    for (var k in overrides) e[k] = overrides[k];
+    return e;
+  }
+  check('conflictsWithが文字列（配列でない）はinvalid',
+    Core.validateEntryStructure(baseFixture({ conflictsWith: 'exhibition_next' })).valid === false);
+  check('conflictsWithに空文字を含む場合はinvalid',
+    Core.validateEntryStructure(baseFixture({ conflictsWith: [''] })).valid === false);
+  check('conflictsWithが自己参照の場合はinvalid',
+    Core.validateEntryStructure(baseFixture({ conflictsWith: ['f04_base'] })).valid === false);
+  check('conflictsWithに重複がある場合はinvalid',
+    Core.validateEntryStructure(baseFixture({ conflictsWith: ['a', 'a'] })).valid === false);
+  check('conflictsWithが正常な配列の場合はvalid',
+    Core.validateEntryStructure(baseFixture({ conflictsWith: ['other_id'] })).valid === true);
+  check('conflictsWithが未指定でもvalid（任意項目）',
+    Core.validateEntryStructure(baseFixture({})).valid === true);
+
+  // 不正entryはfindAnswerableEntry/matchQueryで回答不可（fail-closed）
+  var invalidKb = [baseFixture({ conflictsWith: 'notarray' })];
+  check('不正なconflictsWithを持つentryはfindAnswerableEntryで取得不可',
+    Core.findAnswerableEntry('f04_base', invalidKb, NOW) === null);
+  var rInvalid = Core.matchQuery('F04テスト固有クエリ文字列', invalidKb, {}, NOW);
+  check('不正なconflictsWithを持つentryへの質問はescalateになる', rInvalid.type === 'escalate');
+
+  // 参照先IDがKB内に存在しない場合も回答不可（KB全体を見て判定）
+  var unknownRefKb = [baseFixture({ conflictsWith: ['does_not_exist_in_kb'] })];
+  check('参照先IDが存在しないconflictsWithを持つentryはfindAnswerableEntryで取得不可',
+    Core.findAnswerableEntry('f04_base', unknownRefKb, NOW) === null);
+})();
+
 Promise.all(pending).then(function () {
   console.log('\n=== SUMMARY ===');
   var failed = results.filter(function (r) { return !r[1]; });

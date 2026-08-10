@@ -86,12 +86,15 @@ CHAT_ROOT.CHAT_KB = [
     // 質問（作家・販売方法・オンライン開始日等）を吸着していた誤ルーティングを解消。
     // 「現在開催中かどうか」を明示的に尋ねる表現だけをqへ登録する。汎用語はkeywordsに
     // 残すが、keywordsだけではMATCH_THRESHOLD(3)へ到達しない（+1ずつのため）。
+    // F-04B: exhibition_nextと同時に閾値以上でマッチした場合、片方だけを回答せず
+    // MULTI_INTENTでescalateする（chat_core.jsのfindConflictPair参照）。
     q: [
       "現在の企画展", "今の企画展", "現在の展示", "今の展示", "開催中の企画展", "今やっている企画展",
       "current exhibition", "what is the current exhibition", "what exhibition is currently on", "what exhibition is on now",
       "当前展览", "现在的展览", "目前有什么展览"
     ],
     keywords: ["企画展", "展示", "展覧会", "exhibition", "展览"],
+    conflictsWith: ["exhibition_next"],
     answer: {
       ja: "現在開催中の企画展はありません。次回は8月22日から30日まで「処暑、線を辿る」を開催予定です。詳しくは企画展ページをご確認ください。",
       en: "There is no exhibition currently in progress. Our next exhibition, “処暑、線を辿る,” is scheduled for August 22–30. Please see the exhibition page for details.",
@@ -114,13 +117,19 @@ CHAT_ROOT.CHAT_KB = [
     // F-03: 「次の展示」「next exhibition」「upcoming exhibition」等の広すぎる部分一致qを
     // 削除し、日程・予定を具体的に尋ねる表現へ限定。作家・販売方法・オンライン開始日
     // を尋ねる質問（現在の登録回答では直接答えられない）はここへもマッチさせない。
+    // F-04A: 「次の企画展はいつですか」等の日程表現を追加。
+    // F-04B: exhibition_currentと同時に閾値以上でマッチした場合はMULTI_INTENTでescalate。
     q: [
       "次の企画展はいつからですか", "次回の企画展はいつですか", "次の展示はいつからですか",
       "次の企画展の会期はいつまでですか", "今後の展示予定を教えてください",
+      "次の企画展はいつですか", "次の企画展はいつ", "次回の日程", "次の企画展の日程", "次回展示の日程",
       "When is your next exhibition?", "What are your upcoming exhibition dates?", "When does the next exhibition start?",
-      "下一次展览什么时候开始", "接下来的展览日期是什么", "今后有什么展览安排"
+      "when is the next exhibition", "next exhibition dates", "when is the next",
+      "下一次展览什么时候开始", "接下来的展览日期是什么", "今后有什么展览安排",
+      "下一次展览是什么时候", "下次展览的日期", "下一次展览什么时候"
     ],
     keywords: ["次回", "今後", "予定", "next", "upcoming", "以后", "接下来"],
+    conflictsWith: ["exhibition_current"],
     answer: {
       ja: "次回以降の展示予定: 「処暑、線を辿る」(8/22–8/30)、「yoshida pottery 個展」(9/12–9/20)、「ヂェン先生の日常着展」(10/3–10/10)、「端田敏也 個展」(10/24–11/1)です。",
       en: "Upcoming exhibitions: Aug 22–30, Sep 12–20, Oct 3–10, and Oct 24–Nov 1 — see the exhibition section for details.",

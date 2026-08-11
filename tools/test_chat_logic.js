@@ -738,18 +738,92 @@ pending.push((function () {
       r.type === 'escalate' && r.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && r.matchedId === 'cart_inventory_reservation');
   });
 
-  // 既知の制約: 「カートに入れたのに売り切れました」は既存stock項目のq「売り切れ」と
-  // 完全に文字列が重複するため、既存stock（変更禁止・保護対象）が先に閾値へ到達し
-  // 回答してしまう。cart_inventory_reservationはreview_requiredのためqualifying候補
-  // 自体に含まれず（chat_core.js変更禁止のためこの優先順位ロジックは変更できない）、
-  // stockの一般的な案内文（在庫は商品ページを確認、確実な確認は問い合わせ）が表示される。
-  // stockの回答自体は誤った情報ではないが、カート特有の注意喚起は行われない。
-  // この既知の制約は設計役へ報告済み（chat_core.jsの優先順位ロジック変更が必要なため
-  // 本フェーズの変更範囲外）。
+  // F-01修正: blocksAnswerWhenMatched:true により、「カートに入れたのに売り切れました」は
+  // 既存stockのq「売り切れ」と文字列が重複してもstockを回答せず、
+  // cart_inventory_reservationがMATCHED_BUT_UNANSWERABLEとしてescalateを強制する。
   var rCartSoldout = Core.matchQuery('カートに入れたのに売り切れました', REAL_KB, REAL_SYNONYMS, NOW);
-  check('既知の制約: 「カートに入れたのに売り切れました」は既存stockのq「売り切れ」と重複するため'
-    + 'stockが回答する（誤情報ではないがcart_inventory_reservationへは到達しない・設計役へ報告済み）',
-    rCartSoldout.type === 'answer' && rCartSoldout.entry.id === 'stock');
+  check('F-01: 「カートに入れたのに売り切れました」はMATCHED_BUT_UNANSWERABLE（cart_inventory_reservation）になる',
+    rCartSoldout.type === 'escalate' && rCartSoldout.reasonCode === 'MATCHED_BUT_UNANSWERABLE'
+    && rCartSoldout.matchedId === 'cart_inventory_reservation');
+  check('F-01: 「カートに入れたのに売り切れました」はstockを回答しない',
+    !(rCartSoldout.type === 'answer' && rCartSoldout.entry.id === 'stock'));
+  check('F-01: 「カートに入れたのに売り切れました」はどのKB回答本文も含まない', rCartSoldout.entry === undefined);
+
+  var f01BlockedPhrases = [
+    'カートに入れたのに売り切れました。なぜですか',
+    'カートに商品を入れておいたのに売り切れになっていました',
+    'カートに追加したのに在庫がなくなっていた',
+    'why did the item in my cart become sold out',
+    'the product in my cart is now out of stock',
+    '购物车里的商品怎么变成缺货了'
+  ];
+  f01BlockedPhrases.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-01: 「' + q + '」はMATCHED_BUT_UNANSWERABLE（cart_inventory_reservation）になる',
+      r.type === 'escalate' && r.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && r.matchedId === 'cart_inventory_reservation');
+    check('F-01: 「' + q + '」はstockを回答しない', !(r.type === 'answer' && r.entry && r.entry.id === 'stock'));
+  });
+
+  // F-01回帰確認: カート文脈を含まない通常の在庫質問はstockが従来通り回答する
+  var rStockNormal1 = Core.matchQuery('この商品は売り切れですか', REAL_KB, REAL_SYNONYMS, NOW);
+  check('F-01回帰: 「この商品は売り切れですか」は従来通りstockが回答する',
+    rStockNormal1.type === 'answer' && rStockNormal1.entry.id === 'stock');
+
+  // F-01メタデータ境界テスト: blocksAnswerWhenMatchedの各種境界条件
+  var f01Fixture = {
+    id: 'f01_boundary_test', category: 'shop', state: 'review_required', authority: 'owner_script',
+    reviewedAt: NOW, validFrom: NOW, validUntil: null,
+    q: ['F01境界テスト文言'], keywords: [],
+    answer: { ja: 'ja', en: 'en', zh: 'zh' },
+    source: { label: 'x', href: 'products_test.html' },
+    blocksAnswerWhenMatched: true
+  };
+  function f01Clone(overrides) {
+    var e = {};
+    for (var k in f01Fixture) e[k] = f01Fixture[k];
+    for (var k2 in overrides) e[k2] = overrides[k2];
+    return e;
+  }
+  var f01Query = 'F01境界テスト文言';
+
+  var bOmitted = f01Clone({}); delete bOmitted.blocksAnswerWhenMatched;
+  check('F-01境界: blocksAnswerWhenMatched省略時は構造検証を通過する', Core.validateEntryStructure(bOmitted).valid === true);
+  var rOmitted = Core.matchQuery(f01Query, [bOmitted], {}, NOW);
+  check('F-01境界: 省略時はブロック経由のMATCHED_BUT_UNANSWERABLEにならない（review_requiredのため通常のescalateにはなる）',
+    !(rOmitted.type === 'answer'));
+
+  var bFalse = f01Clone({ blocksAnswerWhenMatched: false });
+  check('F-01境界: blocksAnswerWhenMatched:falseは構造検証を通過する', Core.validateEntryStructure(bFalse).valid === true);
+  var rFalse = Core.matchQuery(f01Query, [bFalse], {}, NOW);
+  check('F-01境界: falseではactive状態にならない限り回答されない（answer化しない）', rFalse.type !== 'answer');
+
+  var bActive = f01Clone({ state: 'active' });
+  var rActive = Core.matchQuery(f01Query, [bActive], {}, NOW);
+  check('F-01境界: state:activeの場合はブロック対象外で通常通り回答される', rActive.type === 'answer' && rActive.entry.id === 'f01_boundary_test');
+
+  var bDisabled = f01Clone({ state: 'disabled' });
+  var rDisabled = Core.matchQuery(f01Query, [bDisabled], {}, NOW);
+  check('F-01境界: state:disabledの場合はブロック対象外（かつ回答もされない）', rDisabled.type !== 'answer');
+
+  var bInvalidType = f01Clone({ blocksAnswerWhenMatched: 'true' });
+  var vInvalidType = Core.validateEntryStructure(bInvalidType);
+  check('F-01境界: blocksAnswerWhenMatchedが文字列型は構造検証で拒否される',
+    vInvalidType.valid === false && vInvalidType.reasons.indexOf('BLOCKS_ANSWER_WHEN_MATCHED_INVALID') !== -1);
+  var bInvalidTypeNum = f01Clone({ blocksAnswerWhenMatched: 1 });
+  var vInvalidTypeNum = Core.validateEntryStructure(bInvalidTypeNum);
+  check('F-01境界: blocksAnswerWhenMatchedが数値型は構造検証で拒否される',
+    vInvalidTypeNum.valid === false && vInvalidTypeNum.reasons.indexOf('BLOCKS_ANSWER_WHEN_MATCHED_INVALID') !== -1);
+
+  var bExpired = f01Clone({ validFrom: '2099-01-01' });
+  var rExpired = Core.matchQuery(f01Query, [bExpired], {}, NOW);
+  check('F-01境界: 有効期間外の場合はブロック対象外（回答もされない）', rExpired.type !== 'answer');
+
+  var rNormalBlock = Core.matchQuery(f01Query, [f01Fixture], {}, NOW);
+  check('F-01境界: 正常なブロック候補はMATCHED_BUT_UNANSWERABLEになる',
+    rNormalBlock.type === 'escalate' && rNormalBlock.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && rNormalBlock.matchedId === 'f01_boundary_test');
+  check('F-01境界: ブロック時にentry（回答本文参照）が含まれない', rNormalBlock.entry === undefined);
+  check('F-01境界: ブロック時にJSON化した結果に回答本文(ja/en/zh)が含まれない',
+    JSON.stringify(rNormalBlock).indexOf('"ja"') === -1 && JSON.stringify(rNormalBlock).indexOf('"en"') === -1);
 
   // カート確保の回答が既存stock回答へ誤吸着しないこと（stockが直接matchせず、
   // cart_inventory_reservation側で処理されるケースの確認）

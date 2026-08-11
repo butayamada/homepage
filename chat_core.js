@@ -156,6 +156,10 @@
         if (!conflictOk) reasons.push('CONFLICTS_WITH_INVALID');
       }
     }
+    // blocksAnswerWhenMatched（任意項目）: boolean以外は不正
+    if (entry.blocksAnswerWhenMatched !== undefined && typeof entry.blocksAnswerWhenMatched !== 'boolean') {
+      reasons.push('BLOCKS_ANSWER_WHEN_MATCHED_INVALID');
+    }
     return { valid: reasons.length === 0, reasons: reasons };
   }
 
@@ -285,8 +289,42 @@
     return null;
   }
 
+  // blocksAnswerWhenMatched:true かつ state:'review_required' のエントリのみを対象に、
+  // 有効な候補（構造正当・権限正当・期限内・重複IDでない・conflictsWith参照先が実在）が
+  // 閾値以上でマッチした場合、そのIDを返す。同点はKB登録順で先着優先。
+  // このチェックはactive項目のanswer/choiceより必ず先に評価する。
+  function findBlockingCandidate(norm, kb, nowStr) {
+    kb = Array.isArray(kb) ? kb : [];
+    var duplicateIds = findDuplicateIds(kb);
+    var candidates = [];
+    kb.forEach(function (e) {
+      if (!e || typeof e.id !== 'string') return;
+      if (e.blocksAnswerWhenMatched !== true) return;
+      if (e.state !== 'review_required') return;
+      if (ALLOWED_AUTHORITIES.indexOf(e.authority) === -1) return;
+      if (!validateEntryStructure(e).valid) return;
+      if (!isWithinValidity(e, nowStr)) return;
+      if (duplicateIds[e.id]) return;
+      if (hasUnknownConflictReference(e, kb)) return;
+      var score = scoreEntry(norm, e);
+      if (score >= MATCH_THRESHOLD) candidates.push({ entry: e, score: score });
+    });
+    if (!candidates.length) return null;
+    candidates.sort(function (a, b) {
+      if (b.score !== a.score) return b.score - a.score;
+      return kb.indexOf(a.entry) - kb.indexOf(b.entry);
+    });
+    return candidates[0].entry;
+  }
+
   function matchQuery(rawQuery, kb, synonyms, nowStr) {
     var norm = applySynonyms(normalize(rawQuery), synonyms);
+
+    var blocking = findBlockingCandidate(norm, kb, nowStr);
+    if (blocking) {
+      return { type: 'escalate', reasonCode: 'MATCHED_BUT_UNANSWERABLE', matchedId: blocking.id };
+    }
+
     var filtered = filterAnswerableKB(kb, nowStr);
     var scored = filtered.answerable.map(function (e) { return { entry: e, score: scoreEntry(norm, e) }; });
     scored.sort(function (a, b) { return b.score - a.score; });

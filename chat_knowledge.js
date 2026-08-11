@@ -349,13 +349,16 @@ CHAT_ROOT.CHAT_KB = [
     category: "shop",
     state: "review_required",
     authority: "owner_script",
+    blocksAnswerWhenMatched: true,
     reviewedAt: "2026-08-10",
     validFrom: "2026-08-10",
     validUntil: null,
     q: [
       "カートに入れたら在庫は確保されますか", "カートに入れた商品は取り置きされますか", "カートに入れたのに売り切れました",
+      "カートに商品を入れておいたのに売り切れ", "カートに追加したのに在庫がなくなっていた",
       "Does adding it to my cart reserve it?", "Is an item held when it is in my cart?",
-      "加入购物车后会保留库存吗"
+      "why did the item in my cart become sold out", "the product in my cart is now out of stock",
+      "加入购物车后会保留库存吗", "购物车里的商品怎么变成缺货了"
     ],
     keywords: ["カート", "在庫確保", "cart", "reserve", "购物车"],
     answer: {

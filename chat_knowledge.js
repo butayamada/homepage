@@ -255,7 +255,12 @@ CHAT_ROOT.CHAT_KB = [
     reviewedAt: "2026-08-10",
     validFrom: null,
     validUntil: null,
-    q: ["在庫ある", "在庫確認", "売り切れ", "is it in stock"],
+    q: [
+      "在庫ある", "在庫確認", "売り切れ", "is it in stock",
+      "在庫はありますか", "在庫がありますか", "在庫ありますか", "在庫は残っていますか", "まだ在庫はありますか",
+      "Is this in stock?", "Is this item in stock?", "Do you have this in stock?", "Is it available?",
+      "有库存吗", "还有库存吗"
+    ],
     keywords: ["在庫", "売り切れ", "soldout", "stock", "availability", "库存", "缺货"],
     answer: {
       ja: "在庫は商品ページの表示をご確認ください。確実な確認をご希望の場合はお問い合わせください。",
@@ -282,6 +287,95 @@ CHAT_ROOT.CHAT_KB = [
     },
     source: { label: "店舗情報", href: "access_test.html" },
     updated: "2026-07-11"
+  },
+  {
+    // Phase3-C: 店主承認済みの模範回答。特定商品の実寸・重量・素材や、追加撮影の
+    // 可否を推測で回答せず、必ず店主確認へ誘導する定型文。
+    id: "product_additional_photos",
+    category: "shop",
+    state: "active",
+    authority: "owner_script",
+    reviewedAt: "2026-08-10",
+    validFrom: "2026-08-10",
+    validUntil: null,
+    q: [
+      "追加写真を見せてください", "詳しい写真はありますか", "裏面の写真を見たいです", "側面の写真を見せてください",
+      "別の角度から見たいです", "傷に見える部分を確認したいです",
+      "Can I see more photos?", "Do you have additional photos?", "Can I see the back of the item?", "Can I see it from another angle?",
+      "可以看更多照片吗", "有追加的照片吗", "可以看商品背面的照片吗", "可以从其他角度看吗",
+      // F-04と同方針: 特定の複合質問（product_specsとの同時言及）だけを対象にした
+      // 明確なフレーズを個別に登録する。単独の「写真」等の汎用語では閾値に届かない。
+      "サイズと追加写真", "重さと裏面の写真", "tell me the size and show me more photos", "请告诉我尺寸并提供更多照片"
+    ],
+    keywords: ["写真", "追加", "裏面", "側面", "角度", "photo", "photos", "照片"],
+    conflictsWith: ["product_specs"],
+    answer: {
+      ja: "商品ページに掲載している写真をご確認ください。追加写真をご希望の場合は、商品名と確認したい箇所を具体的にお知らせください。商品の状況により、追加撮影や写真の送付ができない場合があります。",
+      en: "Please check the photos shown on the product page. If you would like additional photos, tell us the product name and the specific area you would like to see. Depending on the product’s circumstances, we may not be able to take or send additional photos.",
+      zh: "请先查看商品页面中刊载的照片。如需更多照片，请告知商品名称以及希望确认的具体部位。根据商品情况，我们可能无法补拍或发送照片。"
+    },
+    source: { label: "商品紹介", href: "products_test.html" },
+    updated: "2026-08-10"
+  },
+  {
+    // Phase3-C: 店主承認済みの模範回答。KBにない実寸・重量・素材の具体値を
+    // 推測で生成しない。記載がない場合・個体差の確認は店主へ誘導する。
+    id: "product_specs",
+    category: "shop",
+    state: "active",
+    authority: "owner_script",
+    reviewedAt: "2026-08-10",
+    validFrom: "2026-08-10",
+    validUntil: null,
+    q: [
+      "サイズを教えてください", "大きさを教えてください", "重さはどれくらいですか", "素材は何ですか", "個体差はありますか",
+      "商品ページにサイズがありません",
+      "What size is it?", "How much does it weigh?", "What material is it made from?", "Are there individual variations?",
+      "商品尺寸是多少", "商品有多重", "是什么材质", "有个体差异吗",
+      // F-04と同方針: product_additional_photosとの複合質問を検出するための
+      // 明確なフレーズ。単独の「サイズ」等の汎用語は追加しない。
+      "サイズと追加写真", "重さと裏面の写真", "tell me the size and show me more photos", "请告诉我尺寸并提供更多照片"
+    ],
+    keywords: ["サイズ", "大きさ", "重さ", "素材", "個体差", "size", "weight", "material", "尺寸", "材质"],
+    conflictsWith: ["product_additional_photos"],
+    answer: {
+      ja: "サイズ・重さ・素材は、商品ページに記載されている情報をご確認ください。記載がない場合や、個体差について確認したい場合は、商品名と確認事項をお知らせください。チャットでは推測せず、店主へ確認します。",
+      en: "Please check the product page for information about size, weight, and materials. If the information is not listed or you would like to ask about individual variations, tell us the product name and what you would like to confirm. The chat will not guess; it will ask the shop owner to confirm.",
+      zh: "尺寸、重量和材质请查看商品页面中的信息。如页面未记载，或希望确认个体差异，请告知商品名称及需要确认的事项。聊天不会推测，而会向店主确认。"
+    },
+    source: { label: "商品紹介", href: "products_test.html" },
+    updated: "2026-08-10"
+  },
+  {
+    // Phase3-C: 店主は文面を承認済みだが、Shopify同時購入・売り越し防止監査が
+    // 未完了のためreview_requiredのまま維持する。Shopify同時購入監査完了後に
+    // active化を再検討する。顧客へは絶対に回答せず、店主確認へ誘導する。
+    id: "cart_inventory_reservation",
+    category: "shop",
+    state: "review_required",
+    authority: "owner_script",
+    blocksAnswerWhenMatched: true,
+    reviewedAt: "2026-08-10",
+    validFrom: "2026-08-10",
+    validUntil: null,
+    q: [
+      "カートに入れたら在庫は確保されますか", "カートに入れた商品は取り置きされますか", "カートに入れたのに売り切れました",
+      "カートに商品を入れておいたのに売り切れ", "カートに追加したのに在庫がなくなっていた",
+      "Does adding it to my cart reserve it?", "Is an item held when it is in my cart?",
+      "why did the item in my cart become sold out", "the product in my cart is now out of stock",
+      "加入购物车后会保留库存吗", "购物车里的商品怎么变成缺货了",
+      "カートに入れた商品はまだ在庫がありますか", "カートに入れた商品の在庫はありますか", "カートの商品の在庫はありますか",
+      "Is the item in my cart still in stock?", "Is the product in my cart still available?",
+      "购物车里的商品还有库存吗"
+    ],
+    keywords: ["カート", "在庫確保", "cart", "reserve", "购物车"],
+    answer: {
+      ja: "商品をカートに入れただけでは、在庫は確保されません。お手続き中に他のお客様の注文が先に完了した場合、売り切れとなることがあります。",
+      en: "Adding an item to your cart does not reserve inventory. If another customer completes their order first while you are checking out, the item may become sold out.",
+      zh: "仅将商品加入购物车并不会保留库存。如果其他顾客在您办理购买手续期间先完成订单，商品可能会售罄。"
+    },
+    source: { label: "商品紹介", href: "products_test.html" },
+    updated: "2026-08-10"
   }
 ];
 

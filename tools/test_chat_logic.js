@@ -626,6 +626,278 @@ pending.push((function () {
     Core.findAnswerableEntry('f04_base', unknownRefKb, NOW) === null);
 })();
 
+/* ==================== 18. Phase3-C: 店主承認済み商品問い合わせ回答 ==================== */
+(function () {
+  var photosEntry = REAL_KB.filter(function (e) { return e.id === 'product_additional_photos'; })[0];
+  var specsEntry = REAL_KB.filter(function (e) { return e.id === 'product_specs'; })[0];
+  var cartEntry = REAL_KB.filter(function (e) { return e.id === 'cart_inventory_reservation'; })[0];
+
+  check('product_additional_photosがREAL_KBに存在する', !!photosEntry);
+  check('product_specsがREAL_KBに存在する', !!specsEntry);
+  check('cart_inventory_reservationがREAL_KBに存在する', !!cartEntry);
+
+  // --- 追加写真 ---
+  var photosQuestions = [
+    '追加写真を見せてください', '詳しい写真はありますか', '裏面の写真を見たいです', '側面の写真を見せてください',
+    '別の角度から見たいです', '傷に見える部分を確認したいです',
+    'Can I see more photos?', 'Do you have additional photos?', 'Can I see the back of the item?', 'Can I see it from another angle?',
+    '可以看更多照片吗', '有追加的照片吗', '可以看商品背面的照片吗', '可以从其他角度看吗'
+  ];
+  photosQuestions.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('Phase3-C: 「' + q + '」はproduct_additional_photosへ回答される',
+      r.type === 'answer' && r.entry.id === 'product_additional_photos');
+    if (r.type === 'answer') {
+      check('Phase3-C: 「' + q + '」の回答本文はKB登録文と完全一致（JA/EN/ZH）',
+        r.entry.answer.ja === photosEntry.answer.ja && r.entry.answer.en === photosEntry.answer.en && r.entry.answer.zh === photosEntry.answer.zh);
+    }
+  });
+  check('product_additional_photosのauthorityはowner_script', photosEntry.authority === 'owner_script');
+  check('product_additional_photosのsourceは安全（products_test.html）',
+    photosEntry.source.href === 'products_test.html' && Core.isSafeUrl(photosEntry.source.href) === true);
+
+  // 単独の「写真」だけでは意図を断定しない（NO_MATCHまたは安全なescalate）
+  var rBarePhoto = Core.matchQuery('写真', REAL_KB, REAL_SYNONYMS, NOW);
+  check('単独の「写真」はproduct_additional_photosへ回答しない（escalate）', rBarePhoto.type === 'escalate');
+
+  // validFrom前は回答不可
+  check('product_additional_photosはvalidFrom前日はfindAnswerableEntryで取得不可',
+    Core.findAnswerableEntry('product_additional_photos', REAL_KB, '2026-08-09') === null);
+  var rPhotosBefore = Core.matchQuery('追加写真を見せてください', REAL_KB, REAL_SYNONYMS, '2026-08-09');
+  check('product_additional_photosはvalidFrom前日はescalateになる', rPhotosBefore.type === 'escalate');
+
+  // --- 商品仕様（サイズ・重さ・素材・個体差） ---
+  var specsQuestions = [
+    'サイズを教えてください', '大きさを教えてください', '重さはどれくらいですか', '素材は何ですか', '個体差はありますか',
+    '商品ページにサイズがありません',
+    'What size is it?', 'How much does it weigh?', 'What material is it made from?', 'Are there individual variations?',
+    '商品尺寸是多少', '商品有多重', '是什么材质', '有个体差异吗'
+  ];
+  specsQuestions.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('Phase3-C: 「' + q + '」はproduct_specsへ回答される',
+      r.type === 'answer' && r.entry.id === 'product_specs');
+    if (r.type === 'answer') {
+      check('Phase3-C: 「' + q + '」の回答本文はKB登録文と完全一致（JA/EN/ZH）',
+        r.entry.answer.ja === specsEntry.answer.ja && r.entry.answer.en === specsEntry.answer.en && r.entry.answer.zh === specsEntry.answer.zh);
+      // 特定商品の実寸・重量・素材を生成していないこと（登録文以外の数値・単位を含まない）
+      check('Phase3-C: 「' + q + '」の回答に具体的な数値（cm/kg/g）を含まない（推測生成していない）',
+        !/\d+\s*(cm|mm|kg|g|㎝|ｃｍ)/i.test(r.entry.answer.ja) && !/\d+\s*(cm|mm|kg|g)/i.test(r.entry.answer.en));
+    }
+  });
+  check('product_specsのauthorityはowner_script', specsEntry.authority === 'owner_script');
+
+  // validFrom前は回答不可
+  check('product_specsはvalidFrom前日はfindAnswerableEntryで取得不可',
+    Core.findAnswerableEntry('product_specs', REAL_KB, '2026-08-09') === null);
+
+  // --- 複合質問（写真＋仕様）: MULTI_INTENTでescalate ---
+  var multiIntentProduct = [
+    'サイズと追加写真をお願いします',
+    '重さと裏面の写真を確認したいです',
+    'Can you tell me the size and show me more photos?',
+    '请告诉我尺寸并提供更多照片'
+  ];
+  multiIntentProduct.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('Phase3-C複合: 「' + q + '」はescalateになる', r.type === 'escalate');
+    check('Phase3-C複合: 「' + q + '」の理由はMULTI_INTENT', r.type === 'escalate' && r.reasonCode === 'MULTI_INTENT');
+    check('Phase3-C複合: 「' + q + '」のmatchedIdsは安定した順序で2件',
+      r.type === 'escalate' && Array.isArray(r.matchedIds) && r.matchedIds.length === 2
+      && r.matchedIds.indexOf('product_additional_photos') !== -1 && r.matchedIds.indexOf('product_specs') !== -1);
+    check('Phase3-C複合: 「' + q + '」はproduct_additional_photosだけを回答しない',
+      !(r.type === 'answer' && r.entry.id === 'product_additional_photos'));
+    check('Phase3-C複合: 「' + q + '」はproduct_specsだけを回答しない',
+      !(r.type === 'answer' && r.entry.id === 'product_specs'));
+    check('Phase3-C複合: 「' + q + '」はchoiceにならない', r.type !== 'choice');
+  });
+
+  // --- カートと在庫確保（review_required・顧客へ絶対に回答しない） ---
+  check('cart_inventory_reservationのstateはreview_required', cartEntry.state === 'review_required');
+  check('cart_inventory_reservationのauthorityはowner_script', cartEntry.authority === 'owner_script');
+  check('cart_inventory_reservationはfindAnswerableEntryで取得不能（顧客へ絶対に回答しない）',
+    Core.findAnswerableEntry('cart_inventory_reservation', REAL_KB, NOW) === null);
+  check('cart_inventory_reservationのJA本文は保存されている（画面には出さないが登録済み）',
+    typeof cartEntry.answer.ja === 'string' && cartEntry.answer.ja.indexOf('在庫は確保されません') !== -1);
+  check('cart_inventory_reservationのEN本文は保存されている',
+    typeof cartEntry.answer.en === 'string' && cartEntry.answer.en.indexOf('does not reserve inventory') !== -1);
+  check('cart_inventory_reservationのZH本文は保存されている',
+    typeof cartEntry.answer.zh === 'string' && cartEntry.answer.zh.indexOf('并不会保留库存') !== -1);
+
+  var cartQuestions = [
+    'カートに入れたら在庫は確保されますか',
+    'カートに入れた商品は取り置きされますか',
+    'Does adding it to my cart reserve it?',
+    'Is an item held when it is in my cart?',
+    '加入购物车后会保留库存吗'
+  ];
+  cartQuestions.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('Phase3-C カート: 「' + q + '」はescalateになる（回答本文を表示しない）', r.type === 'escalate');
+    check('Phase3-C カート: 「' + q + '」の理由はMATCHED_BUT_UNANSWERABLE、matchedIdはcart_inventory_reservation',
+      r.type === 'escalate' && r.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && r.matchedId === 'cart_inventory_reservation');
+  });
+
+  // F-01修正: blocksAnswerWhenMatched:true により、「カートに入れたのに売り切れました」は
+  // 既存stockのq「売り切れ」と文字列が重複してもstockを回答せず、
+  // cart_inventory_reservationがMATCHED_BUT_UNANSWERABLEとしてescalateを強制する。
+  var rCartSoldout = Core.matchQuery('カートに入れたのに売り切れました', REAL_KB, REAL_SYNONYMS, NOW);
+  check('F-01: 「カートに入れたのに売り切れました」はMATCHED_BUT_UNANSWERABLE（cart_inventory_reservation）になる',
+    rCartSoldout.type === 'escalate' && rCartSoldout.reasonCode === 'MATCHED_BUT_UNANSWERABLE'
+    && rCartSoldout.matchedId === 'cart_inventory_reservation');
+  check('F-01: 「カートに入れたのに売り切れました」はstockを回答しない',
+    !(rCartSoldout.type === 'answer' && rCartSoldout.entry.id === 'stock'));
+  check('F-01: 「カートに入れたのに売り切れました」はどのKB回答本文も含まない', rCartSoldout.entry === undefined);
+
+  var f01BlockedPhrases = [
+    'カートに入れたのに売り切れました。なぜですか',
+    'カートに商品を入れておいたのに売り切れになっていました',
+    'カートに追加したのに在庫がなくなっていた',
+    'why did the item in my cart become sold out',
+    'the product in my cart is now out of stock',
+    '购物车里的商品怎么变成缺货了'
+  ];
+  f01BlockedPhrases.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-01: 「' + q + '」はMATCHED_BUT_UNANSWERABLE（cart_inventory_reservation）になる',
+      r.type === 'escalate' && r.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && r.matchedId === 'cart_inventory_reservation');
+    check('F-01: 「' + q + '」はstockを回答しない', !(r.type === 'answer' && r.entry && r.entry.id === 'stock'));
+  });
+
+  // F-01回帰確認: カート文脈を含まない通常の在庫質問はstockが従来通り回答する
+  var rStockNormal1 = Core.matchQuery('この商品は売り切れですか', REAL_KB, REAL_SYNONYMS, NOW);
+  check('F-01回帰: 「この商品は売り切れですか」は従来通りstockが回答する',
+    rStockNormal1.type === 'answer' && rStockNormal1.entry.id === 'stock');
+
+  // F-01メタデータ境界テスト: blocksAnswerWhenMatchedの各種境界条件
+  var f01Fixture = {
+    id: 'f01_boundary_test', category: 'shop', state: 'review_required', authority: 'owner_script',
+    reviewedAt: NOW, validFrom: NOW, validUntil: null,
+    q: ['F01境界テスト文言'], keywords: [],
+    answer: { ja: 'ja', en: 'en', zh: 'zh' },
+    source: { label: 'x', href: 'products_test.html' },
+    blocksAnswerWhenMatched: true
+  };
+  function f01Clone(overrides) {
+    var e = {};
+    for (var k in f01Fixture) e[k] = f01Fixture[k];
+    for (var k2 in overrides) e[k2] = overrides[k2];
+    return e;
+  }
+  var f01Query = 'F01境界テスト文言';
+
+  var bOmitted = f01Clone({}); delete bOmitted.blocksAnswerWhenMatched;
+  check('F-01境界: blocksAnswerWhenMatched省略時は構造検証を通過する', Core.validateEntryStructure(bOmitted).valid === true);
+  var rOmitted = Core.matchQuery(f01Query, [bOmitted], {}, NOW);
+  check('F-01境界: 省略時はブロック経由のMATCHED_BUT_UNANSWERABLEにならない（review_requiredのため通常のescalateにはなる）',
+    !(rOmitted.type === 'answer'));
+
+  var bFalse = f01Clone({ blocksAnswerWhenMatched: false });
+  check('F-01境界: blocksAnswerWhenMatched:falseは構造検証を通過する', Core.validateEntryStructure(bFalse).valid === true);
+  var rFalse = Core.matchQuery(f01Query, [bFalse], {}, NOW);
+  check('F-01境界: falseではactive状態にならない限り回答されない（answer化しない）', rFalse.type !== 'answer');
+
+  var bActive = f01Clone({ state: 'active' });
+  var rActive = Core.matchQuery(f01Query, [bActive], {}, NOW);
+  check('F-01境界: state:activeの場合はブロック対象外で通常通り回答される', rActive.type === 'answer' && rActive.entry.id === 'f01_boundary_test');
+
+  var bDisabled = f01Clone({ state: 'disabled' });
+  var rDisabled = Core.matchQuery(f01Query, [bDisabled], {}, NOW);
+  check('F-01境界: state:disabledの場合はブロック対象外（かつ回答もされない）', rDisabled.type !== 'answer');
+
+  var bInvalidType = f01Clone({ blocksAnswerWhenMatched: 'true' });
+  var vInvalidType = Core.validateEntryStructure(bInvalidType);
+  check('F-01境界: blocksAnswerWhenMatchedが文字列型は構造検証で拒否される',
+    vInvalidType.valid === false && vInvalidType.reasons.indexOf('BLOCKS_ANSWER_WHEN_MATCHED_INVALID') !== -1);
+  var bInvalidTypeNum = f01Clone({ blocksAnswerWhenMatched: 1 });
+  var vInvalidTypeNum = Core.validateEntryStructure(bInvalidTypeNum);
+  check('F-01境界: blocksAnswerWhenMatchedが数値型は構造検証で拒否される',
+    vInvalidTypeNum.valid === false && vInvalidTypeNum.reasons.indexOf('BLOCKS_ANSWER_WHEN_MATCHED_INVALID') !== -1);
+
+  var bExpired = f01Clone({ validFrom: '2099-01-01' });
+  var rExpired = Core.matchQuery(f01Query, [bExpired], {}, NOW);
+  check('F-01境界: 有効期間外の場合はブロック対象外（回答もされない）', rExpired.type !== 'answer');
+
+  var rNormalBlock = Core.matchQuery(f01Query, [f01Fixture], {}, NOW);
+  check('F-01境界: 正常なブロック候補はMATCHED_BUT_UNANSWERABLEになる',
+    rNormalBlock.type === 'escalate' && rNormalBlock.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && rNormalBlock.matchedId === 'f01_boundary_test');
+  check('F-01境界: ブロック時にentry（回答本文参照）が含まれない', rNormalBlock.entry === undefined);
+  check('F-01境界: ブロック時にJSON化した結果に回答本文(ja/en/zh)が含まれない',
+    JSON.stringify(rNormalBlock).indexOf('"ja"') === -1 && JSON.stringify(rNormalBlock).indexOf('"en"') === -1);
+
+  // カート確保の回答が既存stock回答へ誤吸着しないこと（stockが直接matchせず、
+  // cart_inventory_reservation側で処理されるケースの確認）
+  var rCartOnly = Core.matchQuery('カートに入れたら在庫は確保されますか', REAL_KB, REAL_SYNONYMS, NOW);
+  check('「カートに入れたら在庫は確保されますか」はstockへ誤吸着しない',
+    !(rCartOnly.type === 'answer' && rCartOnly.entry.id === 'stock'));
+
+  // --- F-02: 通常在庫質問ルーティング修正 ---
+  var stockEntry = REAL_KB.find(function (e) { return e.id === 'stock'; });
+  var f02NormalStockQuestions = [
+    '在庫はありますか', '在庫がありますか', '在庫ありますか', '在庫は残っていますか', 'まだ在庫はありますか',
+    'Is this in stock?', 'Is this item in stock?', 'Do you have this in stock?', 'Is it available?',
+    '有库存吗', '还有库存吗'
+  ];
+  f02NormalStockQuestions.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-02通常在庫: 「' + q + '」はstockのanswerになる', r.type === 'answer' && r.entry && r.entry.id === 'stock');
+    check('F-02通常在庫: 「' + q + '」の回答本文はstock KB本文と完全一致',
+      r.type === 'answer' && r.entry
+      && r.entry.answer.ja === stockEntry.answer.ja
+      && r.entry.answer.en === stockEntry.answer.en
+      && r.entry.answer.zh === stockEntry.answer.zh);
+    check('F-02通常在庫: 「' + q + '」はcart_inventory_reservationへ誤吸着しない',
+      !(r.type === 'escalate' && r.matchedId === 'cart_inventory_reservation'));
+  });
+
+  var f02NegativeVagueQuestions = ['在庫', '商品はありますか', 'available'];
+  f02NegativeVagueQuestions.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-02否定例: 曖昧な単語「' + q + '」はstockへ断定回答されない',
+      !(r.type === 'answer' && r.entry && r.entry.id === 'stock'));
+  });
+
+  var f02CartCompoundQuestions = [
+    'カートに入れた商品はまだ在庫がありますか',
+    'カートに入れた商品の在庫はありますか',
+    'カートの商品の在庫はありますか',
+    'Is the item in my cart still in stock?',
+    'Is the product in my cart still available?',
+    '购物车里的商品还有库存吗'
+  ];
+  f02CartCompoundQuestions.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-02カート複合: 「' + q + '」はMATCHED_BUT_UNANSWERABLE（cart_inventory_reservation）になる',
+      r.type === 'escalate' && r.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && r.matchedId === 'cart_inventory_reservation');
+    check('F-02カート複合: 「' + q + '」はstockを回答しない', !(r.type === 'answer' && r.entry && r.entry.id === 'stock'));
+    check('F-02カート複合: 「' + q + '」は回答本文を含まない', r.entry === undefined);
+  });
+
+  var f02F01Regression = [
+    'カートに入れたのに売り切れました',
+    'カートに入れたのに売り切れました。なぜですか'
+  ];
+  f02F01Regression.forEach(function (q) {
+    var r = Core.matchQuery(q, REAL_KB, REAL_SYNONYMS, NOW);
+    check('F-02のF-01無回帰: 「' + q + '」は引き続きMATCHED_BUT_UNANSWERABLE（cart_inventory_reservation）',
+      r.type === 'escalate' && r.reasonCode === 'MATCHED_BUT_UNANSWERABLE' && r.matchedId === 'cart_inventory_reservation');
+  });
+
+  // stock/cart_inventory_reservationのq配列に正規化後の重複がないこと
+  function checkNoNormalizedDup(entry) {
+    var seen = {};
+    var dupFound = false;
+    (entry.q || []).forEach(function (qv) {
+      var n = Core.normalize(qv);
+      if (seen[n]) dupFound = true;
+      seen[n] = true;
+    });
+    return !dupFound;
+  }
+  check('F-02: stockのq配列に正規化後の重複がない', checkNoNormalizedDup(stockEntry));
+  check('F-02: cart_inventory_reservationのq配列に正規化後の重複がない', checkNoNormalizedDup(cartEntry));
+})();
+
 Promise.all(pending).then(function () {
   console.log('\n=== SUMMARY ===');
   var failed = results.filter(function (r) { return !r[1]; });

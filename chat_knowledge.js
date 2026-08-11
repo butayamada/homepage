@@ -255,7 +255,12 @@ CHAT_ROOT.CHAT_KB = [
     reviewedAt: "2026-08-10",
     validFrom: null,
     validUntil: null,
-    q: ["在庫ある", "在庫確認", "売り切れ", "is it in stock"],
+    q: [
+      "在庫ある", "在庫確認", "売り切れ", "is it in stock",
+      "在庫はありますか", "在庫がありますか", "在庫ありますか", "在庫は残っていますか", "まだ在庫はありますか",
+      "Is this in stock?", "Is this item in stock?", "Do you have this in stock?", "Is it available?",
+      "有库存吗", "还有库存吗"
+    ],
     keywords: ["在庫", "売り切れ", "soldout", "stock", "availability", "库存", "缺货"],
     answer: {
       ja: "在庫は商品ページの表示をご確認ください。確実な確認をご希望の場合はお問い合わせください。",
@@ -358,7 +363,10 @@ CHAT_ROOT.CHAT_KB = [
       "カートに商品を入れておいたのに売り切れ", "カートに追加したのに在庫がなくなっていた",
       "Does adding it to my cart reserve it?", "Is an item held when it is in my cart?",
       "why did the item in my cart become sold out", "the product in my cart is now out of stock",
-      "加入购物车后会保留库存吗", "购物车里的商品怎么变成缺货了"
+      "加入购物车后会保留库存吗", "购物车里的商品怎么变成缺货了",
+      "カートに入れた商品はまだ在庫がありますか", "カートに入れた商品の在庫はありますか", "カートの商品の在庫はありますか",
+      "Is the item in my cart still in stock?", "Is the product in my cart still available?",
+      "购物车里的商品还有库存吗"
     ],
     keywords: ["カート", "在庫確保", "cart", "reserve", "购物车"],
     answer: {

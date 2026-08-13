@@ -258,6 +258,12 @@ var LANG_TRANSLATIONS = {
     cart_note_too_long:    "500文字を超える内容は保存されません",
     cart_note_checkout_save_failed: "ご注文備考の保存に失敗しました。もう一度お試しの上、チェックアウトへお進みください。",
 
+    // 在庫再確認・Checkout安全停止（Phase 6-B F-01）
+    cart_stock_no_reservation_notice: "カートに入れただけでは在庫は確保されません。ご注文は決済完了順に確定します。",
+    cart_stock_insufficient_notice: "在庫が変動したため、この数量では購入できません。数量を変更するか、商品をカートから削除してください。",
+    cart_stock_sold_out_notice: "この商品は売り切れました。カートから削除してください。",
+    cart_stock_check_failed_checkout: "在庫を確認できませんでした。チェックアウトには進まず、時間をおいて再度お試しください。",
+
     // オンラインショップ入場時の注意事項モーダル（UIラベルのみ翻訳対象。本文は日本語を正本とする）
     shop_notice_title:     "オンラインショップご利用案内",
     shop_notice_subtitle:  "ご注文前に必ずお読みください",
@@ -507,6 +513,11 @@ var LANG_TRANSLATIONS = {
     cart_note_too_long:    "Content over 500 characters will not be saved",
     cart_note_checkout_save_failed: "Could not save your order note. Please try again before checking out.",
 
+    cart_stock_no_reservation_notice: "Items are not reserved when added to your cart. Orders are confirmed in the order payment is completed.",
+    cart_stock_insufficient_notice: "Stock has changed and this quantity is no longer available. Please reduce the quantity or remove the item from your cart.",
+    cart_stock_sold_out_notice: "This item is sold out. Please remove it from your cart.",
+    cart_stock_check_failed_checkout: "We could not confirm current stock. Checkout has been paused; please try again shortly.",
+
     shop_notice_title:     "Online Shop Notice",
     shop_notice_subtitle:  "Please read before ordering",
     shop_notice_next:      "Next",
@@ -754,6 +765,11 @@ var LANG_TRANSLATIONS = {
     cart_note_save_failed: "保存失败",
     cart_note_too_long:    "超过500字的内容将不会被保存",
     cart_note_checkout_save_failed: "订单备注保存失败，请重试后再进行结账。",
+
+    cart_stock_no_reservation_notice: "商品加入购物车后不会保留库存。订单按付款完成顺序确认。",
+    cart_stock_insufficient_notice: "库存已发生变化，当前数量无法购买。请减少数量或从购物车中删除该商品。",
+    cart_stock_sold_out_notice: "该商品已售罄。请从购物车中删除。",
+    cart_stock_check_failed_checkout: "无法确认当前库存，结账已暂停。请稍后重试。",
 
     shop_notice_title:     "网上商店须知",
     shop_notice_subtitle:  "下单前请务必阅读",

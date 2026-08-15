@@ -214,6 +214,26 @@
    * Cart line 1件のVariant在庫状態を判定する。
    * status: AVAILABLE / BACKORDER_ALLOWED / SOLD_OUT / NOT_ENOUGH_STOCK / UNKNOWN
    */
+  function isStrictBoolean(v) {
+    return typeof v === 'boolean';
+  }
+  // 正の整数（Cart lineの要求数量用）。有限・整数・0より大きいことを厳格に要求する。
+  function isPositiveInteger(v) {
+    return typeof v === 'number' && isFinite(v) && Number.isInteger(v) && v > 0;
+  }
+  // 0以上の有限整数（quantityAvailable用）。0は許可する。
+  function isNonNegativeInteger(v) {
+    return typeof v === 'number' && isFinite(v) && Number.isInteger(v) && v >= 0;
+  }
+
+  /**
+   * F-02A: 判定前に在庫フィールドを厳格型検証する。
+   * availableForSale / currentlyNotInStock は typeof === 'boolean' 以外すべてUNKNOWN
+   * （"true"/"false"文字列、0/1、null、undefined、配列、オブジェクトいずれも変換しない）。
+   * 数量は正の整数（要求数量）・0以上の有限整数（quantityAvailable）以外UNKNOWN。
+   * 判定順: 1.構造検証 2.boolean型検証 3.要求数量検証 4.quantityAvailable検証
+   *         5.SOLD_OUT 6.BACKORDER_ALLOWED 7.通常数量比較 8.その他UNKNOWN
+   */
   function lineInventoryStatus(line) {
     var lineId = (line && typeof line === 'object' && line.id) || null;
     var quantity = line && line.quantity;
@@ -221,35 +241,38 @@
     var merchandiseId = (merch && typeof merch === 'object' && merch.id) || null;
     var productTitle = (merch && merch.product && merch.product.title) || null;
     var variantTitle = (merch && merch.title) || null;
-    var requestedQuantity = isFiniteNumber(quantity) ? quantity : null;
 
-    function unknown(availableQuantity) {
+    function unknown(requestedQuantity, availableQuantity) {
       return {
         lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
-        variantTitle: variantTitle, requestedQuantity: requestedQuantity,
+        variantTitle: variantTitle,
+        requestedQuantity: (requestedQuantity === undefined) ? null : requestedQuantity,
         availableQuantity: (availableQuantity === undefined) ? null : availableQuantity,
         status: 'UNKNOWN'
       };
     }
 
+    // 1. line・merchandise構造検証
     if (!line || typeof line !== 'object' || !lineId) return unknown();
-    if (!isFiniteNumber(quantity) || quantity <= 0) return unknown();
     if (!merch || typeof merch !== 'object' || !merchandiseId) return unknown();
 
+    // 2. boolean 2項目の型検証（値の変換・truthy/falsy判定は一切行わない）
     var availableForSale = merch.availableForSale;
     var currentlyNotInStock = merch.currentlyNotInStock;
-    var quantityAvailable = merch.quantityAvailable;
-    var qtyKnown = isFiniteNumber(quantityAvailable) && quantityAvailable >= 0;
-
-    if (availableForSale === true && currentlyNotInStock === true) {
-      return {
-        lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
-        variantTitle: variantTitle, requestedQuantity: requestedQuantity,
-        availableQuantity: qtyKnown ? quantityAvailable : null,
-        status: 'BACKORDER_ALLOWED'
-      };
+    if (!isStrictBoolean(availableForSale) || !isStrictBoolean(currentlyNotInStock)) {
+      return unknown(isPositiveInteger(quantity) ? quantity : null);
     }
-    if (availableForSale !== true) {
+
+    // 3. 要求数量の検証（正の整数のみ）
+    if (!isPositiveInteger(quantity)) return unknown();
+    var requestedQuantity = quantity;
+
+    // 4. quantityAvailableの検証（0以上の有限整数のみ、欠落・null・負数・小数・文字列・NaN・Infinityは不明）
+    var quantityAvailable = merch.quantityAvailable;
+    var qtyKnown = isNonNegativeInteger(quantityAvailable);
+
+    // 5. 売切れ
+    if (availableForSale === false) {
       return {
         lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
         variantTitle: variantTitle, requestedQuantity: requestedQuantity,
@@ -257,8 +280,19 @@
         status: 'SOLD_OUT'
       };
     }
-    // ここでは availableForSale === true かつ currentlyNotInStock !== true
-    if (!qtyKnown) return unknown();
+
+    // 6. 受注販売（CONTINUE）。quantityAvailableが欠落・不正型なら安全のためUNKNOWN（0は許可）。
+    if (availableForSale === true && currentlyNotInStock === true) {
+      if (!qtyKnown) return unknown(requestedQuantity);
+      return {
+        lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
+        variantTitle: variantTitle, requestedQuantity: requestedQuantity,
+        availableQuantity: quantityAvailable, status: 'BACKORDER_ALLOWED'
+      };
+    }
+
+    // 7. 通常商品の数量比較（ここでは availableForSale === true かつ currentlyNotInStock === false）
+    if (!qtyKnown) return unknown(requestedQuantity);
     if (requestedQuantity > quantityAvailable) {
       return {
         lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
@@ -300,10 +334,45 @@
     return { ok: false, code: code, issues: issues };
   }
 
+  var GLOBAL_ROOT = typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this);
+
+  /**
+   * F-02B: Checkout URLの厳格検証（純粋関数）。assertValidFetchedCart・
+   * planCheckoutTransitionの両方から呼ぶ — 上流で確認済みという前提を置かず、
+   * 遷移計画側でも必ず再検証する。
+   * 許可条件: 文字列／空文字でない／new URL()で解析可能／protocolが厳密に'https:'／
+   * hostnameが設定済みShopifyストアドメインと完全一致（部分一致・suffix一致は不可）／
+   * username・passwordなし／非標準portなし。
+   * 期待hostnameは可能な限りSHOP_CONFIG.domainから取得する（ハードコード重複を避ける）。
+   * SHOP_CONFIG.domain自体が欠落・不正な場合はfail-closedで常にfalseを返す。
+   */
+  function hasControlChar(s) {
+    for (var i = 0; i < s.length; i++) {
+      var code = s.charCodeAt(i);
+      if (code <= 31 || code === 127) return true;
+    }
+    return false;
+  }
+
+  function isValidCheckoutUrl(value) {
+    if (typeof value !== 'string' || value.length === 0) return false;
+    if (hasControlChar(value)) return false; // controls
+    if (value.indexOf(String.fromCharCode(92)) !== -1) return false; // backslash-spoofed URL
+    var expectedHost = GLOBAL_ROOT && GLOBAL_ROOT.SHOP_CONFIG && GLOBAL_ROOT.SHOP_CONFIG.domain;
+    if (typeof expectedHost !== 'string' || expectedHost.length === 0) return false;
+    var u;
+    try { u = new URL(value); } catch (e) { return false; }
+    if (u.protocol !== 'https:') return false;
+    if (u.hostname !== expectedHost) return false; // 完全一致のみ。部分一致・suffix一致は使わない
+    if (u.username || u.password) return false;
+    if (u.port) return false; // 非標準portなし
+    return true;
+  }
+
   /**
    * fetchCart()応答の厳格検証。cart欠落／id不一致／lines.edgesが配列でない／
-   * （requireCheckoutUrl指定時）checkoutUrl欠落はすべてthrowする。
-   * 呼び出し元でrejectとして扱う（成功を推測しない）。
+   * （requireCheckoutUrl指定時）checkoutUrlが厳格検証（isValidCheckoutUrl）を
+   * 通らない場合はすべてthrowする。呼び出し元でrejectとして扱う（成功を推測しない）。
    */
   function assertValidFetchedCart(cart, expectedCartId, opts) {
     opts = opts || {};
@@ -316,8 +385,8 @@
     if (!cart.lines || !Array.isArray(cart.lines.edges)) {
       throw new Error('Cart lines missing or malformed');
     }
-    if (opts.requireCheckoutUrl && !cart.checkoutUrl) {
-      throw new Error('Cart checkoutUrl missing');
+    if (opts.requireCheckoutUrl && !isValidCheckoutUrl(cart.checkoutUrl)) {
+      throw new Error('Cart checkoutUrl missing or invalid');
     }
     return cart;
   }
@@ -326,6 +395,8 @@
    * Checkout直前の最終判定（純粋関数）。fetchCartで既に厳格検証済みのCartを受け取り、
    * 「NAVIGATE（遷移してよい）」か「BLOCK（遷移禁止、理由あり）」かだけを返す。
    * window.location等の副作用は一切持たない — 呼び出し元（ブラウザUI）が実際の遷移を行う。
+   * checkoutUrlは上流（assertValidFetchedCart）で確認済みという前提を置かず、
+   * ここでも必ずisValidCheckoutUrlで再検証する — 不正なURLは絶対にNAVIGATEを返さない。
    */
   function planCheckoutTransition(freshCart, expectedCartId) {
     if (!freshCart || freshCart.id !== expectedCartId) {
@@ -335,7 +406,7 @@
     if (!inv.ok) {
       return { action: 'BLOCK', code: inv.code, issues: inv.issues };
     }
-    if (!freshCart.checkoutUrl) {
+    if (!isValidCheckoutUrl(freshCart.checkoutUrl)) {
       return { action: 'BLOCK', code: 'CHECKOUT_URL_MISSING', issues: inv.issues };
     }
     return { action: 'NAVIGATE', url: freshCart.checkoutUrl, issues: inv.issues };
@@ -367,6 +438,7 @@
   return {
     lineInventoryStatus: lineInventoryStatus,
     validateCartInventoryForCheckout: validateCartInventoryForCheckout,
+    isValidCheckoutUrl: isValidCheckoutUrl,
     assertValidFetchedCart: assertValidFetchedCart,
     planCheckoutTransition: planCheckoutTransition,
     matchWarningsToLines: matchWarningsToLines

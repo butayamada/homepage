@@ -185,6 +185,266 @@
   };
 });
 
+/* =====================================================
+   カート在庫再確認・Checkout安全停止（Phase 6-B F-01） — 純粋関数のみ。
+   ブラウザ・Node回帰テストの両方から同一実装を呼ぶ（CartNoteLogicと同じ方針）。
+   入力値から成功状態を推測するフォールバックは行わない — 判定できない場合は
+   常にUNKNOWN（Checkout不可）へ倒す。
+   ===================================================== */
+(function (root, factory) {
+  var mod = factory();
+  // module.exportsを丸ごと差し替えず、既存のCartNoteLogicのexportへ合流させる
+  // （同一ファイル内に複数のUMDモジュールがあるため、後勝ちで上書きしない）。
+  if (typeof module === 'object' && module.exports) {
+    if (module.exports && typeof module.exports === 'object') {
+      for (var k in mod) { module.exports[k] = mod[k]; }
+    } else {
+      module.exports = mod;
+    }
+  }
+  if (root) root.CartInventoryGuard = mod;
+})(typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this), function () {
+  'use strict';
+
+  function isFiniteNumber(v) {
+    return typeof v === 'number' && isFinite(v);
+  }
+
+  /**
+   * Cart line 1件のVariant在庫状態を判定する。
+   * status: AVAILABLE / BACKORDER_ALLOWED / SOLD_OUT / NOT_ENOUGH_STOCK / UNKNOWN
+   */
+  function isStrictBoolean(v) {
+    return typeof v === 'boolean';
+  }
+  // 正の整数（Cart lineの要求数量用）。有限・整数・0より大きいことを厳格に要求する。
+  function isPositiveInteger(v) {
+    return typeof v === 'number' && isFinite(v) && Number.isInteger(v) && v > 0;
+  }
+  // 0以上の有限整数（quantityAvailable用）。0は許可する。
+  function isNonNegativeInteger(v) {
+    return typeof v === 'number' && isFinite(v) && Number.isInteger(v) && v >= 0;
+  }
+
+  /**
+   * F-02A: 判定前に在庫フィールドを厳格型検証する。
+   * availableForSale / currentlyNotInStock は typeof === 'boolean' 以外すべてUNKNOWN
+   * （"true"/"false"文字列、0/1、null、undefined、配列、オブジェクトいずれも変換しない）。
+   * 数量は正の整数（要求数量）・0以上の有限整数（quantityAvailable）以外UNKNOWN。
+   * 判定順: 1.構造検証 2.boolean型検証 3.要求数量検証 4.quantityAvailable検証
+   *         5.SOLD_OUT 6.BACKORDER_ALLOWED 7.通常数量比較 8.その他UNKNOWN
+   */
+  function lineInventoryStatus(line) {
+    var lineId = (line && typeof line === 'object' && line.id) || null;
+    var quantity = line && line.quantity;
+    var merch = line && line.merchandise;
+    var merchandiseId = (merch && typeof merch === 'object' && merch.id) || null;
+    var productTitle = (merch && merch.product && merch.product.title) || null;
+    var variantTitle = (merch && merch.title) || null;
+
+    function unknown(requestedQuantity, availableQuantity) {
+      return {
+        lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
+        variantTitle: variantTitle,
+        requestedQuantity: (requestedQuantity === undefined) ? null : requestedQuantity,
+        availableQuantity: (availableQuantity === undefined) ? null : availableQuantity,
+        status: 'UNKNOWN'
+      };
+    }
+
+    // 1. line・merchandise構造検証
+    if (!line || typeof line !== 'object' || !lineId) return unknown();
+    if (!merch || typeof merch !== 'object' || !merchandiseId) return unknown();
+
+    // 2. boolean 2項目の型検証（値の変換・truthy/falsy判定は一切行わない）
+    var availableForSale = merch.availableForSale;
+    var currentlyNotInStock = merch.currentlyNotInStock;
+    if (!isStrictBoolean(availableForSale) || !isStrictBoolean(currentlyNotInStock)) {
+      return unknown(isPositiveInteger(quantity) ? quantity : null);
+    }
+
+    // 3. 要求数量の検証（正の整数のみ）
+    if (!isPositiveInteger(quantity)) return unknown();
+    var requestedQuantity = quantity;
+
+    // 4. quantityAvailableの検証（0以上の有限整数のみ、欠落・null・負数・小数・文字列・NaN・Infinityは不明）
+    var quantityAvailable = merch.quantityAvailable;
+    var qtyKnown = isNonNegativeInteger(quantityAvailable);
+
+    // 5. 売切れ
+    if (availableForSale === false) {
+      return {
+        lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
+        variantTitle: variantTitle, requestedQuantity: requestedQuantity,
+        availableQuantity: qtyKnown ? quantityAvailable : null,
+        status: 'SOLD_OUT'
+      };
+    }
+
+    // 6. 受注販売（CONTINUE）。quantityAvailableが欠落・不正型なら安全のためUNKNOWN（0は許可）。
+    if (availableForSale === true && currentlyNotInStock === true) {
+      if (!qtyKnown) return unknown(requestedQuantity);
+      return {
+        lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
+        variantTitle: variantTitle, requestedQuantity: requestedQuantity,
+        availableQuantity: quantityAvailable, status: 'BACKORDER_ALLOWED'
+      };
+    }
+
+    // 7. 通常商品の数量比較（ここでは availableForSale === true かつ currentlyNotInStock === false）
+    if (!qtyKnown) return unknown(requestedQuantity);
+    if (requestedQuantity > quantityAvailable) {
+      return {
+        lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
+        variantTitle: variantTitle, requestedQuantity: requestedQuantity,
+        availableQuantity: quantityAvailable, status: 'NOT_ENOUGH_STOCK'
+      };
+    }
+    return {
+      lineId: lineId, merchandiseId: merchandiseId, productTitle: productTitle,
+      variantTitle: variantTitle, requestedQuantity: requestedQuantity,
+      availableQuantity: quantityAvailable, status: 'AVAILABLE'
+    };
+  }
+
+  /**
+   * Cart全体を検証し、Checkoutへ進んでよいかを判定する純粋関数。
+   * ok===true となるのは、空でないCartの全行がAVAILABLEまたはBACKORDER_ALLOWEDの場合のみ。
+   * code: OK / CART_MISSING / LINES_MISSING / EMPTY_CART / SOLD_OUT / NOT_ENOUGH_STOCK / UNKNOWN_STOCK
+   */
+  function validateCartInventoryForCheckout(cart) {
+    if (!cart || typeof cart !== 'object') {
+      return { ok: false, code: 'CART_MISSING', issues: [] };
+    }
+    var edges = cart.lines && cart.lines.edges;
+    if (!Array.isArray(edges)) {
+      return { ok: false, code: 'LINES_MISSING', issues: [] };
+    }
+    if (edges.length === 0) {
+      return { ok: false, code: 'EMPTY_CART', issues: [] };
+    }
+    var issues = edges.map(function (edge) { return lineInventoryStatus(edge && edge.node); });
+    var blocking = issues.filter(function (i) { return i.status !== 'AVAILABLE' && i.status !== 'BACKORDER_ALLOWED'; });
+    if (!blocking.length) {
+      return { ok: true, code: 'OK', issues: issues };
+    }
+    var code = blocking.some(function (i) { return i.status === 'SOLD_OUT'; }) ? 'SOLD_OUT'
+      : blocking.some(function (i) { return i.status === 'NOT_ENOUGH_STOCK'; }) ? 'NOT_ENOUGH_STOCK'
+      : 'UNKNOWN_STOCK';
+    return { ok: false, code: code, issues: issues };
+  }
+
+  var GLOBAL_ROOT = typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this);
+
+  /**
+   * F-02B: Checkout URLの厳格検証（純粋関数）。assertValidFetchedCart・
+   * planCheckoutTransitionの両方から呼ぶ — 上流で確認済みという前提を置かず、
+   * 遷移計画側でも必ず再検証する。
+   * 許可条件: 文字列／空文字でない／new URL()で解析可能／protocolが厳密に'https:'／
+   * hostnameが設定済みShopifyストアドメインと完全一致（部分一致・suffix一致は不可）／
+   * username・passwordなし／非標準portなし。
+   * 期待hostnameは可能な限りSHOP_CONFIG.domainから取得する（ハードコード重複を避ける）。
+   * SHOP_CONFIG.domain自体が欠落・不正な場合はfail-closedで常にfalseを返す。
+   */
+  function hasControlChar(s) {
+    for (var i = 0; i < s.length; i++) {
+      var code = s.charCodeAt(i);
+      if (code <= 31 || code === 127) return true;
+    }
+    return false;
+  }
+
+  function isValidCheckoutUrl(value) {
+    if (typeof value !== 'string' || value.length === 0) return false;
+    if (hasControlChar(value)) return false; // controls
+    if (value.indexOf(String.fromCharCode(92)) !== -1) return false; // backslash-spoofed URL
+    var expectedHost = GLOBAL_ROOT && GLOBAL_ROOT.SHOP_CONFIG && GLOBAL_ROOT.SHOP_CONFIG.domain;
+    if (typeof expectedHost !== 'string' || expectedHost.length === 0) return false;
+    var u;
+    try { u = new URL(value); } catch (e) { return false; }
+    if (u.protocol !== 'https:') return false;
+    if (u.hostname !== expectedHost) return false; // 完全一致のみ。部分一致・suffix一致は使わない
+    if (u.username || u.password) return false;
+    if (u.port) return false; // 非標準portなし
+    return true;
+  }
+
+  /**
+   * fetchCart()応答の厳格検証。cart欠落／id不一致／lines.edgesが配列でない／
+   * （requireCheckoutUrl指定時）checkoutUrlが厳格検証（isValidCheckoutUrl）を
+   * 通らない場合はすべてthrowする。呼び出し元でrejectとして扱う（成功を推測しない）。
+   */
+  function assertValidFetchedCart(cart, expectedCartId, opts) {
+    opts = opts || {};
+    if (!cart || typeof cart !== 'object' || !cart.id) {
+      throw new Error('Cart missing or malformed');
+    }
+    if (expectedCartId && cart.id !== expectedCartId) {
+      throw new Error('Cart id mismatch');
+    }
+    if (!cart.lines || !Array.isArray(cart.lines.edges)) {
+      throw new Error('Cart lines missing or malformed');
+    }
+    if (opts.requireCheckoutUrl && !isValidCheckoutUrl(cart.checkoutUrl)) {
+      throw new Error('Cart checkoutUrl missing or invalid');
+    }
+    return cart;
+  }
+
+  /**
+   * Checkout直前の最終判定（純粋関数）。fetchCartで既に厳格検証済みのCartを受け取り、
+   * 「NAVIGATE（遷移してよい）」か「BLOCK（遷移禁止、理由あり）」かだけを返す。
+   * window.location等の副作用は一切持たない — 呼び出し元（ブラウザUI）が実際の遷移を行う。
+   * checkoutUrlは上流（assertValidFetchedCart）で確認済みという前提を置かず、
+   * ここでも必ずisValidCheckoutUrlで再検証する — 不正なURLは絶対にNAVIGATEを返さない。
+   */
+  function planCheckoutTransition(freshCart, expectedCartId) {
+    if (!freshCart || freshCart.id !== expectedCartId) {
+      return { action: 'BLOCK', code: 'CART_ID_MISMATCH', issues: [] };
+    }
+    var inv = validateCartInventoryForCheckout(freshCart);
+    if (!inv.ok) {
+      return { action: 'BLOCK', code: inv.code, issues: inv.issues };
+    }
+    if (!isValidCheckoutUrl(freshCart.checkoutUrl)) {
+      return { action: 'BLOCK', code: 'CHECKOUT_URL_MISSING', issues: inv.issues };
+    }
+    return { action: 'NAVIGATE', url: freshCart.checkoutUrl, issues: inv.issues };
+  }
+
+  /**
+   * Cart mutationのwarningsを、対象のCart line IDへ厳密一致でのみ紐付ける（純粋関数）。
+   * target欠落・未知target（現在のCartに存在しないline id）は個別行へ割り当てず、
+   * generalWarningCode（Cart全体の警告）として扱う。不明なtargetを別商品へ推測で
+   * 割り当てない。対象コードは MERCHANDISE_OUT_OF_STOCK / MERCHANDISE_NOT_ENOUGH_STOCK のみ
+   * （MERCHANDISE_NOT_APPLICABLEはCartErrorCode側であり、ここでは扱わない）。
+   */
+  function matchWarningsToLines(warnings, cart) {
+    var byLine = {};
+    var generalWarningCode = null;
+    var edges = (cart && cart.lines && cart.lines.edges) || [];
+    (warnings || []).forEach(function (w) {
+      if (!w || (w.code !== 'MERCHANDISE_OUT_OF_STOCK' && w.code !== 'MERCHANDISE_NOT_ENOUGH_STOCK')) return;
+      var matchedLineId = null;
+      if (w.target) {
+        edges.forEach(function (e) { if (e && e.node && e.node.id === w.target) matchedLineId = e.node.id; });
+      }
+      if (matchedLineId) { byLine[matchedLineId] = w.code; }
+      else { generalWarningCode = w.code; }
+    });
+    return { byLine: byLine, generalWarningCode: generalWarningCode };
+  }
+
+  return {
+    lineInventoryStatus: lineInventoryStatus,
+    validateCartInventoryForCheckout: validateCartInventoryForCheckout,
+    isValidCheckoutUrl: isValidCheckoutUrl,
+    assertValidFetchedCart: assertValidFetchedCart,
+    planCheckoutTransition: planCheckoutTransition,
+    matchWarningsToLines: matchWarningsToLines
+  };
+});
+
 // 以降はブラウザのカートUI本体（DOM必須）。Node（回帰テスト）でrequire()した際は
 // document が無いため実行しない — CartNoteLogicのexportだけを取得できればよい。
 if (typeof document !== 'undefined') {
@@ -211,7 +471,10 @@ if (typeof document !== 'undefined') {
     '.cart-order-note-textarea:focus-visible{outline:1px solid var(--sumi);outline-offset:1px;}' +
     '.cart-order-note-status{display:flex;justify-content:space-between;align-items:baseline;font-size:.62rem;letter-spacing:.05em;color:var(--hai);margin-top:.4rem;gap:.6rem;}' +
     '.cart-order-note-state{white-space:nowrap;}' +
-    '.cart-order-note-state.is-error{color:#8a3a30;}';
+    '.cart-order-note-state.is-error{color:#8a3a30;}' +
+    '.cart-row-warning{border-bottom-color:rgba(181,71,58,.4);}' +
+    '.c-row-warning{grid-column:1/-1;font-size:.68rem;line-height:1.6;letter-spacing:.02em;color:#8a3a30;margin:.3rem 0 0;}' +
+    '.cart-stock-notice{font-size:.68rem;line-height:1.7;letter-spacing:.02em;color:var(--hai);margin:0 0 .8rem;}';
   document.head.appendChild(style);
 
   var CART_KEY = 'arc_cart_id';
@@ -233,17 +496,16 @@ if (typeof document !== 'undefined') {
 
   if (!cartDrawer || !cartOpenBtn) return; // このページにカートUIが無ければ何もしない
 
-  if (cartNoteEl) {
-    cartNoteEl.innerHTML = 'Shopifyによる安全な決済。在庫の最終確定はチェックアウト時にShopify側で行われます。<br>' +
-      'Secure checkout by Shopify. Final stock availability is confirmed by Shopify at checkout.';
-  }
-
   /* ---------- 多言語対応（指示書22追記） ----------
      lang.js の LANG_TRANSLATIONS[lang] を参照。arc_lang の現在値に基づき都度翻訳する。 */
   var SHOP_MESSAGE_FALLBACKS = {
     shop_sold_out_other: 'Sold out due to other orders.',
     shop_stock_adjusted: 'Quantity adjusted due to stock changes.',
-    cart_note_checkout_save_failed: 'Could not save your order note. Please try again before checking out.'
+    cart_note_checkout_save_failed: 'Could not save your order note. Please try again before checking out.',
+    cart_stock_no_reservation_notice: 'Items are not reserved when added to your cart. Orders are confirmed in the order payment is completed.',
+    cart_stock_insufficient_notice: 'Stock has changed and this quantity is no longer available. Please reduce the quantity or remove the item from your cart.',
+    cart_stock_sold_out_notice: 'This item is sold out. Please remove it from your cart.',
+    cart_stock_check_failed_checkout: 'We could not confirm current stock. Checkout has been paused; please try again shortly.'
   };
   function currentLang() {
     try { return localStorage.getItem('arc_lang') || 'ja'; } catch (e) { return 'ja'; }
@@ -262,14 +524,14 @@ if (typeof document !== 'undefined') {
     cartMessageEl.style.display = '';
   }
 
-  function warningsToKey(warnings) {
-    if (!warnings || !warnings.length) return null;
-    var hasOutOfStock = warnings.some(function (w) { return w.code === 'MERCHANDISE_OUT_OF_STOCK'; });
-    var hasNotEnough = warnings.some(function (w) { return w.code === 'MERCHANDISE_NOT_ENOUGH_STOCK'; });
-    if (hasOutOfStock) return 'shop_sold_out_other';
-    if (hasNotEnough) return 'shop_stock_adjusted';
-    return null;
+  // 「カートに入れただけでは在庫は確保されない」注意書き（3言語、指示書F-01 §7）。
+  // 既存のShopifyによる安全な決済の注記に加えて表示する。
+  function renderStockNotice() {
+    if (!cartNoteEl) return;
+    cartNoteEl.textContent = t('cart_stock_no_reservation_notice',
+      'Items are not reserved when added to your cart. Orders are confirmed in the order payment is completed.');
   }
+  renderStockNotice();
 
   // setLang() 実行時に、既に表示中のカートメッセージ／商品ページ側の在庫UIを再翻訳する。
   // lang.js 本体は変更せず、window.setLang をラップして再描画フックを追加する。
@@ -277,6 +539,7 @@ if (typeof document !== 'undefined') {
     var _origSetLang = window.setLang;
     window.setLang = function (lang) {
       _origSetLang(lang);
+      renderStockNotice();
       if (lastMessageKey) showCartMessage(lastMessageKey);
       // ご注文備考の状態表示（保存中/保存済み等）だけ再翻訳する。入力済みの本文は一切変更しない。
       if (noteSaver && cartOrderNoteStatusEl && !cartOrderNoteStatusEl.__toolong) {
@@ -299,7 +562,6 @@ if (typeof document !== 'undefined') {
     // 失敗してもunhandledrejection・console errorにしない（runBackgroundNoteSave内でcatch済み）。
     if (!open && noteSaver) { flushNoteDebounce(); runBackgroundNoteSave(); }
   }
-  cartOpenBtn.addEventListener('click', function () { setCart(true); });
   if (cartCloseBtn) cartCloseBtn.addEventListener('click', function () { setCart(false); });
   if (cartScrim) cartScrim.addEventListener('click', function () { setCart(false); });
   document.addEventListener('keydown', function (e) {
@@ -307,16 +569,24 @@ if (typeof document !== 'undefined') {
   });
 
   /* ---------- Checkoutボタンのdisabled状態を一箇所で管理する ----------
-     自動保存中／Checkout処理中／disableCommerce後、という複数の理由が競合して
-     互いのdisabled解除を上書きしないよう、理由ごとのフラグからdisabled値を
-     毎回再計算する（直接 cartCheckoutBtn.disabled に代入する箇所を増やさない）。
-     commerceDisabled は一度trueになったら絶対にfalseへ戻さない。 */
+     自動保存中／Checkout処理中／disableCommerce後／カート再取得中／再取得失敗／
+     在庫未確認、という複数の理由が競合して互いのdisabled解除を上書きしないよう、
+     理由ごとのフラグからdisabled値を毎回再計算する
+     （直接 cartCheckoutBtn.disabled に代入する箇所を増やさない）。
+     commerceDisabled は一度trueになったら絶対にfalseへ戻さない。
+     lastInventoryResult は「まだ在庫検証していない」状態をnullで区別し、
+     検証前はCheckoutを許可しない（fail-closed）。 */
   var commerceDisabled = false;
   var checkoutInProgress = false;
   var noteAutoSaveBusy = false;
+  var cartRefreshBusy = false;
+  var cartRefreshFailed = false;
+  var lastInventoryResult = null;
   function recomputeCheckoutBtn() {
     if (!cartCheckoutBtn) return;
-    cartCheckoutBtn.disabled = commerceDisabled || checkoutInProgress || noteAutoSaveBusy;
+    var inventoryOk = !!(lastInventoryResult && lastInventoryResult.ok === true);
+    cartCheckoutBtn.disabled = commerceDisabled || checkoutInProgress || noteAutoSaveBusy ||
+      cartRefreshBusy || cartRefreshFailed || !inventoryOk;
   }
 
   /* ---------- 商品ページ等の「準備中」フォールバック表示 ---------- */
@@ -336,7 +606,7 @@ if (typeof document !== 'undefined') {
   var CART_FIELDS =
     'id checkoutUrl totalQuantity note cost{subtotalAmount{amount}} ' +
     'lines(first:50){edges{node{ id quantity cost{totalAmount{amount}} ' +
-    'merchandise{... on ProductVariant{ id title product{title} } } }}}';
+    'merchandise{... on ProductVariant{ id title availableForSale quantityAvailable currentlyNotInStock product{title} } } }}}';
   var RESULT_ERRORS = 'userErrors{code field message} warnings{code message target}';
 
   function gql(query, variables) {
@@ -357,9 +627,11 @@ if (typeof document !== 'undefined') {
       return r;
     });
   }
-  function fetchCart(id) {
+  function fetchCart(id, opts) {
     var query = 'query($id: ID!) { cart(id: $id) { ' + CART_FIELDS + ' } }';
-    return gql(query, { id: id }).then(function (data) { return data.cart; });
+    return gql(query, { id: id }).then(function (data) {
+      return window.CartInventoryGuard.assertValidFetchedCart(data && data.cart, id, opts);
+    });
   }
   function addLine(cartId, merchandiseId, qty) {
     var query = 'mutation($id: ID!, $lines: [CartLineInput!]!) {' +
@@ -432,7 +704,43 @@ if (typeof document !== 'undefined') {
     }
   }
 
-  function renderCart() {
+  /* ---------- 在庫判定結果・warning target の行への紐付け ----------
+     商品を黙って自動削除・自動置換・数量変更しない。対象行を明示し、
+     購入者自身に数量変更または削除をしてもらう。色だけに依存せずテキストで示す。 */
+  var ROW_STATUS_KEYS = {
+    SOLD_OUT: ['cart_stock_sold_out_notice', 'この商品は売り切れました。カートから削除してください。'],
+    NOT_ENOUGH_STOCK: ['cart_stock_insufficient_notice', '在庫が変動したため、この数量では購入できません。数量を変更するか、商品をカートから削除してください。'],
+    UNKNOWN: ['cart_stock_check_failed_checkout', '在庫を確認できませんでした。チェックアウトには進まず、時間をおいて再度お試しください。']
+  };
+
+  var lastWarningsByLine = {};
+  var lastGeneralWarningCode = null;
+  // targetと現在のCart line IDが完全一致した場合だけ対象行へ紐付ける（実体は
+  // CartInventoryGuard.matchWarningsToLines — テスト側と同一実装を通す）。
+  function applyWarnings(warnings, cartForMatching) {
+    var r = window.CartInventoryGuard.matchWarningsToLines(warnings, cartForMatching);
+    lastWarningsByLine = r.byLine;
+    lastGeneralWarningCode = r.generalWarningCode;
+  }
+
+  function updateInventoryState(c) {
+    lastInventoryResult = window.CartInventoryGuard.validateCartInventoryForCheckout(c);
+  }
+
+  function bannerKeyForState() {
+    if (lastInventoryResult && lastInventoryResult.ok === false) {
+      if (lastInventoryResult.code === 'SOLD_OUT') return 'cart_stock_sold_out_notice';
+      if (lastInventoryResult.code === 'NOT_ENOUGH_STOCK') return 'cart_stock_insufficient_notice';
+      if (lastInventoryResult.code === 'EMPTY_CART') return null;
+      return 'cart_stock_check_failed_checkout'; // CART_MISSING / LINES_MISSING / UNKNOWN_STOCK
+    }
+    if (lastGeneralWarningCode === 'MERCHANDISE_OUT_OF_STOCK') return 'cart_stock_sold_out_notice';
+    if (lastGeneralWarningCode === 'MERCHANDISE_NOT_ENOUGH_STOCK') return 'cart_stock_insufficient_notice';
+    return null;
+  }
+
+  function renderCart(adjustedLineIds) {
+    adjustedLineIds = adjustedLineIds || {};
     if (!cart) return;
     var edges = (cart.lines && cart.lines.edges) || [];
     cartCountEl.textContent = cart.totalQuantity || 0;
@@ -441,6 +749,10 @@ if (typeof document !== 'undefined') {
     if (!edges.length) {
       cartItemsEl.innerHTML = '<p class="cart-empty">かごは空です — Your cart is empty.</p>';
       return;
+    }
+    var issuesByLine = {};
+    if (lastInventoryResult && Array.isArray(lastInventoryResult.issues)) {
+      lastInventoryResult.issues.forEach(function (i) { if (i.lineId) issuesByLine[i.lineId] = i; });
     }
     edges.forEach(function (edge) {
       var line = edge.node;
@@ -478,26 +790,66 @@ if (typeof document !== 'undefined') {
       rm.addEventListener('click', function () { doRemove(line.id); });
 
       row.appendChild(name); row.appendChild(qty); row.appendChild(price); row.appendChild(rm);
+
+      // 対象行の在庫問題を明示する（色だけに依存しない：アイコン＋テキスト）。
+      // 自動削除・自動数量変更・自動置換は行わない — 購入者自身の操作を促すのみ。
+      var issue = issuesByLine[line.id];
+      var rowWarningKey = null;
+      var rowWarningFallback = null;
+      if (issue && (issue.status === 'SOLD_OUT' || issue.status === 'NOT_ENOUGH_STOCK' || issue.status === 'UNKNOWN')) {
+        var entry = ROW_STATUS_KEYS[issue.status];
+        rowWarningKey = entry[0];
+        rowWarningFallback = entry[1];
+        if (issue.status === 'NOT_ENOUGH_STOCK' && adjustedLineIds[line.id]) {
+          rowWarningKey = 'shop_stock_adjusted';
+          rowWarningFallback = SHOP_MESSAGE_FALLBACKS.shop_stock_adjusted;
+        }
+      } else if (lastWarningsByLine[line.id]) {
+        var isOutOfStock = lastWarningsByLine[line.id] === 'MERCHANDISE_OUT_OF_STOCK';
+        var wEntry = ROW_STATUS_KEYS[isOutOfStock ? 'SOLD_OUT' : 'NOT_ENOUGH_STOCK'];
+        rowWarningKey = wEntry[0];
+        rowWarningFallback = wEntry[1];
+      }
+      if (rowWarningKey) {
+        row.classList.add('cart-row-warning');
+        var note = document.createElement('p');
+        note.className = 'c-row-warning';
+        note.textContent = '⚠ ' + t(rowWarningKey, rowWarningFallback);
+        row.appendChild(note);
+      }
+
       cartItemsEl.appendChild(row);
     });
   }
 
   function doUpdate(lineId, quantity) {
+    var prevRequested = {}; prevRequested[lineId] = quantity;
     return getOrCreateCart().then(function (c) {
       return updateLine(c.id, lineId, quantity);
     }).then(function (r) {
+      applyWarnings(r.warnings, r.cart);
       setCartRef(r.cart);
-      renderCart();
-      showCartMessage(warningsToKey(r.warnings));
+      updateInventoryState(r.cart);
+      var adjusted = {};
+      (r.cart.lines && r.cart.lines.edges || []).forEach(function (e) {
+        var lid = e.node && e.node.id;
+        if (lid && prevRequested[lid] !== undefined && prevRequested[lid] !== e.node.quantity) adjusted[lid] = true;
+      });
+      renderCart(adjusted);
+      recomputeCheckoutBtn();
+      showCartMessage(bannerKeyForState());
     }).catch(disableCommerce);
   }
   function doRemove(lineId) {
     return getOrCreateCart().then(function (c) {
       return removeLine(c.id, lineId);
     }).then(function (r) {
+      applyWarnings(r.warnings, r.cart);
       setCartRef(r.cart);
+      updateInventoryState(r.cart);
       renderCart();
-      showCartMessage(warningsToKey(r.warnings));
+      recomputeCheckoutBtn();
+      showCartMessage(bannerKeyForState());
     }).catch(disableCommerce);
   }
 
@@ -507,10 +859,13 @@ if (typeof document !== 'undefined') {
       return getOrCreateCart().then(function (c) {
         return addLine(c.id, merchandiseId, qty || 1);
       }).then(function (r) {
+        applyWarnings(r.warnings, r.cart);
         setCartRef(r.cart);
+        updateInventoryState(r.cart);
         renderCart();
         setCart(true);
-        showCartMessage(warningsToKey(r.warnings));
+        recomputeCheckoutBtn();
+        showCartMessage(bannerKeyForState());
         return r;
       });
     },
@@ -519,6 +874,45 @@ if (typeof document !== 'undefined') {
     t: t,
     currentLang: currentLang
   };
+
+  /* ---------- カートを開くたびのCart再取得（Phase 6-B F-01） ----------
+     1. Drawerを開く 2. Checkoutボタンを一時無効化 3. 最新Cartを再取得
+     4. 成功時のみCart参照を更新して再描画 5. 在庫判定を再実行
+     6. 成功時にCheckout無効を解除 7. 失敗時は古い表示を購入可能と扱わず、
+        Checkoutを停止して再試行案内。
+     多重クリック・並行取得で古い応答が新しい応答を上書きしないよう、
+     request sequence（cartOpenRefreshSeq）で最新の呼び出しだけを反映する。
+     一時的な取得失敗はcommerceDisabledを永久trueにしない — 次回の再取得成功で復旧できる。
+     既存Cartが取得不能な場合、ここで新しいCartを自動作成しない（cartがまだ無い初回のみ
+     getOrCreateCart経由で作成する。既存の実装済み挙動を維持）。 */
+  var cartOpenRefreshSeq = 0;
+  function refreshCartOnOpen() {
+    var mySeq = ++cartOpenRefreshSeq;
+    cartRefreshBusy = true;
+    recomputeCheckoutBtn();
+    var p = cart ? fetchCart(cart.id, { requireCheckoutUrl: true }) : getOrCreateCart();
+    return p.then(function (c) {
+      if (mySeq !== cartOpenRefreshSeq) return; // 古い応答は無視（single-flight/最新優先）
+      cartRefreshFailed = false;
+      applyWarnings([], c); // 開き直した時点でtargetに紐づく前回warningの表示は失効させる
+      setCartRef(c);
+      updateInventoryState(c);
+      renderCart();
+      cartRefreshBusy = false;
+      recomputeCheckoutBtn();
+      showCartMessage(bannerKeyForState());
+    }).catch(function () {
+      if (mySeq !== cartOpenRefreshSeq) return;
+      cartRefreshBusy = false;
+      cartRefreshFailed = true;
+      recomputeCheckoutBtn();
+      showCartMessage('cart_stock_check_failed_checkout');
+    });
+  }
+  cartOpenBtn.addEventListener('click', function () {
+    setCart(true);
+    refreshCartOnOpen();
+  });
 
   /* ---------- ご注文備考（カートnote） ---------- */
   var NOTE_STATUS_KEYS = {
@@ -609,6 +1003,16 @@ if (typeof document !== 'undefined') {
     });
   }
 
+  /* ---------- Checkout直前処理（Phase 6-B F-01） ----------
+     1. checkoutInProgressで二重クリック防止 2. 注文備考のdebounceを停止
+     3. 未保存の注文備考をShopifyへ保存 4. 保存結果のCart ID・note一致を既存ロジックで検証
+        （updateNote内のvalidateNoteUpdateCartで実施済み）
+     5. 同じCart IDを最新取得 6. Cart ID・lines・Variant在庫を検証
+     7. 最新Cartを再描画 8. 在庫判定が全件可の場合のみ最新checkoutUrlへ遷移。
+     note保存失敗／Cart再取得失敗／在庫確認不能／売切れ／数量不足／Cart ID不一致／
+     checkoutUrl欠落／空Cartのいずれも遷移を禁止する。失敗時はDrawerを開いたままにし、
+     入力済み注文備考を消さず、対象商品と理由を表示する。console error・unhandled
+     rejectionを発生させないよう、ここで必ずcatchする。 */
   if (cartCheckoutBtn) {
     cartCheckoutBtn.addEventListener('click', function () {
       if (checkoutInProgress || commerceDisabled) return; // 二重クリック防止／準備中は絶対に進めない
@@ -616,24 +1020,47 @@ if (typeof document !== 'undefined') {
       checkoutInProgress = true;
       recomputeCheckoutBtn();
       flushNoteDebounce();
-      // Checkout直前の保存失敗だけは握り潰さず、遷移を阻止する（このcatchのみ意図的に非握り潰し）。
-      Promise.resolve(noteSaver.runSave()).then(function () {
-        if (cart && cart.checkoutUrl) {
-          window.location.href = cart.checkoutUrl;
-          return; // 遷移するため checkoutInProgress は戻さない
-        }
-        checkoutInProgress = false;
-        recomputeCheckoutBtn();
-      }).catch(function () {
-        // ご注文備考の保存に失敗した場合はCheckoutへ進ませない。入力内容は消さない。
-        checkoutInProgress = false;
-        recomputeCheckoutBtn();
-        showCartMessage('cart_note_checkout_save_failed');
-      });
+      var cartIdAtStart = cart.id;
+
+      Promise.resolve(noteSaver.runSave())
+        .catch(function (err) {
+          err = err || new Error('note save failed');
+          err.__checkoutPhase = 'note';
+          throw err;
+        })
+        .then(function () {
+          // 直前に保存したCartと同じIDを最新取得する（新しいCartは自動作成しない）。
+          return fetchCart(cartIdAtStart, { requireCheckoutUrl: true });
+        })
+        .then(function (freshCart) {
+          applyWarnings([], freshCart); // Checkout直前再取得はwarningsを伴わない。前回分は失効させる
+          setCartRef(freshCart);
+          updateInventoryState(freshCart); // renderCart()での行表示用に判定を保持する
+          renderCart();
+          var plan = window.CartInventoryGuard.planCheckoutTransition(freshCart, cartIdAtStart);
+          checkoutInProgress = false;
+          if (plan.action !== 'NAVIGATE') {
+            recomputeCheckoutBtn();
+            showCartMessage(bannerKeyForState());
+            return;
+          }
+          checkoutInProgress = true; // 遷移するため無効状態を維持する
+          window.location.href = plan.url;
+        })
+        .catch(function (err) {
+          // note保存失敗、Cart再取得失敗（HTTP非2xx／JSON不正／GraphQL errors／Cart欠落／
+          // Cart ID不一致／lines欠落／checkoutUrl欠落）のいずれもここに到達する。
+          // 入力済み注文備考は消さない。Drawerも開いたままにする。
+          checkoutInProgress = false;
+          recomputeCheckoutBtn();
+          showCartMessage(err && err.__checkoutPhase === 'note'
+            ? 'cart_note_checkout_save_failed' : 'cart_stock_check_failed_checkout');
+        });
     });
   }
 
-  getOrCreateCart().then(function () {
+  getOrCreateCart().then(function (c) {
+    updateInventoryState(c);
     renderCart();
     renderNoteUI();
   }).catch(function () {

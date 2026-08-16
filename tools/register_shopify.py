@@ -101,7 +101,14 @@ def classify(items, exhibition, ledger):
 
 
 def build_title(item):
-    return f"{item['supplier']}　{item['name']}"
+    supplier = item.get("supplier")
+    name = item.get("name")
+    if type(supplier) is not str or type(name) is not str:
+        raise RegisterError(f"登録対象商品のタイトルが非文字列です: id={item.get('id')}")
+    if not supplier.strip() or not name.strip():
+        raise RegisterError(f"登録対象商品のタイトルが空です: id={item.get('id')}")
+    return f"{supplier}　{name}"
+
 
 
 def tax_included_price(item):
@@ -142,7 +149,15 @@ def build_description(item):
 
 
 def normalize_title(t):
-    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", t))
+    if type(t) is not str:
+        raise RegisterError("商品名の入力値が文字列型ではありません")
+    n1 = unicodedata.normalize("NFKC", t)
+    n2 = n1.strip()
+    n3 = re.sub(r"\s+", " ", n2)
+    n4 = n3.casefold()
+    if not n4:
+        raise RegisterError("商品名が空です")
+    return n4
 
 
 ALL_TITLES_QUERY = """
@@ -167,11 +182,18 @@ def fetch_all_titles(token):
             next_cursor = page["pageInfo"]["endCursor"]
         except (KeyError, TypeError) as e:
             raise RegisterError(f"Shopify商品一覧のJSON構造が不正です: {e}")
-        for e in edges:
-            title = e.get("node", {}).get("title")
-            if not isinstance(title, str):
-                raise RegisterError(f"Shopify商品タイトルが文字列型ではありません: {title!r}")
-            titles.add(normalize_title(title))
+        for idx, e in enumerate(edges):
+            node = e.get("node", {})
+            title = node.get("title") if isinstance(node, dict) else None
+            if title is None or type(title) is not str:
+                raise RegisterError(f"Shopify既存商品のタイトルが非文字列です: index={idx}")
+            try:
+                norm_t = normalize_title(title)
+            except RegisterError as exc:
+                if "空" in str(exc):
+                    raise RegisterError(f"Shopify既存商品のタイトルが空です: index={idx}")
+                raise
+            titles.add(norm_t)
         if not has_next:
             break
         cursor = next_cursor
@@ -184,11 +206,11 @@ def find_duplicates(targets, existing_titles):
     duplicates = []
     for t in targets:
         title = build_title(t)
-        if not isinstance(title, str):
-            raise RegisterError(f"対象商品のタイトルが文字列型ではありません: id={t.get('id')}")
-        if normalize_title(title) in existing_titles:
+        norm_t = normalize_title(title)
+        if norm_t in existing_titles:
             duplicates.append(t)
     return duplicates
+
 
 
 PRODUCT_CREATE_MUTATION = """
@@ -354,10 +376,25 @@ def main():
     args = parser.parse_args()
     exhibition = args.exhibition.strip()
     now = datetime.now(timezone.utc).isoformat()
-
     try:
         token = read_admin_token()
         items = load_inventory(args.source)
+        # Validate target items in the exhibition batch early
+        if not isinstance(items, list):
+            raise RegisterError("インベントリデータのルート構造が配列ではありません")
+        for idx, item in enumerate(items):
+            if not isinstance(item, dict):
+                continue
+            if (item.get("exhibition") or "").strip() != exhibition:
+                continue
+            supplier = item.get("supplier")
+            name = item.get("name")
+            if type(supplier) is not str or type(name) is not str:
+                raise RegisterError(f"登録対象商品のタイトルが非文字列です: index={idx}, id={item.get('id')}")
+            if not supplier.strip() or not name.strip():
+                raise RegisterError(f"登録対象商品のタイトルが空です: index={idx}, id={item.get('id')}")
+            title = f"{supplier}　{name}"
+            normalize_title(title)
     except (RegisterError, OSError, json.JSONDecodeError) as e:
         append_log([f"[{now}] エラー（企画展: {exhibition}）: {e}"])
         print(f"エラー: {e}", file=sys.stderr)

@@ -387,3 +387,152 @@ rs.main()
     result = subprocess.run([sys.executable, "-c", script], capture_output=True, text=True)
     assert result.returncode != 0
     assert "続行します" not in result.stdout
+
+
+# ---------------------------------------------------------------------------
+# F-01 Fix Audited Tests: casefold, empty/whitespace, non-string checks
+# ---------------------------------------------------------------------------
+
+def test_casefold_duplicates(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+
+    # 1. ABC and abc
+    items = [make_item(2001, "abc")]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, "fetch_all_titles", lambda token: {rs.normalize_title("作家A　ABC")})
+
+    graphql_calls = []
+    monkeypatch.setattr(rs, "admin_graphql", lambda *a, **k: graphql_calls.append(a) or {})
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert graphql_calls == []
+    assert not rs.LEDGER_PATH.exists()
+
+def test_nfkc_casefold_duplicates(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+
+    # 2. Full-width and half-width case difference
+    items = [make_item(2002, "ａｂｃ")]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, "fetch_all_titles", lambda token: {rs.normalize_title("作家A　ABC")})
+
+    graphql_calls = []
+    monkeypatch.setattr(rs, "admin_graphql", lambda *a, **k: graphql_calls.append(a) or {})
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert graphql_calls == []
+    assert not rs.LEDGER_PATH.exists()
+
+def test_strasse_casefold_duplicates(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+
+    # 3. Straße and STRASSE
+    items = [make_item(2003, "Straße")]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, "fetch_all_titles", lambda token: {rs.normalize_title("作家A　STRASSE")})
+
+    graphql_calls = []
+    monkeypatch.setattr(rs, "admin_graphql", lambda *a, **k: graphql_calls.append(a) or {})
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert graphql_calls == []
+    assert not rs.LEDGER_PATH.exists()
+
+def test_case_difference_stops_whole_batch(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+
+    # 4. A batch with differing case items stops registration before location_id/mutation
+    items = [make_item(2004, "item1"), make_item(2005, "item2")]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, "fetch_all_titles", lambda token: {rs.normalize_title("作家A　ITEM2")})
+
+    graphql_calls = []
+    monkeypatch.setattr(rs, "admin_graphql", lambda *a, **k: graphql_calls.append(a) or {})
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert graphql_calls == []
+    assert not rs.LEDGER_PATH.exists()
+
+# Empty targets
+@pytest.mark.parametrize("empty_name", ["", " ", "　", "\t\n", "\r\n  \t", "\n \t \u3000"])
+def test_target_empty_title_fails(isolated_paths, empty_name, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(3001, empty_name)]
+    inv_path = write_inventory(tmp_path, items)
+
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+# Empty Shopify existing
+@pytest.mark.parametrize("empty_shopify_title", ["", " ", "　", "\t\n", "\r\n  \t", "\n \t \u3000"])
+def test_shopify_empty_title_fails(isolated_paths, empty_shopify_title, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(3002, "ValidName")]
+    inv_path = write_inventory(tmp_path, items)
+
+    def fake_admin_graphql(token, query, variables=None):
+        return {
+            "products": {
+                "pageInfo": {"hasNextPage": False, "endCursor": None},
+                "edges": [{"node": {"title": empty_shopify_title}}],
+            }
+        }
+    monkeypatch.setattr(rs, "admin_graphql", fake_admin_graphql)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+# Non-string targets
+@pytest.mark.parametrize("bad_value", [None, 123, True, ["abc"], {"a": 1}])
+def test_target_non_string_fails(isolated_paths, bad_value, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(4001, bad_value)]
+    inv_path = write_inventory(tmp_path, items)
+
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+# Non-string Shopify existing
+@pytest.mark.parametrize("bad_shopify_value", [None, 123, True, ["abc"], {"a": 1}])
+def test_shopify_non_string_fails(isolated_paths, bad_shopify_value, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(4002, "ValidName")]
+    inv_path = write_inventory(tmp_path, items)
+
+    def fake_admin_graphql(token, query, variables=None):
+        return {
+            "products": {
+                "pageInfo": {"hasNextPage": False, "endCursor": None},
+                "edges": [{"node": {"title": bad_shopify_value}}],
+            }
+        }
+    monkeypatch.setattr(rs, "admin_graphql", fake_admin_graphql)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()

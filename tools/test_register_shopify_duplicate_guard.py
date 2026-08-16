@@ -536,3 +536,183 @@ def test_shopify_non_string_fails(isolated_paths, bad_shopify_value, monkeypatch
     code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
     assert code != 0
     assert not rs.LEDGER_PATH.exists()
+
+
+# ---------------------------------------------------------------------------
+# F-01 Fix Audited Tests Phase 2: hasNextPage and endCursor validation
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("bad_has_next", [None, 0, 1, "", "false", [], {}])
+def test_invalid_has_next_page_type_fails(isolated_paths, bad_has_next, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(5001, "ValidTitle")]
+    inv_path = write_inventory(tmp_path, items)
+
+    def fake_admin_graphql(token, query, variables=None):
+        return {
+            "products": {
+                "pageInfo": {"hasNextPage": bad_has_next, "endCursor": "cursor1"},
+                "edges": [{"node": {"title": "作家A　別の商品"}}],
+            }
+        }
+    monkeypatch.setattr(rs, "admin_graphql", fake_admin_graphql)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+
+def test_valid_pagination_normal_flow(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(5002, "abc")]
+    inv_path = write_inventory(tmp_path, items)
+
+    graphql_calls = []
+    def fake_admin_graphql(token, query, variables=None):
+        cursor = variables.get("cursor")
+        graphql_calls.append(cursor)
+        if cursor is None:
+            return {
+                "products": {
+                    "pageInfo": {"hasNextPage": True, "endCursor": "cursor1"},
+                    "edges": [{"node": {"title": "作家A　xyz"}}],
+                }
+            }
+        elif cursor == "cursor1":
+            return {
+                "products": {
+                    "pageInfo": {"hasNextPage": True, "endCursor": "cursor2"},
+                    "edges": [{"node": {"title": "作家A　ABC"}}],
+                }
+            }
+        elif cursor == "cursor2":
+            return {
+                "products": {
+                    "pageInfo": {"hasNextPage": False, "endCursor": None},
+                    "edges": [{"node": {"title": "作家A　other"}}],
+                }
+            }
+        pytest.fail("Unexpected query cursor")
+
+    monkeypatch.setattr(rs, "admin_graphql", fake_admin_graphql)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert graphql_calls == [None, "cursor1", "cursor2"]
+    assert not rs.LEDGER_PATH.exists()
+
+
+@pytest.mark.parametrize("bad_cursor", [
+    "MISSING",
+    None,
+    12345,
+    "",
+    "   ",
+])
+def test_invalid_end_cursor_fails(isolated_paths, bad_cursor, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(5003, "ValidName")]
+    inv_path = write_inventory(tmp_path, items)
+
+    def fake_admin_graphql(token, query, variables=None):
+        page_info = {"hasNextPage": True}
+        if bad_cursor != "MISSING":
+            page_info["endCursor"] = bad_cursor
+        return {
+            "products": {
+                "pageInfo": page_info,
+                "edges": [{"node": {"title": "作家A　別の商品"}}],
+            }
+        }
+    monkeypatch.setattr(rs, "admin_graphql", fake_admin_graphql)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+
+def test_repeated_end_cursor_fails(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(5004, "ValidName")]
+    inv_path = write_inventory(tmp_path, items)
+
+    def fake_admin_graphql(token, query, variables=None):
+        return {
+            "products": {
+                "pageInfo": {"hasNextPage": True, "endCursor": "cursor1"},
+                "edges": [{"node": {"title": "作家A　別の商品"}}],
+            }
+        }
+    monkeypatch.setattr(rs, "admin_graphql", fake_admin_graphql)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+
+def test_cycle_end_cursor_fails(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(5005, "ValidName")]
+    inv_path = write_inventory(tmp_path, items)
+
+    def fake_admin_graphql(token, query, variables=None):
+        cursor = variables.get("cursor")
+        if cursor is None:
+            return {
+                "products": {
+                    "pageInfo": {"hasNextPage": True, "endCursor": "cursorA"},
+                    "edges": [{"node": {"title": "作家A　別の商品"}}],
+                }
+            }
+        elif cursor == "cursorA":
+            return {
+                "products": {
+                    "pageInfo": {"hasNextPage": True, "endCursor": "cursorB"},
+                    "edges": [{"node": {"title": "作家A　別の商品"}}],
+                }
+            }
+        elif cursor == "cursorB":
+            return {
+                "products": {
+                    "pageInfo": {"hasNextPage": True, "endCursor": "cursorA"},
+                    "edges": [{"node": {"title": "作家A　別の商品"}}],
+                }
+            }
+        pytest.fail("Unexpected query cursor")
+
+    monkeypatch.setattr(rs, "admin_graphql", fake_admin_graphql)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+
+@pytest.mark.parametrize("malformed_resp", [
+    {"products": "not-a-dict"},
+    {"products": {"pageInfo": "not-a-dict", "edges": []}},
+    {"products": {"pageInfo": {"hasNextPage": False}, "edges": "not-a-list"}},
+    {"products": {"pageInfo": {"hasNextPage": False}, "edges": ["not-a-dict"]}},
+    {"products": {"pageInfo": {"hasNextPage": False}, "edges": [{"node": "not-a-dict"}]}},
+])
+def test_malformed_page_structure_fails(isolated_paths, malformed_resp, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(5006, "ValidName")]
+    inv_path = write_inventory(tmp_path, items)
+
+    monkeypatch.setattr(rs, "admin_graphql", lambda *a, **k: malformed_resp)
+    monkeypatch.setattr(rs, "get_location_id", lambda token: pytest.fail("get_location_id must not be called"))
+    monkeypatch.setattr(rs, "register_one", lambda *a, **k: pytest.fail("register_one must not be called"))
+
+    code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()

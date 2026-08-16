@@ -101,7 +101,14 @@ def classify(items, exhibition, ledger):
 
 
 def build_title(item):
-    return f"{item['supplier']}　{item['name']}"
+    supplier = item.get("supplier")
+    name = item.get("name")
+    if type(supplier) is not str or type(name) is not str:
+        raise RegisterError(f"登録対象商品のタイトルが非文字列です: id={item.get('id')}")
+    if not supplier.strip() or not name.strip():
+        raise RegisterError(f"登録対象商品のタイトルが空です: id={item.get('id')}")
+    return f"{supplier}　{name}"
+
 
 
 def tax_included_price(item):
@@ -142,7 +149,15 @@ def build_description(item):
 
 
 def normalize_title(t):
-    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", t))
+    if type(t) is not str:
+        raise RegisterError("商品名の入力値が文字列型ではありません")
+    n1 = unicodedata.normalize("NFKC", t)
+    n2 = n1.strip()
+    n3 = re.sub(r"\s+", " ", n2)
+    n4 = n3.casefold()
+    if not n4:
+        raise RegisterError("商品名が空です")
+    return n4
 
 
 ALL_TITLES_QUERY = """
@@ -158,18 +173,77 @@ query($cursor: String) {
 def fetch_all_titles(token):
     titles = set()
     cursor = None
+    seen_cursors = set()
     while True:
         data = admin_graphql(token, ALL_TITLES_QUERY, {"cursor": cursor})
-        page = data["products"]
-        titles.update(normalize_title(e["node"]["title"]) for e in page["edges"])
-        if not page["pageInfo"]["hasNextPage"]:
+        if not isinstance(data, dict):
+            raise RegisterError("Shopify GraphQLのレスポンスが辞書型ではありません")
+        products = data.get("products")
+        if not isinstance(products, dict):
+            raise RegisterError("Shopify商品一覧(products)が辞書型ではありません")
+        page_info = products.get("pageInfo")
+        if not isinstance(page_info, dict):
+            raise RegisterError("Shopify商品一覧のpageInfoが辞書型ではありません")
+        edges = products.get("edges")
+        if not isinstance(edges, list):
+            raise RegisterError("Shopify商品一覧のedgesが配列型ではありません")
+
+        if "hasNextPage" not in page_info:
+            raise RegisterError("Shopify商品一覧のhasNextPageが欠落しています")
+        has_next = page_info["hasNextPage"]
+        if type(has_next) is not bool:
+            raise RegisterError(f"Shopify商品一覧のhasNextPageがbool型ではありません: {type(has_next).__name__}")
+
+        end_cursor = page_info.get("endCursor")
+
+        if has_next is True:
+            if end_cursor is None:
+                raise RegisterError("Shopify商品一覧のhasNextPageがTrueですが、endCursorが欠落またはNoneです")
+            if type(end_cursor) is not str:
+                raise RegisterError(f"Shopify商品一覧のendCursorが文字列型ではありません: {type(end_cursor).__name__}")
+            if not end_cursor.strip():
+                raise RegisterError("Shopify商品一覧のendCursorが空文字または空白だけです")
+            if end_cursor == cursor:
+                raise RegisterError(f"Shopify商品一覧のendCursorが現在のcursorと同一です: {end_cursor!r}")
+            if end_cursor in seen_cursors:
+                raise RegisterError(f"Shopify商品一覧のendCursorに循環・重複が検出されました: {end_cursor!r}")
+            seen_cursors.add(end_cursor)
+
+        for idx, e in enumerate(edges):
+            if not isinstance(e, dict):
+                raise RegisterError(f"Shopify商品edgeが辞書型ではありません: index={idx}")
+            node = e.get("node")
+            if not isinstance(node, dict):
+                raise RegisterError(f"Shopify商品nodeが辞書型ではありません: index={idx}")
+            title = node.get("title")
+            if title is None or type(title) is not str:
+                raise RegisterError(f"Shopify既存商品のタイトルが非文字列です: index={idx}")
+            try:
+                norm_t = normalize_title(title)
+            except RegisterError as exc:
+                if "空" in str(exc):
+                    raise RegisterError(f"Shopify既存商品のタイトルが空です: index={idx}")
+                raise
+            titles.add(norm_t)
+
+        if has_next is False:
             break
-        cursor = page["pageInfo"]["endCursor"]
+        cursor = end_cursor
     return titles
 
 
+
 def find_duplicates(targets, existing_titles):
-    return [t for t in targets if normalize_title(build_title(t)) in existing_titles]
+    if not isinstance(existing_titles, set):
+        raise RegisterError("existing_titlesの構造が不正です（set型ではありません）")
+    duplicates = []
+    for t in targets:
+        title = build_title(t)
+        norm_t = normalize_title(title)
+        if norm_t in existing_titles:
+            duplicates.append(t)
+    return duplicates
+
 
 
 PRODUCT_CREATE_MUTATION = """
@@ -315,6 +389,18 @@ def item_label(item):
     return f"{build_title(item)} (id={item['id']})"
 
 
+def print_duplicate_hard_stop(duplicates, now, exhibition):
+    print("登録を停止しました。")
+    print("既存Shopify商品と同名の商品が1件以上あります。")
+    print("店主による確認が完了するまで登録できません。")
+    for it in duplicates:
+        print(f"  - {build_title(it)} (id={it['id']})")
+    append_log([
+        f"[{now}] 企画展: {exhibition} — 重複ハードストップ: {len(duplicates)}件",
+        "\n".join(f"  - {item_label(it)}" for it in duplicates),
+    ])
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--exhibition", required=True, help="企画展名（inventory.jsonのexhibitionと厳密一致）")
@@ -323,10 +409,25 @@ def main():
     args = parser.parse_args()
     exhibition = args.exhibition.strip()
     now = datetime.now(timezone.utc).isoformat()
-
     try:
         token = read_admin_token()
         items = load_inventory(args.source)
+        # Validate target items in the exhibition batch early
+        if not isinstance(items, list):
+            raise RegisterError("インベントリデータのルート構造が配列ではありません")
+        for idx, item in enumerate(items):
+            if not isinstance(item, dict):
+                continue
+            if (item.get("exhibition") or "").strip() != exhibition:
+                continue
+            supplier = item.get("supplier")
+            name = item.get("name")
+            if type(supplier) is not str or type(name) is not str:
+                raise RegisterError(f"登録対象商品のタイトルが非文字列です: index={idx}, id={item.get('id')}")
+            if not supplier.strip() or not name.strip():
+                raise RegisterError(f"登録対象商品のタイトルが空です: index={idx}, id={item.get('id')}")
+            title = f"{supplier}　{name}"
+            normalize_title(title)
     except (RegisterError, OSError, json.JSONDecodeError) as e:
         append_log([f"[{now}] エラー（企画展: {exhibition}）: {e}"])
         print(f"エラー: {e}", file=sys.stderr)
@@ -337,11 +438,11 @@ def main():
 
     try:
         existing_titles = fetch_all_titles(token)
+        duplicates = find_duplicates(targets, existing_titles)
     except RegisterError as e:
         append_log([f"[{now}] エラー（企画展: {exhibition}）: {e}"])
         print(f"エラー: {e}", file=sys.stderr)
         sys.exit(1)
-    duplicates = find_duplicates(targets, existing_titles)
 
     if args.dry_run:
         print(f"企画展: {exhibition}")
@@ -358,9 +459,9 @@ def main():
         for it in excluded["already_registered"]:
             print(f"  - {item_label(it)}")
         if duplicates:
-            print(f"\n⚠ 重複の可能性あり（既存Shopify商品と同名）: {len(duplicates)}件")
-            for it in duplicates:
-                print(f"  - {build_title(it)}")
+            print()
+            print_duplicate_hard_stop(duplicates, now, exhibition)
+            sys.exit(1)
         print("\n--dry-run のため登録は行っていません。")
         return
 
@@ -379,9 +480,8 @@ def main():
         sys.exit(1)
 
     if duplicates:
-        print(f"⚠ 重複の可能性あり: {len(duplicates)}件（登録は続行します）")
-        for it in duplicates:
-            print(f"  - {build_title(it)}")
+        print_duplicate_hard_stop(duplicates, now, exhibition)
+        sys.exit(1)
 
     location_id = get_location_id(token)
     registered, errors = [], []

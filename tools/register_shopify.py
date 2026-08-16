@@ -160,16 +160,35 @@ def fetch_all_titles(token):
     cursor = None
     while True:
         data = admin_graphql(token, ALL_TITLES_QUERY, {"cursor": cursor})
-        page = data["products"]
-        titles.update(normalize_title(e["node"]["title"]) for e in page["edges"])
-        if not page["pageInfo"]["hasNextPage"]:
+        try:
+            page = data["products"]
+            edges = page["edges"]
+            has_next = page["pageInfo"]["hasNextPage"]
+            next_cursor = page["pageInfo"]["endCursor"]
+        except (KeyError, TypeError) as e:
+            raise RegisterError(f"Shopify商品一覧のJSON構造が不正です: {e}")
+        for e in edges:
+            title = e.get("node", {}).get("title")
+            if not isinstance(title, str):
+                raise RegisterError(f"Shopify商品タイトルが文字列型ではありません: {title!r}")
+            titles.add(normalize_title(title))
+        if not has_next:
             break
-        cursor = page["pageInfo"]["endCursor"]
+        cursor = next_cursor
     return titles
 
 
 def find_duplicates(targets, existing_titles):
-    return [t for t in targets if normalize_title(build_title(t)) in existing_titles]
+    if not isinstance(existing_titles, set):
+        raise RegisterError("existing_titlesの構造が不正です（set型ではありません）")
+    duplicates = []
+    for t in targets:
+        title = build_title(t)
+        if not isinstance(title, str):
+            raise RegisterError(f"対象商品のタイトルが文字列型ではありません: id={t.get('id')}")
+        if normalize_title(title) in existing_titles:
+            duplicates.append(t)
+    return duplicates
 
 
 PRODUCT_CREATE_MUTATION = """
@@ -315,6 +334,18 @@ def item_label(item):
     return f"{build_title(item)} (id={item['id']})"
 
 
+def print_duplicate_hard_stop(duplicates, now, exhibition):
+    print("登録を停止しました。")
+    print("既存Shopify商品と同名の商品が1件以上あります。")
+    print("店主による確認が完了するまで登録できません。")
+    for it in duplicates:
+        print(f"  - {build_title(it)} (id={it['id']})")
+    append_log([
+        f"[{now}] 企画展: {exhibition} — 重複ハードストップ: {len(duplicates)}件",
+        "\n".join(f"  - {item_label(it)}" for it in duplicates),
+    ])
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--exhibition", required=True, help="企画展名（inventory.jsonのexhibitionと厳密一致）")
@@ -337,11 +368,11 @@ def main():
 
     try:
         existing_titles = fetch_all_titles(token)
+        duplicates = find_duplicates(targets, existing_titles)
     except RegisterError as e:
         append_log([f"[{now}] エラー（企画展: {exhibition}）: {e}"])
         print(f"エラー: {e}", file=sys.stderr)
         sys.exit(1)
-    duplicates = find_duplicates(targets, existing_titles)
 
     if args.dry_run:
         print(f"企画展: {exhibition}")
@@ -358,9 +389,9 @@ def main():
         for it in excluded["already_registered"]:
             print(f"  - {item_label(it)}")
         if duplicates:
-            print(f"\n⚠ 重複の可能性あり（既存Shopify商品と同名）: {len(duplicates)}件")
-            for it in duplicates:
-                print(f"  - {build_title(it)}")
+            print()
+            print_duplicate_hard_stop(duplicates, now, exhibition)
+            sys.exit(1)
         print("\n--dry-run のため登録は行っていません。")
         return
 
@@ -379,9 +410,8 @@ def main():
         sys.exit(1)
 
     if duplicates:
-        print(f"⚠ 重複の可能性あり: {len(duplicates)}件（登録は続行します）")
-        for it in duplicates:
-            print(f"  - {build_title(it)}")
+        print_duplicate_hard_stop(duplicates, now, exhibition)
+        sys.exit(1)
 
     location_id = get_location_id(token)
     registered, errors = [], []

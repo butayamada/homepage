@@ -29,9 +29,26 @@ SHOPIFY_DOMAIN = "vh55x1-pa.myshopify.com"
 SHOPIFY_ADMIN_API_VERSION = "2026-01"
 MAX_TARGETS = 200
 
+# --- Shopify公開前ロック（Phase F-04-F01 緊急安全修正） ---
+# コード上で固定した真偽値であり、環境変数・.env・CLI引数のいずれからも読み取らない。
+# これらのいずれかで解除できる実装、および隠しオプション・テスト用バイパスは意図的に作らない。
+# 解除は、店主承認後の別PRでこの定数そのものを変更することでのみ行う。
+PRELAUNCH_LOCKED = True
+PRELAUNCH_LOCK_REASON_CODE = "SHOPIFY_REGISTRATION_PRELAUNCH_LOCKED"
+PRELAUNCH_LOCK_MESSAGE = "Shopify登録は正式公開前のため停止中です。商品・在庫は変更されていません。"
+
 
 class DropError(Exception):
     pass
+
+
+def enforce_prelaunch_lock():
+    """main()の最初の文として呼び出す。Shopify query/mutation・sync/deployより前に、
+    無条件で非0終了する。token・入力・パス等は出力しない。"""
+    if PRELAUNCH_LOCKED:
+        print(PRELAUNCH_LOCK_MESSAGE, file=sys.stderr)
+        print(PRELAUNCH_LOCK_REASON_CODE, file=sys.stderr)
+        sys.exit(1)
 
 
 def read_admin_token():
@@ -181,6 +198,7 @@ def update_release_id():
 
 
 def main():
+    enforce_prelaunch_lock()
     parser = argparse.ArgumentParser()
     parser.add_argument("--exhibition", required=True, help="企画展名（タグと厳密一致・前後空白trimのみ）")
     parser.add_argument("--dry-run", action="store_true", help="対象一覧の表示のみ。公開・同期なし")

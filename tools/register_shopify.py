@@ -30,6 +30,8 @@ LOG_PATH = TOOLS_DIR / "register_shopify_log.txt"
 SHOPIFY_DOMAIN = "vh55x1-pa.myshopify.com"
 SHOPIFY_ADMIN_API_VERSION = "2026-01"
 MAX_TARGETS = 200
+MAX_TITLE_PAGES = 100
+MAX_EXISTING_PRODUCT_COUNT = 25000  # MAX_TITLE_PAGES (100) * 250 per page
 
 
 class RegisterError(Exception):
@@ -174,55 +176,67 @@ def fetch_all_titles(token):
     titles = set()
     cursor = None
     seen_cursors = set()
+    page_count = 0
+    raw_product_count = 0
     while True:
-        data = admin_graphql(token, ALL_TITLES_QUERY, {"cursor": cursor})
+        data = admin_graphql(token, ALL_TITLES_QUERY, {'cursor': cursor})
         if not isinstance(data, dict):
-            raise RegisterError("Shopify GraphQLのレスポンスが辞書型ではありません")
-        products = data.get("products")
+            raise RegisterError('Shopify GraphQLのレスポンスが辞書型ではありません')
+        products = data.get('products')
         if not isinstance(products, dict):
-            raise RegisterError("Shopify商品一覧(products)が辞書型ではありません")
-        page_info = products.get("pageInfo")
+            raise RegisterError('Shopify商品一覧(products)が辞書型ではありません')
+        page_info = products.get('pageInfo')
         if not isinstance(page_info, dict):
-            raise RegisterError("Shopify商品一覧のpageInfoが辞書型ではありません")
-        edges = products.get("edges")
+            raise RegisterError('Shopify商品一覧のpageInfoが辞書型ではありません')
+        edges = products.get('edges')
         if not isinstance(edges, list):
-            raise RegisterError("Shopify商品一覧のedgesが配列型ではありません")
+            raise RegisterError('Shopify商品一覧のedgesが配列型ではありません')
 
-        if "hasNextPage" not in page_info:
-            raise RegisterError("Shopify商品一覧のhasNextPageが欠落しています")
-        has_next = page_info["hasNextPage"]
+        page_count += 1
+        if page_count > MAX_TITLE_PAGES:
+            raise RegisterError(f'Shopify商品一覧の取得ページ数が上限({MAX_TITLE_PAGES}ページ)を超過しました')
+
+        if 'hasNextPage' not in page_info:
+            raise RegisterError('Shopify商品一覧のhasNextPageが欠落しています')
+        has_next = page_info['hasNextPage']
         if type(has_next) is not bool:
-            raise RegisterError(f"Shopify商品一覧のhasNextPageがbool型ではありません: {type(has_next).__name__}")
+            raise RegisterError(f'Shopify商品一覧のhasNextPageがbool型ではありません: {type(has_next).__name__}')
 
-        end_cursor = page_info.get("endCursor")
+        if has_next is True and page_count >= MAX_TITLE_PAGES:
+            raise RegisterError(f'Shopify商品一覧の取得ページ数が上限({MAX_TITLE_PAGES}ページ)に達したため次ページを取得できません')
+
+        end_cursor = page_info.get('endCursor')
 
         if has_next is True:
             if end_cursor is None:
-                raise RegisterError("Shopify商品一覧のhasNextPageがTrueですが、endCursorが欠落またはNoneです")
+                raise RegisterError('Shopify商品一覧のhasNextPageがTrueですが、endCursorが欠落またはNoneです')
             if type(end_cursor) is not str:
-                raise RegisterError(f"Shopify商品一覧のendCursorが文字列型ではありません: {type(end_cursor).__name__}")
+                raise RegisterError(f'Shopify商品一覧のendCursorが文字列型ではありません: {type(end_cursor).__name__}')
             if not end_cursor.strip():
-                raise RegisterError("Shopify商品一覧のendCursorが空文字または空白だけです")
+                raise RegisterError('Shopify商品一覧のendCursorが空文字または空白だけです')
             if end_cursor == cursor:
-                raise RegisterError(f"Shopify商品一覧のendCursorが現在のcursorと同一です: {end_cursor!r}")
+                raise RegisterError('Shopify商品一覧のendCursorが現在のcursorと同一です')
             if end_cursor in seen_cursors:
-                raise RegisterError(f"Shopify商品一覧のendCursorに循環・重複が検出されました: {end_cursor!r}")
+                raise RegisterError('Shopify商品一覧のendCursorに循環・重複が検出されました')
             seen_cursors.add(end_cursor)
 
         for idx, e in enumerate(edges):
+            raw_product_count += 1
+            if raw_product_count > MAX_EXISTING_PRODUCT_COUNT:
+                raise RegisterError(f'Shopify既存商品の総件数が上限({MAX_EXISTING_PRODUCT_COUNT}件)を超過しました')
             if not isinstance(e, dict):
-                raise RegisterError(f"Shopify商品edgeが辞書型ではありません: index={idx}")
-            node = e.get("node")
+                raise RegisterError(f'Shopify商品edgeが辞書型ではありません: index={idx}')
+            node = e.get('node')
             if not isinstance(node, dict):
-                raise RegisterError(f"Shopify商品nodeが辞書型ではありません: index={idx}")
-            title = node.get("title")
+                raise RegisterError(f'Shopify商品nodeが辞書型ではありません: index={idx}')
+            title = node.get('title')
             if title is None or type(title) is not str:
-                raise RegisterError(f"Shopify既存商品のタイトルが非文字列です: index={idx}")
+                raise RegisterError(f'Shopify既存商品のタイトルが非文字列です: index={idx}')
             try:
                 norm_t = normalize_title(title)
             except RegisterError as exc:
-                if "空" in str(exc):
-                    raise RegisterError(f"Shopify既存商品のタイトルが空です: index={idx}")
+                if '空' in str(exc):
+                    raise RegisterError(f'Shopify既存商品のタイトルが空です: index={idx}')
                 raise
             titles.add(norm_t)
 
@@ -230,8 +244,6 @@ def fetch_all_titles(token):
             break
         cursor = end_cursor
     return titles
-
-
 
 def find_duplicates(targets, existing_titles):
     if not isinstance(existing_titles, set):

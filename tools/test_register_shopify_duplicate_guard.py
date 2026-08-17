@@ -716,3 +716,227 @@ def test_malformed_page_structure_fails(isolated_paths, malformed_resp, monkeypa
     code = run_main(["--exhibition", EXHIBITION, "--source", str(inv_path)], monkeypatch)
     assert code != 0
     assert not rs.LEDGER_PATH.exists()
+
+# ---------------------------------------------------------------------------
+# F-01A: Pagination Bounds & Cursor Redaction Tests
+# ---------------------------------------------------------------------------
+
+def test_page_limit_under_limit_terminates_normally(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(6001, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, 'MAX_TITLE_PAGES', 3)
+
+    calls = []
+    def fake_admin_graphql(token, query, variables=None):
+        calls.append(variables.get('cursor'))
+        if len(calls) == 1:
+            return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': 'c1'}, 'edges': [{'node': {'title': '作家A　品1'}}]}}
+        else:
+            return {'products': {'pageInfo': {'hasNextPage': False, 'endCursor': None}, 'edges': [{'node': {'title': '作家A　品2'}}]}}
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    code = run_main(['--exhibition', EXHIBITION, '--dry-run', '--source', str(inv_path)], monkeypatch)
+    assert code == 0
+    assert len(calls) == 2
+
+
+def test_page_limit_exact_at_limit_false_terminates_normally(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(6002, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, 'MAX_TITLE_PAGES', 2)
+
+    calls = []
+    def fake_admin_graphql(token, query, variables=None):
+        calls.append(variables.get('cursor'))
+        if len(calls) == 1:
+            return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': 'c1'}, 'edges': [{'node': {'title': '作家A　品1'}}]}}
+        else:
+            return {'products': {'pageInfo': {'hasNextPage': False, 'endCursor': None}, 'edges': [{'node': {'title': '作家A　品2'}}]}}
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    code = run_main(['--exhibition', EXHIBITION, '--dry-run', '--source', str(inv_path)], monkeypatch)
+    assert code == 0
+    assert len(calls) == 2
+
+
+def test_page_limit_exact_at_limit_true_stops_batch(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(6003, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, 'MAX_TITLE_PAGES', 2)
+
+    calls = []
+    def fake_admin_graphql(token, query, variables=None):
+        calls.append(variables.get('cursor'))
+        cursor_id = f'c{len(calls)}'
+        return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': cursor_id}, 'edges': [{'node': {'title': f'作家A　品{len(calls)}'}}]}}
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    monkeypatch.setattr(rs, 'get_location_id', lambda token: pytest.fail('get_location_id must not be called'))
+    monkeypatch.setattr(rs, 'register_one', lambda *a, **k: pytest.fail('register_one must not be called'))
+
+    # Dry-run
+    code_dry = run_main(['--exhibition', EXHIBITION, '--dry-run', '--source', str(inv_path)], monkeypatch)
+    assert code_dry != 0
+    assert len(calls) == 2
+    assert not rs.LEDGER_PATH.exists()
+
+    # Normal run
+    calls.clear()
+    code_normal = run_main(['--exhibition', EXHIBITION, '--source', str(inv_path)], monkeypatch)
+    assert code_normal != 0
+    assert len(calls) == 2
+    assert not rs.LEDGER_PATH.exists()
+
+
+def test_infinite_distinct_cursors_stops_at_limit(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(6004, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, 'MAX_TITLE_PAGES', 5)
+
+    calls = []
+    def fake_admin_graphql(token, query, variables=None):
+        calls.append(variables.get('cursor'))
+        return {
+            'products': {
+                'pageInfo': {'hasNextPage': True, 'endCursor': f'unique_cursor_{len(calls)}'},
+                'edges': [{'node': {'title': f'作家A　品{len(calls)}'}}]
+            }
+        }
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    monkeypatch.setattr(rs, 'get_location_id', lambda token: pytest.fail('get_location_id must not be called'))
+    monkeypatch.setattr(rs, 'register_one', lambda *a, **k: pytest.fail('register_one must not be called'))
+
+    code = run_main(['--exhibition', EXHIBITION, '--source', str(inv_path)], monkeypatch)
+    assert code != 0
+    assert len(calls) == 5
+    assert not rs.LEDGER_PATH.exists()
+
+
+def test_product_count_under_and_exact_limit(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(6005, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, 'MAX_EXISTING_PRODUCT_COUNT', 3)
+
+    def fake_admin_graphql(token, query, variables=None):
+        return {
+            'products': {
+                'pageInfo': {'hasNextPage': False, 'endCursor': None},
+                'edges': [
+                    {'node': {'title': '作家A　品1'}},
+                    {'node': {'title': '作家A　品2'}},
+                    {'node': {'title': '作家A　品3'}},
+                ]
+            }
+        }
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    code = run_main(['--exhibition', EXHIBITION, '--dry-run', '--source', str(inv_path)], monkeypatch)
+    assert code == 0
+
+
+def test_product_count_exceeded_by_one_fails_closed(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(6006, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, 'MAX_EXISTING_PRODUCT_COUNT', 3)
+
+    def fake_admin_graphql(token, query, variables=None):
+        return {
+            'products': {
+                'pageInfo': {'hasNextPage': False, 'endCursor': None},
+                'edges': [
+                    {'node': {'title': '作家A　品1'}},
+                    {'node': {'title': '作家A　品2'}},
+                    {'node': {'title': '作家A　品3'}},
+                    {'node': {'title': '作家A　品4'}},
+                ]
+            }
+        }
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    monkeypatch.setattr(rs, 'get_location_id', lambda token: pytest.fail('get_location_id must not be called'))
+    monkeypatch.setattr(rs, 'register_one', lambda *a, **k: pytest.fail('register_one must not be called'))
+
+    code = run_main(['--exhibition', EXHIBITION, '--source', str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+
+def test_product_count_counts_raw_nodes_with_duplicate_titles(isolated_paths, monkeypatch):
+    tmp_path = isolated_paths
+    items = [make_item(6007, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+    monkeypatch.setattr(rs, 'MAX_EXISTING_PRODUCT_COUNT', 2)
+
+    def fake_admin_graphql(token, query, variables=None):
+        return {
+            'products': {
+                'pageInfo': {'hasNextPage': False, 'endCursor': None},
+                'edges': [
+                    {'node': {'title': '作家A　同名'}},
+                    {'node': {'title': '作家A　同名'}},
+                    {'node': {'title': '作家A　同名'}},
+                ]
+            }
+        }
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    monkeypatch.setattr(rs, 'get_location_id', lambda token: pytest.fail('get_location_id must not be called'))
+    monkeypatch.setattr(rs, 'register_one', lambda *a, **k: pytest.fail('register_one must not be called'))
+
+    code = run_main(['--exhibition', EXHIBITION, '--source', str(inv_path)], monkeypatch)
+    assert code != 0
+    assert not rs.LEDGER_PATH.exists()
+
+
+@pytest.mark.parametrize('scenario', ['same_as_current', 'repeated_seen', 'cycle_a_b_a'])
+def test_cursor_value_redaction_in_all_outputs(isolated_paths, scenario, monkeypatch, capsys):
+    tmp_path = isolated_paths
+    items = [make_item(6008, '箸置き')]
+    inv_path = write_inventory(tmp_path, items)
+
+    secret_cursor = 'CURSOR_SHOULD_NEVER_APPEAR_12345'
+    secret_cursor_b = 'CURSOR_SHOULD_NEVER_APPEAR_67890'
+
+    def fake_admin_graphql(token, query, variables=None):
+        cursor = variables.get('cursor')
+        if scenario == 'same_as_current':
+            return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': cursor or secret_cursor}, 'edges': [{'node': {'title': '作家A　品1'}}]}}
+        elif scenario == 'repeated_seen':
+            return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': secret_cursor}, 'edges': [{'node': {'title': '作家A　品1'}}]}}
+        elif scenario == 'cycle_a_b_a':
+            if cursor is None:
+                return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': secret_cursor}, 'edges': [{'node': {'title': '作家A　品1'}}]}}
+            elif cursor == secret_cursor:
+                return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': secret_cursor_b}, 'edges': [{'node': {'title': '作家A　品2'}}]}}
+            else:
+                return {'products': {'pageInfo': {'hasNextPage': True, 'endCursor': secret_cursor}, 'edges': [{'node': {'title': '作家A　品3'}}]}}
+
+    monkeypatch.setattr(rs, 'admin_graphql', fake_admin_graphql)
+    monkeypatch.setattr(rs, 'get_location_id', lambda token: pytest.fail('get_location_id must not be called'))
+    monkeypatch.setattr(rs, 'register_one', lambda *a, **k: pytest.fail('register_one must not be called'))
+
+    code = run_main(['--exhibition', EXHIBITION, '--source', str(inv_path)], monkeypatch)
+    assert code != 0
+
+    captured = capsys.readouterr()
+    assert secret_cursor not in captured.out
+    assert secret_cursor not in captured.err
+    assert secret_cursor_b not in captured.out
+    assert secret_cursor_b not in captured.err
+
+    if rs.LOG_PATH.exists():
+        log_content = rs.LOG_PATH.read_text(encoding='utf-8')
+        assert secret_cursor not in log_content
+        assert secret_cursor_b not in log_content
+
+    with pytest.raises(rs.RegisterError) as excinfo:
+        rs.fetch_all_titles('dummy-token')
+    assert secret_cursor not in str(excinfo.value)
+    assert secret_cursor_b not in str(excinfo.value)

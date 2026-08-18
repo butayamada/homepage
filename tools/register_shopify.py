@@ -33,9 +33,26 @@ MAX_TARGETS = 200
 MAX_TITLE_PAGES = 100
 MAX_EXISTING_PRODUCT_COUNT = 25000  # MAX_TITLE_PAGES (100) * 250 per page
 
+# --- Shopify公開前ロック（Phase F-04-F01 緊急安全修正） ---
+# コード上で固定した真偽値であり、環境変数・.env・CLI引数のいずれからも読み取らない。
+# これらのいずれかで解除できる実装、および隠しオプション・テスト用バイパスは意図的に作らない。
+# 解除は、店主承認後の別PRでこの定数そのものを変更することでのみ行う。
+PRELAUNCH_LOCKED = True
+PRELAUNCH_LOCK_REASON_CODE = "SHOPIFY_REGISTRATION_PRELAUNCH_LOCKED"
+PRELAUNCH_LOCK_MESSAGE = "Shopify登録は正式公開前のため停止中です。商品・在庫は変更されていません。"
+
 
 class RegisterError(Exception):
     pass
+
+
+def enforce_prelaunch_lock():
+    """main()の最初の文として呼び出す。inventory読込み・Shopify query/mutation・
+    ledgerの読み書きより前に、無条件で非0終了する。token・入力商品・パス等は出力しない。"""
+    if PRELAUNCH_LOCKED:
+        print(PRELAUNCH_LOCK_MESSAGE, file=sys.stderr)
+        print(PRELAUNCH_LOCK_REASON_CODE, file=sys.stderr)
+        sys.exit(1)
 
 
 def read_admin_token():
@@ -420,6 +437,7 @@ def print_duplicate_hard_stop(duplicates, now, exhibition):
 
 
 def main():
+    enforce_prelaunch_lock()
     parser = argparse.ArgumentParser()
     parser.add_argument("--exhibition", required=True, help="企画展名（inventory.jsonのexhibitionと厳密一致）")
     parser.add_argument("--dry-run", action="store_true")

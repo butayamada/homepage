@@ -36,12 +36,16 @@ def make_item(id_, name, supplier="作家A", stock=1, inspected=True):
 
 @pytest.fixture(autouse=True)
 def isolated_paths(tmp_path, monkeypatch):
-    """ledger/log を一時ディレクトリへ差し替え、.env はダミートークンで用意する。"""
+    """ledger/log を一時ディレクトリへ差し替え、.env はダミートークンで用意する。
+    Phase F-04-F01のShopify公開前ロックは、このファイルが検証する重複検出・
+    ページネーション等の既存ロジックとは独立した安全機構のため、テストのみ
+    monkeypatchで無効化する（本番コードのデフォルトはPRELAUNCH_LOCKED=Trueのまま）。"""
     ledger_path = tmp_path / "shopify_register_ledger.json"
     log_path = tmp_path / "register_shopify_log.txt"
     monkeypatch.setattr(rs, "LEDGER_PATH", ledger_path)
     monkeypatch.setattr(rs, "LOG_PATH", log_path)
     monkeypatch.setattr(rs, "read_admin_token", lambda: "dummy-test-token")
+    monkeypatch.setattr(rs, "PRELAUNCH_LOCKED", False)
     yield tmp_path
 
 

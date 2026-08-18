@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "meishi-kanri",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "3333", "--directory", "C:\\Users\\butay\\meishi-kanri"],
-      "port": 3333
+      "name": "homepage",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3030"],
+      "port": 3030
     }
   ]
 }
